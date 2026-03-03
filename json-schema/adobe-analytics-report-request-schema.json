@@ -1,0 +1,202 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://developer.adobe.com/schemas/analytics/report-request.json",
+  "title": "Adobe Analytics Report Request",
+  "description": "Schema for an Adobe Analytics 2.0 API report request body. Defines the structure for specifying metrics, dimensions, filters, date ranges, and settings when running a report.",
+  "type": "object",
+  "required": ["rsid", "globalFilters", "metricContainer"],
+  "properties": {
+    "rsid": {
+      "type": "string",
+      "description": "The report suite ID to run the report against",
+      "minLength": 1
+    },
+    "locale": {
+      "type": "string",
+      "description": "Locale for response labels and dimension values",
+      "enum": ["en_US", "fr_FR", "jp_JP", "ja_JP", "de_DE", "es_ES", "ko_KR", "pt_BR", "zh_CN", "zh_TW"],
+      "default": "en_US"
+    },
+    "globalFilters": {
+      "type": "array",
+      "description": "Filters applied to the entire report. Must include at least one dateRange filter.",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/ReportFilter"
+      }
+    },
+    "metricContainer": {
+      "$ref": "#/$defs/MetricContainer",
+      "description": "Container defining the metrics to include in the report"
+    },
+    "dimension": {
+      "type": "string",
+      "description": "The primary dimension ID for the report (e.g. 'variables/page', 'variables/evar1')"
+    },
+    "settings": {
+      "$ref": "#/$defs/ReportSettings",
+      "description": "Report output settings such as pagination and row limits"
+    },
+    "statistics": {
+      "type": "object",
+      "description": "Statistical settings controlling summary row inclusion",
+      "properties": {
+        "functions": {
+          "type": "array",
+          "description": "Statistical functions to apply",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "search": {
+      "$ref": "#/$defs/ReportSearch",
+      "description": "Search filter to narrow returned dimension items"
+    }
+  },
+  "$defs": {
+    "ReportFilter": {
+      "type": "object",
+      "description": "A filter applied to a report, either globally or at the metric level",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The filter type",
+          "enum": ["dateRange", "breakdown", "segment", "excludeItemIds"]
+        },
+        "id": {
+          "type": "string",
+          "description": "Identifier for this filter, used to reference it from metrics"
+        },
+        "dateRange": {
+          "type": "string",
+          "description": "ISO 8601 date range in format 'YYYY-MM-DDTHH:mm:ss/YYYY-MM-DDTHH:mm:ss'"
+        },
+        "segmentId": {
+          "type": "string",
+          "description": "The ID of a saved segment to apply as a filter"
+        },
+        "dimension": {
+          "type": "string",
+          "description": "Dimension ID for breakdown filters (e.g. 'variables/page')"
+        },
+        "itemId": {
+          "type": "string",
+          "description": "Dimension item ID for breakdown filters"
+        },
+        "itemIds": {
+          "type": "array",
+          "description": "List of dimension item IDs for excludeItemIds filter",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MetricContainer": {
+      "type": "object",
+      "description": "Container specifying the metrics and metric-level filters for a report",
+      "required": ["metrics"],
+      "properties": {
+        "metricFilters": {
+          "type": "array",
+          "description": "Filters available to be applied at the metric level",
+          "items": {
+            "$ref": "#/$defs/ReportFilter"
+          }
+        },
+        "metrics": {
+          "type": "array",
+          "description": "List of metrics to include as columns in the report",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/ReportMetric"
+          }
+        }
+      }
+    },
+    "ReportMetric": {
+      "type": "object",
+      "description": "A single metric column in a report request",
+      "required": ["id"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The metric ID (e.g. 'metrics/visits', 'metrics/pageviews', 'metrics/revenue')"
+        },
+        "columnId": {
+          "type": "string",
+          "description": "A client-assigned column identifier used in the response to map metric values"
+        },
+        "filters": {
+          "type": "array",
+          "description": "IDs of metricFilters to apply to this metric column",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sort": {
+          "type": "string",
+          "description": "Sort order for rows based on this metric",
+          "enum": ["ASC", "DESC"]
+        }
+      }
+    },
+    "ReportSettings": {
+      "type": "object",
+      "description": "Settings controlling pagination and output behavior of the report",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "description": "Maximum number of rows to return per page",
+          "default": 50,
+          "minimum": 1,
+          "maximum": 50000
+        },
+        "page": {
+          "type": "integer",
+          "description": "Zero-indexed page number for paginated results",
+          "default": 0,
+          "minimum": 0
+        },
+        "nonesBehavior": {
+          "type": "string",
+          "description": "How to handle 'None' dimension items in the results",
+          "enum": ["exclude-nones", "return-nones"],
+          "default": "exclude-nones"
+        },
+        "countRepeatInstances": {
+          "type": "boolean",
+          "description": "Whether to count repeat instances of an eVar",
+          "default": true
+        }
+      }
+    },
+    "ReportSearch": {
+      "type": "object",
+      "description": "Search criteria to filter returned dimension items by value",
+      "properties": {
+        "clause": {
+          "type": "string",
+          "description": "Search clause in Analytics search syntax"
+        },
+        "excludeItemIds": {
+          "type": "array",
+          "description": "List of dimension item IDs to exclude from results",
+          "items": {
+            "type": "string"
+          }
+        },
+        "itemIds": {
+          "type": "array",
+          "description": "List of specific dimension item IDs to include",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

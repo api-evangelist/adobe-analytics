@@ -1,0 +1,1130 @@
+openapi: 3.1.0
+info:
+  title: Adobe Analytics API
+  description: >-
+    The Adobe Analytics 2.0 APIs provide programmatic access to data, reports,
+    and administration features within Adobe Analytics. You can perform almost
+    any action available in the Analytics user interface, including reporting,
+    segment management, calculated metrics, dimensions, and component
+    administration.
+  version: '2.0'
+  contact:
+    name: Adobe Analytics Support
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
+  termsOfService: https://www.adobe.com/legal/terms.html
+externalDocs:
+  description: Adobe Analytics 2.0 API Documentation
+  url: https://developer.adobe.com/analytics-apis/docs/2.0/
+servers:
+  - url: https://analytics.adobe.io/api/{globalCompanyId}
+    description: Adobe Analytics Production API
+    variables:
+      globalCompanyId:
+        description: The global company ID for your Adobe Analytics organization
+        default: YOUR_GLOBAL_COMPANY_ID
+tags:
+  - name: Reports
+    description: Run analytics reports and retrieve data
+  - name: Segments
+    description: Create, retrieve, update, and delete analytics segments
+  - name: Calculated Metrics
+    description: Manage calculated metrics built from existing metrics
+  - name: Metrics
+    description: Retrieve available metrics for a report suite
+  - name: Dimensions
+    description: Retrieve available dimensions for a report suite
+  - name: Report Suites
+    description: Retrieve report suite information and configuration
+  - name: Virtual Report Suites
+    description: Manage virtual report suites
+  - name: Annotations
+    description: Manage analytics annotations
+  - name: Tags
+    description: Manage component tags
+  - name: Date Ranges
+    description: Manage saved date ranges
+security:
+  - bearerAuth: []
+    apiKey: []
+paths:
+  /reports:
+    post:
+      operationId: runReport
+      summary: Run a report
+      description: >-
+        Runs an analytics report based on the provided report request definition.
+        The request body specifies metrics, dimensions, date ranges, filters,
+        and other parameters to define the report output.
+      tags:
+        - Reports
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportRequest'
+      responses:
+        '200':
+          description: Report results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportResponse'
+        '400':
+          description: Invalid request body or parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - missing or invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /segments:
+    get:
+      operationId: listSegments
+      summary: List segments
+      description: >-
+        Retrieves a list of segments for the company. Supports filtering by
+        name, tag, owner, and report suite, as well as pagination and expansion
+        of additional fields.
+      tags:
+        - Segments
+      parameters:
+        - $ref: '#/components/parameters/locale'
+        - $ref: '#/components/parameters/filterByIds'
+        - name: limit
+          in: query
+          description: Maximum number of results per page (max 1000)
+          schema:
+            type: integer
+            default: 10
+            maximum: 1000
+        - name: page
+          in: query
+          description: Page number (zero-indexed)
+          schema:
+            type: integer
+            default: 0
+        - name: expansion
+          in: query
+          description: >-
+            Comma-separated list of additional fields to include. Valid values:
+            reportSuiteName, ownerFullName, modified, tags, compatibility,
+            definition, publishingStatus, definitionLastModified, categories
+          schema:
+            type: string
+        - name: includeType
+          in: query
+          description: >-
+            Controls which segments are returned. Use 'all' for all company
+            segments (admin only), 'shared' for shared segments, 'templates'
+            for template segments.
+          schema:
+            type: string
+            enum:
+              - all
+              - shared
+              - templates
+      responses:
+        '200':
+          description: List of segments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      operationId: createSegment
+      summary: Create a segment
+      description: >-
+        Creates a new analytics segment. The segment definition uses the
+        Analytics query language to specify filter criteria based on dimensions,
+        metrics, and events.
+      tags:
+        - Segments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SegmentCreate'
+      responses:
+        '200':
+          description: Segment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+        '400':
+          description: Invalid segment definition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /segments/{segmentId}:
+    get:
+      operationId: getSegment
+      summary: Get a segment
+      description: >-
+        Retrieves a single segment by its ID, including its definition and
+        associated metadata.
+      tags:
+        - Segments
+      parameters:
+        - $ref: '#/components/parameters/segmentId'
+        - $ref: '#/components/parameters/locale'
+        - name: expansion
+          in: query
+          description: Comma-separated list of additional fields to include
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Segment details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+        '404':
+          description: Segment not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      operationId: updateSegment
+      summary: Update a segment
+      description: >-
+        Updates an existing segment. Supports partial updates — you can send
+        only the fields you want to change. Tags, compatibility, and
+        reportSuiteName cannot be edited via this endpoint.
+      tags:
+        - Segments
+      parameters:
+        - $ref: '#/components/parameters/segmentId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SegmentCreate'
+      responses:
+        '200':
+          description: Updated segment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+        '404':
+          description: Segment not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      operationId: deleteSegment
+      summary: Delete a segment
+      description: Permanently deletes the specified segment.
+      tags:
+        - Segments
+      parameters:
+        - $ref: '#/components/parameters/segmentId'
+      responses:
+        '200':
+          description: Segment deleted successfully
+        '404':
+          description: Segment not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /calculatedmetrics:
+    get:
+      operationId: listCalculatedMetrics
+      summary: List calculated metrics
+      description: >-
+        Retrieves all calculated metrics for the company. Supports filtering
+        by owner, tags, report suite, and whether to include shared or template
+        calculated metrics.
+      tags:
+        - Calculated Metrics
+      parameters:
+        - $ref: '#/components/parameters/locale'
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+            maximum: 1000
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 0
+        - name: expansion
+          in: query
+          description: Comma-separated additional fields to include
+          schema:
+            type: string
+        - name: includeType
+          in: query
+          description: Controls which calculated metrics are returned
+          schema:
+            type: string
+            enum:
+              - all
+              - shared
+              - templates
+      responses:
+        '200':
+          description: List of calculated metrics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculatedMetricList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      operationId: createCalculatedMetric
+      summary: Create a calculated metric
+      description: >-
+        Creates a new calculated metric using a definition that combines
+        existing metrics with mathematical operators and functions.
+      tags:
+        - Calculated Metrics
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalculatedMetricCreate'
+      responses:
+        '200':
+          description: Calculated metric created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculatedMetric'
+        '400':
+          description: Invalid definition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /calculatedmetrics/{calculatedMetricId}:
+    get:
+      operationId: getCalculatedMetric
+      summary: Get a calculated metric
+      description: Retrieves a single calculated metric by its ID.
+      tags:
+        - Calculated Metrics
+      parameters:
+        - $ref: '#/components/parameters/calculatedMetricId'
+      responses:
+        '200':
+          description: Calculated metric details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculatedMetric'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      operationId: updateCalculatedMetric
+      summary: Update a calculated metric
+      description: Updates an existing calculated metric definition or metadata.
+      tags:
+        - Calculated Metrics
+      parameters:
+        - $ref: '#/components/parameters/calculatedMetricId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalculatedMetricCreate'
+      responses:
+        '200':
+          description: Updated calculated metric
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculatedMetric'
+    delete:
+      operationId: deleteCalculatedMetric
+      summary: Delete a calculated metric
+      description: Permanently deletes the specified calculated metric.
+      tags:
+        - Calculated Metrics
+      parameters:
+        - $ref: '#/components/parameters/calculatedMetricId'
+      responses:
+        '200':
+          description: Deleted successfully
+  /metrics:
+    get:
+      operationId: listMetrics
+      summary: List metrics
+      description: >-
+        Returns a list of all metrics available in the specified report suite,
+        including standard metrics and any calculated metrics. Metrics are
+        returned as objects containing the ID, name, type, and description.
+      tags:
+        - Metrics
+      parameters:
+        - $ref: '#/components/parameters/rsid'
+        - $ref: '#/components/parameters/locale'
+      responses:
+        '200':
+          description: List of metrics
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Metric'
+        '400':
+          description: Missing or invalid rsid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /dimensions:
+    get:
+      operationId: listDimensions
+      summary: List dimensions
+      description: >-
+        Returns all dimensions available in the specified report suite. Each
+        dimension represents a category for grouping and filtering report data,
+        such as page, browser, or custom eVar/prop.
+      tags:
+        - Dimensions
+      parameters:
+        - $ref: '#/components/parameters/rsid'
+        - $ref: '#/components/parameters/locale'
+      responses:
+        '200':
+          description: List of dimensions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Dimension'
+        '400':
+          description: Missing or invalid rsid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /reportsuites/collections/suites:
+    get:
+      operationId: listReportSuites
+      summary: List report suites
+      description: >-
+        Returns a list of report suites accessible to the authenticated user,
+        including report suite ID, name, timezone, and type.
+      tags:
+        - Report Suites
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: List of report suites
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportSuiteList'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /reportsuites/collections/suites/{rsid}:
+    get:
+      operationId: getReportSuite
+      summary: Get a report suite
+      description: Returns details for a specific report suite by its ID.
+      tags:
+        - Report Suites
+      parameters:
+        - $ref: '#/components/parameters/rsidPath'
+      responses:
+        '200':
+          description: Report suite details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportSuite'
+        '404':
+          description: Report suite not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /annotations:
+    get:
+      operationId: listAnnotations
+      summary: List annotations
+      description: >-
+        Retrieves all annotations associated with report suites in the company.
+        Annotations mark specific dates or date ranges in reports with
+        descriptive notes.
+      tags:
+        - Annotations
+      parameters:
+        - $ref: '#/components/parameters/locale'
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: List of annotations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Annotation'
+    post:
+      operationId: createAnnotation
+      summary: Create an annotation
+      description: Creates a new annotation for a report suite date range.
+      tags:
+        - Annotations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnnotationCreate'
+      responses:
+        '200':
+          description: Annotation created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Annotation'
+  /dateranges:
+    get:
+      operationId: listDateRanges
+      summary: List date ranges
+      description: Returns saved date ranges available to the user or company.
+      tags:
+        - Date Ranges
+      parameters:
+        - $ref: '#/components/parameters/locale'
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: List of date ranges
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DateRange'
+  /componentmetadata/tags:
+    get:
+      operationId: listTags
+      summary: List tags
+      description: >-
+        Returns all tags used on components within the company. Tags can be
+        applied to segments, calculated metrics, projects, and other
+        components.
+      tags:
+        - Tags
+      responses:
+        '200':
+          description: List of tags
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tag'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 access token from Adobe IMS
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe Developer Console API key
+  parameters:
+    rsid:
+      name: rsid
+      in: query
+      required: true
+      description: The report suite ID
+      schema:
+        type: string
+    rsidPath:
+      name: rsid
+      in: path
+      required: true
+      description: The report suite ID
+      schema:
+        type: string
+    segmentId:
+      name: segmentId
+      in: path
+      required: true
+      description: The segment ID
+      schema:
+        type: string
+    calculatedMetricId:
+      name: calculatedMetricId
+      in: path
+      required: true
+      description: The calculated metric ID
+      schema:
+        type: string
+    locale:
+      name: locale
+      in: query
+      description: The locale for response labels
+      schema:
+        type: string
+        enum:
+          - en_US
+          - fr_FR
+          - jp_JP
+          - ja_JP
+          - de_DE
+          - es_ES
+          - ko_KR
+          - pt_BR
+          - zh_CN
+          - zh_TW
+    filterByIds:
+      name: filterByIds
+      in: query
+      description: Comma-separated list of IDs to filter results
+      schema:
+        type: string
+  schemas:
+    ReportRequest:
+      type: object
+      required:
+        - rsid
+        - globalFilters
+        - metricContainer
+      description: Definition of an analytics report request
+      properties:
+        rsid:
+          type: string
+          description: The report suite ID to run the report against
+        locale:
+          type: string
+          description: Locale for response labels
+        globalFilters:
+          type: array
+          description: List of global filters applied to the entire report
+          items:
+            $ref: '#/components/schemas/ReportFilter'
+        metricContainer:
+          $ref: '#/components/schemas/MetricContainer'
+        dimension:
+          type: string
+          description: The primary dimension ID for the report (e.g. variables/page)
+        settings:
+          $ref: '#/components/schemas/ReportSettings'
+        statistics:
+          type: object
+          description: Statistical settings for the report
+    ReportFilter:
+      type: object
+      required:
+        - type
+      description: A filter applied to a report
+      properties:
+        type:
+          type: string
+          description: Filter type
+          enum:
+            - dateRange
+            - breakdown
+            - segment
+        dateRange:
+          type: string
+          description: ISO 8601 date range (e.g. 2024-01-01T00:00:00/2024-01-31T23:59:59)
+        segmentId:
+          type: string
+          description: ID of an existing segment to apply as a filter
+        dimension:
+          type: string
+          description: Dimension for breakdown filter
+        itemId:
+          type: string
+          description: Dimension item ID for breakdown filter
+    MetricContainer:
+      type: object
+      required:
+        - metrics
+      description: Container defining the metrics to include in a report
+      properties:
+        metrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportMetric'
+        metricFilters:
+          type: array
+          description: Filters applied at the metric level
+          items:
+            $ref: '#/components/schemas/ReportFilter'
+    ReportMetric:
+      type: object
+      required:
+        - id
+      description: A metric included in a report request
+      properties:
+        id:
+          type: string
+          description: The metric ID (e.g. metrics/visits)
+        columnId:
+          type: string
+          description: Column identifier for this metric in the response
+        filters:
+          type: array
+          description: Metric-level filter IDs referencing metricFilters
+          items:
+            type: string
+        sort:
+          type: string
+          description: Sort direction for this metric
+          enum:
+            - ASC
+            - DESC
+    ReportSettings:
+      type: object
+      description: Settings that control report output behavior
+      properties:
+        limit:
+          type: integer
+          description: Maximum number of rows to return
+          default: 50
+        page:
+          type: integer
+          description: Page number (zero-indexed)
+          default: 0
+        nonesBehavior:
+          type: string
+          description: How to handle None values
+          enum:
+            - exclude-nones
+            - return-nones
+    ReportResponse:
+      type: object
+      description: The result of an analytics report request
+      properties:
+        totalPages:
+          type: integer
+          description: Total number of result pages
+        numberOfElements:
+          type: integer
+          description: Number of rows in this response
+        rows:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportRow'
+        columns:
+          type: object
+          description: Column metadata for the report
+        summaryData:
+          type: object
+          description: Totals and summary statistics
+    ReportRow:
+      type: object
+      description: A single row in a report result
+      properties:
+        itemId:
+          type: string
+          description: The dimension item ID
+        value:
+          type: string
+          description: The dimension item display value
+        data:
+          type: array
+          description: Metric values for this row, in column order
+          items:
+            type: number
+    Segment:
+      type: object
+      description: An analytics segment definition
+      properties:
+        id:
+          type: string
+          description: Unique segment identifier
+        name:
+          type: string
+          description: Display name of the segment
+        description:
+          type: string
+          description: Description of the segment's purpose
+        rsid:
+          type: string
+          description: The report suite this segment is based on
+        owner:
+          $ref: '#/components/schemas/Owner'
+        definition:
+          type: object
+          description: The segment rule definition
+        modified:
+          type: string
+          format: date-time
+          description: Last modification timestamp
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+    SegmentCreate:
+      type: object
+      required:
+        - name
+        - rsid
+        - definition
+      description: Payload for creating or updating a segment
+      properties:
+        name:
+          type: string
+          description: Display name of the segment
+          maxLength: 255
+        description:
+          type: string
+          description: Description of the segment's purpose
+        rsid:
+          type: string
+          description: Report suite ID this segment is based on
+        definition:
+          type: object
+          description: The segment rule definition in Analytics query format
+    SegmentList:
+      type: object
+      description: Paginated list of segments
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Segment'
+        totalElements:
+          type: integer
+          description: Total number of segments available
+        totalPages:
+          type: integer
+          description: Total number of pages
+        numberOfElements:
+          type: integer
+          description: Number of elements on this page
+    CalculatedMetric:
+      type: object
+      description: A calculated metric definition
+      properties:
+        id:
+          type: string
+          description: Unique calculated metric identifier
+        name:
+          type: string
+          description: Display name
+        description:
+          type: string
+          description: Description of what the metric measures
+        rsid:
+          type: string
+          description: The report suite this calculated metric is based on
+        owner:
+          $ref: '#/components/schemas/Owner'
+        definition:
+          type: object
+          description: The formula definition for this calculated metric
+        modified:
+          type: string
+          format: date-time
+          description: Last modification timestamp
+        type:
+          type: string
+          description: The metric type
+          enum:
+            - DECIMAL
+            - TIME
+            - PERCENT
+            - CURRENCY
+    CalculatedMetricCreate:
+      type: object
+      required:
+        - name
+        - rsid
+        - definition
+      description: Payload for creating or updating a calculated metric
+      properties:
+        name:
+          type: string
+          description: Display name
+          maxLength: 255
+        description:
+          type: string
+          description: Description of what the metric measures
+        rsid:
+          type: string
+          description: Report suite ID
+        definition:
+          type: object
+          description: The formula definition
+        type:
+          type: string
+          description: The metric output type
+          enum:
+            - DECIMAL
+            - TIME
+            - PERCENT
+            - CURRENCY
+    CalculatedMetricList:
+      type: object
+      description: Paginated list of calculated metrics
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/CalculatedMetric'
+        totalElements:
+          type: integer
+          description: Total number of calculated metrics available
+        totalPages:
+          type: integer
+          description: Total number of pages
+    Metric:
+      type: object
+      description: An analytics metric available in a report suite
+      properties:
+        id:
+          type: string
+          description: Metric ID (e.g. metrics/visits)
+        title:
+          type: string
+          description: Display name of the metric
+        name:
+          type: string
+          description: Internal name
+        type:
+          type: string
+          description: Metric data type
+          enum:
+            - INT
+            - DECIMAL
+            - CURRENCY
+            - PERCENT
+            - TIME
+        extraTitleInfo:
+          type: string
+          description: Additional context for the metric title
+        category:
+          type: string
+          description: Category grouping for the metric
+        description:
+          type: string
+          description: Description of what the metric measures
+    Dimension:
+      type: object
+      description: An analytics dimension available in a report suite
+      properties:
+        id:
+          type: string
+          description: Dimension ID (e.g. variables/page)
+        title:
+          type: string
+          description: Display name of the dimension
+        name:
+          type: string
+          description: Internal name
+        type:
+          type: string
+          description: Dimension data type
+        category:
+          type: string
+          description: Category grouping for the dimension
+        description:
+          type: string
+          description: Description of what the dimension tracks
+    ReportSuite:
+      type: object
+      description: An Adobe Analytics report suite
+      properties:
+        rsid:
+          type: string
+          description: Report suite ID
+        name:
+          type: string
+          description: Display name of the report suite
+        timezoneZoneinfo:
+          type: string
+          description: Timezone for the report suite
+        type:
+          type: string
+          description: Report suite type
+          enum:
+            - standard
+            - virtual
+    ReportSuiteList:
+      type: object
+      description: Paginated list of report suites
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportSuite'
+        totalElements:
+          type: integer
+          description: Total number of report suites
+        totalPages:
+          type: integer
+          description: Total number of pages
+    Annotation:
+      type: object
+      description: An annotation marking a date range in reports
+      properties:
+        id:
+          type: string
+          description: Unique annotation identifier
+        name:
+          type: string
+          description: Display name of the annotation
+        description:
+          type: string
+          description: Annotation text content
+        dateRange:
+          type: string
+          description: ISO 8601 date range covered by this annotation
+        rsids:
+          type: array
+          items:
+            type: string
+          description: List of report suite IDs this annotation applies to
+        color:
+          type: string
+          description: Display color for the annotation in reports
+    AnnotationCreate:
+      type: object
+      required:
+        - name
+        - dateRange
+      description: Payload for creating an annotation
+      properties:
+        name:
+          type: string
+          description: Display name
+          maxLength: 255
+        description:
+          type: string
+          description: Annotation notes
+        dateRange:
+          type: string
+          description: ISO 8601 date range
+        rsids:
+          type: array
+          items:
+            type: string
+          description: Report suite IDs to apply to
+        color:
+          type: string
+          description: Hex color code
+    DateRange:
+      type: object
+      description: A saved date range component
+      properties:
+        id:
+          type: string
+          description: Unique date range identifier
+        name:
+          type: string
+          description: Display name
+        description:
+          type: string
+          description: Description of the date range
+        definition:
+          type: string
+          description: The date range definition expression
+    Tag:
+      type: object
+      description: A tag applied to an Analytics component
+      properties:
+        id:
+          type: integer
+          description: Tag identifier
+        name:
+          type: string
+          description: Tag name
+        description:
+          type: string
+          description: Tag description
+        components:
+          type: array
+          description: List of components this tag is applied to
+          items:
+            type: object
+    Owner:
+      type: object
+      description: The owner of an Analytics component
+      properties:
+        id:
+          type: integer
+          description: Owner user ID
+        name:
+          type: string
+          description: Owner display name
+        login:
+          type: string
+          description: Owner login identifier
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+        errorDescription:
+          type: string
+          description: Human-readable error message
+        errorId:
+          type: string
+          description: Unique ID for tracking this error

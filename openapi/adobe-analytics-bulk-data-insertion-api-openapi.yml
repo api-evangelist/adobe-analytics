@@ -1,0 +1,212 @@
+openapi: 3.1.0
+info:
+  title: Adobe Analytics Bulk Data Insertion API
+  description: >-
+    The Bulk Data Insertion API (BDIA) lets you upload server-side call data in
+    batches of gzip-compressed CSV files. Each file contains one event per row
+    and must conform to the BDIA file format specification. This API is the
+    recommended successor to the single-event Data Insertion API for
+    high-volume server-side data collection.
+  version: '1.0'
+  contact:
+    name: Adobe Analytics Support
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
+  termsOfService: https://www.adobe.com/legal/terms.html
+externalDocs:
+  description: Adobe Analytics Bulk Data Insertion API Documentation
+  url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
+servers:
+  - url: https://analytics-collection.adobe.io/aa/collect/v1
+    description: Production (auto-routed)
+  - url: https://analytics-collection-us.adobe.io/aa/collect/v1
+    description: US region
+  - url: https://analytics-collection-eu.adobe.io/aa/collect/v1
+    description: EU region
+tags:
+  - name: Events
+    description: Upload and validate batched event data files
+security:
+  - bearerAuth: []
+    apiKey: []
+paths:
+  /events:
+    post:
+      operationId: uploadEvents
+      summary: Upload a batch events file
+      description: >-
+        Uploads a gzip-compressed CSV file containing batched Analytics event
+        data. Each row in the CSV represents one Analytics hit. The file must
+        include required columns (timestamp, marketingCloudVisitorID or
+        customerID, and reportSuiteID) and may include any additional Analytics
+        variables. The visitor group ID header (x-adobe-vgid) is required and
+        must match the visitor group used for all files in a sequence to ensure
+        correct visitor stitching.
+      tags:
+        - Events
+      parameters:
+        - $ref: '#/components/parameters/visitorGroupId'
+        - name: x-adobe-idempotency-key
+          in: header
+          description: >-
+            Optional unique identifier for the upload for deduplication.
+            Duplicate uploads with the same key are rejected.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Gzip-compressed CSV file containing event data
+      responses:
+        '200':
+          description: File uploaded and queued for processing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadResponse'
+        '400':
+          description: Invalid file format or missing required headers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized - invalid or missing credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Rate limit exceeded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /events/validate:
+    post:
+      operationId: validateEvents
+      summary: Validate a batch events file
+      description: >-
+        Synchronously validates a gzip-compressed CSV events file without
+        ingesting the data. Returns an immediate response indicating whether
+        the file passes format validation, along with detailed error messages
+        for any rows that fail validation. Use this endpoint to test files
+        before uploading to the events endpoint.
+      tags:
+        - Events
+      parameters:
+        - $ref: '#/components/parameters/visitorGroupId'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Gzip-compressed CSV file to validate
+      responses:
+        '200':
+          description: Validation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationResponse'
+        '400':
+          description: File could not be read or is malformed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 access token from Adobe IMS
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe Developer Console API key
+  parameters:
+    visitorGroupId:
+      name: x-adobe-vgid
+      in: header
+      required: true
+      description: >-
+        The visitor group ID. All files for the same visitors must share the
+        same visitor group ID to ensure correct visitor stitching.
+      schema:
+        type: string
+  schemas:
+    UploadResponse:
+      type: object
+      description: Response after a successful file upload
+      properties:
+        uploadTrackingCode:
+          type: string
+          description: Unique tracking code for this upload
+        fileSize:
+          type: integer
+          description: Size of the uploaded file in bytes
+        receivedTime:
+          type: string
+          format: date-time
+          description: Timestamp when the file was received
+    ValidationResponse:
+      type: object
+      description: Result of a file validation request
+      properties:
+        success:
+          type: boolean
+          description: Whether the file passed all validation checks
+        message:
+          type: string
+          description: Summary validation message
+        errors:
+          type: array
+          description: List of validation errors found in the file
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    ValidationError:
+      type: object
+      description: A single validation error from file validation
+      properties:
+        row:
+          type: integer
+          description: Row number where the error occurred (1-indexed)
+        column:
+          type: string
+          description: Column name where the error occurred
+        message:
+          type: string
+          description: Description of the validation error
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+        errorDescription:
+          type: string
+          description: Human-readable error message

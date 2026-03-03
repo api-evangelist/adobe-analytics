@@ -1,0 +1,251 @@
+asyncapi: 2.6.0
+info:
+  title: Adobe Analytics Livestream API
+  description: >-
+    The Adobe Analytics Livestream API delivers real-time analytics hit data
+    to a connected client as each hit is processed by Adobe Analytics servers.
+    Data is streamed in line-delimited JSON format compressed with gzip,
+    reflecting traffic being collected by a report suite at the time it is
+    processed. Clients connect to a named streaming endpoint provisioned by
+    Adobe and maintain a persistent connection to receive the continuous
+    data stream.
+  version: '1.0'
+  contact:
+    name: Adobe Analytics Support
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
+  termsOfService: https://www.adobe.com/legal/terms.html
+externalDocs:
+  description: Adobe Analytics Livestream API Documentation
+  url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
+servers:
+  adobeLivestream:
+    url: 'https://livestream.adobe.net/api/1/stream/{endpointName}'
+    protocol: https
+    description: >-
+      Adobe Analytics Livestream endpoint. The endpoint name is provisioned
+      by Adobe and corresponds to one or more report suites.
+    variables:
+      endpointName:
+        description: >-
+          The livestream endpoint name provided by Adobe Customer Care,
+          associated with your report suite(s)
+    security:
+      - oauth2: []
+channels:
+  /{endpointName}:
+    description: >-
+      Persistent streaming channel for receiving real-time Analytics hit data.
+      The client maintains a long-lived HTTPS connection and receives a
+      continuous stream of newline-delimited JSON objects, one per Analytics
+      hit, as they are processed.
+    parameters:
+      endpointName:
+        description: The provisioned livestream endpoint name
+        schema:
+          type: string
+    subscribe:
+      operationId: receiveAnalyticsHit
+      summary: Receive real-time Analytics hit data
+      description: >-
+        Receive a continuous stream of Analytics hit records as they are
+        processed. Each message is a newline-delimited JSON object
+        representing a single Analytics hit, including visitor information,
+        page data, eVars, props, events, and other variables collected
+        during the hit.
+      message:
+        oneOf:
+          - $ref: '#/components/messages/AnalyticsHit'
+          - $ref: '#/components/messages/AnalyticsHitWithGeolocation'
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      description: OAuth 2.0 access token from Adobe IMS
+      flows:
+        clientCredentials:
+          tokenUrl: https://ims-na1.adobelogin.com/ims/token/v3
+          scopes:
+            openid: Required
+  messages:
+    AnalyticsHit:
+      name: AnalyticsHit
+      title: Analytics Hit
+      summary: A single Analytics data collection hit
+      description: >-
+        Represents one processed Analytics hit as received from a visitor's
+        browser or server-side data collection. Contains all variables set
+        during the hit including page information, visitor identifiers,
+        eVars, props, and events.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/AnalyticsHit'
+    AnalyticsHitWithGeolocation:
+      name: AnalyticsHitWithGeolocation
+      title: Analytics Hit With Geolocation
+      summary: An Analytics hit enriched with geolocation data
+      description: >-
+        An Analytics hit that includes additional geolocation information
+        derived from the visitor's IP address, such as country, region,
+        city, and DMA code.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/AnalyticsHitWithGeolocation'
+  schemas:
+    AnalyticsHit:
+      type: object
+      description: A single processed Analytics data collection hit
+      properties:
+        hitIdHigh:
+          type: integer
+          description: High 64 bits of the unique hit identifier
+        hitIdLow:
+          type: integer
+          description: Low 64 bits of the unique hit identifier
+        acceptLanguage:
+          type: string
+          description: The Accept-Language header value from the visitor's browser
+        browserHeight:
+          type: integer
+          description: Browser viewport height in pixels
+        browserWidth:
+          type: integer
+          description: Browser viewport width in pixels
+        connectionType:
+          type: integer
+          description: Visitor connection type code
+        currencyCode:
+          type: string
+          description: Currency code used for the hit
+        customVisId:
+          type: string
+          description: Custom visitor ID set by the implementation
+        dateTime:
+          type: string
+          format: date-time
+          description: Timestamp when the hit was received and processed by Adobe
+        domain:
+          type: string
+          description: Internet domain derived from the visitor's IP address
+        eVar1:
+          type: string
+          description: eVar1 conversion variable value
+        eVar2:
+          type: string
+          description: eVar2 conversion variable value
+        eVar3:
+          type: string
+          description: eVar3 conversion variable value
+        eVar4:
+          type: string
+          description: eVar4 conversion variable value
+        eVar5:
+          type: string
+          description: eVar5 conversion variable value
+        events:
+          type: string
+          description: Comma-separated list of events fired on this hit
+        excludeHit:
+          type: integer
+          description: Flag indicating if the hit should be excluded from reporting
+        hitSource:
+          type: integer
+          description: Hit source type code indicating how the hit was submitted
+        ipAddress:
+          type: string
+          description: Visitor IP address (may be obfuscated)
+        javaEnabled:
+          type: boolean
+          description: Whether Java is enabled in the visitor's browser
+        javaScriptVersion:
+          type: string
+          description: JavaScript version supported by the visitor's browser
+        language:
+          type: integer
+          description: Visitor browser language code
+        mcVisId:
+          type: string
+          description: Marketing Cloud Visitor ID (Experience Cloud ID)
+        mobileDeviceName:
+          type: string
+          description: Name of the mobile device if the visit is from a mobile device
+        os:
+          type: integer
+          description: Operating system code
+        pageName:
+          type: string
+          description: Page name variable value
+        pageURL:
+          type: string
+          description: URL of the page on which the hit was fired
+        pagetype:
+          type: string
+          description: Page type variable value
+        prop1:
+          type: string
+          description: prop1 traffic variable value
+        prop2:
+          type: string
+          description: prop2 traffic variable value
+        prop3:
+          type: string
+          description: prop3 traffic variable value
+        purchaseId:
+          type: string
+          description: Purchase ID for deduplication of purchase events
+        referrer:
+          type: string
+          description: Referring URL for the visit
+        reportSuite:
+          type: string
+          description: The report suite ID that collected this hit
+        screenHeight:
+          type: integer
+          description: Visitor's screen height in pixels
+        screenWidth:
+          type: integer
+          description: Visitor's screen width in pixels
+        userAgent:
+          type: string
+          description: Browser user agent string
+        visIdHigh:
+          type: integer
+          description: High 64 bits of the Analytics visitor ID
+        visIdLow:
+          type: integer
+          description: Low 64 bits of the Analytics visitor ID
+        visIdType:
+          type: integer
+          description: Visitor ID type code indicating the source of the visitor ID
+        visitNum:
+          type: integer
+          description: Visit number for this visitor
+        visitPageNum:
+          type: integer
+          description: Page number within the current visit
+    AnalyticsHitWithGeolocation:
+      allOf:
+        - $ref: '#/components/schemas/AnalyticsHit'
+        - type: object
+          description: Additional geolocation fields derived from IP address
+          properties:
+            countryCode:
+              type: string
+              description: Two-letter ISO country code for the visitor's location
+            region:
+              type: integer
+              description: Region code for the visitor's geographic region
+            city:
+              type: integer
+              description: City code for the visitor's city
+            zip:
+              type: string
+              description: Postal code for the visitor's location
+            latitude:
+              type: number
+              description: Latitude coordinate of the visitor's location
+            longitude:
+              type: number
+              description: Longitude coordinate of the visitor's location
+            dmaCode:
+              type: integer
+              description: Designated Market Area code for US visitors

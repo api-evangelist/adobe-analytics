@@ -1,0 +1,329 @@
+openapi: 3.1.0
+info:
+  title: Adobe Analytics Data Repair API
+  description: >-
+    The Data Repair API allows you to permanently delete or transform data
+    that has already been ingested in Adobe Analytics. Use cases include
+    deleting personally identifiable information (PII) to comply with privacy
+    regulations and removing corrupted or erroneous data. The API requires
+    a two-step workflow: first estimate the scope and cost using the server
+    call estimate endpoint, then submit a repair job. This is a paid feature.
+  version: '1.0'
+  contact:
+    name: Adobe Analytics Support
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
+  termsOfService: https://www.adobe.com/legal/terms.html
+externalDocs:
+  description: Adobe Analytics Data Repair API Documentation
+  url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
+servers:
+  - url: https://analytics.adobe.io/api/{globalCompanyId}/datarepair/v1
+    description: Adobe Analytics Data Repair API
+    variables:
+      globalCompanyId:
+        description: The global company ID for your Analytics organization
+        default: YOUR_GLOBAL_COMPANY_ID
+tags:
+  - name: Server Call Estimate
+    description: Estimate the scope and cost of a repair job
+  - name: Jobs
+    description: Create and monitor data repair jobs
+security:
+  - bearerAuth: []
+    apiKey: []
+paths:
+  /{rsid}/serverCallEstimate:
+    get:
+      operationId: getServerCallEstimate
+      summary: Get server call estimate
+      description: >-
+        Calculates the number of data rows that would be scanned for a repair
+        job given the specified report suite and date range. This estimate is
+        required before creating a repair job and returns a validationToken
+        that must be passed to the job creation endpoint. The count determines
+        the cost of the repair.
+      tags:
+        - Server Call Estimate
+      parameters:
+        - $ref: '#/components/parameters/rsidPath'
+        - name: dateRangeStart
+          in: query
+          required: true
+          description: >-
+            Start of the date range for the repair in ISO 8601 format
+            (YYYY-MM-DD)
+          schema:
+            type: string
+            format: date
+        - name: dateRangeEnd
+          in: query
+          required: true
+          description: >-
+            End of the date range for the repair (inclusive) in ISO 8601
+            format (YYYY-MM-DD)
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Server call estimate
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerCallEstimate'
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /{rsid}/job:
+    get:
+      operationId: listJobs
+      summary: List data repair jobs
+      description: >-
+        Returns a list of the most recent 20 data repair jobs for the specified
+        report suite, including both completed and in-progress jobs. Each job
+        record includes status, progress, and result information.
+      tags:
+        - Jobs
+      parameters:
+        - $ref: '#/components/parameters/rsidPath'
+      responses:
+        '200':
+          description: List of repair jobs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RepairJob'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      operationId: createRepairJob
+      summary: Create a data repair job
+      description: >-
+        Creates and starts a new data repair job for the specified report suite
+        and date range. The validationToken from the serverCallEstimate endpoint
+        must be included as a query parameter. The request body defines which
+        variables to repair and what actions to take (delete or set).
+      tags:
+        - Jobs
+      parameters:
+        - $ref: '#/components/parameters/rsidPath'
+        - name: validationToken
+          in: query
+          required: true
+          description: >-
+            The token returned by the serverCallEstimate endpoint, confirming
+            you have reviewed the cost estimate
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RepairJobDefinition'
+      responses:
+        '200':
+          description: Repair job created and started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepairJob'
+        '400':
+          description: Invalid job definition or validation token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /{rsid}/job/{jobId}:
+    get:
+      operationId: getRepairJob
+      summary: Get a data repair job
+      description: >-
+        Returns the current status and details for a specific data repair job,
+        including progress percentage, number of rows processed, and
+        completion status.
+      tags:
+        - Jobs
+      parameters:
+        - $ref: '#/components/parameters/rsidPath'
+        - name: jobId
+          in: path
+          required: true
+          description: The repair job ID returned when the job was created
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Repair job details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RepairJob'
+        '404':
+          description: Job not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 access token from Adobe IMS
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe Developer Console API key
+  parameters:
+    rsidPath:
+      name: rsid
+      in: path
+      required: true
+      description: The report suite ID
+      schema:
+        type: string
+  schemas:
+    ServerCallEstimate:
+      type: object
+      description: Estimate of server calls for a proposed data repair job
+      properties:
+        reportSuiteId:
+          type: string
+          description: The report suite ID for the estimate
+        dateRangeStart:
+          type: string
+          format: date
+          description: Start date of the repair range
+        dateRangeEnd:
+          type: string
+          format: date
+          description: End date of the repair range
+        serverCallEstimate:
+          type: integer
+          description: Estimated number of server calls (rows) that will be scanned
+        validationToken:
+          type: string
+          description: Token required when creating the repair job
+    RepairJobDefinition:
+      type: object
+      required:
+        - variables
+      description: Definition of a data repair job
+      properties:
+        variables:
+          type: object
+          description: >-
+            Map of variable names to repair actions. Keys are Analytics
+            variable names (e.g. eVar1, prop5, activitymap) and values are
+            action objects.
+          additionalProperties:
+            $ref: '#/components/schemas/RepairAction'
+    RepairAction:
+      type: object
+      required:
+        - action
+      description: The action to take on a specific variable
+      properties:
+        action:
+          type: string
+          description: The repair action to perform
+          enum:
+            - delete
+            - set
+        setValue:
+          type: string
+          description: >-
+            The value to set the variable to (required when action is 'set')
+        filter:
+          $ref: '#/components/schemas/RepairFilter'
+    RepairFilter:
+      type: object
+      description: Optional filter to limit which rows are affected by the repair
+      properties:
+        condition:
+          type: string
+          description: The filter condition type
+          enum:
+            - contains
+            - streq
+            - startswith
+        matchValue:
+          type: string
+          description: The value to match against for filtering
+    RepairJob:
+      type: object
+      description: Status and details of a data repair job
+      properties:
+        jobId:
+          type: integer
+          description: Unique job identifier
+        reportSuiteId:
+          type: string
+          description: The report suite being repaired
+        dateRangeStart:
+          type: string
+          format: date
+          description: Start of the repair date range
+        dateRangeEnd:
+          type: string
+          format: date
+          description: End of the repair date range
+        status:
+          type: string
+          description: Current status of the repair job
+          enum:
+            - processing
+            - complete
+            - failed
+        progress:
+          type: integer
+          description: Job completion percentage (0-100)
+          minimum: 0
+          maximum: 100
+        jobCreateTime:
+          type: string
+          format: date-time
+          description: Timestamp when the job was created
+        jobCompleteTime:
+          type: string
+          format: date-time
+          description: Timestamp when the job completed
+        serverCalls:
+          type: integer
+          description: Actual number of server calls processed
+        nodesProcessed:
+          type: integer
+          description: Number of data nodes processed
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+        errorDescription:
+          type: string
+          description: Human-readable error message

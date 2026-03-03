@@ -1,0 +1,183 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "analytics": "https://developer.adobe.com/analytics-apis/docs/2.0/schemas/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "ReportSuite": {
+      "@id": "analytics:ReportSuite",
+      "@context": {
+        "rsid": "analytics:rsid",
+        "name": "schema:name",
+        "timezoneZoneinfo": "analytics:timezoneZoneinfo",
+        "type": "analytics:reportSuiteType",
+        "currency": "analytics:currency"
+      }
+    },
+
+    "Segment": {
+      "@id": "analytics:Segment",
+      "@context": {
+        "id": "@id",
+        "name": "schema:name",
+        "description": "dcterms:description",
+        "rsid": "analytics:reportSuiteId",
+        "owner": "analytics:owner",
+        "definition": "analytics:definition",
+        "modified": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "created": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "tags": {
+          "@id": "analytics:tags",
+          "@container": "@set"
+        },
+        "compatibility": "analytics:compatibility",
+        "publishingStatus": "analytics:publishingStatus"
+      }
+    },
+
+    "CalculatedMetric": {
+      "@id": "analytics:CalculatedMetric",
+      "@context": {
+        "id": "@id",
+        "name": "schema:name",
+        "description": "dcterms:description",
+        "rsid": "analytics:reportSuiteId",
+        "owner": "analytics:owner",
+        "definition": "analytics:definition",
+        "type": "analytics:metricType",
+        "modified": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        },
+        "tags": {
+          "@id": "analytics:tags",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Metric": {
+      "@id": "analytics:Metric",
+      "@context": {
+        "id": "@id",
+        "title": "schema:name",
+        "name": "analytics:internalName",
+        "type": "analytics:dataType",
+        "category": "analytics:category",
+        "description": "dcterms:description"
+      }
+    },
+
+    "Dimension": {
+      "@id": "analytics:Dimension",
+      "@context": {
+        "id": "@id",
+        "title": "schema:name",
+        "name": "analytics:internalName",
+        "type": "analytics:dataType",
+        "category": "analytics:category",
+        "description": "dcterms:description",
+        "extraTitleInfo": "analytics:extraTitleInfo"
+      }
+    },
+
+    "Annotation": {
+      "@id": "analytics:Annotation",
+      "@context": {
+        "id": "@id",
+        "name": "schema:name",
+        "description": "dcterms:description",
+        "dateRange": "analytics:dateRange",
+        "rsids": {
+          "@id": "analytics:reportSuiteIds",
+          "@container": "@set"
+        },
+        "color": "analytics:displayColor",
+        "applyToAllReports": "analytics:applyToAllReports"
+      }
+    },
+
+    "RepairJob": {
+      "@id": "analytics:RepairJob",
+      "@context": {
+        "jobId": "@id",
+        "reportSuiteId": "analytics:reportSuiteId",
+        "dateRangeStart": {
+          "@id": "analytics:dateRangeStart",
+          "@type": "xsd:date"
+        },
+        "dateRangeEnd": {
+          "@id": "analytics:dateRangeEnd",
+          "@type": "xsd:date"
+        },
+        "status": "analytics:jobStatus",
+        "progress": "analytics:progressPercent",
+        "jobCreateTime": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "jobCompleteTime": {
+          "@id": "analytics:completedTime",
+          "@type": "xsd:dateTime"
+        },
+        "serverCalls": "analytics:serverCallsProcessed"
+      }
+    },
+
+    "AnalyticsHit": {
+      "@id": "analytics:AnalyticsHit",
+      "@context": {
+        "reportSuite": "analytics:reportSuiteId",
+        "dateTime": {
+          "@id": "dcterms:date",
+          "@type": "xsd:dateTime"
+        },
+        "mcVisId": "analytics:marketingCloudVisitorId",
+        "customVisId": "analytics:customVisitorId",
+        "pageName": "schema:name",
+        "pageURL": {
+          "@id": "schema:url",
+          "@type": "@id"
+        },
+        "referrer": {
+          "@id": "schema:referrer",
+          "@type": "@id"
+        },
+        "userAgent": "schema:softwareVersion",
+        "ipAddress": "schema:ipAddressFamily",
+        "visitNum": "analytics:visitNumber",
+        "visitPageNum": "analytics:visitPageNumber",
+        "events": "analytics:events",
+        "purchaseId": "analytics:purchaseId",
+        "countryCode": "schema:addressCountry",
+        "language": "schema:inLanguage"
+      }
+    },
+
+    "Owner": {
+      "@id": "analytics:Owner",
+      "@context": {
+        "id": "@id",
+        "name": "schema:name",
+        "login": "schema:email"
+      }
+    },
+
+    "Tag": {
+      "@id": "analytics:Tag",
+      "@context": {
+        "id": "@id",
+        "name": "schema:name",
+        "description": "dcterms:description"
+      }
+    }
+  }
+}
