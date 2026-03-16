@@ -1,10 +1,12 @@
+aid: adobe-analytics
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/adobe-analytics/refs/heads/main/apis.yml
 name: Adobe Analytics
 description: Adobe Analytics provides real-time analytics and detailed segmentation capabilities across all marketing channels, enabling organizations to discover high-value audiences and power customer intelligence.
-image: https://www.adobe.com/content/dam/cc/icons/analytics.svg
-url: https://www.adobe.com/analytics/adobe-analytics.html
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 created: 2024-01-01 00:00:00+00:00
-modified: 2026-03-02 00:00:00+00:00
-specificationVersion: '0.18'
+modified: '2026-03-16'
+specificationVersion: '0.19'
 apis:
 - name: Adobe Analytics API
   description: The Adobe Analytics 2.0 APIs provide programmatic access to data, reports, and administration features within Adobe Analytics. They allow you to perform almost any action available in the Analytics user interface, including reporting, segment management, calculated metrics, and component administration.
