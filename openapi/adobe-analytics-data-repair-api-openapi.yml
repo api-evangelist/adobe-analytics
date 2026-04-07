@@ -24,10 +24,10 @@ servers:
         description: The global company ID for your Analytics organization
         default: YOUR_GLOBAL_COMPANY_ID
 tags:
-  - name: Server Call Estimate
-    description: Estimate the scope and cost of a repair job
   - name: Jobs
     description: Create and monitor data repair jobs
+  - name: Server Call Estimate
+    description: Estimate the scope and cost of a repair job
 security:
   - bearerAuth: []
     apiKey: []

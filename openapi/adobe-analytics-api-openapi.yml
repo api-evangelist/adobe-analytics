@@ -23,26 +23,22 @@ servers:
         description: The global company ID for your Adobe Analytics organization
         default: YOUR_GLOBAL_COMPANY_ID
 tags:
+  - name: Annotations
+    description: Manage analytics annotations
+  - name: Calculated Metrics
+    description: Manage calculated metrics built from existing metrics
+  - name: Date Ranges
+    description: Manage saved date ranges
+  - name: Dimensions
+    description: Retrieve available dimensions for a report suite
+  - name: Metrics
+    description: Retrieve available metrics for a report suite
+  - name: Report Suites
+    description: Retrieve report suite information and configuration
   - name: Reports
     description: Run analytics reports and retrieve data
   - name: Segments
     description: Create, retrieve, update, and delete analytics segments
-  - name: Calculated Metrics
-    description: Manage calculated metrics built from existing metrics
-  - name: Metrics
-    description: Retrieve available metrics for a report suite
-  - name: Dimensions
-    description: Retrieve available dimensions for a report suite
-  - name: Report Suites
-    description: Retrieve report suite information and configuration
-  - name: Virtual Report Suites
-    description: Manage virtual report suites
-  - name: Annotations
-    description: Manage analytics annotations
-  - name: Tags
-    description: Manage component tags
-  - name: Date Ranges
-    description: Manage saved date ranges
 security:
   - bearerAuth: []
     apiKey: []
@@ -570,8 +566,7 @@ paths:
         Returns all tags used on components within the company. Tags can be
         applied to segments, calculated metrics, projects, and other
         components.
-      tags:
-        - Tags
+      tags: []
       responses:
         '200':
           description: List of tags
