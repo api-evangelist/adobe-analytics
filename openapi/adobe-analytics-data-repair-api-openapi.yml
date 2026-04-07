@@ -35,7 +35,7 @@ paths:
   /{rsid}/serverCallEstimate:
     get:
       operationId: getServerCallEstimate
-      summary: Get server call estimate
+      summary: Adobe Analytics Get server call estimate
       description: >-
         Calculates the number of data rows that would be scanned for a repair
         job given the specified report suite and date range. This estimate is
@@ -86,7 +86,7 @@ paths:
   /{rsid}/job:
     get:
       operationId: listJobs
-      summary: List data repair jobs
+      summary: Adobe Analytics List data repair jobs
       description: >-
         Returns a list of the most recent 20 data repair jobs for the specified
         report suite, including both completed and in-progress jobs. Each job
@@ -112,7 +112,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
     post:
       operationId: createRepairJob
-      summary: Create a data repair job
+      summary: Adobe Analytics Create a data repair job
       description: >-
         Creates and starts a new data repair job for the specified report suite
         and date range. The validationToken from the serverCallEstimate endpoint
@@ -158,7 +158,7 @@ paths:
   /{rsid}/job/{jobId}:
     get:
       operationId: getRepairJob
-      summary: Get a data repair job
+      summary: Adobe Analytics Get a data repair job
       description: >-
         Returns the current status and details for a specific data repair job,
         including progress percentage, number of rows processed, and

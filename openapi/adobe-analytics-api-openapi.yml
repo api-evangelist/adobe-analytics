@@ -50,7 +50,7 @@ paths:
   /reports:
     post:
       operationId: runReport
-      summary: Run a report
+      summary: Adobe Analytics Run a report
       description: >-
         Runs an analytics report based on the provided report request definition.
         The request body specifies metrics, dimensions, date ranges, filters,
@@ -85,7 +85,7 @@ paths:
   /segments:
     get:
       operationId: listSegments
-      summary: List segments
+      summary: Adobe Analytics List segments
       description: >-
         Retrieves a list of segments for the company. Supports filtering by
         name, tag, owner, and report suite, as well as pagination and expansion
@@ -143,7 +143,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
     post:
       operationId: createSegment
-      summary: Create a segment
+      summary: Adobe Analytics Create a segment
       description: >-
         Creates a new analytics segment. The segment definition uses the
         Analytics query language to specify filter criteria based on dimensions,
@@ -178,7 +178,7 @@ paths:
   /segments/{segmentId}:
     get:
       operationId: getSegment
-      summary: Get a segment
+      summary: Adobe Analytics Get a segment
       description: >-
         Retrieves a single segment by its ID, including its definition and
         associated metadata.
@@ -207,7 +207,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
     put:
       operationId: updateSegment
-      summary: Update a segment
+      summary: Adobe Analytics Update a segment
       description: >-
         Updates an existing segment. Supports partial updates — you can send
         only the fields you want to change. Tags, compatibility, and
@@ -237,7 +237,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
     delete:
       operationId: deleteSegment
-      summary: Delete a segment
+      summary: Adobe Analytics Delete a segment
       description: Permanently deletes the specified segment.
       tags:
         - Segments
@@ -255,7 +255,7 @@ paths:
   /calculatedmetrics:
     get:
       operationId: listCalculatedMetrics
-      summary: List calculated metrics
+      summary: Adobe Analytics List calculated metrics
       description: >-
         Retrieves all calculated metrics for the company. Supports filtering
         by owner, tags, report suite, and whether to include shared or template
@@ -304,7 +304,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
     post:
       operationId: createCalculatedMetric
-      summary: Create a calculated metric
+      summary: Adobe Analytics Create a calculated metric
       description: >-
         Creates a new calculated metric using a definition that combines
         existing metrics with mathematical operators and functions.
@@ -332,7 +332,7 @@ paths:
   /calculatedmetrics/{calculatedMetricId}:
     get:
       operationId: getCalculatedMetric
-      summary: Get a calculated metric
+      summary: Adobe Analytics Get a calculated metric
       description: Retrieves a single calculated metric by its ID.
       tags:
         - Calculated Metrics
@@ -353,7 +353,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
     put:
       operationId: updateCalculatedMetric
-      summary: Update a calculated metric
+      summary: Adobe Analytics Update a calculated metric
       description: Updates an existing calculated metric definition or metadata.
       tags:
         - Calculated Metrics
@@ -374,7 +374,7 @@ paths:
                 $ref: '#/components/schemas/CalculatedMetric'
     delete:
       operationId: deleteCalculatedMetric
-      summary: Delete a calculated metric
+      summary: Adobe Analytics Delete a calculated metric
       description: Permanently deletes the specified calculated metric.
       tags:
         - Calculated Metrics
@@ -386,7 +386,7 @@ paths:
   /metrics:
     get:
       operationId: listMetrics
-      summary: List metrics
+      summary: Adobe Analytics List metrics
       description: >-
         Returns a list of all metrics available in the specified report suite,
         including standard metrics and any calculated metrics. Metrics are
@@ -414,7 +414,7 @@ paths:
   /dimensions:
     get:
       operationId: listDimensions
-      summary: List dimensions
+      summary: Adobe Analytics List dimensions
       description: >-
         Returns all dimensions available in the specified report suite. Each
         dimension represents a category for grouping and filtering report data,
@@ -442,7 +442,7 @@ paths:
   /reportsuites/collections/suites:
     get:
       operationId: listReportSuites
-      summary: List report suites
+      summary: Adobe Analytics List report suites
       description: >-
         Returns a list of report suites accessible to the authenticated user,
         including report suite ID, name, timezone, and type.
@@ -475,7 +475,7 @@ paths:
   /reportsuites/collections/suites/{rsid}:
     get:
       operationId: getReportSuite
-      summary: Get a report suite
+      summary: Adobe Analytics Get a report suite
       description: Returns details for a specific report suite by its ID.
       tags:
         - Report Suites
@@ -497,7 +497,7 @@ paths:
   /annotations:
     get:
       operationId: listAnnotations
-      summary: List annotations
+      summary: Adobe Analytics List annotations
       description: >-
         Retrieves all annotations associated with report suites in the company.
         Annotations mark specific dates or date ranges in reports with
@@ -522,7 +522,7 @@ paths:
                   $ref: '#/components/schemas/Annotation'
     post:
       operationId: createAnnotation
-      summary: Create an annotation
+      summary: Adobe Analytics Create an annotation
       description: Creates a new annotation for a report suite date range.
       tags:
         - Annotations
@@ -542,7 +542,7 @@ paths:
   /dateranges:
     get:
       operationId: listDateRanges
-      summary: List date ranges
+      summary: Adobe Analytics List date ranges
       description: Returns saved date ranges available to the user or company.
       tags:
         - Date Ranges
@@ -565,7 +565,7 @@ paths:
   /componentmetadata/tags:
     get:
       operationId: listTags
-      summary: List tags
+      summary: Adobe Analytics List tags
       description: >-
         Returns all tags used on components within the company. Tags can be
         applied to segments, calculated metrics, projects, and other
