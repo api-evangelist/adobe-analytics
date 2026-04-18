@@ -1,0 +1,78 @@
+{
+  "type": "object",
+  "description": "An analytics segment definition",
+  "name": "Segment",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique segment identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the segment"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the segment's purpose"
+    },
+    "rsid": {
+      "type": "string",
+      "description": "The report suite this segment is based on"
+    },
+    "owner": {
+      "type": "object",
+      "description": "The owner of an Analytics component",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Owner user ID"
+        },
+        "name": {
+          "type": "string",
+          "description": "Owner display name"
+        },
+        "login": {
+          "type": "string",
+          "description": "Owner login identifier"
+        }
+      }
+    },
+    "definition": {
+      "type": "object",
+      "description": "The segment rule definition"
+    },
+    "modified": {
+      "type": "datetime",
+      "description": "Last modification timestamp"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "A tag applied to an Analytics component",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Tag identifier"
+          },
+          "name": {
+            "type": "string",
+            "description": "Tag name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Tag description"
+          },
+          "components": {
+            "type": "array",
+            "description": "List of components this tag is applied to",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

@@ -1,0 +1,8 @@
+{
+  "action": "delete",
+  "setValue": "example_value",
+  "filter": {
+    "condition": "contains",
+    "matchValue": "example_value"
+  }
+}

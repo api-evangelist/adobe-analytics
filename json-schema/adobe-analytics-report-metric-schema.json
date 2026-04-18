@@ -1,0 +1,38 @@
+{
+  "type": "object",
+  "description": "A metric included in a report request",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "The metric ID (e.g. metrics/visits)",
+      "example": "abc123"
+    },
+    "columnId": {
+      "type": "string",
+      "description": "Column identifier for this metric in the response",
+      "example": "500123"
+    },
+    "filters": {
+      "type": "array",
+      "description": "Metric-level filter IDs referencing metricFilters",
+      "example": [],
+      "items": {
+        "type": "string"
+      }
+    },
+    "sort": {
+      "type": "string",
+      "description": "Sort direction for this metric",
+      "example": "ASC",
+      "enum": [
+        "ASC",
+        "DESC"
+      ]
+    }
+  },
+  "required": [
+    "id"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ReportMetric"
+}

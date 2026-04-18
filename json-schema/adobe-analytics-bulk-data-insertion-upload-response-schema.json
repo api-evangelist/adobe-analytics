@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "description": "Response after a successful file upload",
+  "properties": {
+    "uploadTrackingCode": {
+      "type": "string",
+      "description": "Unique tracking code for this upload",
+      "example": "example_value"
+    },
+    "fileSize": {
+      "type": "integer",
+      "description": "Size of the uploaded file in bytes",
+      "example": 10
+    },
+    "receivedTime": {
+      "type": "string",
+      "description": "Timestamp when the file was received",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UploadResponse"
+}

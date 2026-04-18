@@ -1,0 +1,84 @@
+{
+  "type": "object",
+  "description": "Container defining the metrics to include in a report",
+  "name": "MetricContainer",
+  "properties": {
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "A metric included in a report request",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The metric ID (e.g. metrics/visits)"
+          },
+          "columnId": {
+            "type": "string",
+            "description": "Column identifier for this metric in the response"
+          },
+          "filters": {
+            "type": "array",
+            "description": "Metric-level filter IDs referencing metricFilters",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sort": {
+            "type": "string",
+            "description": "Sort direction for this metric",
+            "enum": [
+              "ASC",
+              "DESC"
+            ]
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    },
+    "metricFilters": {
+      "type": "array",
+      "description": "Filters applied at the metric level",
+      "items": {
+        "type": "object",
+        "description": "A filter applied to a report",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Filter type",
+            "enum": [
+              "dateRange",
+              "breakdown",
+              "segment"
+            ]
+          },
+          "dateRange": {
+            "type": "string",
+            "description": "ISO 8601 date range (e.g. 2024-01-01T00:00:00/2024-01-31T23:59:59)"
+          },
+          "segmentId": {
+            "type": "string",
+            "description": "ID of an existing segment to apply as a filter"
+          },
+          "dimension": {
+            "type": "string",
+            "description": "Dimension for breakdown filter"
+          },
+          "itemId": {
+            "type": "string",
+            "description": "Dimension item ID for breakdown filter"
+          }
+        },
+        "required": [
+          "type"
+        ]
+      }
+    }
+  },
+  "required": [
+    "metrics"
+  ],
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

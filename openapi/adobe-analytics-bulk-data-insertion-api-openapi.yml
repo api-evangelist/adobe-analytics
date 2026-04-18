@@ -12,27 +12,28 @@ info:
     name: Adobe Analytics Support
     url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
   termsOfService: https://www.adobe.com/legal/terms.html
+  x-last-validated: '2026-04-18'
 externalDocs:
   description: Adobe Analytics Bulk Data Insertion API Documentation
   url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
 servers:
-  - url: https://analytics-collection.adobe.io/aa/collect/v1
-    description: Production (auto-routed)
-  - url: https://analytics-collection-us.adobe.io/aa/collect/v1
-    description: US region
-  - url: https://analytics-collection-eu.adobe.io/aa/collect/v1
-    description: EU region
+- url: https://analytics-collection.adobe.io/aa/collect/v1
+  description: Production (auto-routed)
+- url: https://analytics-collection-us.adobe.io/aa/collect/v1
+  description: US region
+- url: https://analytics-collection-eu.adobe.io/aa/collect/v1
+  description: EU region
 tags:
-  - name: Events
-    description: Upload and validate batched event data files
+- name: Events
+  description: Upload and validate batched event data files
 security:
-  - bearerAuth: []
-    apiKey: []
+- bearerAuth: []
+  apiKey: []
 paths:
   /events:
     post:
       operationId: uploadEvents
-      summary: Adobe Analytics Upload a batch events file
+      summary: Adobe Analytics Upload a Batch Events File
       description: >-
         Uploads a gzip-compressed CSV file containing batched Analytics event
         data. Each row in the CSV represents one Analytics hit. The file must
@@ -42,16 +43,17 @@ paths:
         must match the visitor group used for all files in a sequence to ensure
         correct visitor stitching.
       tags:
-        - Events
+      - Events
       parameters:
-        - $ref: '#/components/parameters/visitorGroupId'
-        - name: x-adobe-idempotency-key
-          in: header
-          description: >-
-            Optional unique identifier for the upload for deduplication.
-            Duplicate uploads with the same key are rejected.
-          schema:
-            type: string
+      - $ref: '#/components/parameters/visitorGroupId'
+      - name: x-adobe-idempotency-key
+        in: header
+        description: >-
+          Optional unique identifier for the upload for deduplication.
+          Duplicate uploads with the same key are rejected.
+        schema:
+          type: string
+        example: example_value
       requestBody:
         required: true
         content:
@@ -59,12 +61,18 @@ paths:
             schema:
               type: object
               required:
-                - file
+              - file
               properties:
                 file:
                   type: string
                   format: binary
                   description: Gzip-compressed CSV file containing event data
+            examples:
+              UploadeventsRequestExample:
+                summary: Default uploadEvents request
+                x-microcks-default: true
+                value:
+                  file: example_value
       responses:
         '200':
           description: File uploaded and queued for processing
@@ -72,28 +80,60 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/UploadResponse'
+              examples:
+                Uploadevents200Example:
+                  summary: Default uploadEvents 200 response
+                  x-microcks-default: true
+                  value:
+                    uploadTrackingCode: example_value
+                    fileSize: 10
+                    receivedTime: '2026-01-15T10:30:00Z'
         '400':
           description: Invalid file format or missing required headers
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Uploadevents400Example:
+                  summary: Default uploadEvents 400 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
         '401':
           description: Unauthorized - invalid or missing credentials
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Uploadevents401Example:
+                  summary: Default uploadEvents 401 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
         '429':
           description: Rate limit exceeded
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Uploadevents429Example:
+                  summary: Default uploadEvents 429 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /events/validate:
     post:
       operationId: validateEvents
-      summary: Adobe Analytics Validate a batch events file
+      summary: Adobe Analytics Validate a Batch Events File
       description: >-
         Synchronously validates a gzip-compressed CSV events file without
         ingesting the data. Returns an immediate response indicating whether
@@ -101,9 +141,9 @@ paths:
         for any rows that fail validation. Use this endpoint to test files
         before uploading to the events endpoint.
       tags:
-        - Events
+      - Events
       parameters:
-        - $ref: '#/components/parameters/visitorGroupId'
+      - $ref: '#/components/parameters/visitorGroupId'
       requestBody:
         required: true
         content:
@@ -111,12 +151,18 @@ paths:
             schema:
               type: object
               required:
-                - file
+              - file
               properties:
                 file:
                   type: string
                   format: binary
                   description: Gzip-compressed CSV file to validate
+            examples:
+              ValidateeventsRequestExample:
+                summary: Default validateEvents request
+                x-microcks-default: true
+                value:
+                  file: example_value
       responses:
         '200':
           description: Validation result
@@ -124,18 +170,46 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationResponse'
+              examples:
+                Validateevents200Example:
+                  summary: Default validateEvents 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: example_value
+                    errors:
+                    - row: 10
+                      column: example_value
+                      message: example_value
         '400':
           description: File could not be read or is malformed
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Validateevents400Example:
+                  summary: Default validateEvents 400 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Validateevents401Example:
+                  summary: Default validateEvents 401 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     bearerAuth:
@@ -165,13 +239,16 @@ components:
         uploadTrackingCode:
           type: string
           description: Unique tracking code for this upload
+          example: example_value
         fileSize:
           type: integer
           description: Size of the uploaded file in bytes
+          example: 10
         receivedTime:
           type: string
           format: date-time
           description: Timestamp when the file was received
+          example: '2026-01-15T10:30:00Z'
     ValidationResponse:
       type: object
       description: Result of a file validation request
@@ -179,14 +256,17 @@ components:
         success:
           type: boolean
           description: Whether the file passed all validation checks
+          example: true
         message:
           type: string
           description: Summary validation message
+          example: example_value
         errors:
           type: array
           description: List of validation errors found in the file
           items:
             $ref: '#/components/schemas/ValidationError'
+          example: []
     ValidationError:
       type: object
       description: A single validation error from file validation
@@ -194,12 +274,15 @@ components:
         row:
           type: integer
           description: Row number where the error occurred (1-indexed)
+          example: 10
         column:
           type: string
           description: Column name where the error occurred
+          example: example_value
         message:
           type: string
           description: Description of the validation error
+          example: example_value
     ErrorResponse:
       type: object
       description: Error response from the API
@@ -207,6 +290,8 @@ components:
         errorCode:
           type: string
           description: Machine-readable error code
+          example: example_value
         errorDescription:
           type: string
           description: Human-readable error message
+          example: example_value

@@ -1,0 +1,7 @@
+{
+  "type": "dateRange",
+  "dateRange": "example_value",
+  "segmentId": "500123",
+  "dimension": "example_value",
+  "itemId": "500123"
+}

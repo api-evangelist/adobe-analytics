@@ -1,0 +1,4 @@
+{
+  "condition": "contains",
+  "matchValue": "example_value"
+}

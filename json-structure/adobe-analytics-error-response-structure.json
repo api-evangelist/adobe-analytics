@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "description": "Error response from the API",
+  "name": "ErrorResponse",
+  "properties": {
+    "errorCode": {
+      "type": "string",
+      "description": "Machine-readable error code"
+    },
+    "errorDescription": {
+      "type": "string",
+      "description": "Human-readable error message"
+    },
+    "errorId": {
+      "type": "string",
+      "description": "Unique ID for tracking this error"
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

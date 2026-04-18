@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "description": "An analytics dimension available in a report suite",
+  "name": "Dimension",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Dimension ID (e.g. variables/page)"
+    },
+    "title": {
+      "type": "string",
+      "description": "Display name of the dimension"
+    },
+    "name": {
+      "type": "string",
+      "description": "Internal name"
+    },
+    "type": {
+      "type": "string",
+      "description": "Dimension data type"
+    },
+    "category": {
+      "type": "string",
+      "description": "Category grouping for the dimension"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of what the dimension tracks"
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

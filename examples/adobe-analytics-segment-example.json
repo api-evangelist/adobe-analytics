@@ -1,0 +1,14 @@
+{
+  "id": "abc123",
+  "name": "Example Title",
+  "description": "A sample description.",
+  "rsid": "500123",
+  "owner": {
+    "id": "abc123",
+    "name": "Example Title",
+    "login": "example_value"
+  },
+  "definition": "example_value",
+  "modified": "2026-01-15T10:30:00Z",
+  "tags": []
+}

@@ -1,0 +1,38 @@
+{
+  "type": "object",
+  "description": "Result of a file validation request",
+  "name": "ValidationResponse",
+  "properties": {
+    "success": {
+      "type": "boolean",
+      "description": "Whether the file passed all validation checks"
+    },
+    "message": {
+      "type": "string",
+      "description": "Summary validation message"
+    },
+    "errors": {
+      "type": "array",
+      "description": "List of validation errors found in the file",
+      "items": {
+        "type": "object",
+        "description": "A single validation error from file validation",
+        "properties": {
+          "row": {
+            "type": "integer",
+            "description": "Row number where the error occurred (1-indexed)"
+          },
+          "column": {
+            "type": "string",
+            "description": "Column name where the error occurred"
+          },
+          "message": {
+            "type": "string",
+            "description": "Description of the validation error"
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

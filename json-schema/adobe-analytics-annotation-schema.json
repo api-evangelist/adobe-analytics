@@ -1,0 +1,41 @@
+{
+  "type": "object",
+  "description": "An annotation marking a date range in reports",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique annotation identifier",
+      "example": "abc123"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the annotation",
+      "example": "Example Title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Annotation text content",
+      "example": "A sample description."
+    },
+    "dateRange": {
+      "type": "string",
+      "description": "ISO 8601 date range covered by this annotation",
+      "example": "example_value"
+    },
+    "rsids": {
+      "type": "array",
+      "description": "List of report suite IDs this annotation applies to",
+      "example": [],
+      "items": {
+        "type": "string"
+      }
+    },
+    "color": {
+      "type": "string",
+      "description": "Display color for the annotation in reports",
+      "example": "example_value"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Annotation"
+}

@@ -12,53 +12,78 @@ info:
     name: Adobe Analytics Support
     url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
   termsOfService: https://www.adobe.com/legal/terms.html
+  x-last-validated: '2026-04-18'
 externalDocs:
   description: Adobe Analytics 2.0 API Documentation
   url: https://developer.adobe.com/analytics-apis/docs/2.0/
 servers:
-  - url: https://analytics.adobe.io/api/{globalCompanyId}
-    description: Adobe Analytics Production API
-    variables:
-      globalCompanyId:
-        description: The global company ID for your Adobe Analytics organization
-        default: YOUR_GLOBAL_COMPANY_ID
+- url: https://analytics.adobe.io/api/{globalCompanyId}
+  description: Adobe Analytics Production API
+  variables:
+    globalCompanyId:
+      description: The global company ID for your Adobe Analytics organization
+      default: YOUR_GLOBAL_COMPANY_ID
 tags:
-  - name: Annotations
-    description: Manage analytics annotations
-  - name: Calculated Metrics
-    description: Manage calculated metrics built from existing metrics
-  - name: Date Ranges
-    description: Manage saved date ranges
-  - name: Dimensions
-    description: Retrieve available dimensions for a report suite
-  - name: Metrics
-    description: Retrieve available metrics for a report suite
-  - name: Report Suites
-    description: Retrieve report suite information and configuration
-  - name: Reports
-    description: Run analytics reports and retrieve data
-  - name: Segments
-    description: Create, retrieve, update, and delete analytics segments
+- name: Annotations
+  description: Manage analytics annotations
+- name: Calculated Metrics
+  description: Manage calculated metrics built from existing metrics
+- name: Date Ranges
+  description: Manage saved date ranges
+- name: Dimensions
+  description: Retrieve available dimensions for a report suite
+- name: Metrics
+  description: Retrieve available metrics for a report suite
+- name: Report Suites
+  description: Retrieve report suite information and configuration
+- name: Reports
+  description: Run analytics reports and retrieve data
+- name: Segments
+  description: Create, retrieve, update, and delete analytics segments
 security:
-  - bearerAuth: []
-    apiKey: []
+- bearerAuth: []
+  apiKey: []
 paths:
   /reports:
     post:
       operationId: runReport
-      summary: Adobe Analytics Run a report
+      summary: Adobe Analytics Run a Report
       description: >-
         Runs an analytics report based on the provided report request definition.
         The request body specifies metrics, dimensions, date ranges, filters,
         and other parameters to define the report output.
       tags:
-        - Reports
+      - Reports
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/ReportRequest'
+            examples:
+              RunreportRequestExample:
+                summary: Default runReport request
+                x-microcks-default: true
+                value:
+                  rsid: '500123'
+                  locale: example_value
+                  globalFilters:
+                  - type: dateRange
+                    dateRange: example_value
+                    segmentId: '500123'
+                    dimension: example_value
+                    itemId: '500123'
+                  metricContainer:
+                    metrics:
+                    - {}
+                    metricFilters:
+                    - {}
+                  dimension: example_value
+                  settings:
+                    limit: 10
+                    page: 10
+                    nonesBehavior: exclude-nones
+                  statistics: example_value
       responses:
         '200':
           description: Report results
@@ -66,64 +91,100 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReportResponse'
+              examples:
+                Runreport200Example:
+                  summary: Default runReport 200 response
+                  x-microcks-default: true
+                  value:
+                    totalPages: 42
+                    numberOfElements: 10
+                    rows:
+                    - itemId: '500123'
+                      value: example_value
+                      data: {}
+                    columns: example_value
+                    summaryData: example_value
         '400':
           description: Invalid request body or parameters
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Runreport400Example:
+                  summary: Default runReport 400 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+                    errorId: '500123'
         '401':
           description: Unauthorized - missing or invalid credentials
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Runreport401Example:
+                  summary: Default runReport 401 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+                    errorId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /segments:
     get:
       operationId: listSegments
-      summary: Adobe Analytics List segments
+      summary: Adobe Analytics List Segments
       description: >-
         Retrieves a list of segments for the company. Supports filtering by
         name, tag, owner, and report suite, as well as pagination and expansion
         of additional fields.
       tags:
-        - Segments
+      - Segments
       parameters:
-        - $ref: '#/components/parameters/locale'
-        - $ref: '#/components/parameters/filterByIds'
-        - name: limit
-          in: query
-          description: Maximum number of results per page (max 1000)
-          schema:
-            type: integer
-            default: 10
-            maximum: 1000
-        - name: page
-          in: query
-          description: Page number (zero-indexed)
-          schema:
-            type: integer
-            default: 0
-        - name: expansion
-          in: query
-          description: >-
-            Comma-separated list of additional fields to include. Valid values:
-            reportSuiteName, ownerFullName, modified, tags, compatibility,
-            definition, publishingStatus, definitionLastModified, categories
-          schema:
-            type: string
-        - name: includeType
-          in: query
-          description: >-
-            Controls which segments are returned. Use 'all' for all company
-            segments (admin only), 'shared' for shared segments, 'templates'
-            for template segments.
-          schema:
-            type: string
-            enum:
-              - all
-              - shared
-              - templates
+      - $ref: '#/components/parameters/locale'
+      - $ref: '#/components/parameters/filterByIds'
+      - name: limit
+        in: query
+        description: Maximum number of results per page (max 1000)
+        schema:
+          type: integer
+          default: 10
+          maximum: 1000
+        example: 10
+      - name: page
+        in: query
+        description: Page number (zero-indexed)
+        schema:
+          type: integer
+          default: 0
+        example: 10
+      - name: expansion
+        in: query
+        description: >-
+          Comma-separated list of additional fields to include. Valid values:
+          reportSuiteName, ownerFullName, modified, tags, compatibility,
+          definition, publishingStatus, definitionLastModified, categories
+        schema:
+          type: string
+        example: example_value
+      - name: includeType
+        in: query
+        description: >-
+          Controls which segments are returned. Use 'all' for all company
+          segments (admin only), 'shared' for shared segments, 'templates'
+          for template segments.
+        schema:
+          type: string
+          enum:
+          - all
+          - shared
+          - templates
+        example: all
       responses:
         '200':
           description: List of segments
@@ -131,27 +192,63 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/SegmentList'
+              examples:
+                Listsegments200Example:
+                  summary: Default listSegments 200 response
+                  x-microcks-default: true
+                  value:
+                    content:
+                    - id: abc123
+                      name: Example Title
+                      description: A sample description.
+                      rsid: '500123'
+                      definition: example_value
+                      modified: '2026-01-15T10:30:00Z'
+                      tags: {}
+                    totalElements: 42
+                    totalPages: 42
+                    numberOfElements: 10
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Listsegments401Example:
+                  summary: Default listSegments 401 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+                    errorId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createSegment
-      summary: Adobe Analytics Create a segment
+      summary: Adobe Analytics Create a Segment
       description: >-
         Creates a new analytics segment. The segment definition uses the
         Analytics query language to specify filter criteria based on dimensions,
         metrics, and events.
       tags:
-        - Segments
+      - Segments
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/SegmentCreate'
+            examples:
+              CreatesegmentRequestExample:
+                summary: Default createSegment request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  description: A sample description.
+                  rsid: '500123'
+                  definition: example_value
       responses:
         '200':
           description: Segment created
@@ -159,35 +256,75 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Segment'
+              examples:
+                Createsegment200Example:
+                  summary: Default createSegment 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    description: A sample description.
+                    rsid: '500123'
+                    owner:
+                      id: abc123
+                      name: Example Title
+                      login: example_value
+                    definition: example_value
+                    modified: '2026-01-15T10:30:00Z'
+                    tags:
+                    - id: abc123
+                      name: Example Title
+                      description: A sample description.
+                      components: {}
         '400':
           description: Invalid segment definition
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Createsegment400Example:
+                  summary: Default createSegment 400 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+                    errorId: '500123'
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Createsegment401Example:
+                  summary: Default createSegment 401 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+                    errorId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /segments/{segmentId}:
     get:
       operationId: getSegment
-      summary: Adobe Analytics Get a segment
+      summary: Adobe Analytics Get a Segment
       description: >-
         Retrieves a single segment by its ID, including its definition and
         associated metadata.
       tags:
-        - Segments
+      - Segments
       parameters:
-        - $ref: '#/components/parameters/segmentId'
-        - $ref: '#/components/parameters/locale'
-        - name: expansion
-          in: query
-          description: Comma-separated list of additional fields to include
-          schema:
-            type: string
+      - $ref: '#/components/parameters/segmentId'
+      - $ref: '#/components/parameters/locale'
+      - name: expansion
+        in: query
+        description: Comma-separated list of additional fields to include
+        schema:
+          type: string
+        example: example_value
       responses:
         '200':
           description: Segment details
@@ -195,29 +332,69 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Segment'
+              examples:
+                Getsegment200Example:
+                  summary: Default getSegment 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    description: A sample description.
+                    rsid: '500123'
+                    owner:
+                      id: abc123
+                      name: Example Title
+                      login: example_value
+                    definition: example_value
+                    modified: '2026-01-15T10:30:00Z'
+                    tags:
+                    - id: abc123
+                      name: Example Title
+                      description: A sample description.
+                      components: {}
         '404':
           description: Segment not found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Getsegment404Example:
+                  summary: Default getSegment 404 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+                    errorId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: updateSegment
-      summary: Adobe Analytics Update a segment
+      summary: Adobe Analytics Update a Segment
       description: >-
         Updates an existing segment. Supports partial updates — you can send
         only the fields you want to change. Tags, compatibility, and
         reportSuiteName cannot be edited via this endpoint.
       tags:
-        - Segments
+      - Segments
       parameters:
-        - $ref: '#/components/parameters/segmentId'
+      - $ref: '#/components/parameters/segmentId'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/SegmentCreate'
+            examples:
+              UpdatesegmentRequestExample:
+                summary: Default updateSegment request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  description: A sample description.
+                  rsid: '500123'
+                  definition: example_value
       responses:
         '200':
           description: Updated segment
@@ -225,20 +402,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Segment'
+              examples:
+                Updatesegment200Example:
+                  summary: Default updateSegment 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    description: A sample description.
+                    rsid: '500123'
+                    owner:
+                      id: abc123
+                      name: Example Title
+                      login: example_value
+                    definition: example_value
+                    modified: '2026-01-15T10:30:00Z'
+                    tags:
+                    - id: abc123
+                      name: Example Title
+                      description: A sample description.
+                      components: {}
         '404':
           description: Segment not found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Updatesegment404Example:
+                  summary: Default updateSegment 404 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+                    errorId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteSegment
-      summary: Adobe Analytics Delete a segment
+      summary: Adobe Analytics Delete a Segment
       description: Permanently deletes the specified segment.
       tags:
-        - Segments
+      - Segments
       parameters:
-        - $ref: '#/components/parameters/segmentId'
+      - $ref: '#/components/parameters/segmentId'
       responses:
         '200':
           description: Segment deleted successfully
@@ -248,43 +456,58 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Deletesegment404Example:
+                  summary: Default deleteSegment 404 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+                    errorId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /calculatedmetrics:
     get:
       operationId: listCalculatedMetrics
-      summary: Adobe Analytics List calculated metrics
+      summary: Adobe Analytics List Calculated Metrics
       description: >-
         Retrieves all calculated metrics for the company. Supports filtering
         by owner, tags, report suite, and whether to include shared or template
         calculated metrics.
       tags:
-        - Calculated Metrics
+      - Calculated Metrics
       parameters:
-        - $ref: '#/components/parameters/locale'
-        - name: limit
-          in: query
-          schema:
-            type: integer
-            default: 10
-            maximum: 1000
-        - name: page
-          in: query
-          schema:
-            type: integer
-            default: 0
-        - name: expansion
-          in: query
-          description: Comma-separated additional fields to include
-          schema:
-            type: string
-        - name: includeType
-          in: query
-          description: Controls which calculated metrics are returned
-          schema:
-            type: string
-            enum:
-              - all
-              - shared
-              - templates
+      - $ref: '#/components/parameters/locale'
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 10
+          maximum: 1000
+        example: 10
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 0
+        example: 10
+      - name: expansion
+        in: query
+        description: Comma-separated additional fields to include
+        schema:
+          type: string
+        example: example_value
+      - name: includeType
+        in: query
+        description: Controls which calculated metrics are returned
+        schema:
+          type: string
+          enum:
+          - all
+          - shared
+          - templates
+        example: all
       responses:
         '200':
           description: List of calculated metrics
@@ -292,26 +515,62 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CalculatedMetricList'
+              examples:
+                Listcalculatedmetrics200Example:
+                  summary: Default listCalculatedMetrics 200 response
+                  x-microcks-default: true
+                  value:
+                    content:
+                    - id: abc123
+                      name: Example Title
+                      description: A sample description.
+                      rsid: '500123'
+                      definition: example_value
+                      modified: '2026-01-15T10:30:00Z'
+                      type: DECIMAL
+                    totalElements: 42
+                    totalPages: 42
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Listcalculatedmetrics401Example:
+                  summary: Default listCalculatedMetrics 401 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+                    errorId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createCalculatedMetric
-      summary: Adobe Analytics Create a calculated metric
+      summary: Adobe Analytics Create a Calculated Metric
       description: >-
         Creates a new calculated metric using a definition that combines
         existing metrics with mathematical operators and functions.
       tags:
-        - Calculated Metrics
+      - Calculated Metrics
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CalculatedMetricCreate'
+            examples:
+              CreatecalculatedmetricRequestExample:
+                summary: Default createCalculatedMetric request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  description: A sample description.
+                  rsid: '500123'
+                  definition: example_value
+                  type: DECIMAL
       responses:
         '200':
           description: Calculated metric created
@@ -319,21 +578,48 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CalculatedMetric'
+              examples:
+                Createcalculatedmetric200Example:
+                  summary: Default createCalculatedMetric 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    description: A sample description.
+                    rsid: '500123'
+                    owner:
+                      id: abc123
+                      name: Example Title
+                      login: example_value
+                    definition: example_value
+                    modified: '2026-01-15T10:30:00Z'
+                    type: DECIMAL
         '400':
           description: Invalid definition
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Createcalculatedmetric400Example:
+                  summary: Default createCalculatedMetric 400 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+                    errorId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /calculatedmetrics/{calculatedMetricId}:
     get:
       operationId: getCalculatedMetric
-      summary: Adobe Analytics Get a calculated metric
+      summary: Adobe Analytics Get a Calculated Metric
       description: Retrieves a single calculated metric by its ID.
       tags:
-        - Calculated Metrics
+      - Calculated Metrics
       parameters:
-        - $ref: '#/components/parameters/calculatedMetricId'
+      - $ref: '#/components/parameters/calculatedMetricId'
       responses:
         '200':
           description: Calculated metric details
@@ -341,26 +627,63 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CalculatedMetric'
+              examples:
+                Getcalculatedmetric200Example:
+                  summary: Default getCalculatedMetric 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    description: A sample description.
+                    rsid: '500123'
+                    owner:
+                      id: abc123
+                      name: Example Title
+                      login: example_value
+                    definition: example_value
+                    modified: '2026-01-15T10:30:00Z'
+                    type: DECIMAL
         '404':
           description: Not found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Getcalculatedmetric404Example:
+                  summary: Default getCalculatedMetric 404 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+                    errorId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     put:
       operationId: updateCalculatedMetric
-      summary: Adobe Analytics Update a calculated metric
+      summary: Adobe Analytics Update a Calculated Metric
       description: Updates an existing calculated metric definition or metadata.
       tags:
-        - Calculated Metrics
+      - Calculated Metrics
       parameters:
-        - $ref: '#/components/parameters/calculatedMetricId'
+      - $ref: '#/components/parameters/calculatedMetricId'
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/CalculatedMetricCreate'
+            examples:
+              UpdatecalculatedmetricRequestExample:
+                summary: Default updateCalculatedMetric request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  description: A sample description.
+                  rsid: '500123'
+                  definition: example_value
+                  type: DECIMAL
       responses:
         '200':
           description: Updated calculated metric
@@ -368,30 +691,52 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CalculatedMetric'
+              examples:
+                Updatecalculatedmetric200Example:
+                  summary: Default updateCalculatedMetric 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    description: A sample description.
+                    rsid: '500123'
+                    owner:
+                      id: abc123
+                      name: Example Title
+                      login: example_value
+                    definition: example_value
+                    modified: '2026-01-15T10:30:00Z'
+                    type: DECIMAL
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     delete:
       operationId: deleteCalculatedMetric
-      summary: Adobe Analytics Delete a calculated metric
+      summary: Adobe Analytics Delete a Calculated Metric
       description: Permanently deletes the specified calculated metric.
       tags:
-        - Calculated Metrics
+      - Calculated Metrics
       parameters:
-        - $ref: '#/components/parameters/calculatedMetricId'
+      - $ref: '#/components/parameters/calculatedMetricId'
       responses:
         '200':
           description: Deleted successfully
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /metrics:
     get:
       operationId: listMetrics
-      summary: Adobe Analytics List metrics
+      summary: Adobe Analytics List Metrics
       description: >-
         Returns a list of all metrics available in the specified report suite,
         including standard metrics and any calculated metrics. Metrics are
         returned as objects containing the ID, name, type, and description.
       tags:
-        - Metrics
+      - Metrics
       parameters:
-        - $ref: '#/components/parameters/rsid'
-        - $ref: '#/components/parameters/locale'
+      - $ref: '#/components/parameters/rsid'
+      - $ref: '#/components/parameters/locale'
       responses:
         '200':
           description: List of metrics
@@ -401,25 +746,48 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Metric'
+              examples:
+                Listmetrics200Example:
+                  summary: Default listMetrics 200 response
+                  x-microcks-default: true
+                  value:
+                  - id: abc123
+                    title: Example Title
+                    name: Example Title
+                    type: INT
+                    extraTitleInfo: example_value
+                    category: example_value
+                    description: A sample description.
         '400':
           description: Missing or invalid rsid
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Listmetrics400Example:
+                  summary: Default listMetrics 400 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+                    errorId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /dimensions:
     get:
       operationId: listDimensions
-      summary: Adobe Analytics List dimensions
+      summary: Adobe Analytics List Dimensions
       description: >-
         Returns all dimensions available in the specified report suite. Each
         dimension represents a category for grouping and filtering report data,
         such as page, browser, or custom eVar/prop.
       tags:
-        - Dimensions
+      - Dimensions
       parameters:
-        - $ref: '#/components/parameters/rsid'
-        - $ref: '#/components/parameters/locale'
+      - $ref: '#/components/parameters/rsid'
+      - $ref: '#/components/parameters/locale'
       responses:
         '200':
           description: List of dimensions
@@ -429,32 +797,56 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Dimension'
+              examples:
+                Listdimensions200Example:
+                  summary: Default listDimensions 200 response
+                  x-microcks-default: true
+                  value:
+                  - id: abc123
+                    title: Example Title
+                    name: Example Title
+                    type: example_value
+                    category: example_value
+                    description: A sample description.
         '400':
           description: Missing or invalid rsid
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Listdimensions400Example:
+                  summary: Default listDimensions 400 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+                    errorId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /reportsuites/collections/suites:
     get:
       operationId: listReportSuites
-      summary: Adobe Analytics List report suites
+      summary: Adobe Analytics List Report Suites
       description: >-
         Returns a list of report suites accessible to the authenticated user,
         including report suite ID, name, timezone, and type.
       tags:
-        - Report Suites
+      - Report Suites
       parameters:
-        - name: limit
-          in: query
-          schema:
-            type: integer
-            default: 10
-        - name: page
-          in: query
-          schema:
-            type: integer
-            default: 0
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 10
+        example: 10
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 0
+        example: 10
       responses:
         '200':
           description: List of report suites
@@ -462,21 +854,44 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReportSuiteList'
+              examples:
+                Listreportsuites200Example:
+                  summary: Default listReportSuites 200 response
+                  x-microcks-default: true
+                  value:
+                    content:
+                    - rsid: '500123'
+                      name: Example Title
+                      timezoneZoneinfo: example_value
+                      type: standard
+                    totalElements: 42
+                    totalPages: 42
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Listreportsuites401Example:
+                  summary: Default listReportSuites 401 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+                    errorId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /reportsuites/collections/suites/{rsid}:
     get:
       operationId: getReportSuite
-      summary: Adobe Analytics Get a report suite
+      summary: Adobe Analytics Get a Report Suite
       description: Returns details for a specific report suite by its ID.
       tags:
-        - Report Suites
+      - Report Suites
       parameters:
-        - $ref: '#/components/parameters/rsidPath'
+      - $ref: '#/components/parameters/rsidPath'
       responses:
         '200':
           description: Report suite details
@@ -484,29 +899,50 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ReportSuite'
+              examples:
+                Getreportsuite200Example:
+                  summary: Default getReportSuite 200 response
+                  x-microcks-default: true
+                  value:
+                    rsid: '500123'
+                    name: Example Title
+                    timezoneZoneinfo: example_value
+                    type: standard
         '404':
           description: Report suite not found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Getreportsuite404Example:
+                  summary: Default getReportSuite 404 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+                    errorId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /annotations:
     get:
       operationId: listAnnotations
-      summary: Adobe Analytics List annotations
+      summary: Adobe Analytics List Annotations
       description: >-
         Retrieves all annotations associated with report suites in the company.
         Annotations mark specific dates or date ranges in reports with
         descriptive notes.
       tags:
-        - Annotations
+      - Annotations
       parameters:
-        - $ref: '#/components/parameters/locale'
-        - name: limit
-          in: query
-          schema:
-            type: integer
-            default: 10
+      - $ref: '#/components/parameters/locale'
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 10
+        example: 10
       responses:
         '200':
           description: List of annotations
@@ -516,18 +952,44 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Annotation'
+              examples:
+                Listannotations200Example:
+                  summary: Default listAnnotations 200 response
+                  x-microcks-default: true
+                  value:
+                  - id: abc123
+                    name: Example Title
+                    description: A sample description.
+                    dateRange: example_value
+                    rsids:
+                    - example_value
+                    color: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createAnnotation
-      summary: Adobe Analytics Create an annotation
+      summary: Adobe Analytics Create an Annotation
       description: Creates a new annotation for a report suite date range.
       tags:
-        - Annotations
+      - Annotations
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/AnnotationCreate'
+            examples:
+              CreateannotationRequestExample:
+                summary: Default createAnnotation request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  description: A sample description.
+                  dateRange: example_value
+                  rsids:
+                  - example_value
+                  color: example_value
       responses:
         '200':
           description: Annotation created
@@ -535,20 +997,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Annotation'
+              examples:
+                Createannotation200Example:
+                  summary: Default createAnnotation 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    description: A sample description.
+                    dateRange: example_value
+                    rsids:
+                    - example_value
+                    color: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /dateranges:
     get:
       operationId: listDateRanges
-      summary: Adobe Analytics List date ranges
+      summary: Adobe Analytics List Date Ranges
       description: Returns saved date ranges available to the user or company.
       tags:
-        - Date Ranges
+      - Date Ranges
       parameters:
-        - $ref: '#/components/parameters/locale'
-        - name: limit
-          in: query
-          schema:
-            type: integer
-            default: 10
+      - $ref: '#/components/parameters/locale'
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 10
+        example: 10
       responses:
         '200':
           description: List of date ranges
@@ -558,15 +1036,28 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/DateRange'
+              examples:
+                Listdateranges200Example:
+                  summary: Default listDateRanges 200 response
+                  x-microcks-default: true
+                  value:
+                  - id: abc123
+                    name: Example Title
+                    description: A sample description.
+                    definition: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /componentmetadata/tags:
     get:
       operationId: listTags
-      summary: Adobe Analytics List tags
+      summary: Adobe Analytics List Tags
       description: >-
         Returns all tags used on components within the company. Tags can be
         applied to segments, calculated metrics, projects, and other
         components.
-      tags: []
+      tags:
+      - Annotations
       responses:
         '200':
           description: List of tags
@@ -576,6 +1067,19 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Tag'
+              examples:
+                Listtags200Example:
+                  summary: Default listTags 200 response
+                  x-microcks-default: true
+                  value:
+                  - id: abc123
+                    name: Example Title
+                    description: A sample description.
+                    components:
+                    - {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     bearerAuth:
@@ -623,16 +1127,16 @@ components:
       schema:
         type: string
         enum:
-          - en_US
-          - fr_FR
-          - jp_JP
-          - ja_JP
-          - de_DE
-          - es_ES
-          - ko_KR
-          - pt_BR
-          - zh_CN
-          - zh_TW
+        - en_US
+        - fr_FR
+        - jp_JP
+        - ja_JP
+        - de_DE
+        - es_ES
+        - ko_KR
+        - pt_BR
+        - zh_CN
+        - zh_TW
     filterByIds:
       name: filterByIds
       in: query
@@ -643,95 +1147,111 @@ components:
     ReportRequest:
       type: object
       required:
-        - rsid
-        - globalFilters
-        - metricContainer
+      - rsid
+      - globalFilters
+      - metricContainer
       description: Definition of an analytics report request
       properties:
         rsid:
           type: string
           description: The report suite ID to run the report against
+          example: examplersid
         locale:
           type: string
           description: Locale for response labels
+          example: en_US
         globalFilters:
           type: array
           description: List of global filters applied to the entire report
           items:
             $ref: '#/components/schemas/ReportFilter'
+          example: []
         metricContainer:
           $ref: '#/components/schemas/MetricContainer'
         dimension:
           type: string
           description: The primary dimension ID for the report (e.g. variables/page)
+          example: variables/page
         settings:
           $ref: '#/components/schemas/ReportSettings'
         statistics:
           type: object
           description: Statistical settings for the report
+          example: example_value
     ReportFilter:
       type: object
       required:
-        - type
+      - type
       description: A filter applied to a report
       properties:
         type:
           type: string
           description: Filter type
           enum:
-            - dateRange
-            - breakdown
-            - segment
+          - dateRange
+          - breakdown
+          - segment
+          example: dateRange
         dateRange:
           type: string
           description: ISO 8601 date range (e.g. 2024-01-01T00:00:00/2024-01-31T23:59:59)
+          example: example_value
         segmentId:
           type: string
           description: ID of an existing segment to apply as a filter
+          example: '500123'
         dimension:
           type: string
           description: Dimension for breakdown filter
+          example: example_value
         itemId:
           type: string
           description: Dimension item ID for breakdown filter
+          example: '500123'
     MetricContainer:
       type: object
       required:
-        - metrics
+      - metrics
       description: Container defining the metrics to include in a report
       properties:
         metrics:
           type: array
           items:
             $ref: '#/components/schemas/ReportMetric'
+          example: []
         metricFilters:
           type: array
           description: Filters applied at the metric level
           items:
             $ref: '#/components/schemas/ReportFilter'
+          example: []
     ReportMetric:
       type: object
       required:
-        - id
+      - id
       description: A metric included in a report request
       properties:
         id:
           type: string
           description: The metric ID (e.g. metrics/visits)
+          example: abc123
         columnId:
           type: string
           description: Column identifier for this metric in the response
+          example: '500123'
         filters:
           type: array
           description: Metric-level filter IDs referencing metricFilters
           items:
             type: string
+          example: []
         sort:
           type: string
           description: Sort direction for this metric
           enum:
-            - ASC
-            - DESC
+          - ASC
+          - DESC
+          example: ASC
     ReportSettings:
       type: object
       description: Settings that control report output behavior
@@ -740,16 +1260,19 @@ components:
           type: integer
           description: Maximum number of rows to return
           default: 50
+          example: 10
         page:
           type: integer
           description: Page number (zero-indexed)
           default: 0
+          example: 10
         nonesBehavior:
           type: string
           description: How to handle None values
           enum:
-            - exclude-nones
-            - return-nones
+          - exclude-nones
+          - return-nones
+          example: exclude-nones
     ReportResponse:
       type: object
       description: The result of an analytics report request
@@ -757,19 +1280,24 @@ components:
         totalPages:
           type: integer
           description: Total number of result pages
+          example: 42
         numberOfElements:
           type: integer
           description: Number of rows in this response
+          example: 10
         rows:
           type: array
           items:
             $ref: '#/components/schemas/ReportRow'
+          example: []
         columns:
           type: object
           description: Column metadata for the report
+          example: example_value
         summaryData:
           type: object
           description: Totals and summary statistics
+          example: example_value
     ReportRow:
       type: object
       description: A single row in a report result
@@ -777,14 +1305,17 @@ components:
         itemId:
           type: string
           description: The dimension item ID
+          example: '500123'
         value:
           type: string
           description: The dimension item display value
+          example: example_value
         data:
           type: array
           description: Metric values for this row, in column order
           items:
             type: number
+          example: []
     Segment:
       type: object
       description: An analytics segment definition
@@ -792,49 +1323,60 @@ components:
         id:
           type: string
           description: Unique segment identifier
+          example: abc123
         name:
           type: string
           description: Display name of the segment
+          example: Example Title
         description:
           type: string
           description: Description of the segment's purpose
+          example: A sample description.
         rsid:
           type: string
           description: The report suite this segment is based on
+          example: '500123'
         owner:
           $ref: '#/components/schemas/Owner'
         definition:
           type: object
           description: The segment rule definition
+          example: example_value
         modified:
           type: string
           format: date-time
           description: Last modification timestamp
+          example: '2026-01-15T10:30:00Z'
         tags:
           type: array
           items:
             $ref: '#/components/schemas/Tag'
+          example: []
     SegmentCreate:
       type: object
       required:
-        - name
-        - rsid
-        - definition
+      - name
+      - rsid
+      - definition
       description: Payload for creating or updating a segment
       properties:
         name:
           type: string
           description: Display name of the segment
           maxLength: 255
+          example: Example Title
         description:
           type: string
           description: Description of the segment's purpose
+          example: A sample description.
         rsid:
           type: string
           description: Report suite ID this segment is based on
+          example: '500123'
         definition:
           type: object
           description: The segment rule definition in Analytics query format
+          example: example_value
     SegmentList:
       type: object
       description: Paginated list of segments
@@ -843,15 +1385,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Segment'
+          example: []
         totalElements:
           type: integer
           description: Total number of segments available
+          example: 42
         totalPages:
           type: integer
           description: Total number of pages
+          example: 42
         numberOfElements:
           type: integer
           description: Number of elements on this page
+          example: 10
     CalculatedMetric:
       type: object
       description: A calculated metric definition
@@ -859,61 +1405,73 @@ components:
         id:
           type: string
           description: Unique calculated metric identifier
+          example: abc123
         name:
           type: string
           description: Display name
+          example: Example Title
         description:
           type: string
           description: Description of what the metric measures
+          example: A sample description.
         rsid:
           type: string
           description: The report suite this calculated metric is based on
+          example: '500123'
         owner:
           $ref: '#/components/schemas/Owner'
         definition:
           type: object
           description: The formula definition for this calculated metric
+          example: example_value
         modified:
           type: string
           format: date-time
           description: Last modification timestamp
+          example: '2026-01-15T10:30:00Z'
         type:
           type: string
           description: The metric type
           enum:
-            - DECIMAL
-            - TIME
-            - PERCENT
-            - CURRENCY
+          - DECIMAL
+          - TIME
+          - PERCENT
+          - CURRENCY
+          example: DECIMAL
     CalculatedMetricCreate:
       type: object
       required:
-        - name
-        - rsid
-        - definition
+      - name
+      - rsid
+      - definition
       description: Payload for creating or updating a calculated metric
       properties:
         name:
           type: string
           description: Display name
           maxLength: 255
+          example: Example Title
         description:
           type: string
           description: Description of what the metric measures
+          example: A sample description.
         rsid:
           type: string
           description: Report suite ID
+          example: '500123'
         definition:
           type: object
           description: The formula definition
+          example: example_value
         type:
           type: string
           description: The metric output type
           enum:
-            - DECIMAL
-            - TIME
-            - PERCENT
-            - CURRENCY
+          - DECIMAL
+          - TIME
+          - PERCENT
+          - CURRENCY
+          example: DECIMAL
     CalculatedMetricList:
       type: object
       description: Paginated list of calculated metrics
@@ -922,12 +1480,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CalculatedMetric'
+          example: []
         totalElements:
           type: integer
           description: Total number of calculated metrics available
+          example: 42
         totalPages:
           type: integer
           description: Total number of pages
+          example: 42
     Metric:
       type: object
       description: An analytics metric available in a report suite
@@ -935,30 +1496,37 @@ components:
         id:
           type: string
           description: Metric ID (e.g. metrics/visits)
+          example: abc123
         title:
           type: string
           description: Display name of the metric
+          example: Example Title
         name:
           type: string
           description: Internal name
+          example: Example Title
         type:
           type: string
           description: Metric data type
           enum:
-            - INT
-            - DECIMAL
-            - CURRENCY
-            - PERCENT
-            - TIME
+          - INT
+          - DECIMAL
+          - CURRENCY
+          - PERCENT
+          - TIME
+          example: INT
         extraTitleInfo:
           type: string
           description: Additional context for the metric title
+          example: example_value
         category:
           type: string
           description: Category grouping for the metric
+          example: example_value
         description:
           type: string
           description: Description of what the metric measures
+          example: A sample description.
     Dimension:
       type: object
       description: An analytics dimension available in a report suite
@@ -966,21 +1534,27 @@ components:
         id:
           type: string
           description: Dimension ID (e.g. variables/page)
+          example: abc123
         title:
           type: string
           description: Display name of the dimension
+          example: Example Title
         name:
           type: string
           description: Internal name
+          example: Example Title
         type:
           type: string
           description: Dimension data type
+          example: example_value
         category:
           type: string
           description: Category grouping for the dimension
+          example: example_value
         description:
           type: string
           description: Description of what the dimension tracks
+          example: A sample description.
     ReportSuite:
       type: object
       description: An Adobe Analytics report suite
@@ -988,18 +1562,22 @@ components:
         rsid:
           type: string
           description: Report suite ID
+          example: '500123'
         name:
           type: string
           description: Display name of the report suite
+          example: Example Title
         timezoneZoneinfo:
           type: string
           description: Timezone for the report suite
+          example: example_value
         type:
           type: string
           description: Report suite type
           enum:
-            - standard
-            - virtual
+          - standard
+          - virtual
+          example: standard
     ReportSuiteList:
       type: object
       description: Paginated list of report suites
@@ -1008,12 +1586,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ReportSuite'
+          example: []
         totalElements:
           type: integer
           description: Total number of report suites
+          example: 42
         totalPages:
           type: integer
           description: Total number of pages
+          example: 42
     Annotation:
       type: object
       description: An annotation marking a date range in reports
@@ -1021,48 +1602,59 @@ components:
         id:
           type: string
           description: Unique annotation identifier
+          example: abc123
         name:
           type: string
           description: Display name of the annotation
+          example: Example Title
         description:
           type: string
           description: Annotation text content
+          example: A sample description.
         dateRange:
           type: string
           description: ISO 8601 date range covered by this annotation
+          example: example_value
         rsids:
           type: array
           items:
             type: string
           description: List of report suite IDs this annotation applies to
+          example: []
         color:
           type: string
           description: Display color for the annotation in reports
+          example: example_value
     AnnotationCreate:
       type: object
       required:
-        - name
-        - dateRange
+      - name
+      - dateRange
       description: Payload for creating an annotation
       properties:
         name:
           type: string
           description: Display name
           maxLength: 255
+          example: Example Title
         description:
           type: string
           description: Annotation notes
+          example: A sample description.
         dateRange:
           type: string
           description: ISO 8601 date range
+          example: example_value
         rsids:
           type: array
           items:
             type: string
           description: Report suite IDs to apply to
+          example: []
         color:
           type: string
           description: Hex color code
+          example: example_value
     DateRange:
       type: object
       description: A saved date range component
@@ -1070,15 +1662,19 @@ components:
         id:
           type: string
           description: Unique date range identifier
+          example: abc123
         name:
           type: string
           description: Display name
+          example: Example Title
         description:
           type: string
           description: Description of the date range
+          example: A sample description.
         definition:
           type: string
           description: The date range definition expression
+          example: example_value
     Tag:
       type: object
       description: A tag applied to an Analytics component
@@ -1086,17 +1682,21 @@ components:
         id:
           type: integer
           description: Tag identifier
+          example: abc123
         name:
           type: string
           description: Tag name
+          example: Example Title
         description:
           type: string
           description: Tag description
+          example: A sample description.
         components:
           type: array
           description: List of components this tag is applied to
           items:
             type: object
+          example: []
     Owner:
       type: object
       description: The owner of an Analytics component
@@ -1104,12 +1704,15 @@ components:
         id:
           type: integer
           description: Owner user ID
+          example: abc123
         name:
           type: string
           description: Owner display name
+          example: Example Title
         login:
           type: string
           description: Owner login identifier
+          example: example_value
     ErrorResponse:
       type: object
       description: Error response from the API
@@ -1117,9 +1720,12 @@ components:
         errorCode:
           type: string
           description: Machine-readable error code
+          example: example_value
         errorDescription:
           type: string
           description: Human-readable error message
+          example: example_value
         errorId:
           type: string
           description: Unique ID for tracking this error
+          example: '500123'

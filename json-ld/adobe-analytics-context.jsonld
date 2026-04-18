@@ -1,182 +1,485 @@
 {
   "@context": {
     "@version": 1.1,
-    "analytics": "https://developer.adobe.com/analytics-apis/docs/2.0/schemas/",
-    "schema": "https://schema.org/",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
-    "dcterms": "http://purl.org/dc/terms/",
-
-    "ReportSuite": {
-      "@id": "analytics:ReportSuite",
+    "schema": "https://schema.org/",
+    "ReportRequest": {
+      "@id": "ns:ReportRequest",
       "@context": {
-        "rsid": "analytics:rsid",
-        "name": "schema:name",
-        "timezoneZoneinfo": "analytics:timezoneZoneinfo",
-        "type": "analytics:reportSuiteType",
-        "currency": "analytics:currency"
+        "rsid": {
+          "@id": "ns:rsid",
+          "@type": "xsd:string"
+        },
+        "locale": {
+          "@id": "ns:locale",
+          "@type": "xsd:string"
+        },
+        "globalFilters": "ns:globalFilters",
+        "metricContainer": {
+          "@id": "ns:metricContainer",
+          "@type": "xsd:string"
+        },
+        "dimension": {
+          "@id": "ns:dimension",
+          "@type": "xsd:string"
+        },
+        "settings": {
+          "@id": "ns:settings",
+          "@type": "xsd:string"
+        },
+        "statistics": "ns:statistics"
       }
     },
-
-    "Segment": {
-      "@id": "analytics:Segment",
+    "ReportFilter": {
+      "@id": "ns:ReportFilter",
       "@context": {
-        "id": "@id",
-        "name": "schema:name",
-        "description": "dcterms:description",
-        "rsid": "analytics:reportSuiteId",
-        "owner": "analytics:owner",
-        "definition": "analytics:definition",
-        "modified": {
-          "@id": "dcterms:modified",
-          "@type": "xsd:dateTime"
+        "type": {
+          "@id": "ns:type",
+          "@type": "xsd:string"
         },
-        "created": {
-          "@id": "dcterms:created",
-          "@type": "xsd:dateTime"
+        "dateRange": {
+          "@id": "ns:dateRange",
+          "@type": "xsd:string"
         },
-        "tags": {
-          "@id": "analytics:tags",
-          "@container": "@set"
+        "segmentId": {
+          "@id": "ns:segmentId",
+          "@type": "xsd:string"
         },
-        "compatibility": "analytics:compatibility",
-        "publishingStatus": "analytics:publishingStatus"
-      }
-    },
-
-    "CalculatedMetric": {
-      "@id": "analytics:CalculatedMetric",
-      "@context": {
-        "id": "@id",
-        "name": "schema:name",
-        "description": "dcterms:description",
-        "rsid": "analytics:reportSuiteId",
-        "owner": "analytics:owner",
-        "definition": "analytics:definition",
-        "type": "analytics:metricType",
-        "modified": {
-          "@id": "dcterms:modified",
-          "@type": "xsd:dateTime"
+        "dimension": {
+          "@id": "ns:dimension",
+          "@type": "xsd:string"
         },
-        "tags": {
-          "@id": "analytics:tags",
-          "@container": "@set"
+        "itemId": {
+          "@id": "ns:itemId",
+          "@type": "xsd:string"
         }
       }
     },
-
+    "MetricContainer": {
+      "@id": "ns:MetricContainer",
+      "@context": {
+        "metrics": "ns:metrics",
+        "metricFilters": "ns:metricFilters"
+      }
+    },
+    "ReportMetric": {
+      "@id": "ns:ReportMetric",
+      "@context": {
+        "id": {
+          "@id": "ns:id",
+          "@type": "xsd:string"
+        },
+        "columnId": {
+          "@id": "ns:columnId",
+          "@type": "xsd:string"
+        },
+        "filters": "ns:filters",
+        "sort": {
+          "@id": "ns:sort",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "ReportSettings": {
+      "@id": "ns:ReportSettings",
+      "@context": {
+        "limit": {
+          "@id": "ns:limit",
+          "@type": "xsd:integer"
+        },
+        "page": {
+          "@id": "ns:page",
+          "@type": "xsd:integer"
+        },
+        "nonesBehavior": {
+          "@id": "ns:nonesBehavior",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "ReportResponse": {
+      "@id": "ns:ReportResponse",
+      "@context": {
+        "totalPages": {
+          "@id": "ns:totalPages",
+          "@type": "xsd:integer"
+        },
+        "numberOfElements": {
+          "@id": "ns:numberOfElements",
+          "@type": "xsd:integer"
+        },
+        "rows": "ns:rows",
+        "columns": "ns:columns",
+        "summaryData": "ns:summaryData"
+      }
+    },
+    "ReportRow": {
+      "@id": "ns:ReportRow",
+      "@context": {
+        "itemId": {
+          "@id": "ns:itemId",
+          "@type": "xsd:string"
+        },
+        "value": {
+          "@id": "ns:value",
+          "@type": "xsd:string"
+        },
+        "data": "ns:data"
+      }
+    },
+    "Segment": {
+      "@id": "ns:Segment",
+      "@context": {
+        "id": {
+          "@id": "ns:id",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "ns:description",
+          "@type": "xsd:string"
+        },
+        "rsid": {
+          "@id": "ns:rsid",
+          "@type": "xsd:string"
+        },
+        "owner": {
+          "@id": "ns:owner",
+          "@type": "xsd:string"
+        },
+        "definition": "ns:definition",
+        "modified": {
+          "@id": "ns:modified",
+          "@type": "xsd:string"
+        },
+        "tags": "ns:tags"
+      }
+    },
+    "SegmentCreate": {
+      "@id": "ns:SegmentCreate",
+      "@context": {
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "ns:description",
+          "@type": "xsd:string"
+        },
+        "rsid": {
+          "@id": "ns:rsid",
+          "@type": "xsd:string"
+        },
+        "definition": "ns:definition"
+      }
+    },
+    "SegmentList": {
+      "@id": "ns:SegmentList",
+      "@context": {
+        "content": "ns:content",
+        "totalElements": {
+          "@id": "ns:totalElements",
+          "@type": "xsd:integer"
+        },
+        "totalPages": {
+          "@id": "ns:totalPages",
+          "@type": "xsd:integer"
+        },
+        "numberOfElements": {
+          "@id": "ns:numberOfElements",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+    "CalculatedMetric": {
+      "@id": "ns:CalculatedMetric",
+      "@context": {
+        "id": {
+          "@id": "ns:id",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "ns:description",
+          "@type": "xsd:string"
+        },
+        "rsid": {
+          "@id": "ns:rsid",
+          "@type": "xsd:string"
+        },
+        "owner": {
+          "@id": "ns:owner",
+          "@type": "xsd:string"
+        },
+        "definition": "ns:definition",
+        "modified": {
+          "@id": "ns:modified",
+          "@type": "xsd:string"
+        },
+        "type": {
+          "@id": "ns:type",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "CalculatedMetricCreate": {
+      "@id": "ns:CalculatedMetricCreate",
+      "@context": {
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "ns:description",
+          "@type": "xsd:string"
+        },
+        "rsid": {
+          "@id": "ns:rsid",
+          "@type": "xsd:string"
+        },
+        "definition": "ns:definition",
+        "type": {
+          "@id": "ns:type",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "CalculatedMetricList": {
+      "@id": "ns:CalculatedMetricList",
+      "@context": {
+        "content": "ns:content",
+        "totalElements": {
+          "@id": "ns:totalElements",
+          "@type": "xsd:integer"
+        },
+        "totalPages": {
+          "@id": "ns:totalPages",
+          "@type": "xsd:integer"
+        }
+      }
+    },
     "Metric": {
-      "@id": "analytics:Metric",
+      "@id": "ns:Metric",
       "@context": {
-        "id": "@id",
-        "title": "schema:name",
-        "name": "analytics:internalName",
-        "type": "analytics:dataType",
-        "category": "analytics:category",
-        "description": "dcterms:description"
+        "id": {
+          "@id": "ns:id",
+          "@type": "xsd:string"
+        },
+        "title": {
+          "@id": "ns:title",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
+        },
+        "type": {
+          "@id": "ns:type",
+          "@type": "xsd:string"
+        },
+        "extraTitleInfo": {
+          "@id": "ns:extraTitleInfo",
+          "@type": "xsd:string"
+        },
+        "category": {
+          "@id": "ns:category",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "ns:description",
+          "@type": "xsd:string"
+        }
       }
     },
-
     "Dimension": {
-      "@id": "analytics:Dimension",
+      "@id": "ns:Dimension",
       "@context": {
-        "id": "@id",
-        "title": "schema:name",
-        "name": "analytics:internalName",
-        "type": "analytics:dataType",
-        "category": "analytics:category",
-        "description": "dcterms:description",
-        "extraTitleInfo": "analytics:extraTitleInfo"
+        "id": {
+          "@id": "ns:id",
+          "@type": "xsd:string"
+        },
+        "title": {
+          "@id": "ns:title",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
+        },
+        "type": {
+          "@id": "ns:type",
+          "@type": "xsd:string"
+        },
+        "category": {
+          "@id": "ns:category",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "ns:description",
+          "@type": "xsd:string"
+        }
       }
     },
-
+    "ReportSuite": {
+      "@id": "ns:ReportSuite",
+      "@context": {
+        "rsid": {
+          "@id": "ns:rsid",
+          "@type": "xsd:string"
+        },
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
+        },
+        "timezoneZoneinfo": {
+          "@id": "ns:timezoneZoneinfo",
+          "@type": "xsd:string"
+        },
+        "type": {
+          "@id": "ns:type",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "ReportSuiteList": {
+      "@id": "ns:ReportSuiteList",
+      "@context": {
+        "content": "ns:content",
+        "totalElements": {
+          "@id": "ns:totalElements",
+          "@type": "xsd:integer"
+        },
+        "totalPages": {
+          "@id": "ns:totalPages",
+          "@type": "xsd:integer"
+        }
+      }
+    },
     "Annotation": {
-      "@id": "analytics:Annotation",
+      "@id": "ns:Annotation",
       "@context": {
-        "id": "@id",
-        "name": "schema:name",
-        "description": "dcterms:description",
-        "dateRange": "analytics:dateRange",
-        "rsids": {
-          "@id": "analytics:reportSuiteIds",
-          "@container": "@set"
+        "id": {
+          "@id": "ns:id",
+          "@type": "xsd:string"
         },
-        "color": "analytics:displayColor",
-        "applyToAllReports": "analytics:applyToAllReports"
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "ns:description",
+          "@type": "xsd:string"
+        },
+        "dateRange": {
+          "@id": "ns:dateRange",
+          "@type": "xsd:string"
+        },
+        "rsids": "ns:rsids",
+        "color": {
+          "@id": "ns:color",
+          "@type": "xsd:string"
+        }
       }
     },
-
-    "RepairJob": {
-      "@id": "analytics:RepairJob",
+    "AnnotationCreate": {
+      "@id": "ns:AnnotationCreate",
       "@context": {
-        "jobId": "@id",
-        "reportSuiteId": "analytics:reportSuiteId",
-        "dateRangeStart": {
-          "@id": "analytics:dateRangeStart",
-          "@type": "xsd:date"
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
         },
-        "dateRangeEnd": {
-          "@id": "analytics:dateRangeEnd",
-          "@type": "xsd:date"
+        "description": {
+          "@id": "ns:description",
+          "@type": "xsd:string"
         },
-        "status": "analytics:jobStatus",
-        "progress": "analytics:progressPercent",
-        "jobCreateTime": {
-          "@id": "dcterms:created",
-          "@type": "xsd:dateTime"
+        "dateRange": {
+          "@id": "ns:dateRange",
+          "@type": "xsd:string"
         },
-        "jobCompleteTime": {
-          "@id": "analytics:completedTime",
-          "@type": "xsd:dateTime"
-        },
-        "serverCalls": "analytics:serverCallsProcessed"
+        "rsids": "ns:rsids",
+        "color": {
+          "@id": "ns:color",
+          "@type": "xsd:string"
+        }
       }
     },
-
-    "AnalyticsHit": {
-      "@id": "analytics:AnalyticsHit",
+    "DateRange": {
+      "@id": "ns:DateRange",
       "@context": {
-        "reportSuite": "analytics:reportSuiteId",
-        "dateTime": {
-          "@id": "dcterms:date",
-          "@type": "xsd:dateTime"
+        "id": {
+          "@id": "ns:id",
+          "@type": "xsd:string"
         },
-        "mcVisId": "analytics:marketingCloudVisitorId",
-        "customVisId": "analytics:customVisitorId",
-        "pageName": "schema:name",
-        "pageURL": {
-          "@id": "schema:url",
-          "@type": "@id"
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
         },
-        "referrer": {
-          "@id": "schema:referrer",
-          "@type": "@id"
+        "description": {
+          "@id": "ns:description",
+          "@type": "xsd:string"
         },
-        "userAgent": "schema:softwareVersion",
-        "ipAddress": "schema:ipAddressFamily",
-        "visitNum": "analytics:visitNumber",
-        "visitPageNum": "analytics:visitPageNumber",
-        "events": "analytics:events",
-        "purchaseId": "analytics:purchaseId",
-        "countryCode": "schema:addressCountry",
-        "language": "schema:inLanguage"
+        "definition": {
+          "@id": "ns:definition",
+          "@type": "xsd:string"
+        }
       }
     },
-
-    "Owner": {
-      "@id": "analytics:Owner",
-      "@context": {
-        "id": "@id",
-        "name": "schema:name",
-        "login": "schema:email"
-      }
-    },
-
     "Tag": {
-      "@id": "analytics:Tag",
+      "@id": "ns:Tag",
       "@context": {
-        "id": "@id",
-        "name": "schema:name",
-        "description": "dcterms:description"
+        "id": {
+          "@id": "ns:id",
+          "@type": "xsd:integer"
+        },
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
+        },
+        "description": {
+          "@id": "ns:description",
+          "@type": "xsd:string"
+        },
+        "components": "ns:components"
+      }
+    },
+    "Owner": {
+      "@id": "ns:Owner",
+      "@context": {
+        "id": {
+          "@id": "ns:id",
+          "@type": "xsd:integer"
+        },
+        "name": {
+          "@id": "ns:name",
+          "@type": "xsd:string"
+        },
+        "login": {
+          "@id": "ns:login",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "@id": "ns:ErrorResponse",
+      "@context": {
+        "errorCode": {
+          "@id": "ns:errorCode",
+          "@type": "xsd:string"
+        },
+        "errorDescription": {
+          "@id": "ns:errorDescription",
+          "@type": "xsd:string"
+        },
+        "errorId": {
+          "@id": "ns:errorId",
+          "@type": "xsd:string"
+        }
       }
     }
   }

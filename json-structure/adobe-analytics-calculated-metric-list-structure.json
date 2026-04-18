@@ -1,0 +1,77 @@
+{
+  "type": "object",
+  "description": "Paginated list of calculated metrics",
+  "name": "CalculatedMetricList",
+  "properties": {
+    "content": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "A calculated metric definition",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique calculated metric identifier"
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of what the metric measures"
+          },
+          "rsid": {
+            "type": "string",
+            "description": "The report suite this calculated metric is based on"
+          },
+          "owner": {
+            "type": "object",
+            "description": "The owner of an Analytics component",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "description": "Owner user ID"
+              },
+              "name": {
+                "type": "string",
+                "description": "Owner display name"
+              },
+              "login": {
+                "type": "string",
+                "description": "Owner login identifier"
+              }
+            }
+          },
+          "definition": {
+            "type": "object",
+            "description": "The formula definition for this calculated metric"
+          },
+          "modified": {
+            "type": "datetime",
+            "description": "Last modification timestamp"
+          },
+          "type": {
+            "type": "string",
+            "description": "The metric type",
+            "enum": [
+              "DECIMAL",
+              "TIME",
+              "PERCENT",
+              "CURRENCY"
+            ]
+          }
+        }
+      }
+    },
+    "totalElements": {
+      "type": "integer",
+      "description": "Total number of calculated metrics available"
+    },
+    "totalPages": {
+      "type": "integer",
+      "description": "Total number of pages"
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

@@ -1,0 +1,67 @@
+{
+  "type": "object",
+  "description": "Status and details of a data repair job",
+  "properties": {
+    "jobId": {
+      "type": "integer",
+      "description": "Unique job identifier",
+      "example": "500123"
+    },
+    "reportSuiteId": {
+      "type": "string",
+      "description": "The report suite being repaired",
+      "example": "500123"
+    },
+    "dateRangeStart": {
+      "type": "string",
+      "description": "Start of the repair date range",
+      "format": "date",
+      "example": "2026-01-15"
+    },
+    "dateRangeEnd": {
+      "type": "string",
+      "description": "End of the repair date range",
+      "format": "date",
+      "example": "2026-01-15"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the repair job",
+      "example": "processing",
+      "enum": [
+        "processing",
+        "complete",
+        "failed"
+      ]
+    },
+    "progress": {
+      "type": "integer",
+      "description": "Job completion percentage (0-100)",
+      "example": 10
+    },
+    "jobCreateTime": {
+      "type": "string",
+      "description": "Timestamp when the job was created",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "jobCompleteTime": {
+      "type": "string",
+      "description": "Timestamp when the job completed",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "serverCalls": {
+      "type": "integer",
+      "description": "Actual number of server calls processed",
+      "example": 10
+    },
+    "nodesProcessed": {
+      "type": "integer",
+      "description": "Number of data nodes processed",
+      "example": 10
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RepairJob"
+}

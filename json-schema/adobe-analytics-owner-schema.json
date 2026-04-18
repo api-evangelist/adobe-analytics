@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "description": "The owner of an Analytics component",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Owner user ID",
+      "example": "abc123"
+    },
+    "name": {
+      "type": "string",
+      "description": "Owner display name",
+      "example": "Example Title"
+    },
+    "login": {
+      "type": "string",
+      "description": "Owner login identifier",
+      "example": "example_value"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Owner"
+}

@@ -1,0 +1,128 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Adobe Analytics Bulk Data Insertion API"
+  description: "Upload and validate batched event data files in gzip-compressed CSV format for server-side data collection into Adobe Analytics."
+  tags:
+    - Adobe Analytics
+    - Bulk Data Insertion
+    - Data Collection
+    - Events
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      ADOBE_ANALYTICS_BEARER_TOKEN: ADOBE_ANALYTICS_BEARER_TOKEN
+      ADOBE_ANALYTICS_API_KEY: ADOBE_ANALYTICS_API_KEY
+
+capability:
+  consumes:
+    - type: http
+      namespace: adobe-bulk-data-insertion
+      baseUri: "https://analytics-collection.adobe.io/aa/collect/v1"
+      description: "Adobe Analytics Bulk Data Insertion API for high-volume server-side data collection."
+      authentication:
+        type: bearer
+        token: "{{ADOBE_ANALYTICS_BEARER_TOKEN}}"
+      resources:
+        - name: events
+          path: /events
+          description: "Batch event upload and validation."
+          operations:
+            - name: upload-events
+              method: POST
+              description: "Upload a gzip-compressed CSV file containing batched Analytics event data."
+              inputParameters:
+                - name: x-adobe-vgid
+                  in: header
+                  type: string
+                  required: true
+                  description: "Visitor group ID for correct visitor stitching."
+                - name: x-adobe-idempotency-key
+                  in: header
+                  type: string
+                  required: false
+                  description: "Unique identifier for deduplication."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: validate-events
+              method: POST
+              path: /validate
+              description: "Validate a gzip-compressed CSV events file without ingesting data."
+              inputParameters:
+                - name: x-adobe-vgid
+                  in: header
+                  type: string
+                  required: true
+                  description: "Visitor group ID."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8101
+      namespace: adobe-bulk-data-insertion-api
+      resources:
+        - path: /v1/events
+          name: events
+          description: "Batch event operations."
+          operations:
+            - method: POST
+              name: upload-events
+              description: "Upload a batch events file."
+              call: "adobe-bulk-data-insertion.upload-events"
+              with:
+                x-adobe-vgid: "rest.x-adobe-vgid"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/events/validate
+          name: event-validation
+          description: "Validate batch event files."
+          operations:
+            - method: POST
+              name: validate-events
+              description: "Validate a batch events file."
+              call: "adobe-bulk-data-insertion.validate-events"
+              with:
+                x-adobe-vgid: "rest.x-adobe-vgid"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9101
+      namespace: adobe-bulk-data-insertion-mcp
+      transport: http
+      tools:
+        - name: upload-events
+          description: "Upload a gzip-compressed CSV file of batched Analytics event data."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "adobe-bulk-data-insertion.upload-events"
+          with:
+            x-adobe-vgid: "tools.visitor_group_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: validate-events
+          description: "Validate a gzip-compressed CSV events file without ingesting data."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "adobe-bulk-data-insertion.validate-events"
+          with:
+            x-adobe-vgid: "tools.visitor_group_id"
+          outputParameters:
+            - type: object
+              mapping: "$."

@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "description": "A saved date range component",
+  "name": "DateRange",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique date range identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the date range"
+    },
+    "definition": {
+      "type": "string",
+      "description": "The date range definition expression"
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

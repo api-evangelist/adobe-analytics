@@ -1,0 +1,53 @@
+{
+  "type": "object",
+  "description": "Status and details of a data repair job",
+  "name": "RepairJob",
+  "properties": {
+    "jobId": {
+      "type": "integer",
+      "description": "Unique job identifier"
+    },
+    "reportSuiteId": {
+      "type": "string",
+      "description": "The report suite being repaired"
+    },
+    "dateRangeStart": {
+      "type": "date",
+      "description": "Start of the repair date range"
+    },
+    "dateRangeEnd": {
+      "type": "date",
+      "description": "End of the repair date range"
+    },
+    "status": {
+      "type": "string",
+      "description": "Current status of the repair job",
+      "enum": [
+        "processing",
+        "complete",
+        "failed"
+      ]
+    },
+    "progress": {
+      "type": "integer",
+      "description": "Job completion percentage (0-100)"
+    },
+    "jobCreateTime": {
+      "type": "datetime",
+      "description": "Timestamp when the job was created"
+    },
+    "jobCompleteTime": {
+      "type": "datetime",
+      "description": "Timestamp when the job completed"
+    },
+    "serverCalls": {
+      "type": "integer",
+      "description": "Actual number of server calls processed"
+    },
+    "nodesProcessed": {
+      "type": "integer",
+      "description": "Number of data nodes processed"
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

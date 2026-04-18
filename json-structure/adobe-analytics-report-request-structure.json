@@ -1,21 +1,19 @@
 {
   "type": "object",
   "description": "Definition of an analytics report request",
+  "name": "ReportRequest",
   "properties": {
     "rsid": {
       "type": "string",
-      "description": "The report suite ID to run the report against",
-      "example": "examplersid"
+      "description": "The report suite ID to run the report against"
     },
     "locale": {
       "type": "string",
-      "description": "Locale for response labels",
-      "example": "en_US"
+      "description": "Locale for response labels"
     },
     "globalFilters": {
       "type": "array",
       "description": "List of global filters applied to the entire report",
-      "example": [],
       "items": {
         "type": "object",
         "description": "A filter applied to a report",
@@ -23,7 +21,6 @@
           "type": {
             "type": "string",
             "description": "Filter type",
-            "example": "dateRange",
             "enum": [
               "dateRange",
               "breakdown",
@@ -32,23 +29,19 @@
           },
           "dateRange": {
             "type": "string",
-            "description": "ISO 8601 date range (e.g. 2024-01-01T00:00:00/2024-01-31T23:59:59)",
-            "example": "example_value"
+            "description": "ISO 8601 date range (e.g. 2024-01-01T00:00:00/2024-01-31T23:59:59)"
           },
           "segmentId": {
             "type": "string",
-            "description": "ID of an existing segment to apply as a filter",
-            "example": "500123"
+            "description": "ID of an existing segment to apply as a filter"
           },
           "dimension": {
             "type": "string",
-            "description": "Dimension for breakdown filter",
-            "example": "example_value"
+            "description": "Dimension for breakdown filter"
           },
           "itemId": {
             "type": "string",
-            "description": "Dimension item ID for breakdown filter",
-            "example": "500123"
+            "description": "Dimension item ID for breakdown filter"
           }
         },
         "required": [
@@ -62,25 +55,21 @@
       "properties": {
         "metrics": {
           "type": "array",
-          "example": [],
           "items": {
             "type": "object",
             "description": "A metric included in a report request",
             "properties": {
               "id": {
                 "type": "string",
-                "description": "The metric ID (e.g. metrics/visits)",
-                "example": "abc123"
+                "description": "The metric ID (e.g. metrics/visits)"
               },
               "columnId": {
                 "type": "string",
-                "description": "Column identifier for this metric in the response",
-                "example": "500123"
+                "description": "Column identifier for this metric in the response"
               },
               "filters": {
                 "type": "array",
                 "description": "Metric-level filter IDs referencing metricFilters",
-                "example": [],
                 "items": {
                   "type": "string"
                 }
@@ -88,7 +77,6 @@
               "sort": {
                 "type": "string",
                 "description": "Sort direction for this metric",
-                "example": "ASC",
                 "enum": [
                   "ASC",
                   "DESC"
@@ -103,7 +91,6 @@
         "metricFilters": {
           "type": "array",
           "description": "Filters applied at the metric level",
-          "example": [],
           "items": {
             "type": "object",
             "description": "A filter applied to a report",
@@ -111,7 +98,6 @@
               "type": {
                 "type": "string",
                 "description": "Filter type",
-                "example": "dateRange",
                 "enum": [
                   "dateRange",
                   "breakdown",
@@ -120,23 +106,19 @@
               },
               "dateRange": {
                 "type": "string",
-                "description": "ISO 8601 date range (e.g. 2024-01-01T00:00:00/2024-01-31T23:59:59)",
-                "example": "example_value"
+                "description": "ISO 8601 date range (e.g. 2024-01-01T00:00:00/2024-01-31T23:59:59)"
               },
               "segmentId": {
                 "type": "string",
-                "description": "ID of an existing segment to apply as a filter",
-                "example": "500123"
+                "description": "ID of an existing segment to apply as a filter"
               },
               "dimension": {
                 "type": "string",
-                "description": "Dimension for breakdown filter",
-                "example": "example_value"
+                "description": "Dimension for breakdown filter"
               },
               "itemId": {
                 "type": "string",
-                "description": "Dimension item ID for breakdown filter",
-                "example": "500123"
+                "description": "Dimension item ID for breakdown filter"
               }
             },
             "required": [
@@ -151,8 +133,7 @@
     },
     "dimension": {
       "type": "string",
-      "description": "The primary dimension ID for the report (e.g. variables/page)",
-      "example": "variables/page"
+      "description": "The primary dimension ID for the report (e.g. variables/page)"
     },
     "settings": {
       "type": "object",
@@ -160,18 +141,15 @@
       "properties": {
         "limit": {
           "type": "integer",
-          "description": "Maximum number of rows to return",
-          "example": 10
+          "description": "Maximum number of rows to return"
         },
         "page": {
           "type": "integer",
-          "description": "Page number (zero-indexed)",
-          "example": 10
+          "description": "Page number (zero-indexed)"
         },
         "nonesBehavior": {
           "type": "string",
           "description": "How to handle None values",
-          "example": "exclude-nones",
           "enum": [
             "exclude-nones",
             "return-nones"
@@ -181,8 +159,7 @@
     },
     "statistics": {
       "type": "object",
-      "description": "Statistical settings for the report",
-      "example": "example_value"
+      "description": "Statistical settings for the report"
     }
   },
   "required": [
@@ -190,6 +167,5 @@
     "globalFilters",
     "metricContainer"
   ],
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "ReportRequest"
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
 }

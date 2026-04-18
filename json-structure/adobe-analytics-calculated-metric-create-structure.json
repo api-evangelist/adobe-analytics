@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "description": "Payload for creating or updating a calculated metric",
+  "name": "CalculatedMetricCreate",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Display name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of what the metric measures"
+    },
+    "rsid": {
+      "type": "string",
+      "description": "Report suite ID"
+    },
+    "definition": {
+      "type": "object",
+      "description": "The formula definition"
+    },
+    "type": {
+      "type": "string",
+      "description": "The metric output type",
+      "enum": [
+        "DECIMAL",
+        "TIME",
+        "PERCENT",
+        "CURRENCY"
+      ]
+    }
+  },
+  "required": [
+    "name",
+    "rsid",
+    "definition"
+  ],
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

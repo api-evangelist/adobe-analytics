@@ -1,0 +1,12 @@
+{
+  "jobId": "500123",
+  "reportSuiteId": "500123",
+  "dateRangeStart": "2026-01-15",
+  "dateRangeEnd": "2026-01-15",
+  "status": "processing",
+  "progress": 10,
+  "jobCreateTime": "2026-01-15T10:30:00Z",
+  "jobCompleteTime": "2026-01-15T10:30:00Z",
+  "serverCalls": 10,
+  "nodesProcessed": 10
+}

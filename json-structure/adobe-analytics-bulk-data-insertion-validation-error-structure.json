@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "description": "A single validation error from file validation",
+  "name": "ValidationError",
+  "properties": {
+    "row": {
+      "type": "integer",
+      "description": "Row number where the error occurred (1-indexed)"
+    },
+    "column": {
+      "type": "string",
+      "description": "Column name where the error occurred"
+    },
+    "message": {
+      "type": "string",
+      "description": "Description of the validation error"
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

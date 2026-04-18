@@ -1,0 +1,35 @@
+{
+  "type": "object",
+  "description": "Estimate of server calls for a proposed data repair job",
+  "properties": {
+    "reportSuiteId": {
+      "type": "string",
+      "description": "The report suite ID for the estimate",
+      "example": "500123"
+    },
+    "dateRangeStart": {
+      "type": "string",
+      "description": "Start date of the repair range",
+      "format": "date",
+      "example": "2026-01-15"
+    },
+    "dateRangeEnd": {
+      "type": "string",
+      "description": "End date of the repair range",
+      "format": "date",
+      "example": "2026-01-15"
+    },
+    "serverCallEstimate": {
+      "type": "integer",
+      "description": "Estimated number of server calls (rows) that will be scanned",
+      "example": 10
+    },
+    "validationToken": {
+      "type": "string",
+      "description": "Token required when creating the repair job",
+      "example": "CAUQAA"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ServerCallEstimate"
+}

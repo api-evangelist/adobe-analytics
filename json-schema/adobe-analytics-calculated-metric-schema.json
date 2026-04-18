@@ -1,0 +1,71 @@
+{
+  "type": "object",
+  "description": "A calculated metric definition",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique calculated metric identifier",
+      "example": "abc123"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name",
+      "example": "Example Title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of what the metric measures",
+      "example": "A sample description."
+    },
+    "rsid": {
+      "type": "string",
+      "description": "The report suite this calculated metric is based on",
+      "example": "500123"
+    },
+    "owner": {
+      "type": "object",
+      "description": "The owner of an Analytics component",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Owner user ID",
+          "example": "abc123"
+        },
+        "name": {
+          "type": "string",
+          "description": "Owner display name",
+          "example": "Example Title"
+        },
+        "login": {
+          "type": "string",
+          "description": "Owner login identifier",
+          "example": "example_value"
+        }
+      }
+    },
+    "definition": {
+      "type": "object",
+      "description": "The formula definition for this calculated metric",
+      "example": "example_value"
+    },
+    "modified": {
+      "type": "string",
+      "description": "Last modification timestamp",
+      "format": "date-time",
+      "example": "2026-01-15T10:30:00Z"
+    },
+    "type": {
+      "type": "string",
+      "description": "The metric type",
+      "example": "DECIMAL",
+      "enum": [
+        "DECIMAL",
+        "TIME",
+        "PERCENT",
+        "CURRENCY"
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CalculatedMetric"
+}

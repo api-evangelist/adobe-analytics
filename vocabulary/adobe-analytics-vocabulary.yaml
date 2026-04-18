@@ -1,0 +1,26 @@
+name: adobe-analytics API Vocabulary
+provider: adobe-analytics
+created: '2026-04-18'
+modified: '2026-04-18'
+apis:
+- name: Adobe Analytics API
+  version: '2.0'
+- name: Adobe Analytics Bulk Data Insertion API
+  version: '1.0'
+- name: Adobe Analytics Data Repair API
+  version: '1.0'
+resources: 11
+operations: 25
+schemas: 31
+tags:
+- Annotations
+- Calculated Metrics
+- Date Ranges
+- Dimensions
+- Events
+- Jobs
+- Metrics
+- Report Suites
+- Reports
+- Segments
+- Server Call Estimate

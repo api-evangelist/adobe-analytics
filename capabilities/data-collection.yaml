@@ -1,0 +1,186 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Adobe Analytics Data Collection"
+  description: "Unified workflow for server-side data collection and ingestion combining Bulk Data Insertion for high-volume event uploads with the Analytics API for report suite discovery and validation. Used by data engineers and implementation teams."
+  tags:
+    - Adobe Analytics
+    - Data Collection
+    - Bulk Data Insertion
+    - Events
+    - Server Side
+  created: "2026-04-18"
+  modified: "2026-04-18"
+
+binds:
+  - namespace: env
+    keys:
+      ADOBE_ANALYTICS_BEARER_TOKEN: ADOBE_ANALYTICS_BEARER_TOKEN
+      ADOBE_ANALYTICS_API_KEY: ADOBE_ANALYTICS_API_KEY
+      ADOBE_ANALYTICS_GLOBAL_COMPANY_ID: ADOBE_ANALYTICS_GLOBAL_COMPANY_ID
+
+capability:
+  consumes:
+    - import: adobe-bulk-data-insertion
+      location: ./shared/bulk-data-insertion.yaml
+    - import: adobe-analytics
+      location: ./shared/analytics-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8081
+      namespace: adobe-data-collection-api
+      description: "Unified REST API for Adobe Analytics server-side data collection and ingestion."
+      resources:
+        - path: /v1/events
+          name: events
+          description: "Batch event upload."
+          operations:
+            - method: POST
+              name: upload-events
+              description: "Upload a batch events file."
+              call: "adobe-bulk-data-insertion.upload-events"
+              with:
+                x-adobe-vgid: "rest.x-adobe-vgid"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/events/validate
+          name: event-validation
+          description: "Validate event files."
+          operations:
+            - method: POST
+              name: validate-events
+              description: "Validate a batch events file without ingesting."
+              call: "adobe-bulk-data-insertion.validate-events"
+              with:
+                x-adobe-vgid: "rest.x-adobe-vgid"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/report-suites
+          name: report-suites
+          description: "Report suite discovery for data collection targeting."
+          operations:
+            - method: GET
+              name: list-report-suites
+              description: "List report suites to identify collection targets."
+              call: "adobe-analytics.list-report-suites"
+              with:
+                limit: "rest.limit"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/report-suites/{rsid}
+          name: report-suite-detail
+          description: "Report suite details."
+          operations:
+            - method: GET
+              name: get-report-suite
+              description: "Get report suite details."
+              call: "adobe-analytics.get-report-suite"
+              with:
+                rsid: "rest.rsid"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/metrics
+          name: metrics
+          description: "Metric discovery for event mapping."
+          operations:
+            - method: GET
+              name: list-metrics
+              description: "List metrics to validate event data mapping."
+              call: "adobe-analytics.list-metrics"
+              with:
+                rsid: "rest.rsid"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/dimensions
+          name: dimensions
+          description: "Dimension discovery for event mapping."
+          operations:
+            - method: GET
+              name: list-dimensions
+              description: "List dimensions to validate event data mapping."
+              call: "adobe-analytics.list-dimensions"
+              with:
+                rsid: "rest.rsid"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9091
+      namespace: adobe-data-collection-mcp
+      transport: http
+      description: "MCP server for AI-assisted Adobe Analytics data collection and ingestion workflows."
+      tools:
+        - name: upload-events
+          description: "Upload a gzip-compressed CSV file of batched Analytics event data."
+          hints:
+            readOnly: false
+            idempotent: false
+          call: "adobe-bulk-data-insertion.upload-events"
+          with:
+            x-adobe-vgid: "tools.visitor_group_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: validate-events
+          description: "Validate a batch events file without ingesting data."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "adobe-bulk-data-insertion.validate-events"
+          with:
+            x-adobe-vgid: "tools.visitor_group_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-report-suites
+          description: "List report suites to identify data collection targets."
+          hints:
+            readOnly: true
+            idempotent: true
+            openWorld: true
+          call: "adobe-analytics.list-report-suites"
+          with:
+            limit: "tools.limit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-report-suite
+          description: "Get details for a report suite to verify collection configuration."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "adobe-analytics.get-report-suite"
+          with:
+            rsid: "tools.rsid"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-metrics
+          description: "List available metrics to validate event data mapping."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "adobe-analytics.list-metrics"
+          with:
+            rsid: "tools.rsid"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-dimensions
+          description: "List available dimensions to validate event data mapping."
+          hints:
+            readOnly: true
+            idempotent: true
+          call: "adobe-analytics.list-dimensions"
+          with:
+            rsid: "tools.rsid"
+          outputParameters:
+            - type: object
+              mapping: "$."

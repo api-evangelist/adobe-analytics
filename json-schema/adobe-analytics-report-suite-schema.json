@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "description": "An Adobe Analytics report suite",
+  "properties": {
+    "rsid": {
+      "type": "string",
+      "description": "Report suite ID",
+      "example": "500123"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name of the report suite",
+      "example": "Example Title"
+    },
+    "timezoneZoneinfo": {
+      "type": "string",
+      "description": "Timezone for the report suite",
+      "example": "example_value"
+    },
+    "type": {
+      "type": "string",
+      "description": "Report suite type",
+      "example": "standard",
+      "enum": [
+        "standard",
+        "virtual"
+      ]
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ReportSuite"
+}

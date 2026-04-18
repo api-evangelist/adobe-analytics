@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "description": "A saved date range component",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique date range identifier",
+      "example": "abc123"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name",
+      "example": "Example Title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the date range",
+      "example": "A sample description."
+    },
+    "definition": {
+      "type": "string",
+      "description": "The date range definition expression",
+      "example": "example_value"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DateRange"
+}

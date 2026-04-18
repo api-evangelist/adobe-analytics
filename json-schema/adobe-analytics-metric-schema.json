@@ -1,0 +1,50 @@
+{
+  "type": "object",
+  "description": "An analytics metric available in a report suite",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Metric ID (e.g. metrics/visits)",
+      "example": "abc123"
+    },
+    "title": {
+      "type": "string",
+      "description": "Display name of the metric",
+      "example": "Example Title"
+    },
+    "name": {
+      "type": "string",
+      "description": "Internal name",
+      "example": "Example Title"
+    },
+    "type": {
+      "type": "string",
+      "description": "Metric data type",
+      "example": "INT",
+      "enum": [
+        "INT",
+        "DECIMAL",
+        "CURRENCY",
+        "PERCENT",
+        "TIME"
+      ]
+    },
+    "extraTitleInfo": {
+      "type": "string",
+      "description": "Additional context for the metric title",
+      "example": "example_value"
+    },
+    "category": {
+      "type": "string",
+      "description": "Category grouping for the metric",
+      "example": "example_value"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of what the metric measures",
+      "example": "A sample description."
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Metric"
+}

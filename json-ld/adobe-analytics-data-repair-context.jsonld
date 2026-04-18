@@ -1,0 +1,126 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "ServerCallEstimate": {
+      "@id": "ns:ServerCallEstimate",
+      "@context": {
+        "reportSuiteId": {
+          "@id": "ns:reportSuiteId",
+          "@type": "xsd:string"
+        },
+        "dateRangeStart": {
+          "@id": "ns:dateRangeStart",
+          "@type": "xsd:string"
+        },
+        "dateRangeEnd": {
+          "@id": "ns:dateRangeEnd",
+          "@type": "xsd:string"
+        },
+        "serverCallEstimate": {
+          "@id": "ns:serverCallEstimate",
+          "@type": "xsd:integer"
+        },
+        "validationToken": {
+          "@id": "ns:validationToken",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "RepairJobDefinition": {
+      "@id": "ns:RepairJobDefinition",
+      "@context": {
+        "variables": "ns:variables"
+      }
+    },
+    "RepairAction": {
+      "@id": "ns:RepairAction",
+      "@context": {
+        "action": {
+          "@id": "ns:action",
+          "@type": "xsd:string"
+        },
+        "setValue": {
+          "@id": "ns:setValue",
+          "@type": "xsd:string"
+        },
+        "filter": {
+          "@id": "ns:filter",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "RepairFilter": {
+      "@id": "ns:RepairFilter",
+      "@context": {
+        "condition": {
+          "@id": "ns:condition",
+          "@type": "xsd:string"
+        },
+        "matchValue": {
+          "@id": "ns:matchValue",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "RepairJob": {
+      "@id": "ns:RepairJob",
+      "@context": {
+        "jobId": {
+          "@id": "ns:jobId",
+          "@type": "xsd:integer"
+        },
+        "reportSuiteId": {
+          "@id": "ns:reportSuiteId",
+          "@type": "xsd:string"
+        },
+        "dateRangeStart": {
+          "@id": "ns:dateRangeStart",
+          "@type": "xsd:string"
+        },
+        "dateRangeEnd": {
+          "@id": "ns:dateRangeEnd",
+          "@type": "xsd:string"
+        },
+        "status": {
+          "@id": "ns:status",
+          "@type": "xsd:string"
+        },
+        "progress": {
+          "@id": "ns:progress",
+          "@type": "xsd:integer"
+        },
+        "jobCreateTime": {
+          "@id": "ns:jobCreateTime",
+          "@type": "xsd:string"
+        },
+        "jobCompleteTime": {
+          "@id": "ns:jobCompleteTime",
+          "@type": "xsd:string"
+        },
+        "serverCalls": {
+          "@id": "ns:serverCalls",
+          "@type": "xsd:integer"
+        },
+        "nodesProcessed": {
+          "@id": "ns:nodesProcessed",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "@id": "ns:ErrorResponse",
+      "@context": {
+        "errorCode": {
+          "@id": "ns:errorCode",
+          "@type": "xsd:string"
+        },
+        "errorDescription": {
+          "@id": "ns:errorDescription",
+          "@type": "xsd:string"
+        }
+      }
+    }
+  }
+}

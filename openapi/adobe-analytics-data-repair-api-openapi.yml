@@ -13,29 +13,30 @@ info:
     name: Adobe Analytics Support
     url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
   termsOfService: https://www.adobe.com/legal/terms.html
+  x-last-validated: '2026-04-18'
 externalDocs:
   description: Adobe Analytics Data Repair API Documentation
   url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
 servers:
-  - url: https://analytics.adobe.io/api/{globalCompanyId}/datarepair/v1
-    description: Adobe Analytics Data Repair API
-    variables:
-      globalCompanyId:
-        description: The global company ID for your Analytics organization
-        default: YOUR_GLOBAL_COMPANY_ID
+- url: https://analytics.adobe.io/api/{globalCompanyId}/datarepair/v1
+  description: Adobe Analytics Data Repair API
+  variables:
+    globalCompanyId:
+      description: The global company ID for your Analytics organization
+      default: YOUR_GLOBAL_COMPANY_ID
 tags:
-  - name: Jobs
-    description: Create and monitor data repair jobs
-  - name: Server Call Estimate
-    description: Estimate the scope and cost of a repair job
+- name: Jobs
+  description: Create and monitor data repair jobs
+- name: Server Call Estimate
+  description: Estimate the scope and cost of a repair job
 security:
-  - bearerAuth: []
-    apiKey: []
+- bearerAuth: []
+  apiKey: []
 paths:
   /{rsid}/serverCallEstimate:
     get:
       operationId: getServerCallEstimate
-      summary: Adobe Analytics Get server call estimate
+      summary: Adobe Analytics Get Server Call Estimate
       description: >-
         Calculates the number of data rows that would be scanned for a repair
         job given the specified report suite and date range. This estimate is
@@ -43,27 +44,29 @@ paths:
         that must be passed to the job creation endpoint. The count determines
         the cost of the repair.
       tags:
-        - Server Call Estimate
+      - Server Call Estimate
       parameters:
-        - $ref: '#/components/parameters/rsidPath'
-        - name: dateRangeStart
-          in: query
-          required: true
-          description: >-
-            Start of the date range for the repair in ISO 8601 format
-            (YYYY-MM-DD)
-          schema:
-            type: string
-            format: date
-        - name: dateRangeEnd
-          in: query
-          required: true
-          description: >-
-            End of the date range for the repair (inclusive) in ISO 8601
-            format (YYYY-MM-DD)
-          schema:
-            type: string
-            format: date
+      - $ref: '#/components/parameters/rsidPath'
+      - name: dateRangeStart
+        in: query
+        required: true
+        description: >-
+          Start of the date range for the repair in ISO 8601 format
+          (YYYY-MM-DD)
+        schema:
+          type: string
+          format: date
+        example: '2026-01-15'
+      - name: dateRangeEnd
+        in: query
+        required: true
+        description: >-
+          End of the date range for the repair (inclusive) in ISO 8601
+          format (YYYY-MM-DD)
+        schema:
+          type: string
+          format: date
+        example: '2026-01-15'
       responses:
         '200':
           description: Server call estimate
@@ -71,30 +74,57 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerCallEstimate'
+              examples:
+                Getservercallestimate200Example:
+                  summary: Default getServerCallEstimate 200 response
+                  x-microcks-default: true
+                  value:
+                    reportSuiteId: '500123'
+                    dateRangeStart: '2026-01-15'
+                    dateRangeEnd: '2026-01-15'
+                    serverCallEstimate: 10
+                    validationToken: CAUQAA
         '400':
           description: Invalid parameters
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Getservercallestimate400Example:
+                  summary: Default getServerCallEstimate 400 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Getservercallestimate401Example:
+                  summary: Default getServerCallEstimate 401 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /{rsid}/job:
     get:
       operationId: listJobs
-      summary: Adobe Analytics List data repair jobs
+      summary: Adobe Analytics List Data Repair Jobs
       description: >-
         Returns a list of the most recent 20 data repair jobs for the specified
         report suite, including both completed and in-progress jobs. Each job
         record includes status, progress, and result information.
       tags:
-        - Jobs
+      - Jobs
       parameters:
-        - $ref: '#/components/parameters/rsidPath'
+      - $ref: '#/components/parameters/rsidPath'
       responses:
         '200':
           description: List of repair jobs
@@ -104,38 +134,70 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/RepairJob'
+              examples:
+                Listjobs200Example:
+                  summary: Default listJobs 200 response
+                  x-microcks-default: true
+                  value:
+                  - jobId: '500123'
+                    reportSuiteId: '500123'
+                    dateRangeStart: '2026-01-15'
+                    dateRangeEnd: '2026-01-15'
+                    status: processing
+                    progress: 10
+                    jobCreateTime: '2026-01-15T10:30:00Z'
+                    jobCompleteTime: '2026-01-15T10:30:00Z'
+                    serverCalls: 10
+                    nodesProcessed: 10
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Listjobs401Example:
+                  summary: Default listJobs 401 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
     post:
       operationId: createRepairJob
-      summary: Adobe Analytics Create a data repair job
+      summary: Adobe Analytics Create a Data Repair Job
       description: >-
         Creates and starts a new data repair job for the specified report suite
         and date range. The validationToken from the serverCallEstimate endpoint
         must be included as a query parameter. The request body defines which
         variables to repair and what actions to take (delete or set).
       tags:
-        - Jobs
+      - Jobs
       parameters:
-        - $ref: '#/components/parameters/rsidPath'
-        - name: validationToken
-          in: query
-          required: true
-          description: >-
-            The token returned by the serverCallEstimate endpoint, confirming
-            you have reviewed the cost estimate
-          schema:
-            type: string
+      - $ref: '#/components/parameters/rsidPath'
+      - name: validationToken
+        in: query
+        required: true
+        description: >-
+          The token returned by the serverCallEstimate endpoint, confirming
+          you have reviewed the cost estimate
+        schema:
+          type: string
+        example: CAUQAA
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/RepairJobDefinition'
+            examples:
+              CreaterepairjobRequestExample:
+                summary: Default createRepairJob request
+                x-microcks-default: true
+                value:
+                  variables: example_value
       responses:
         '200':
           description: Repair job created and started
@@ -143,36 +205,69 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RepairJob'
+              examples:
+                Createrepairjob200Example:
+                  summary: Default createRepairJob 200 response
+                  x-microcks-default: true
+                  value:
+                    jobId: '500123'
+                    reportSuiteId: '500123'
+                    dateRangeStart: '2026-01-15'
+                    dateRangeEnd: '2026-01-15'
+                    status: processing
+                    progress: 10
+                    jobCreateTime: '2026-01-15T10:30:00Z'
+                    jobCompleteTime: '2026-01-15T10:30:00Z'
+                    serverCalls: 10
+                    nodesProcessed: 10
         '400':
           description: Invalid job definition or validation token
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Createrepairjob400Example:
+                  summary: Default createRepairJob 400 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
         '401':
           description: Unauthorized
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Createrepairjob401Example:
+                  summary: Default createRepairJob 401 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
   /{rsid}/job/{jobId}:
     get:
       operationId: getRepairJob
-      summary: Adobe Analytics Get a data repair job
+      summary: Adobe Analytics Get a Data Repair Job
       description: >-
         Returns the current status and details for a specific data repair job,
         including progress percentage, number of rows processed, and
         completion status.
       tags:
-        - Jobs
+      - Jobs
       parameters:
-        - $ref: '#/components/parameters/rsidPath'
-        - name: jobId
-          in: path
-          required: true
-          description: The repair job ID returned when the job was created
-          schema:
-            type: integer
+      - $ref: '#/components/parameters/rsidPath'
+      - name: jobId
+        in: path
+        required: true
+        description: The repair job ID returned when the job was created
+        schema:
+          type: integer
+        example: '500123'
       responses:
         '200':
           description: Repair job details
@@ -180,12 +275,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RepairJob'
+              examples:
+                Getrepairjob200Example:
+                  summary: Default getRepairJob 200 response
+                  x-microcks-default: true
+                  value:
+                    jobId: '500123'
+                    reportSuiteId: '500123'
+                    dateRangeStart: '2026-01-15'
+                    dateRangeEnd: '2026-01-15'
+                    status: processing
+                    progress: 10
+                    jobCreateTime: '2026-01-15T10:30:00Z'
+                    jobCompleteTime: '2026-01-15T10:30:00Z'
+                    serverCalls: 10
+                    nodesProcessed: 10
         '404':
           description: Job not found
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Getrepairjob404Example:
+                  summary: Default getRepairJob 404 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
 components:
   securitySchemes:
     bearerAuth:
@@ -213,24 +333,29 @@ components:
         reportSuiteId:
           type: string
           description: The report suite ID for the estimate
+          example: '500123'
         dateRangeStart:
           type: string
           format: date
           description: Start date of the repair range
+          example: '2026-01-15'
         dateRangeEnd:
           type: string
           format: date
           description: End date of the repair range
+          example: '2026-01-15'
         serverCallEstimate:
           type: integer
           description: Estimated number of server calls (rows) that will be scanned
+          example: 10
         validationToken:
           type: string
           description: Token required when creating the repair job
+          example: CAUQAA
     RepairJobDefinition:
       type: object
       required:
-        - variables
+      - variables
       description: Definition of a data repair job
       properties:
         variables:
@@ -241,22 +366,25 @@ components:
             action objects.
           additionalProperties:
             $ref: '#/components/schemas/RepairAction'
+          example: example_value
     RepairAction:
       type: object
       required:
-        - action
+      - action
       description: The action to take on a specific variable
       properties:
         action:
           type: string
           description: The repair action to perform
           enum:
-            - delete
-            - set
+          - delete
+          - set
+          example: delete
         setValue:
           type: string
           description: >-
             The value to set the variable to (required when action is 'set')
+          example: example_value
         filter:
           $ref: '#/components/schemas/RepairFilter'
     RepairFilter:
@@ -267,12 +395,14 @@ components:
           type: string
           description: The filter condition type
           enum:
-            - contains
-            - streq
-            - startswith
+          - contains
+          - streq
+          - startswith
+          example: contains
         matchValue:
           type: string
           description: The value to match against for filtering
+          example: example_value
     RepairJob:
       type: object
       description: Status and details of a data repair job
@@ -280,43 +410,53 @@ components:
         jobId:
           type: integer
           description: Unique job identifier
+          example: '500123'
         reportSuiteId:
           type: string
           description: The report suite being repaired
+          example: '500123'
         dateRangeStart:
           type: string
           format: date
           description: Start of the repair date range
+          example: '2026-01-15'
         dateRangeEnd:
           type: string
           format: date
           description: End of the repair date range
+          example: '2026-01-15'
         status:
           type: string
           description: Current status of the repair job
           enum:
-            - processing
-            - complete
-            - failed
+          - processing
+          - complete
+          - failed
+          example: processing
         progress:
           type: integer
           description: Job completion percentage (0-100)
           minimum: 0
           maximum: 100
+          example: 10
         jobCreateTime:
           type: string
           format: date-time
           description: Timestamp when the job was created
+          example: '2026-01-15T10:30:00Z'
         jobCompleteTime:
           type: string
           format: date-time
           description: Timestamp when the job completed
+          example: '2026-01-15T10:30:00Z'
         serverCalls:
           type: integer
           description: Actual number of server calls processed
+          example: 10
         nodesProcessed:
           type: integer
           description: Number of data nodes processed
+          example: 10
     ErrorResponse:
       type: object
       description: Error response from the API
@@ -324,6 +464,8 @@ components:
         errorCode:
           type: string
           description: Machine-readable error code
+          example: example_value
         errorDescription:
           type: string
           description: Human-readable error message
+          example: example_value

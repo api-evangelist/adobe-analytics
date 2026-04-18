@@ -1,0 +1,36 @@
+{
+  "type": "object",
+  "description": "A filter applied to a report",
+  "name": "ReportFilter",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "Filter type",
+      "enum": [
+        "dateRange",
+        "breakdown",
+        "segment"
+      ]
+    },
+    "dateRange": {
+      "type": "string",
+      "description": "ISO 8601 date range (e.g. 2024-01-01T00:00:00/2024-01-31T23:59:59)"
+    },
+    "segmentId": {
+      "type": "string",
+      "description": "ID of an existing segment to apply as a filter"
+    },
+    "dimension": {
+      "type": "string",
+      "description": "Dimension for breakdown filter"
+    },
+    "itemId": {
+      "type": "string",
+      "description": "Dimension item ID for breakdown filter"
+    }
+  },
+  "required": [
+    "type"
+  ],
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

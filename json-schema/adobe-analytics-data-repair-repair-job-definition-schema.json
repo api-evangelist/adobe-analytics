@@ -1,0 +1,16 @@
+{
+  "type": "object",
+  "description": "Definition of a data repair job",
+  "properties": {
+    "variables": {
+      "type": "object",
+      "description": "Map of variable names to repair actions. Keys are Analytics variable names (e.g. eVar1, prop5, activitymap) and values are action objects.",
+      "example": "example_value"
+    }
+  },
+  "required": [
+    "variables"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RepairJobDefinition"
+}

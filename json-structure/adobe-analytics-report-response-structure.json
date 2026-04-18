@@ -1,0 +1,48 @@
+{
+  "type": "object",
+  "description": "The result of an analytics report request",
+  "name": "ReportResponse",
+  "properties": {
+    "totalPages": {
+      "type": "integer",
+      "description": "Total number of result pages"
+    },
+    "numberOfElements": {
+      "type": "integer",
+      "description": "Number of rows in this response"
+    },
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "A single row in a report result",
+        "properties": {
+          "itemId": {
+            "type": "string",
+            "description": "The dimension item ID"
+          },
+          "value": {
+            "type": "string",
+            "description": "The dimension item display value"
+          },
+          "data": {
+            "type": "array",
+            "description": "Metric values for this row, in column order",
+            "items": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "columns": {
+      "type": "object",
+      "description": "Column metadata for the report"
+    },
+    "summaryData": {
+      "type": "object",
+      "description": "Totals and summary statistics"
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

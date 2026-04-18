@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "description": "A single row in a report result",
+  "name": "ReportRow",
+  "properties": {
+    "itemId": {
+      "type": "string",
+      "description": "The dimension item ID"
+    },
+    "value": {
+      "type": "string",
+      "description": "The dimension item display value"
+    },
+    "data": {
+      "type": "array",
+      "description": "Metric values for this row, in column order",
+      "items": {
+        "type": "number"
+      }
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

@@ -1,0 +1,29 @@
+{
+  "type": "object",
+  "description": "Payload for creating or updating a segment",
+  "name": "SegmentCreate",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Display name of the segment"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the segment's purpose"
+    },
+    "rsid": {
+      "type": "string",
+      "description": "Report suite ID this segment is based on"
+    },
+    "definition": {
+      "type": "object",
+      "description": "The segment rule definition in Analytics query format"
+    }
+  },
+  "required": [
+    "name",
+    "rsid",
+    "definition"
+  ],
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

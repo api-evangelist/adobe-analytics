@@ -1,0 +1,68 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "UploadResponse": {
+      "@id": "ns:UploadResponse",
+      "@context": {
+        "uploadTrackingCode": {
+          "@id": "ns:uploadTrackingCode",
+          "@type": "xsd:string"
+        },
+        "fileSize": {
+          "@id": "ns:fileSize",
+          "@type": "xsd:integer"
+        },
+        "receivedTime": {
+          "@id": "ns:receivedTime",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "ValidationResponse": {
+      "@id": "ns:ValidationResponse",
+      "@context": {
+        "success": {
+          "@id": "ns:success",
+          "@type": "xsd:boolean"
+        },
+        "message": {
+          "@id": "ns:message",
+          "@type": "xsd:string"
+        },
+        "errors": "ns:errors"
+      }
+    },
+    "ValidationError": {
+      "@id": "ns:ValidationError",
+      "@context": {
+        "row": {
+          "@id": "ns:row",
+          "@type": "xsd:integer"
+        },
+        "column": {
+          "@id": "ns:column",
+          "@type": "xsd:string"
+        },
+        "message": {
+          "@id": "ns:message",
+          "@type": "xsd:string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "@id": "ns:ErrorResponse",
+      "@context": {
+        "errorCode": {
+          "@id": "ns:errorCode",
+          "@type": "xsd:string"
+        },
+        "errorDescription": {
+          "@id": "ns:errorDescription",
+          "@type": "xsd:string"
+        }
+      }
+    }
+  }
+}

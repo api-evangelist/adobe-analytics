@@ -1,0 +1,42 @@
+{
+  "type": "object",
+  "description": "The action to take on a specific variable",
+  "name": "RepairAction",
+  "properties": {
+    "action": {
+      "type": "string",
+      "description": "The repair action to perform",
+      "enum": [
+        "delete",
+        "set"
+      ]
+    },
+    "setValue": {
+      "type": "string",
+      "description": "The value to set the variable to (required when action is 'set')"
+    },
+    "filter": {
+      "type": "object",
+      "description": "Optional filter to limit which rows are affected by the repair",
+      "properties": {
+        "condition": {
+          "type": "string",
+          "description": "The filter condition type",
+          "enum": [
+            "contains",
+            "streq",
+            "startswith"
+          ]
+        },
+        "matchValue": {
+          "type": "string",
+          "description": "The value to match against for filtering"
+        }
+      }
+    }
+  },
+  "required": [
+    "action"
+  ],
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

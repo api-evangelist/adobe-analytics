@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "description": "Settings that control report output behavior",
+  "name": "ReportSettings",
+  "properties": {
+    "limit": {
+      "type": "integer",
+      "description": "Maximum number of rows to return"
+    },
+    "page": {
+      "type": "integer",
+      "description": "Page number (zero-indexed)"
+    },
+    "nonesBehavior": {
+      "type": "string",
+      "description": "How to handle None values",
+      "enum": [
+        "exclude-nones",
+        "return-nones"
+      ]
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

@@ -1,0 +1,43 @@
+{
+  "type": "object",
+  "description": "An analytics metric available in a report suite",
+  "name": "Metric",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Metric ID (e.g. metrics/visits)"
+    },
+    "title": {
+      "type": "string",
+      "description": "Display name of the metric"
+    },
+    "name": {
+      "type": "string",
+      "description": "Internal name"
+    },
+    "type": {
+      "type": "string",
+      "description": "Metric data type",
+      "enum": [
+        "INT",
+        "DECIMAL",
+        "CURRENCY",
+        "PERCENT",
+        "TIME"
+      ]
+    },
+    "extraTitleInfo": {
+      "type": "string",
+      "description": "Additional context for the metric title"
+    },
+    "category": {
+      "type": "string",
+      "description": "Category grouping for the metric"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of what the metric measures"
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "description": "A tag applied to an Analytics component",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "description": "Tag identifier",
+      "example": "abc123"
+    },
+    "name": {
+      "type": "string",
+      "description": "Tag name",
+      "example": "Example Title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Tag description",
+      "example": "A sample description."
+    },
+    "components": {
+      "type": "array",
+      "description": "List of components this tag is applied to",
+      "example": [],
+      "items": {
+        "type": "object"
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Tag"
+}

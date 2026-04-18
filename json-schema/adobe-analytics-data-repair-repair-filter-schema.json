@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "description": "Optional filter to limit which rows are affected by the repair",
+  "properties": {
+    "condition": {
+      "type": "string",
+      "description": "The filter condition type",
+      "example": "contains",
+      "enum": [
+        "contains",
+        "streq",
+        "startswith"
+      ]
+    },
+    "matchValue": {
+      "type": "string",
+      "description": "The value to match against for filtering",
+      "example": "example_value"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RepairFilter"
+}

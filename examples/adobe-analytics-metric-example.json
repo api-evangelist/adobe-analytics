@@ -1,0 +1,9 @@
+{
+  "id": "abc123",
+  "title": "Example Title",
+  "name": "Example Title",
+  "type": "INT",
+  "extraTitleInfo": "example_value",
+  "category": "example_value",
+  "description": "A sample description."
+}

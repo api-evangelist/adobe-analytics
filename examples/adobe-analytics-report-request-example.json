@@ -1,0 +1,16 @@
+{
+  "rsid": "examplersid",
+  "locale": "en_US",
+  "globalFilters": [],
+  "metricContainer": {
+    "metrics": [],
+    "metricFilters": []
+  },
+  "dimension": "variables/page",
+  "settings": {
+    "limit": 10,
+    "page": 10,
+    "nonesBehavior": "exclude-nones"
+  },
+  "statistics": "example_value"
+}

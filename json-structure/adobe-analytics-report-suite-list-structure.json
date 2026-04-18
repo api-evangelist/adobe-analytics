@@ -1,0 +1,45 @@
+{
+  "type": "object",
+  "description": "Paginated list of report suites",
+  "name": "ReportSuiteList",
+  "properties": {
+    "content": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "An Adobe Analytics report suite",
+        "properties": {
+          "rsid": {
+            "type": "string",
+            "description": "Report suite ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the report suite"
+          },
+          "timezoneZoneinfo": {
+            "type": "string",
+            "description": "Timezone for the report suite"
+          },
+          "type": {
+            "type": "string",
+            "description": "Report suite type",
+            "enum": [
+              "standard",
+              "virtual"
+            ]
+          }
+        }
+      }
+    },
+    "totalElements": {
+      "type": "integer",
+      "description": "Total number of report suites"
+    },
+    "totalPages": {
+      "type": "integer",
+      "description": "Total number of pages"
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}

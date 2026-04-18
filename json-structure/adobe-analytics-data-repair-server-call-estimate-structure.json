@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "description": "Estimate of server calls for a proposed data repair job",
+  "name": "ServerCallEstimate",
+  "properties": {
+    "reportSuiteId": {
+      "type": "string",
+      "description": "The report suite ID for the estimate"
+    },
+    "dateRangeStart": {
+      "type": "date",
+      "description": "Start date of the repair range"
+    },
+    "dateRangeEnd": {
+      "type": "date",
+      "description": "End date of the repair range"
+    },
+    "serverCallEstimate": {
+      "type": "integer",
+      "description": "Estimated number of server calls (rows) that will be scanned"
+    },
+    "validationToken": {
+      "type": "string",
+      "description": "Token required when creating the repair job"
+    }
+  },
+  "$schema": "https://json-structure.org/draft/2020-12/schema"
+}
