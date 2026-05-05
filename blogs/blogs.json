@@ -1,0 +1,13 @@
+{
+  "repo": "adobe-analytics",
+  "feeds": [
+    {
+      "source": "https://blog.adobe.com/en/topics/analytics",
+      "feed_url": "https://blog.adobe.com/feed.xml",
+      "saved": 10,
+      "title": "Adobe Blog"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:21:14Z"
+}
