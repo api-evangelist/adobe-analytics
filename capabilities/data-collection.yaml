@@ -1,186 +1,593 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "Adobe Analytics Data Collection"
-  description: "Unified workflow for server-side data collection and ingestion combining Bulk Data Insertion for high-volume event uploads with the Analytics API for report suite discovery and validation. Used by data engineers and implementation teams."
+  label: Adobe Analytics Data Collection
+  description: Unified workflow for server-side data collection and ingestion combining Bulk Data Insertion for high-volume
+    event uploads with the Analytics API for report suite discovery and validation. Used by data engineers and implementation
+    teams.
   tags:
-    - Adobe Analytics
-    - Data Collection
-    - Bulk Data Insertion
-    - Events
-    - Server Side
-  created: "2026-04-18"
-  modified: "2026-04-18"
-
+  - Adobe Analytics
+  - Data Collection
+  - Bulk Data Insertion
+  - Events
+  - Server Side
+  created: '2026-04-18'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      ADOBE_ANALYTICS_BEARER_TOKEN: ADOBE_ANALYTICS_BEARER_TOKEN
-      ADOBE_ANALYTICS_API_KEY: ADOBE_ANALYTICS_API_KEY
-      ADOBE_ANALYTICS_GLOBAL_COMPANY_ID: ADOBE_ANALYTICS_GLOBAL_COMPANY_ID
-
+- namespace: env
+  keys:
+    ADOBE_ANALYTICS_BEARER_TOKEN: ADOBE_ANALYTICS_BEARER_TOKEN
+    ADOBE_ANALYTICS_API_KEY: ADOBE_ANALYTICS_API_KEY
+    ADOBE_ANALYTICS_GLOBAL_COMPANY_ID: ADOBE_ANALYTICS_GLOBAL_COMPANY_ID
 capability:
   consumes:
-    - import: adobe-bulk-data-insertion
-      location: ./shared/bulk-data-insertion.yaml
-    - import: adobe-analytics
-      location: ./shared/analytics-api.yaml
-
+  - type: http
+    namespace: adobe-bulk-data-insertion
+    baseUri: https://analytics-collection.adobe.io/aa/collect/v1
+    description: Adobe Analytics Bulk Data Insertion API for high-volume server-side data collection.
+    authentication:
+      type: bearer
+      token: '{{ADOBE_ANALYTICS_BEARER_TOKEN}}'
+    resources:
+    - name: events
+      path: /events
+      description: Batch event upload and validation.
+      operations:
+      - name: upload-events
+        method: POST
+        description: Upload a gzip-compressed CSV file containing batched Analytics event data.
+        inputParameters:
+        - name: x-adobe-vgid
+          in: header
+          type: string
+          required: true
+          description: Visitor group ID for correct visitor stitching.
+        - name: x-adobe-idempotency-key
+          in: header
+          type: string
+          required: false
+          description: Unique identifier for deduplication.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: validate-events
+        method: POST
+        path: /validate
+        description: Validate a gzip-compressed CSV events file without ingesting data.
+        inputParameters:
+        - name: x-adobe-vgid
+          in: header
+          type: string
+          required: true
+          description: Visitor group ID.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  - type: http
+    namespace: adobe-analytics
+    baseUri: https://analytics.adobe.io/api/{{ADOBE_ANALYTICS_GLOBAL_COMPANY_ID}}
+    description: Adobe Analytics 2.0 API for reporting, segmentation, and component management.
+    authentication:
+      type: bearer
+      token: '{{ADOBE_ANALYTICS_BEARER_TOKEN}}'
+    resources:
+    - name: reports
+      path: /reports
+      description: Analytics reporting operations.
+      operations:
+      - name: run-report
+        method: POST
+        description: Run an analytics report with specified metrics, dimensions, and filters.
+        body:
+          type: json
+          data:
+            rsid: '{{tools.rsid}}'
+            globalFilters: '{{tools.globalFilters}}'
+            metricContainer: '{{tools.metricContainer}}'
+            dimension: '{{tools.dimension}}'
+            settings: '{{tools.settings}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: segments
+      path: /segments
+      description: Segment management operations.
+      operations:
+      - name: list-segments
+        method: GET
+        description: List analytics segments with filtering and pagination.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum results per page (max 1000).
+        - name: page
+          in: query
+          type: integer
+          required: false
+          description: Page number (zero-indexed).
+        - name: expansion
+          in: query
+          type: string
+          required: false
+          description: Additional fields to include.
+        - name: includeType
+          in: query
+          type: string
+          required: false
+          description: Controls which segments are returned (all, shared, templates).
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-segment
+        method: POST
+        description: Create a new analytics segment.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            description: '{{tools.description}}'
+            rsid: '{{tools.rsid}}'
+            definition: '{{tools.definition}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-segment
+        method: GET
+        path: /{segmentId}
+        description: Retrieve a specific segment.
+        inputParameters:
+        - name: segmentId
+          in: path
+          type: string
+          required: true
+          description: The segment ID.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-segment
+        method: PUT
+        path: /{segmentId}
+        description: Update an existing segment.
+        inputParameters:
+        - name: segmentId
+          in: path
+          type: string
+          required: true
+          description: The segment ID.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            description: '{{tools.description}}'
+            rsid: '{{tools.rsid}}'
+            definition: '{{tools.definition}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-segment
+        method: DELETE
+        path: /{segmentId}
+        description: Permanently delete a segment.
+        inputParameters:
+        - name: segmentId
+          in: path
+          type: string
+          required: true
+          description: The segment ID.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: calculated-metrics
+      path: /calculatedmetrics
+      description: Calculated metric management.
+      operations:
+      - name: list-calculated-metrics
+        method: GET
+        description: List calculated metrics.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum results per page.
+        - name: page
+          in: query
+          type: integer
+          required: false
+          description: Page number.
+        - name: expansion
+          in: query
+          type: string
+          required: false
+          description: Additional fields to include.
+        - name: includeType
+          in: query
+          type: string
+          required: false
+          description: Filter type (all, shared, templates).
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-calculated-metric
+        method: POST
+        description: Create a new calculated metric.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            description: '{{tools.description}}'
+            rsid: '{{tools.rsid}}'
+            definition: '{{tools.definition}}'
+            type: '{{tools.type}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-calculated-metric
+        method: GET
+        path: /{calculatedMetricId}
+        description: Retrieve a specific calculated metric.
+        inputParameters:
+        - name: calculatedMetricId
+          in: path
+          type: string
+          required: true
+          description: The calculated metric ID.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: update-calculated-metric
+        method: PUT
+        path: /{calculatedMetricId}
+        description: Update an existing calculated metric.
+        inputParameters:
+        - name: calculatedMetricId
+          in: path
+          type: string
+          required: true
+          description: The calculated metric ID.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            description: '{{tools.description}}'
+            rsid: '{{tools.rsid}}'
+            definition: '{{tools.definition}}'
+            type: '{{tools.type}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-calculated-metric
+        method: DELETE
+        path: /{calculatedMetricId}
+        description: Permanently delete a calculated metric.
+        inputParameters:
+        - name: calculatedMetricId
+          in: path
+          type: string
+          required: true
+          description: The calculated metric ID.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: metrics
+      path: /metrics
+      description: Metric discovery.
+      operations:
+      - name: list-metrics
+        method: GET
+        description: List all available metrics in a report suite.
+        inputParameters:
+        - name: rsid
+          in: query
+          type: string
+          required: true
+          description: The report suite ID.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: dimensions
+      path: /dimensions
+      description: Dimension discovery.
+      operations:
+      - name: list-dimensions
+        method: GET
+        description: List all available dimensions in a report suite.
+        inputParameters:
+        - name: rsid
+          in: query
+          type: string
+          required: true
+          description: The report suite ID.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: report-suites
+      path: /reportsuites/collections/suites
+      description: Report suite operations.
+      operations:
+      - name: list-report-suites
+        method: GET
+        description: List accessible report suites.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum results per page.
+        - name: page
+          in: query
+          type: integer
+          required: false
+          description: Page number.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-report-suite
+        method: GET
+        path: /{rsid}
+        description: Get a specific report suite.
+        inputParameters:
+        - name: rsid
+          in: path
+          type: string
+          required: true
+          description: The report suite ID.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: annotations
+      path: /annotations
+      description: Annotation management.
+      operations:
+      - name: list-annotations
+        method: GET
+        description: List all annotations.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum results to return.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: create-annotation
+        method: POST
+        description: Create a new annotation.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            description: '{{tools.description}}'
+            dateRange: '{{tools.dateRange}}'
+            rsids: '{{tools.rsids}}'
+            color: '{{tools.color}}'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: date-ranges
+      path: /dateranges
+      description: Saved date range operations.
+      operations:
+      - name: list-date-ranges
+        method: GET
+        description: List saved date ranges.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Maximum results to return.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: tags
+      path: /componentmetadata/tags
+      description: Component tag operations.
+      operations:
+      - name: list-tags
+        method: GET
+        description: List all tags used on analytics components.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
   exposes:
-    - type: rest
-      port: 8081
-      namespace: adobe-data-collection-api
-      description: "Unified REST API for Adobe Analytics server-side data collection and ingestion."
-      resources:
-        - path: /v1/events
-          name: events
-          description: "Batch event upload."
-          operations:
-            - method: POST
-              name: upload-events
-              description: "Upload a batch events file."
-              call: "adobe-bulk-data-insertion.upload-events"
-              with:
-                x-adobe-vgid: "rest.x-adobe-vgid"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/events/validate
-          name: event-validation
-          description: "Validate event files."
-          operations:
-            - method: POST
-              name: validate-events
-              description: "Validate a batch events file without ingesting."
-              call: "adobe-bulk-data-insertion.validate-events"
-              with:
-                x-adobe-vgid: "rest.x-adobe-vgid"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/report-suites
-          name: report-suites
-          description: "Report suite discovery for data collection targeting."
-          operations:
-            - method: GET
-              name: list-report-suites
-              description: "List report suites to identify collection targets."
-              call: "adobe-analytics.list-report-suites"
-              with:
-                limit: "rest.limit"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/report-suites/{rsid}
-          name: report-suite-detail
-          description: "Report suite details."
-          operations:
-            - method: GET
-              name: get-report-suite
-              description: "Get report suite details."
-              call: "adobe-analytics.get-report-suite"
-              with:
-                rsid: "rest.rsid"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/metrics
-          name: metrics
-          description: "Metric discovery for event mapping."
-          operations:
-            - method: GET
-              name: list-metrics
-              description: "List metrics to validate event data mapping."
-              call: "adobe-analytics.list-metrics"
-              with:
-                rsid: "rest.rsid"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-        - path: /v1/dimensions
-          name: dimensions
-          description: "Dimension discovery for event mapping."
-          operations:
-            - method: GET
-              name: list-dimensions
-              description: "List dimensions to validate event data mapping."
-              call: "adobe-analytics.list-dimensions"
-              with:
-                rsid: "rest.rsid"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9091
-      namespace: adobe-data-collection-mcp
-      transport: http
-      description: "MCP server for AI-assisted Adobe Analytics data collection and ingestion workflows."
-      tools:
-        - name: upload-events
-          description: "Upload a gzip-compressed CSV file of batched Analytics event data."
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "adobe-bulk-data-insertion.upload-events"
-          with:
-            x-adobe-vgid: "tools.visitor_group_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: validate-events
-          description: "Validate a batch events file without ingesting data."
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "adobe-bulk-data-insertion.validate-events"
-          with:
-            x-adobe-vgid: "tools.visitor_group_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-report-suites
-          description: "List report suites to identify data collection targets."
-          hints:
-            readOnly: true
-            idempotent: true
-            openWorld: true
-          call: "adobe-analytics.list-report-suites"
-          with:
-            limit: "tools.limit"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-report-suite
-          description: "Get details for a report suite to verify collection configuration."
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "adobe-analytics.get-report-suite"
-          with:
-            rsid: "tools.rsid"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-metrics
-          description: "List available metrics to validate event data mapping."
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "adobe-analytics.list-metrics"
-          with:
-            rsid: "tools.rsid"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-dimensions
-          description: "List available dimensions to validate event data mapping."
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "adobe-analytics.list-dimensions"
-          with:
-            rsid: "tools.rsid"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8081
+    namespace: adobe-data-collection-api
+    description: Unified REST API for Adobe Analytics server-side data collection and ingestion.
+    resources:
+    - path: /v1/events
+      name: events
+      description: Batch event upload.
+      operations:
+      - method: POST
+        name: upload-events
+        description: Upload a batch events file.
+        call: adobe-bulk-data-insertion.upload-events
+        with:
+          x-adobe-vgid: rest.x-adobe-vgid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/events/validate
+      name: event-validation
+      description: Validate event files.
+      operations:
+      - method: POST
+        name: validate-events
+        description: Validate a batch events file without ingesting.
+        call: adobe-bulk-data-insertion.validate-events
+        with:
+          x-adobe-vgid: rest.x-adobe-vgid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/report-suites
+      name: report-suites
+      description: Report suite discovery for data collection targeting.
+      operations:
+      - method: GET
+        name: list-report-suites
+        description: List report suites to identify collection targets.
+        call: adobe-analytics.list-report-suites
+        with:
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/report-suites/{rsid}
+      name: report-suite-detail
+      description: Report suite details.
+      operations:
+      - method: GET
+        name: get-report-suite
+        description: Get report suite details.
+        call: adobe-analytics.get-report-suite
+        with:
+          rsid: rest.rsid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/metrics
+      name: metrics
+      description: Metric discovery for event mapping.
+      operations:
+      - method: GET
+        name: list-metrics
+        description: List metrics to validate event data mapping.
+        call: adobe-analytics.list-metrics
+        with:
+          rsid: rest.rsid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/dimensions
+      name: dimensions
+      description: Dimension discovery for event mapping.
+      operations:
+      - method: GET
+        name: list-dimensions
+        description: List dimensions to validate event data mapping.
+        call: adobe-analytics.list-dimensions
+        with:
+          rsid: rest.rsid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9091
+    namespace: adobe-data-collection-mcp
+    transport: http
+    description: MCP server for AI-assisted Adobe Analytics data collection and ingestion workflows.
+    tools:
+    - name: upload-events
+      description: Upload a gzip-compressed CSV file of batched Analytics event data.
+      hints:
+        readOnly: false
+        idempotent: false
+      call: adobe-bulk-data-insertion.upload-events
+      with:
+        x-adobe-vgid: tools.visitor_group_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: validate-events
+      description: Validate a batch events file without ingesting data.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: adobe-bulk-data-insertion.validate-events
+      with:
+        x-adobe-vgid: tools.visitor_group_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-report-suites
+      description: List report suites to identify data collection targets.
+      hints:
+        readOnly: true
+        idempotent: true
+        openWorld: true
+      call: adobe-analytics.list-report-suites
+      with:
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-report-suite
+      description: Get details for a report suite to verify collection configuration.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: adobe-analytics.get-report-suite
+      with:
+        rsid: tools.rsid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-metrics
+      description: List available metrics to validate event data mapping.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: adobe-analytics.list-metrics
+      with:
+        rsid: tools.rsid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-dimensions
+      description: List available dimensions to validate event data mapping.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: adobe-analytics.list-dimensions
+      with:
+        rsid: tools.rsid
+      outputParameters:
+      - type: object
+        mapping: $.
