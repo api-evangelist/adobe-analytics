@@ -1,0 +1,87 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Analytics Data Repair API — Server Call Estimate
+  description: 'Adobe Analytics Data Repair API — Server Call Estimate. 1 operations. Lead operation: Adobe Analytics Get
+    Server Call Estimate. Self-contained Naftiko capability covering one Adobe Analytics business surface.'
+  tags:
+  - Adobe Analytics
+  - Server Call Estimate
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_ANALYTICS_API_KEY: ADOBE_ANALYTICS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: data-repair-server-call-estimate
+    baseUri: https://analytics.adobe.io/api/{globalCompanyId}/datarepair/v1
+    description: Adobe Analytics Data Repair API — Server Call Estimate business capability. Self-contained, no shared references.
+    resources:
+    - name: rsid-serverCallEstimate
+      path: /{rsid}/serverCallEstimate
+      operations:
+      - name: getservercallestimate
+        method: GET
+        description: Adobe Analytics Get Server Call Estimate
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: dateRangeStart
+          in: query
+          type: string
+          description: Start of the date range for the repair in ISO 8601 format (YYYY-MM-DD)
+          required: true
+        - name: dateRangeEnd
+          in: query
+          type: string
+          description: End of the date range for the repair (inclusive) in ISO 8601 format (YYYY-MM-DD)
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_ANALYTICS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: data-repair-server-call-estimate-rest
+    port: 8080
+    description: REST adapter for Adobe Analytics Data Repair API — Server Call Estimate. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/{rsid}/servercallestimate
+      name: rsid-servercallestimate
+      description: REST surface for rsid-serverCallEstimate.
+      operations:
+      - method: GET
+        name: getservercallestimate
+        description: Adobe Analytics Get Server Call Estimate
+        call: data-repair-server-call-estimate.getservercallestimate
+        with:
+          dateRangeStart: rest.dateRangeStart
+          dateRangeEnd: rest.dateRangeEnd
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: data-repair-server-call-estimate-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Analytics Data Repair API — Server Call Estimate. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: adobe-analytics-get-server-call
+      description: Adobe Analytics Get Server Call Estimate
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: data-repair-server-call-estimate.getservercallestimate
+      with:
+        dateRangeStart: tools.dateRangeStart
+        dateRangeEnd: tools.dateRangeEnd
+      outputParameters:
+      - type: object
+        mapping: $.

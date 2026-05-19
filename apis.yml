@@ -1,17 +1,17 @@
 aid: adobe-analytics
-url: >-
-  https://raw.githubusercontent.com/api-evangelist/adobe-analytics/refs/heads/main/apis.yml
+url: https://raw.githubusercontent.com/api-evangelist/adobe-analytics/refs/heads/main/apis.yml
 name: Adobe Analytics
-description: Adobe Analytics provides real-time analytics and detailed segmentation capabilities across all marketing channels, enabling organizations to discover high-value audiences and power 
-  customer intelligence.
+description: Adobe Analytics provides real-time analytics and detailed segmentation capabilities across all marketing channels,
+  enabling organizations to discover high-value audiences and power customer intelligence.
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 created: 2024-01-01 00:00:00+00:00
-modified: '2026-04-18'
+modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
 - name: Adobe Analytics API
-  description: The Adobe Analytics 2.0 APIs provide programmatic access to data, reports, and administration features within Adobe Analytics. They allow you to perform almost any action available in 
-    the Analytics user interface, including reporting, segment management, calculated metrics, and component administration.
+  description: The Adobe Analytics 2.0 APIs provide programmatic access to data, reports, and administration features within
+    Adobe Analytics. They allow you to perform almost any action available in the Analytics user interface, including reporting,
+    segment management, calculated metrics, and component administration.
   image: https://www.adobe.com/content/dam/cc/icons/analytics.svg
   baseUrl: https://analytics.adobe.io/api
   tags:
@@ -40,6 +40,22 @@ apis:
     title: Migration Guide
   - type: GitHubRepository
     url: https://github.com/AdobeDocs/analytics-2.0-apis
+  - type: NaftikoCapability
+    url: capabilities/adobe-analytics-annotations.yaml
+  - type: NaftikoCapability
+    url: capabilities/adobe-analytics-calculated-metrics.yaml
+  - type: NaftikoCapability
+    url: capabilities/adobe-analytics-date-ranges.yaml
+  - type: NaftikoCapability
+    url: capabilities/adobe-analytics-dimensions.yaml
+  - type: NaftikoCapability
+    url: capabilities/adobe-analytics-metrics.yaml
+  - type: NaftikoCapability
+    url: capabilities/adobe-analytics-report-suites.yaml
+  - type: NaftikoCapability
+    url: capabilities/adobe-analytics-reports.yaml
+  - type: NaftikoCapability
+    url: capabilities/adobe-analytics-segments.yaml
   contact:
   - type: Support
     url: https://experienceleague.adobe.com/docs/analytics.html
@@ -48,8 +64,9 @@ apis:
     title: Community
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
 - name: Adobe Analytics Bulk Data Insertion API
-  description: The Bulk Data Insertion API (BDIA) lets you upload server-side call data in batches of compressed CSV files instead of using client-side libraries such as AppMeasurement. It is the 
-    recommended successor to the single-event Data Insertion API for high-volume server-side data collection.
+  description: The Bulk Data Insertion API (BDIA) lets you upload server-side call data in batches of compressed CSV files
+    instead of using client-side libraries such as AppMeasurement. It is the recommended successor to the single-event Data
+    Insertion API for high-volume server-side data collection.
   image: https://www.adobe.com/content/dam/cc/icons/analytics.svg
   baseUrl: https://analytics-collection.adobe.io/aa/collect/v1
   tags:
@@ -66,6 +83,8 @@ apis:
     url: openapi/adobe-analytics-bulk-data-insertion-api-openapi.yml
   - type: Authentication
     url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
+  - type: NaftikoCapability
+    url: capabilities/bulk-data-insertion-events.yaml
   contact:
   - type: Support
     url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
@@ -74,8 +93,9 @@ apis:
     title: Community
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
 - name: Adobe Analytics Livestream API
-  description: The Livestream API is a reporting feature in Adobe Analytics that allows clients to receive traffic data processed by Adobe Analytics in real time. Hits are streamed to the client on a 
-    hit-by-hit basis in the same order and rate that they are processed by Adobe servers.
+  description: The Livestream API is a reporting feature in Adobe Analytics that allows clients to receive traffic data processed
+    by Adobe Analytics in real time. Hits are streamed to the client on a hit-by-hit basis in the same order and rate that
+    they are processed by Adobe servers.
   image: https://www.adobe.com/content/dam/cc/icons/analytics.svg
   baseUrl: https://livestream.adobe.net/api/1/stream
   tags:
@@ -102,8 +122,9 @@ apis:
     title: Community
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
 - name: Adobe Analytics Data Repair API
-  description: The Data Repair API allows you to permanently delete or transform data that has already been ingested in Adobe Analytics. It provides endpoints for estimating repair scope, creating 
-    repair jobs, and monitoring job status. This is a paid feature and Adobe recommends a careful, staged approach when using it.
+  description: The Data Repair API allows you to permanently delete or transform data that has already been ingested in Adobe
+    Analytics. It provides endpoints for estimating repair scope, creating repair jobs, and monitoring job status. This is
+    a paid feature and Adobe recommends a careful, staged approach when using it.
   image: https://www.adobe.com/content/dam/cc/icons/analytics.svg
   baseUrl: https://analytics.adobe.io/api
   tags:
@@ -120,6 +141,10 @@ apis:
     url: openapi/adobe-analytics-data-repair-api-openapi.yml
   - type: Authentication
     url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
+  - type: NaftikoCapability
+    url: capabilities/data-repair-jobs.yaml
+  - type: NaftikoCapability
+    url: capabilities/data-repair-server-call-estimate.yaml
   contact:
   - type: Support
     url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
@@ -128,8 +153,10 @@ apis:
     title: Community
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
 - name: Adobe Analytics Data Insertion API
-  description: The Data Insertion API allows server-side data submission to Adobe Analytics one event at a time using HTTP GET or POST requests. Unlike the Bulk Data Insertion API which processes 
-    compressed CSV files in batches, this API handles individual hit submissions in real time and is explicitly excluded from the Analytics 1.4 API end-of-life scheduled for August 12, 2026.
+  description: The Data Insertion API allows server-side data submission to Adobe Analytics one event at a time using HTTP
+    GET or POST requests. Unlike the Bulk Data Insertion API which processes compressed CSV files in batches, this API handles
+    individual hit submissions in real time and is explicitly excluded from the Analytics 1.4 API end-of-life scheduled for
+    August 12, 2026.
   image: https://www.adobe.com/content/dam/cc/icons/analytics.svg
   baseUrl: https://sc.omtrdc.net/b/ss
   tags:
@@ -150,8 +177,9 @@ apis:
     title: Community
   humanURL: https://developer.adobe.com/analytics-apis/docs/1.4/guides/data-insertion/
 - name: Adobe Analytics 1.4 API
-  description: The Adobe Analytics 1.4 APIs provide programmatic access to reporting, classifications, data sources, and report suite configuration. This version is deprecated and scheduled for 
-    end-of-life on August 12, 2026, after which all endpoints will cease to function. The Data Insertion API is excluded from this end-of-life.
+  description: The Adobe Analytics 1.4 APIs provide programmatic access to reporting, classifications, data sources, and report
+    suite configuration. This version is deprecated and scheduled for end-of-life on August 12, 2026, after which all endpoints
+    will cease to function. The Data Insertion API is excluded from this end-of-life.
   image: https://www.adobe.com/content/dam/cc/icons/analytics.svg
   baseUrl: https://api.omniture.com/admin/1.4
   tags:
@@ -297,7 +325,3 @@ common:
   url: rules/adobe-analytics-spectral-rules.yml
 - type: Vocabulary
   url: vocabulary/adobe-analytics-vocabulary.yaml
-- type: NaftikoCapability
-  url: capabilities/reporting-and-analysis.yaml
-- type: NaftikoCapability
-  url: capabilities/data-collection.yaml

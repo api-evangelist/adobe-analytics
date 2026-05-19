@@ -1,0 +1,70 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Adobe Analytics API — Dimensions
+  description: 'Adobe Analytics API — Dimensions. 1 operations. Lead operation: Adobe Analytics List Dimensions. Self-contained
+    Naftiko capability covering one Adobe Analytics business surface.'
+  tags:
+  - Adobe Analytics
+  - Dimensions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ADOBE_ANALYTICS_API_KEY: ADOBE_ANALYTICS_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: adobe-analytics-dimensions
+    baseUri: https://analytics.adobe.io/api/{globalCompanyId}
+    description: Adobe Analytics API — Dimensions business capability. Self-contained, no shared references.
+    resources:
+    - name: dimensions
+      path: /dimensions
+      operations:
+      - name: listdimensions
+        method: GET
+        description: Adobe Analytics List Dimensions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.ADOBE_ANALYTICS_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: adobe-analytics-dimensions-rest
+    port: 8080
+    description: REST adapter for Adobe Analytics API — Dimensions. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/dimensions
+      name: dimensions
+      description: REST surface for dimensions.
+      operations:
+      - method: GET
+        name: listdimensions
+        description: Adobe Analytics List Dimensions
+        call: adobe-analytics-dimensions.listdimensions
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: adobe-analytics-dimensions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Adobe Analytics API — Dimensions. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: adobe-analytics-list-dimensions
+      description: Adobe Analytics List Dimensions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: adobe-analytics-dimensions.listdimensions
+      outputParameters:
+      - type: object
+        mapping: $.
