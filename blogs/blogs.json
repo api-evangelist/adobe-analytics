@@ -2,12 +2,20 @@
   "repo": "adobe-analytics",
   "feeds": [
     {
-      "source": "https://blog.adobe.com/en/topics/analytics",
+      "source": "https://blog.adobe.com/feed/",
       "feed_url": "https://blog.adobe.com/feed/",
-      "title": "Adobe Blog",
-      "saved": 43
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://status.adobe.com/",
+      "feed_url": "https://status.adobe.com/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
   "post_count": 53,
-  "fetched": "2026-05-17T20:20:35Z"
+  "fetched": "2026-06-01T23:35:02Z"
 }
