@@ -1,0 +1,150 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Analytics Create a Calculated Metric and Run a Report
+  summary: List a report suite's metrics, create a calculated metric, then run a report using it.
+  description: >-
+    Builds a derived metric and immediately puts it to work. The workflow lists
+    the metrics available in a report suite so the caller can reference real
+    metric IDs inside the calculated metric formula, creates the calculated
+    metric, and then runs a date-ranged report that reports on the newly created
+    calculated metric. Every step spells out its request inline, including the
+    Adobe IMS bearer token and Developer Console API key headers.
+  version: 1.0.0
+sourceDescriptions:
+- name: analyticsApi
+  url: ../openapi/adobe-analytics-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-calculated-metric-and-run-report
+  summary: Create a calculated metric and run a report that uses it.
+  description: >-
+    Lists the metrics in the report suite, creates a calculated metric from the
+    supplied formula definition, and runs a report whose metric container
+    references the newly created calculated metric.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - apiKey
+    - rsid
+    - calculatedMetricName
+    - calculatedMetricDefinition
+    - dateRange
+    properties:
+      accessToken:
+        type: string
+        description: Adobe IMS OAuth 2.0 access token (sent as a Bearer token).
+      apiKey:
+        type: string
+        description: Adobe Developer Console API key (x-api-key header).
+      rsid:
+        type: string
+        description: The report suite ID the calculated metric and report are based on.
+      locale:
+        type: string
+        description: Locale for response labels (e.g. en_US).
+        default: en_US
+      calculatedMetricName:
+        type: string
+        description: Display name for the new calculated metric.
+      calculatedMetricDescription:
+        type: string
+        description: Description of what the calculated metric measures.
+        default: Created via Arazzo workflow.
+      calculatedMetricDefinition:
+        type: object
+        description: The formula definition combining existing metrics.
+      calculatedMetricType:
+        type: string
+        description: The metric output type.
+        default: DECIMAL
+        enum:
+        - DECIMAL
+        - TIME
+        - PERCENT
+        - CURRENCY
+      dimension:
+        type: string
+        description: The primary dimension ID for the report (e.g. variables/page).
+        default: variables/page
+      dateRange:
+        type: string
+        description: ISO 8601 date range for the global date filter.
+  steps:
+  - stepId: listMetrics
+    description: List the metrics in the report suite so the formula can reference real metric IDs.
+    operationId: listMetrics
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: rsid
+      in: query
+      value: $inputs.rsid
+    - name: locale
+      in: query
+      value: $inputs.locale
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstMetricId: $response.body#/0/id
+  - stepId: createCalculatedMetric
+    description: Create a calculated metric from the supplied formula definition.
+    operationId: createCalculatedMetric
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.calculatedMetricName
+        description: $inputs.calculatedMetricDescription
+        rsid: $inputs.rsid
+        definition: $inputs.calculatedMetricDefinition
+        type: $inputs.calculatedMetricType
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      calculatedMetricId: $response.body#/id
+  - stepId: runReport
+    description: Run a report that reports on the newly created calculated metric.
+    operationId: runReport
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        rsid: $inputs.rsid
+        locale: $inputs.locale
+        globalFilters:
+        - type: dateRange
+          dateRange: $inputs.dateRange
+        metricContainer:
+          metrics:
+          - id: $steps.createCalculatedMetric.outputs.calculatedMetricId
+            columnId: "0"
+        dimension: $inputs.dimension
+        settings:
+          limit: 50
+          page: 0
+          nonesBehavior: exclude-nones
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      rows: $response.body#/rows
+      totalPages: $response.body#/totalPages
+  outputs:
+    calculatedMetricId: $steps.createCalculatedMetric.outputs.calculatedMetricId
+    rows: $steps.runReport.outputs.rows

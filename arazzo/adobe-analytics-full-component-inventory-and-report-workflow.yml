@@ -1,0 +1,153 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Analytics Full Component Inventory and Report
+  summary: Inventory report suites, dimensions, and metrics, then run a report in a single chained pass.
+  description: >-
+    An end-to-end onboarding flow for a new integration. The workflow lists the
+    report suites accessible to the user, then for the chosen report suite
+    inventories its dimensions and its metrics, and finally runs a date-ranged
+    report using a caller-supplied dimension and metric. This gives a caller
+    everything needed to confirm a suite and its reportable components before
+    pulling data. Every step spells out its request inline, including the Adobe
+    IMS bearer token and Developer Console API key headers.
+  version: 1.0.0
+sourceDescriptions:
+- name: analyticsApi
+  url: ../openapi/adobe-analytics-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: full-component-inventory-and-report
+  summary: Inventory suites, dimensions, and metrics, then run a report.
+  description: >-
+    Lists report suites, inventories the dimensions and metrics for the chosen
+    suite, and runs a date-ranged report using the supplied dimension and metric.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - apiKey
+    - rsid
+    - dimension
+    - metricId
+    - dateRange
+    properties:
+      accessToken:
+        type: string
+        description: Adobe IMS OAuth 2.0 access token (sent as a Bearer token).
+      apiKey:
+        type: string
+        description: Adobe Developer Console API key (x-api-key header).
+      rsid:
+        type: string
+        description: The report suite ID to inventory and report against.
+      locale:
+        type: string
+        description: Locale for response labels (e.g. en_US).
+        default: en_US
+      dimension:
+        type: string
+        description: The primary dimension ID for the report (e.g. variables/page).
+      metricId:
+        type: string
+        description: The metric ID to report on (e.g. metrics/visits).
+      dateRange:
+        type: string
+        description: ISO 8601 date range for the global date filter.
+  steps:
+  - stepId: listReportSuites
+    description: List the report suites accessible to the authenticated user.
+    operationId: listReportSuites
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: limit
+      in: query
+      value: 1000
+    - name: page
+      in: query
+      value: 0
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      totalElements: $response.body#/totalElements
+  - stepId: listDimensions
+    description: Inventory the dimensions available in the chosen report suite.
+    operationId: listDimensions
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: rsid
+      in: query
+      value: $inputs.rsid
+    - name: locale
+      in: query
+      value: $inputs.locale
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstDimensionId: $response.body#/0/id
+  - stepId: listMetrics
+    description: Inventory the metrics available in the chosen report suite.
+    operationId: listMetrics
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: rsid
+      in: query
+      value: $inputs.rsid
+    - name: locale
+      in: query
+      value: $inputs.locale
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstMetricId: $response.body#/0/id
+  - stepId: runReport
+    description: Run a date-ranged report using the supplied dimension and metric.
+    operationId: runReport
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        rsid: $inputs.rsid
+        locale: $inputs.locale
+        globalFilters:
+        - type: dateRange
+          dateRange: $inputs.dateRange
+        metricContainer:
+          metrics:
+          - id: $inputs.metricId
+            columnId: "0"
+        dimension: $inputs.dimension
+        settings:
+          limit: 50
+          page: 0
+          nonesBehavior: exclude-nones
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      rows: $response.body#/rows
+      totalPages: $response.body#/totalPages
+  outputs:
+    reportSuiteCount: $steps.listReportSuites.outputs.totalElements
+    dimensionSample: $steps.listDimensions.outputs.firstDimensionId
+    metricSample: $steps.listMetrics.outputs.firstMetricId
+    rows: $steps.runReport.outputs.rows

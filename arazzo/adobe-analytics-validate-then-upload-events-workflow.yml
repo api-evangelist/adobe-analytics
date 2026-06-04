@@ -1,0 +1,114 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Analytics Validate then Upload a Batch Events File
+  summary: Validate a gzip-compressed events file and upload it only when validation passes.
+  description: >-
+    Guards a bulk ingestion against malformed data. The workflow synchronously
+    validates a gzip-compressed CSV events file without ingesting it, then
+    branches: when the file passes validation it uploads the same file to the
+    collection endpoint for ingestion, and when validation fails it ends without
+    uploading. Both calls share the same visitor group ID so visitor stitching is
+    consistent. Every step spells out its request inline, including the Adobe IMS
+    bearer token and Developer Console API key headers.
+  version: 1.0.0
+sourceDescriptions:
+- name: bulkDataInsertionApi
+  url: ../openapi/adobe-analytics-bulk-data-insertion-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: validate-then-upload-events
+  summary: Validate an events file and upload it when it passes validation.
+  description: >-
+    Validates the events file synchronously and, only when it reports success,
+    uploads the file for ingestion using the same visitor group ID.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - apiKey
+    - visitorGroupId
+    - file
+    properties:
+      accessToken:
+        type: string
+        description: Adobe IMS OAuth 2.0 access token (sent as a Bearer token).
+      apiKey:
+        type: string
+        description: Adobe Developer Console API key (x-api-key header).
+      visitorGroupId:
+        type: string
+        description: >-
+          The visitor group ID (x-adobe-vgid). All files for the same visitors
+          must share this ID to ensure correct visitor stitching.
+      idempotencyKey:
+        type: string
+        description: Optional unique key for upload deduplication (x-adobe-idempotency-key).
+        default: ""
+      file:
+        type: string
+        description: The gzip-compressed CSV events file (multipart binary part).
+  steps:
+  - stepId: validateEvents
+    description: Synchronously validate the events file without ingesting any data.
+    operationId: validateEvents
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-adobe-vgid
+      in: header
+      value: $inputs.visitorGroupId
+    requestBody:
+      contentType: multipart/form-data
+      payload:
+        file: $inputs.file
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      success: $response.body#/success
+      message: $response.body#/message
+    onSuccess:
+    - name: fileValid
+      type: goto
+      stepId: uploadEvents
+      criteria:
+      - context: $response.body
+        condition: $.success == true
+        type: jsonpath
+    - name: fileInvalid
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.success == false
+        type: jsonpath
+  - stepId: uploadEvents
+    description: Upload the validated events file for ingestion using the same visitor group ID.
+    operationId: uploadEvents
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: x-adobe-vgid
+      in: header
+      value: $inputs.visitorGroupId
+    - name: x-adobe-idempotency-key
+      in: header
+      value: $inputs.idempotencyKey
+    requestBody:
+      contentType: multipart/form-data
+      payload:
+        file: $inputs.file
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      uploadTrackingCode: $response.body#/uploadTrackingCode
+      receivedTime: $response.body#/receivedTime
+  outputs:
+    validationSuccess: $steps.validateEvents.outputs.success
+    uploadTrackingCode: $steps.uploadEvents.outputs.uploadTrackingCode

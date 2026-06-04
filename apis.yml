@@ -217,6 +217,45 @@ tags:
 - Marketing
 - Web Analytics
 common:
+- type: ArazzoWorkflows
+  url: arazzo/
+  workflows:
+  - url: arazzo/adobe-analytics-annotate-and-run-report-workflow.yml
+    name: Adobe Analytics Annotate a Date Range and Run a Report
+    summary: Review saved date ranges, create an annotation for a period, then run a report over it.
+  - url: arazzo/adobe-analytics-clone-calculated-metric-workflow.yml
+    name: Adobe Analytics Clone a Calculated Metric
+    summary: Read an existing calculated metric and create a copy of it under a new name.
+  - url: arazzo/adobe-analytics-clone-segment-workflow.yml
+    name: Adobe Analytics Clone a Segment
+    summary: Read an existing segment and create a copy of it under a new name.
+  - url: arazzo/adobe-analytics-create-calculated-metric-and-run-report-workflow.yml
+    name: Adobe Analytics Create a Calculated Metric and Run a Report
+    summary: List a report suite's metrics, create a calculated metric, then run a report using it.
+  - url: arazzo/adobe-analytics-create-segment-and-run-report-workflow.yml
+    name: Adobe Analytics Create a Segment and Run a Segmented Report
+    summary: Inspect a report suite's dimensions, create a new segment, then run a report filtered by that segment.
+  - url: arazzo/adobe-analytics-discover-components-and-run-report-workflow.yml
+    name: Adobe Analytics Discover Components and Run a Report
+    summary: List the dimensions and metrics in a report suite, then run a report built from them.
+  - url: arazzo/adobe-analytics-estimate-and-run-data-repair-workflow.yml
+    name: Adobe Analytics Estimate and Run a Data Repair Job
+    summary: Estimate the scope of a data repair, submit the repair job with the validation token, then check its status.
+  - url: arazzo/adobe-analytics-full-component-inventory-and-report-workflow.yml
+    name: Adobe Analytics Full Component Inventory and Report
+    summary: Inventory report suites, dimensions, and metrics, then run a report in a single chained pass.
+  - url: arazzo/adobe-analytics-report-on-existing-segment-workflow.yml
+    name: Adobe Analytics Report on an Existing Segment
+    summary: List the company segments, fetch a chosen segment's details, then run a report filtered by it.
+  - url: arazzo/adobe-analytics-select-report-suite-and-run-report-workflow.yml
+    name: Adobe Analytics Select a Report Suite and Run a Report
+    summary: List accessible report suites, confirm one by ID, then run a report against it.
+  - url: arazzo/adobe-analytics-upsert-segment-workflow.yml
+    name: Adobe Analytics Upsert a Segment
+    summary: Look up a segment by ID and update it if it exists, otherwise create a new one.
+  - url: arazzo/adobe-analytics-validate-then-upload-events-workflow.yml
+    name: Adobe Analytics Validate then Upload a Batch Events File
+    summary: Validate a gzip-compressed events file and upload it only when validation passes.
 - type: Portal
   url: https://developer.adobe.com/analytics-apis/docs/2.0/
 - type: Documentation

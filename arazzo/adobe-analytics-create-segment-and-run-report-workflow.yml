@@ -1,0 +1,146 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Analytics Create a Segment and Run a Segmented Report
+  summary: Inspect a report suite's dimensions, create a new segment, then run a report filtered by that segment.
+  description: >-
+    A common analyst flow that turns a segment definition into reportable
+    insight. The workflow lists the dimensions available in a report suite to
+    confirm the components referenced by the segment definition exist, creates a
+    new segment from the supplied definition, and then runs a report whose global
+    filters include both a date range and the newly created segment. Every step
+    spells out its request inline, including the Adobe IMS bearer token and
+    Developer Console API key headers.
+  version: 1.0.0
+sourceDescriptions:
+- name: analyticsApi
+  url: ../openapi/adobe-analytics-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: create-segment-and-run-report
+  summary: Create a segment and immediately run a report filtered by it.
+  description: >-
+    Confirms the dimensions in the report suite, creates a segment from the
+    supplied name and definition, and runs a date-ranged report that applies the
+    new segment as a global filter.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - apiKey
+    - rsid
+    - segmentName
+    - segmentDefinition
+    - metricId
+    - dateRange
+    properties:
+      accessToken:
+        type: string
+        description: Adobe IMS OAuth 2.0 access token (sent as a Bearer token).
+      apiKey:
+        type: string
+        description: Adobe Developer Console API key (x-api-key header).
+      rsid:
+        type: string
+        description: The report suite ID the segment and report are based on.
+      locale:
+        type: string
+        description: Locale for response labels (e.g. en_US).
+        default: en_US
+      segmentName:
+        type: string
+        description: Display name for the new segment.
+      segmentDescription:
+        type: string
+        description: Description of the segment's purpose.
+        default: Created via Arazzo workflow.
+      segmentDefinition:
+        type: object
+        description: The segment rule definition in Analytics query format.
+      metricId:
+        type: string
+        description: The metric ID to report on (e.g. metrics/visits).
+      dateRange:
+        type: string
+        description: ISO 8601 date range for the global date filter.
+  steps:
+  - stepId: listDimensions
+    description: List the dimensions in the report suite to confirm referenced components exist.
+    operationId: listDimensions
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: rsid
+      in: query
+      value: $inputs.rsid
+    - name: locale
+      in: query
+      value: $inputs.locale
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      firstDimensionId: $response.body#/0/id
+  - stepId: createSegment
+    description: Create a new segment from the supplied name and definition.
+    operationId: createSegment
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.segmentName
+        description: $inputs.segmentDescription
+        rsid: $inputs.rsid
+        definition: $inputs.segmentDefinition
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      segmentId: $response.body#/id
+      segmentName: $response.body#/name
+  - stepId: runSegmentedReport
+    description: >-
+      Run a report scoped to the date range and filtered by the newly created
+      segment.
+    operationId: runReport
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        rsid: $inputs.rsid
+        locale: $inputs.locale
+        globalFilters:
+        - type: dateRange
+          dateRange: $inputs.dateRange
+        - type: segment
+          segmentId: $steps.createSegment.outputs.segmentId
+        metricContainer:
+          metrics:
+          - id: $inputs.metricId
+            columnId: "0"
+        settings:
+          limit: 50
+          page: 0
+          nonesBehavior: exclude-nones
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      rows: $response.body#/rows
+      summaryData: $response.body#/summaryData
+  outputs:
+    segmentId: $steps.createSegment.outputs.segmentId
+    rows: $steps.runSegmentedReport.outputs.rows
+    summaryData: $steps.runSegmentedReport.outputs.summaryData

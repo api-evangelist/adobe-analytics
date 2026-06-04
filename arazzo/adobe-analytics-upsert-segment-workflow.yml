@@ -1,0 +1,150 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Analytics Upsert a Segment
+  summary: Look up a segment by ID and update it if it exists, otherwise create a new one.
+  description: >-
+    Keeps a segment in sync without the caller knowing in advance whether it
+    already exists. The workflow lists the company segments filtered to a
+    candidate ID, then branches: when the segment is found it updates the
+    existing segment with the supplied definition, and when no match is found it
+    creates a new segment instead. Every step spells out its request inline,
+    including the Adobe IMS bearer token and Developer Console API key headers.
+  version: 1.0.0
+sourceDescriptions:
+- name: analyticsApi
+  url: ../openapi/adobe-analytics-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: upsert-segment
+  summary: Update a segment when it already exists, otherwise create it.
+  description: >-
+    Searches the company segments for the supplied candidate ID and either
+    updates the matched segment or creates a new one from the supplied name and
+    definition.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - apiKey
+    - rsid
+    - candidateSegmentId
+    - segmentName
+    - segmentDefinition
+    properties:
+      accessToken:
+        type: string
+        description: Adobe IMS OAuth 2.0 access token (sent as a Bearer token).
+      apiKey:
+        type: string
+        description: Adobe Developer Console API key (x-api-key header).
+      rsid:
+        type: string
+        description: The report suite ID the segment is based on.
+      candidateSegmentId:
+        type: string
+        description: The segment ID to look for before deciding to update or create.
+      segmentName:
+        type: string
+        description: Display name for the segment.
+      segmentDescription:
+        type: string
+        description: Description of the segment's purpose.
+        default: Managed via Arazzo upsert workflow.
+      segmentDefinition:
+        type: object
+        description: The segment rule definition in Analytics query format.
+  steps:
+  - stepId: findSegment
+    description: >-
+      List the company segments filtered to the candidate ID to determine
+      whether the segment already exists.
+    operationId: listSegments
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: filterByIds
+      in: query
+      value: $inputs.candidateSegmentId
+    - name: limit
+      in: query
+      value: 1
+    - name: page
+      in: query
+      value: 0
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      matchedSegmentId: $response.body#/content/0/id
+      numberOfElements: $response.body#/numberOfElements
+    onSuccess:
+    - name: segmentExists
+      type: goto
+      stepId: updateExisting
+      criteria:
+      - context: $response.body
+        condition: $.content.length > 0
+        type: jsonpath
+    - name: segmentMissing
+      type: goto
+      stepId: createNew
+      criteria:
+      - context: $response.body
+        condition: $.content.length == 0
+        type: jsonpath
+  - stepId: updateExisting
+    description: Update the matched segment with the supplied name and definition.
+    operationId: updateSegment
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: segmentId
+      in: path
+      value: $steps.findSegment.outputs.matchedSegmentId
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.segmentName
+        description: $inputs.segmentDescription
+        rsid: $inputs.rsid
+        definition: $inputs.segmentDefinition
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      segmentId: $response.body#/id
+      modified: $response.body#/modified
+    onSuccess:
+    - name: done
+      type: end
+  - stepId: createNew
+    description: Create a new segment when no existing segment matched the candidate ID.
+    operationId: createSegment
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.segmentName
+        description: $inputs.segmentDescription
+        rsid: $inputs.rsid
+        definition: $inputs.segmentDefinition
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      segmentId: $response.body#/id
+      modified: $response.body#/modified
+  outputs:
+    updatedSegmentId: $steps.updateExisting.outputs.segmentId
+    createdSegmentId: $steps.createNew.outputs.segmentId

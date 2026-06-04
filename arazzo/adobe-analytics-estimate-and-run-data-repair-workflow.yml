@@ -1,0 +1,134 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Analytics Estimate and Run a Data Repair Job
+  summary: Estimate the scope of a data repair, submit the repair job with the validation token, then check its status.
+  description: >-
+    Implements the required two-step Data Repair workflow with a follow-up status
+    check. The workflow first calls the server call estimate endpoint for a report
+    suite and date range, which returns the validationToken that confirms the cost
+    has been reviewed. It then creates the repair job, passing that validationToken
+    and the variable repair actions, and finally fetches the job to read its
+    current status and progress. Every step spells out its request inline,
+    including the Adobe IMS bearer token and Developer Console API key headers.
+  version: 1.0.0
+sourceDescriptions:
+- name: dataRepairApi
+  url: ../openapi/adobe-analytics-data-repair-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: estimate-and-run-data-repair
+  summary: Estimate, submit, and check a data repair job for a report suite.
+  description: >-
+    Calls the server call estimate to obtain a validation token, creates the
+    repair job with that token and the supplied variable actions, then retrieves
+    the job to read its status and progress.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - apiKey
+    - rsid
+    - dateRangeStart
+    - dateRangeEnd
+    - variables
+    properties:
+      accessToken:
+        type: string
+        description: Adobe IMS OAuth 2.0 access token (sent as a Bearer token).
+      apiKey:
+        type: string
+        description: Adobe Developer Console API key (x-api-key header).
+      rsid:
+        type: string
+        description: The report suite ID to repair.
+      dateRangeStart:
+        type: string
+        description: Start of the repair date range in ISO 8601 (YYYY-MM-DD).
+      dateRangeEnd:
+        type: string
+        description: End of the repair date range (inclusive) in ISO 8601 (YYYY-MM-DD).
+      variables:
+        type: object
+        description: >-
+          Map of Analytics variable names (e.g. eVar1, prop5) to repair action
+          objects, each with an action of delete or set.
+  steps:
+  - stepId: getServerCallEstimate
+    description: >-
+      Estimate the number of rows that will be scanned for the repair and obtain
+      the validation token required to create the job.
+    operationId: getServerCallEstimate
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: rsid
+      in: path
+      value: $inputs.rsid
+    - name: dateRangeStart
+      in: query
+      value: $inputs.dateRangeStart
+    - name: dateRangeEnd
+      in: query
+      value: $inputs.dateRangeEnd
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      serverCallEstimate: $response.body#/serverCallEstimate
+      validationToken: $response.body#/validationToken
+  - stepId: createRepairJob
+    description: >-
+      Create and start the repair job, passing the validation token and the
+      variable repair actions.
+    operationId: createRepairJob
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: rsid
+      in: path
+      value: $inputs.rsid
+    - name: validationToken
+      in: query
+      value: $steps.getServerCallEstimate.outputs.validationToken
+    requestBody:
+      contentType: application/json
+      payload:
+        variables: $inputs.variables
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      jobId: $response.body#/jobId
+      status: $response.body#/status
+  - stepId: getRepairJob
+    description: Retrieve the repair job to read its current status and progress.
+    operationId: getRepairJob
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: rsid
+      in: path
+      value: $inputs.rsid
+    - name: jobId
+      in: path
+      value: $steps.createRepairJob.outputs.jobId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/status
+      progress: $response.body#/progress
+  outputs:
+    serverCallEstimate: $steps.getServerCallEstimate.outputs.serverCallEstimate
+    jobId: $steps.createRepairJob.outputs.jobId
+    status: $steps.getRepairJob.outputs.status
+    progress: $steps.getRepairJob.outputs.progress

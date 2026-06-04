@@ -1,0 +1,130 @@
+arazzo: 1.0.1
+info:
+  title: Adobe Analytics Select a Report Suite and Run a Report
+  summary: List accessible report suites, confirm one by ID, then run a report against it.
+  description: >-
+    A discovery-then-report flow for callers who do not already know which
+    report suite to use. The workflow lists the report suites accessible to the
+    authenticated user, fetches the details of the chosen report suite to confirm
+    it exists and read its configuration, and then runs a date-ranged report
+    against that suite. Every step spells out its request inline, including the
+    Adobe IMS bearer token and Developer Console API key headers.
+  version: 1.0.0
+sourceDescriptions:
+- name: analyticsApi
+  url: ../openapi/adobe-analytics-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: select-report-suite-and-run-report
+  summary: Pick a report suite from the accessible list and run a report on it.
+  description: >-
+    Lists the accessible report suites, retrieves the details of the chosen
+    suite, and runs a date-ranged report scoped to it.
+  inputs:
+    type: object
+    required:
+    - accessToken
+    - apiKey
+    - rsid
+    - metricId
+    - dateRange
+    properties:
+      accessToken:
+        type: string
+        description: Adobe IMS OAuth 2.0 access token (sent as a Bearer token).
+      apiKey:
+        type: string
+        description: Adobe Developer Console API key (x-api-key header).
+      rsid:
+        type: string
+        description: The report suite ID to confirm and report against.
+      locale:
+        type: string
+        description: Locale for response labels (e.g. en_US).
+        default: en_US
+      metricId:
+        type: string
+        description: The metric ID to report on (e.g. metrics/visits).
+      dimension:
+        type: string
+        description: The primary dimension ID for the report (e.g. variables/page).
+        default: variables/page
+      dateRange:
+        type: string
+        description: ISO 8601 date range for the global date filter.
+  steps:
+  - stepId: listReportSuites
+    description: List the report suites accessible to the authenticated user.
+    operationId: listReportSuites
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: limit
+      in: query
+      value: 1000
+    - name: page
+      in: query
+      value: 0
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      totalElements: $response.body#/totalElements
+      firstRsid: $response.body#/content/0/rsid
+  - stepId: getReportSuite
+    description: Retrieve the details of the chosen report suite to confirm it exists.
+    operationId: getReportSuite
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    - name: rsid
+      in: path
+      value: $inputs.rsid
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      rsid: $response.body#/rsid
+      name: $response.body#/name
+      timezone: $response.body#/timezoneZoneinfo
+  - stepId: runReport
+    description: Run a date-ranged report scoped to the confirmed report suite.
+    operationId: runReport
+    parameters:
+    - name: Authorization
+      in: header
+      value: "Bearer $inputs.accessToken"
+    - name: x-api-key
+      in: header
+      value: $inputs.apiKey
+    requestBody:
+      contentType: application/json
+      payload:
+        rsid: $steps.getReportSuite.outputs.rsid
+        locale: $inputs.locale
+        globalFilters:
+        - type: dateRange
+          dateRange: $inputs.dateRange
+        metricContainer:
+          metrics:
+          - id: $inputs.metricId
+            columnId: "0"
+        dimension: $inputs.dimension
+        settings:
+          limit: 50
+          page: 0
+          nonesBehavior: exclude-nones
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      rows: $response.body#/rows
+      totalPages: $response.body#/totalPages
+  outputs:
+    reportSuiteName: $steps.getReportSuite.outputs.name
+    rows: $steps.runReport.outputs.rows
