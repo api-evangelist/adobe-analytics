@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Analytics Bulk Data Insertion API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics Upload a Batch Events File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics-collection.adobe.io/aa/collect/v1/events",
+            "headers": [
+              {
+                "name": "x-adobe-vgid",
+                "value": ""
+              },
+              {
+                "name": "x-adobe-idempotency-key",
+                "value": "example_value"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Uploads a gzip-compressed CSV file containing batched Analytics event data. Each row in the CSV represents one Analytics hit. The file must include required columns (timestamp, marketingCloudVisitorID or customerID, and reportSuiteID) and may include any additional Analytics variables. The visitor group ID header (x-adobe-vgid) is required and must match the visitor group used for all files in a sequence to ensure correct visitor stitching."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Validate a Batch Events File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics-collection.adobe.io/aa/collect/v1/events/validate",
+            "headers": [
+              {
+                "name": "x-adobe-vgid",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Synchronously validates a gzip-compressed CSV events file without ingesting the data. Returns an immediate response indicating whether the file passes format validation, along with detailed error messages for any rows that fail validation. Use this endpoint to test files before uploading to the events endpoint."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

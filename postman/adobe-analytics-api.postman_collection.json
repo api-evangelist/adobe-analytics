@@ -1,0 +1,2917 @@
+{
+  "info": {
+    "_postman_id": "21e34be2-d8df-4970-a02e-325e1fe715c9",
+    "name": "Adobe Analytics API",
+    "description": "The Adobe Analytics 2.0 APIs provide programmatic access to data, reports, and administration features within Adobe Analytics. You can perform almost any action available in the Analytics user interface, including reporting, segment management, calculated metrics, dimensions, and component administration.\n\nContact Support:\n Name: Adobe Analytics Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:02:34.000Z",
+    "updatedAt": "2026-06-05T15:02:34.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-21e34be2-d8df-4970-a02e-325e1fe715c9"
+  },
+  "item": [
+    {
+      "name": "reports",
+      "item": [
+        {
+          "name": "Adobe Analytics Run a Report",
+          "id": "4bdd5d34-1a13-4332-b24f-3225cac83994",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rsid\": \"<string>\",\n  \"globalFilters\": [\n    {\n      \"type\": \"dateRange\",\n      \"dateRange\": \"<string>\",\n      \"segmentId\": \"<string>\",\n      \"dimension\": \"<string>\",\n      \"itemId\": \"<string>\"\n    },\n    {\n      \"type\": \"segment\",\n      \"dateRange\": \"<string>\",\n      \"segmentId\": \"<string>\",\n      \"dimension\": \"<string>\",\n      \"itemId\": \"<string>\"\n    }\n  ],\n  \"metricContainer\": {\n    \"metrics\": [\n      {\n        \"id\": \"<string>\",\n        \"columnId\": \"<string>\",\n        \"filters\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"sort\": \"ASC\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"columnId\": \"<string>\",\n        \"filters\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"sort\": \"DESC\"\n      }\n    ],\n    \"metricFilters\": [\n      {\n        \"type\": \"dateRange\",\n        \"dateRange\": \"<string>\",\n        \"segmentId\": \"<string>\",\n        \"dimension\": \"<string>\",\n        \"itemId\": \"<string>\"\n      },\n      {\n        \"type\": \"dateRange\",\n        \"dateRange\": \"<string>\",\n        \"segmentId\": \"<string>\",\n        \"dimension\": \"<string>\",\n        \"itemId\": \"<string>\"\n      }\n    ]\n  },\n  \"locale\": \"<string>\",\n  \"dimension\": \"<string>\",\n  \"settings\": {\n    \"limit\": 50,\n    \"page\": 0,\n    \"nonesBehavior\": \"return-nones\"\n  },\n  \"statistics\": {}\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/reports",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reports"
+              ]
+            },
+            "description": "Runs an analytics report based on the provided report request definition. The request body specifies metrics, dimensions, date ranges, filters, and other parameters to define the report output."
+          },
+          "response": [
+            {
+              "id": "b69954ff-3993-4670-8f56-89c55afe3954",
+              "name": "Report results",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rsid\": \"<string>\",\n  \"globalFilters\": [\n    {\n      \"type\": \"dateRange\",\n      \"dateRange\": \"<string>\",\n      \"segmentId\": \"<string>\",\n      \"dimension\": \"<string>\",\n      \"itemId\": \"<string>\"\n    },\n    {\n      \"type\": \"segment\",\n      \"dateRange\": \"<string>\",\n      \"segmentId\": \"<string>\",\n      \"dimension\": \"<string>\",\n      \"itemId\": \"<string>\"\n    }\n  ],\n  \"metricContainer\": {\n    \"metrics\": [\n      {\n        \"id\": \"<string>\",\n        \"columnId\": \"<string>\",\n        \"filters\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"sort\": \"ASC\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"columnId\": \"<string>\",\n        \"filters\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"sort\": \"DESC\"\n      }\n    ],\n    \"metricFilters\": [\n      {\n        \"type\": \"dateRange\",\n        \"dateRange\": \"<string>\",\n        \"segmentId\": \"<string>\",\n        \"dimension\": \"<string>\",\n        \"itemId\": \"<string>\"\n      },\n      {\n        \"type\": \"dateRange\",\n        \"dateRange\": \"<string>\",\n        \"segmentId\": \"<string>\",\n        \"dimension\": \"<string>\",\n        \"itemId\": \"<string>\"\n      }\n    ]\n  },\n  \"locale\": \"<string>\",\n  \"dimension\": \"<string>\",\n  \"settings\": {\n    \"limit\": 50,\n    \"page\": 0,\n    \"nonesBehavior\": \"return-nones\"\n  },\n  \"statistics\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"totalPages\": \"<integer>\",\n  \"numberOfElements\": \"<integer>\",\n  \"rows\": [\n    {\n      \"itemId\": \"<string>\",\n      \"value\": \"<string>\",\n      \"data\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    },\n    {\n      \"itemId\": \"<string>\",\n      \"value\": \"<string>\",\n      \"data\": [\n        \"<number>\",\n        \"<number>\"\n      ]\n    }\n  ],\n  \"columns\": {},\n  \"summaryData\": {}\n}",
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-b69954ff-3993-4670-8f56-89c55afe3954"
+            },
+            {
+              "id": "e398ccb3-9a09-4f25-86f8-a75c72ae1417",
+              "name": "Invalid request body or parameters",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rsid\": \"<string>\",\n  \"globalFilters\": [\n    {\n      \"type\": \"dateRange\",\n      \"dateRange\": \"<string>\",\n      \"segmentId\": \"<string>\",\n      \"dimension\": \"<string>\",\n      \"itemId\": \"<string>\"\n    },\n    {\n      \"type\": \"segment\",\n      \"dateRange\": \"<string>\",\n      \"segmentId\": \"<string>\",\n      \"dimension\": \"<string>\",\n      \"itemId\": \"<string>\"\n    }\n  ],\n  \"metricContainer\": {\n    \"metrics\": [\n      {\n        \"id\": \"<string>\",\n        \"columnId\": \"<string>\",\n        \"filters\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"sort\": \"ASC\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"columnId\": \"<string>\",\n        \"filters\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"sort\": \"DESC\"\n      }\n    ],\n    \"metricFilters\": [\n      {\n        \"type\": \"dateRange\",\n        \"dateRange\": \"<string>\",\n        \"segmentId\": \"<string>\",\n        \"dimension\": \"<string>\",\n        \"itemId\": \"<string>\"\n      },\n      {\n        \"type\": \"dateRange\",\n        \"dateRange\": \"<string>\",\n        \"segmentId\": \"<string>\",\n        \"dimension\": \"<string>\",\n        \"itemId\": \"<string>\"\n      }\n    ]\n  },\n  \"locale\": \"<string>\",\n  \"dimension\": \"<string>\",\n  \"settings\": {\n    \"limit\": 50,\n    \"page\": 0,\n    \"nonesBehavior\": \"return-nones\"\n  },\n  \"statistics\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\",\n  \"errorId\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-e398ccb3-9a09-4f25-86f8-a75c72ae1417"
+            },
+            {
+              "id": "9cd1e696-7d68-49df-90d9-0d5f5a7d9178",
+              "name": "Unauthorized - missing or invalid credentials",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rsid\": \"<string>\",\n  \"globalFilters\": [\n    {\n      \"type\": \"dateRange\",\n      \"dateRange\": \"<string>\",\n      \"segmentId\": \"<string>\",\n      \"dimension\": \"<string>\",\n      \"itemId\": \"<string>\"\n    },\n    {\n      \"type\": \"segment\",\n      \"dateRange\": \"<string>\",\n      \"segmentId\": \"<string>\",\n      \"dimension\": \"<string>\",\n      \"itemId\": \"<string>\"\n    }\n  ],\n  \"metricContainer\": {\n    \"metrics\": [\n      {\n        \"id\": \"<string>\",\n        \"columnId\": \"<string>\",\n        \"filters\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"sort\": \"ASC\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"columnId\": \"<string>\",\n        \"filters\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"sort\": \"DESC\"\n      }\n    ],\n    \"metricFilters\": [\n      {\n        \"type\": \"dateRange\",\n        \"dateRange\": \"<string>\",\n        \"segmentId\": \"<string>\",\n        \"dimension\": \"<string>\",\n        \"itemId\": \"<string>\"\n      },\n      {\n        \"type\": \"dateRange\",\n        \"dateRange\": \"<string>\",\n        \"segmentId\": \"<string>\",\n        \"dimension\": \"<string>\",\n        \"itemId\": \"<string>\"\n      }\n    ]\n  },\n  \"locale\": \"<string>\",\n  \"dimension\": \"<string>\",\n  \"settings\": {\n    \"limit\": 50,\n    \"page\": 0,\n    \"nonesBehavior\": \"return-nones\"\n  },\n  \"statistics\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\",\n  \"errorId\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-9cd1e696-7d68-49df-90d9-0d5f5a7d9178"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:34.000Z",
+          "updatedAt": "2026-06-05T15:02:34.000Z",
+          "uid": "35240-4bdd5d34-1a13-4332-b24f-3225cac83994"
+        }
+      ],
+      "id": "1e2036d3-8a74-4ccd-bef1-be985900b205",
+      "createdAt": "2026-06-05T15:02:34.000Z",
+      "updatedAt": "2026-06-05T15:02:34.000Z",
+      "uid": "35240-1e2036d3-8a74-4ccd-bef1-be985900b205"
+    },
+    {
+      "name": "segments",
+      "item": [
+        {
+          "name": "{segmentId}",
+          "item": [
+            {
+              "name": "Adobe Analytics Get a Segment",
+              "id": "e448cdce-df46-406d-b893-0cdef2fff704",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/segments/:segmentId?locale=en_US&expansion=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "segments",
+                    ":segmentId"
+                  ],
+                  "query": [
+                    {
+                      "description": "The locale for response labels",
+                      "key": "locale",
+                      "value": "en_US"
+                    },
+                    {
+                      "description": "Comma-separated list of additional fields to include",
+                      "key": "expansion",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "8f7dabfb-855b-48c7-9e84-371601d068c7",
+                      "key": "segmentId",
+                      "value": "<string>",
+                      "description": "(Required) The segment ID"
+                    }
+                  ]
+                },
+                "description": "Retrieves a single segment by its ID, including its definition and associated metadata."
+              },
+              "response": [
+                {
+                  "id": "f99b60ad-8290-45b1-97f8-f689d5954be4",
+                  "name": "Segment details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/segments/:segmentId?locale=en_US&expansion=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "segments",
+                        ":segmentId"
+                      ],
+                      "query": [
+                        {
+                          "description": "The locale for response labels",
+                          "key": "locale",
+                          "value": "en_US"
+                        },
+                        {
+                          "description": "Comma-separated list of additional fields to include",
+                          "key": "expansion",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "segmentId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"rsid\": \"<string>\",\n  \"owner\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"login\": \"<string>\"\n  },\n  \"definition\": {},\n  \"modified\": \"<dateTime>\",\n  \"tags\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:34.000Z",
+                  "updatedAt": "2026-06-05T15:02:34.000Z",
+                  "uid": "35240-f99b60ad-8290-45b1-97f8-f689d5954be4"
+                },
+                {
+                  "id": "c5cb8871-a50c-4ecb-a4e5-a49baeb1824a",
+                  "name": "Segment not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/segments/:segmentId?locale=en_US&expansion=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "segments",
+                        ":segmentId"
+                      ],
+                      "query": [
+                        {
+                          "description": "The locale for response labels",
+                          "key": "locale",
+                          "value": "en_US"
+                        },
+                        {
+                          "description": "Comma-separated list of additional fields to include",
+                          "key": "expansion",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "segmentId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\",\n  \"errorId\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:02:34.000Z",
+                  "updatedAt": "2026-06-05T15:02:34.000Z",
+                  "uid": "35240-c5cb8871-a50c-4ecb-a4e5-a49baeb1824a"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-e448cdce-df46-406d-b893-0cdef2fff704"
+            },
+            {
+              "name": "Adobe Analytics Update a Segment",
+              "id": "b449515c-62c5-40a3-9a81-4854941db69e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"rsid\": \"<string>\",\n  \"definition\": {},\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/segments/:segmentId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "segments",
+                    ":segmentId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "888b42d1-4e6c-4a53-9201-b9b338a9b16a",
+                      "key": "segmentId",
+                      "value": "<string>",
+                      "description": "(Required) The segment ID"
+                    }
+                  ]
+                },
+                "description": "Updates an existing segment. Supports partial updates \u2014 you can send only the fields you want to change. Tags, compatibility, and reportSuiteName cannot be edited via this endpoint."
+              },
+              "response": [
+                {
+                  "id": "0545b15b-02d6-4b93-84e5-560e5c988ac7",
+                  "name": "Updated segment",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"rsid\": \"<string>\",\n  \"definition\": {},\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/segments/:segmentId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "segments",
+                        ":segmentId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "segmentId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"rsid\": \"<string>\",\n  \"owner\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"login\": \"<string>\"\n  },\n  \"definition\": {},\n  \"modified\": \"<dateTime>\",\n  \"tags\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:34.000Z",
+                  "updatedAt": "2026-06-05T15:02:34.000Z",
+                  "uid": "35240-0545b15b-02d6-4b93-84e5-560e5c988ac7"
+                },
+                {
+                  "id": "a299c148-86d0-4b2f-bc90-28b4e5282b22",
+                  "name": "Segment not found",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"rsid\": \"<string>\",\n  \"definition\": {},\n  \"description\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/segments/:segmentId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "segments",
+                        ":segmentId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "segmentId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\",\n  \"errorId\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:02:34.000Z",
+                  "updatedAt": "2026-06-05T15:02:34.000Z",
+                  "uid": "35240-a299c148-86d0-4b2f-bc90-28b4e5282b22"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-b449515c-62c5-40a3-9a81-4854941db69e"
+            },
+            {
+              "name": "Adobe Analytics Delete a Segment",
+              "id": "0b09d8b4-df74-4a98-8507-d48644ed736e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/segments/:segmentId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "segments",
+                    ":segmentId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "9b073582-a2d1-41c6-899e-4852f7ae9194",
+                      "key": "segmentId",
+                      "value": "<string>",
+                      "description": "(Required) The segment ID"
+                    }
+                  ]
+                },
+                "description": "Permanently deletes the specified segment."
+              },
+              "response": [
+                {
+                  "id": "5bb62216-1ce4-4ec9-9e02-99494037e0ac",
+                  "name": "Segment deleted successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/segments/:segmentId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "segments",
+                        ":segmentId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "segmentId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:34.000Z",
+                  "updatedAt": "2026-06-05T15:02:34.000Z",
+                  "uid": "35240-5bb62216-1ce4-4ec9-9e02-99494037e0ac"
+                },
+                {
+                  "id": "28f340ca-58e3-4639-8405-6e5071b25d6e",
+                  "name": "Segment not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/segments/:segmentId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "segments",
+                        ":segmentId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "segmentId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\",\n  \"errorId\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:02:34.000Z",
+                  "updatedAt": "2026-06-05T15:02:34.000Z",
+                  "uid": "35240-28f340ca-58e3-4639-8405-6e5071b25d6e"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-0b09d8b4-df74-4a98-8507-d48644ed736e"
+            }
+          ],
+          "id": "ba68798d-9082-4213-bca4-919b600ffa35",
+          "createdAt": "2026-06-05T15:02:34.000Z",
+          "updatedAt": "2026-06-05T15:02:34.000Z",
+          "uid": "35240-ba68798d-9082-4213-bca4-919b600ffa35"
+        },
+        {
+          "name": "Adobe Analytics List Segments",
+          "id": "a2b7c7b9-1f11-4f7b-8361-860e9f0c8da3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/segments?locale=en_US&filterByIds=<string>&limit=10&page=0&expansion=<string>&includeType=templates",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "segments"
+              ],
+              "query": [
+                {
+                  "description": "The locale for response labels",
+                  "key": "locale",
+                  "value": "en_US"
+                },
+                {
+                  "description": "Comma-separated list of IDs to filter results",
+                  "key": "filterByIds",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Maximum number of results per page (max 1000)",
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "description": "Page number (zero-indexed)",
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "description": "Comma-separated list of additional fields to include. Valid values: reportSuiteName, ownerFullName, modified, tags, compatibility, definition, publishingStatus, definitionLastModified, categories",
+                  "key": "expansion",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Controls which segments are returned. Use 'all' for all company segments (admin only), 'shared' for shared segments, 'templates' for template segments.",
+                  "key": "includeType",
+                  "value": "templates"
+                }
+              ]
+            },
+            "description": "Retrieves a list of segments for the company. Supports filtering by name, tag, owner, and report suite, as well as pagination and expansion of additional fields."
+          },
+          "response": [
+            {
+              "id": "88bb523d-1ec9-4034-ab96-a91bdc06988d",
+              "name": "List of segments",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/segments?locale=en_US&filterByIds=<string>&limit=10&page=0&expansion=<string>&includeType=templates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "segments"
+                  ],
+                  "query": [
+                    {
+                      "description": "The locale for response labels",
+                      "key": "locale",
+                      "value": "en_US"
+                    },
+                    {
+                      "description": "Comma-separated list of IDs to filter results",
+                      "key": "filterByIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of results per page (max 1000)",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Page number (zero-indexed)",
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Comma-separated list of additional fields to include. Valid values: reportSuiteName, ownerFullName, modified, tags, compatibility, definition, publishingStatus, definitionLastModified, categories",
+                      "key": "expansion",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Controls which segments are returned. Use 'all' for all company segments (admin only), 'shared' for shared segments, 'templates' for template segments.",
+                      "key": "includeType",
+                      "value": "templates"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"content\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"rsid\": \"<string>\",\n      \"owner\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"login\": \"<string>\"\n      },\n      \"definition\": {},\n      \"modified\": \"<dateTime>\",\n      \"tags\": [\n        {\n          \"id\": \"<integer>\",\n          \"name\": \"<string>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"id\": \"<integer>\",\n          \"name\": \"<string>\",\n          \"description\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"rsid\": \"<string>\",\n      \"owner\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"login\": \"<string>\"\n      },\n      \"definition\": {},\n      \"modified\": \"<dateTime>\",\n      \"tags\": [\n        {\n          \"id\": \"<integer>\",\n          \"name\": \"<string>\",\n          \"description\": \"<string>\"\n        },\n        {\n          \"id\": \"<integer>\",\n          \"name\": \"<string>\",\n          \"description\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"totalElements\": \"<integer>\",\n  \"totalPages\": \"<integer>\",\n  \"numberOfElements\": \"<integer>\"\n}",
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-88bb523d-1ec9-4034-ab96-a91bdc06988d"
+            },
+            {
+              "id": "911324f0-f562-40c6-b10f-f3f1e0b44e6b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/segments?locale=en_US&filterByIds=<string>&limit=10&page=0&expansion=<string>&includeType=templates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "segments"
+                  ],
+                  "query": [
+                    {
+                      "description": "The locale for response labels",
+                      "key": "locale",
+                      "value": "en_US"
+                    },
+                    {
+                      "description": "Comma-separated list of IDs to filter results",
+                      "key": "filterByIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of results per page (max 1000)",
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "description": "Page number (zero-indexed)",
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Comma-separated list of additional fields to include. Valid values: reportSuiteName, ownerFullName, modified, tags, compatibility, definition, publishingStatus, definitionLastModified, categories",
+                      "key": "expansion",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Controls which segments are returned. Use 'all' for all company segments (admin only), 'shared' for shared segments, 'templates' for template segments.",
+                      "key": "includeType",
+                      "value": "templates"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\",\n  \"errorId\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-911324f0-f562-40c6-b10f-f3f1e0b44e6b"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:34.000Z",
+          "updatedAt": "2026-06-05T15:02:34.000Z",
+          "uid": "35240-a2b7c7b9-1f11-4f7b-8361-860e9f0c8da3"
+        },
+        {
+          "name": "Adobe Analytics Create a Segment",
+          "id": "57a42e9e-b66c-4bd1-b0eb-0d3f03c05559",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"rsid\": \"<string>\",\n  \"definition\": {},\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/segments",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "segments"
+              ]
+            },
+            "description": "Creates a new analytics segment. The segment definition uses the Analytics query language to specify filter criteria based on dimensions, metrics, and events."
+          },
+          "response": [
+            {
+              "id": "477b550a-e18d-475d-8bf5-da45f477c65d",
+              "name": "Segment created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"rsid\": \"<string>\",\n  \"definition\": {},\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/segments",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "segments"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"rsid\": \"<string>\",\n  \"owner\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"login\": \"<string>\"\n  },\n  \"definition\": {},\n  \"modified\": \"<dateTime>\",\n  \"tags\": [\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"id\": \"<integer>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-477b550a-e18d-475d-8bf5-da45f477c65d"
+            },
+            {
+              "id": "c562a40d-426a-4164-8558-3688385827d6",
+              "name": "Invalid segment definition",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"rsid\": \"<string>\",\n  \"definition\": {},\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/segments",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "segments"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\",\n  \"errorId\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-c562a40d-426a-4164-8558-3688385827d6"
+            },
+            {
+              "id": "1cb5fda1-b9eb-40d6-99af-5c38b0d07d8a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"rsid\": \"<string>\",\n  \"definition\": {},\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/segments",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "segments"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\",\n  \"errorId\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-1cb5fda1-b9eb-40d6-99af-5c38b0d07d8a"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:34.000Z",
+          "updatedAt": "2026-06-05T15:02:34.000Z",
+          "uid": "35240-57a42e9e-b66c-4bd1-b0eb-0d3f03c05559"
+        }
+      ],
+      "id": "b8d4ea6e-9f98-43a9-b04b-a2140e602488",
+      "createdAt": "2026-06-05T15:02:34.000Z",
+      "updatedAt": "2026-06-05T15:02:34.000Z",
+      "uid": "35240-b8d4ea6e-9f98-43a9-b04b-a2140e602488"
+    },
+    {
+      "name": "calculatedmetrics",
+      "item": [
+        {
+          "name": "{calculatedMetricId}",
+          "item": [
+            {
+              "name": "Adobe Analytics Get a Calculated Metric",
+              "id": "4c2ebbda-0d75-4678-9fa9-a96575cded49",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/calculatedmetrics/:calculatedMetricId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "calculatedmetrics",
+                    ":calculatedMetricId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "2ebe7376-5b68-4194-bb6c-a476a1544dcc",
+                      "key": "calculatedMetricId",
+                      "value": "<string>",
+                      "description": "(Required) The calculated metric ID"
+                    }
+                  ]
+                },
+                "description": "Retrieves a single calculated metric by its ID."
+              },
+              "response": [
+                {
+                  "id": "8e1a7f88-1303-45f8-bb5f-edfa74c344e1",
+                  "name": "Calculated metric details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/calculatedmetrics/:calculatedMetricId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "calculatedmetrics",
+                        ":calculatedMetricId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "calculatedMetricId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"rsid\": \"<string>\",\n  \"owner\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"login\": \"<string>\"\n  },\n  \"definition\": {},\n  \"modified\": \"<dateTime>\",\n  \"type\": \"TIME\"\n}",
+                  "createdAt": "2026-06-05T15:02:34.000Z",
+                  "updatedAt": "2026-06-05T15:02:34.000Z",
+                  "uid": "35240-8e1a7f88-1303-45f8-bb5f-edfa74c344e1"
+                },
+                {
+                  "id": "a259238e-977f-40f3-9b7d-25782863b91c",
+                  "name": "Not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/calculatedmetrics/:calculatedMetricId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "calculatedmetrics",
+                        ":calculatedMetricId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "calculatedMetricId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\",\n  \"errorId\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:02:34.000Z",
+                  "updatedAt": "2026-06-05T15:02:34.000Z",
+                  "uid": "35240-a259238e-977f-40f3-9b7d-25782863b91c"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-4c2ebbda-0d75-4678-9fa9-a96575cded49"
+            },
+            {
+              "name": "Adobe Analytics Update a Calculated Metric",
+              "id": "0a93f218-51f9-4b71-9ca5-66937607b74b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"rsid\": \"<string>\",\n  \"definition\": {},\n  \"description\": \"<string>\",\n  \"type\": \"TIME\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/calculatedmetrics/:calculatedMetricId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "calculatedmetrics",
+                    ":calculatedMetricId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "2afc50d9-2485-4d8b-9fef-22710e05d7cc",
+                      "key": "calculatedMetricId",
+                      "value": "<string>",
+                      "description": "(Required) The calculated metric ID"
+                    }
+                  ]
+                },
+                "description": "Updates an existing calculated metric definition or metadata."
+              },
+              "response": [
+                {
+                  "id": "54c2f07a-7464-4676-a1be-7dfee0d987ce",
+                  "name": "Updated calculated metric",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"rsid\": \"<string>\",\n  \"definition\": {},\n  \"description\": \"<string>\",\n  \"type\": \"TIME\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/calculatedmetrics/:calculatedMetricId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "calculatedmetrics",
+                        ":calculatedMetricId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "calculatedMetricId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"rsid\": \"<string>\",\n  \"owner\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"login\": \"<string>\"\n  },\n  \"definition\": {},\n  \"modified\": \"<dateTime>\",\n  \"type\": \"TIME\"\n}",
+                  "createdAt": "2026-06-05T15:02:34.000Z",
+                  "updatedAt": "2026-06-05T15:02:34.000Z",
+                  "uid": "35240-54c2f07a-7464-4676-a1be-7dfee0d987ce"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-0a93f218-51f9-4b71-9ca5-66937607b74b"
+            },
+            {
+              "name": "Adobe Analytics Delete a Calculated Metric",
+              "id": "a41c57ea-f792-4205-9779-0bf628f572f9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/calculatedmetrics/:calculatedMetricId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "calculatedmetrics",
+                    ":calculatedMetricId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "a8a17a95-27e3-4d5d-a137-396aa0a5e96a",
+                      "key": "calculatedMetricId",
+                      "value": "<string>",
+                      "description": "(Required) The calculated metric ID"
+                    }
+                  ]
+                },
+                "description": "Permanently deletes the specified calculated metric."
+              },
+              "response": [
+                {
+                  "id": "afe7e8aa-5c09-4fc2-83cb-33e69b9cf9ec",
+                  "name": "Deleted successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/calculatedmetrics/:calculatedMetricId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "calculatedmetrics",
+                        ":calculatedMetricId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "calculatedMetricId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:02:34.000Z",
+                  "updatedAt": "2026-06-05T15:02:34.000Z",
+                  "uid": "35240-afe7e8aa-5c09-4fc2-83cb-33e69b9cf9ec"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-a41c57ea-f792-4205-9779-0bf628f572f9"
+            }
+          ],
+          "id": "e7055278-c8c3-44ef-a66a-fdabb5d24bbb",
+          "createdAt": "2026-06-05T15:02:34.000Z",
+          "updatedAt": "2026-06-05T15:02:34.000Z",
+          "uid": "35240-e7055278-c8c3-44ef-a66a-fdabb5d24bbb"
+        },
+        {
+          "name": "Adobe Analytics List Calculated Metrics",
+          "id": "331ecd60-0dc6-4720-b6b5-52c10f2804cc",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/calculatedmetrics?locale=en_US&limit=10&page=0&expansion=<string>&includeType=templates",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculatedmetrics"
+              ],
+              "query": [
+                {
+                  "description": "The locale for response labels",
+                  "key": "locale",
+                  "value": "en_US"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "description": "Comma-separated additional fields to include",
+                  "key": "expansion",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Controls which calculated metrics are returned",
+                  "key": "includeType",
+                  "value": "templates"
+                }
+              ]
+            },
+            "description": "Retrieves all calculated metrics for the company. Supports filtering by owner, tags, report suite, and whether to include shared or template calculated metrics."
+          },
+          "response": [
+            {
+              "id": "56a35e41-b254-4821-9679-81e80f4dba63",
+              "name": "List of calculated metrics",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/calculatedmetrics?locale=en_US&limit=10&page=0&expansion=<string>&includeType=templates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "calculatedmetrics"
+                  ],
+                  "query": [
+                    {
+                      "description": "The locale for response labels",
+                      "key": "locale",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Comma-separated additional fields to include",
+                      "key": "expansion",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Controls which calculated metrics are returned",
+                      "key": "includeType",
+                      "value": "templates"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"content\": [\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"rsid\": \"<string>\",\n      \"owner\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"login\": \"<string>\"\n      },\n      \"definition\": {},\n      \"modified\": \"<dateTime>\",\n      \"type\": \"CURRENCY\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"rsid\": \"<string>\",\n      \"owner\": {\n        \"id\": \"<integer>\",\n        \"name\": \"<string>\",\n        \"login\": \"<string>\"\n      },\n      \"definition\": {},\n      \"modified\": \"<dateTime>\",\n      \"type\": \"DECIMAL\"\n    }\n  ],\n  \"totalElements\": \"<integer>\",\n  \"totalPages\": \"<integer>\"\n}",
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-56a35e41-b254-4821-9679-81e80f4dba63"
+            },
+            {
+              "id": "e20d489f-dc9e-4888-b00a-0c34112300db",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/calculatedmetrics?locale=en_US&limit=10&page=0&expansion=<string>&includeType=templates",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "calculatedmetrics"
+                  ],
+                  "query": [
+                    {
+                      "description": "The locale for response labels",
+                      "key": "locale",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    },
+                    {
+                      "description": "Comma-separated additional fields to include",
+                      "key": "expansion",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Controls which calculated metrics are returned",
+                      "key": "includeType",
+                      "value": "templates"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\",\n  \"errorId\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-e20d489f-dc9e-4888-b00a-0c34112300db"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:34.000Z",
+          "updatedAt": "2026-06-05T15:02:34.000Z",
+          "uid": "35240-331ecd60-0dc6-4720-b6b5-52c10f2804cc"
+        },
+        {
+          "name": "Adobe Analytics Create a Calculated Metric",
+          "id": "d1bd7197-3586-4889-b1a6-40e02cd5bce8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"rsid\": \"<string>\",\n  \"definition\": {},\n  \"description\": \"<string>\",\n  \"type\": \"TIME\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/calculatedmetrics",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "calculatedmetrics"
+              ]
+            },
+            "description": "Creates a new calculated metric using a definition that combines existing metrics with mathematical operators and functions."
+          },
+          "response": [
+            {
+              "id": "9ea854bf-467f-4e24-b1e9-42157b5b5dfd",
+              "name": "Calculated metric created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"rsid\": \"<string>\",\n  \"definition\": {},\n  \"description\": \"<string>\",\n  \"type\": \"TIME\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/calculatedmetrics",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "calculatedmetrics"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"rsid\": \"<string>\",\n  \"owner\": {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"login\": \"<string>\"\n  },\n  \"definition\": {},\n  \"modified\": \"<dateTime>\",\n  \"type\": \"TIME\"\n}",
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-9ea854bf-467f-4e24-b1e9-42157b5b5dfd"
+            },
+            {
+              "id": "444fa6cf-e9c6-4e78-9fe3-a83332c9bde6",
+              "name": "Invalid definition",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"rsid\": \"<string>\",\n  \"definition\": {},\n  \"description\": \"<string>\",\n  \"type\": \"TIME\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/calculatedmetrics",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "calculatedmetrics"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\",\n  \"errorId\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-444fa6cf-e9c6-4e78-9fe3-a83332c9bde6"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:34.000Z",
+          "updatedAt": "2026-06-05T15:02:34.000Z",
+          "uid": "35240-d1bd7197-3586-4889-b1a6-40e02cd5bce8"
+        }
+      ],
+      "id": "45cf4fc3-8241-468c-9a84-5e407495559d",
+      "createdAt": "2026-06-05T15:02:34.000Z",
+      "updatedAt": "2026-06-05T15:02:34.000Z",
+      "uid": "35240-45cf4fc3-8241-468c-9a84-5e407495559d"
+    },
+    {
+      "name": "metrics",
+      "item": [
+        {
+          "name": "Adobe Analytics List Metrics",
+          "id": "6f3b1888-c5bf-4950-abbb-fd43e9ce0623",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/metrics?rsid=<string>&locale=en_US",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "metrics"
+              ],
+              "query": [
+                {
+                  "description": "(Required) The report suite ID",
+                  "key": "rsid",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The locale for response labels",
+                  "key": "locale",
+                  "value": "en_US"
+                }
+              ]
+            },
+            "description": "Returns a list of all metrics available in the specified report suite, including standard metrics and any calculated metrics. Metrics are returned as objects containing the ID, name, type, and description."
+          },
+          "response": [
+            {
+              "id": "56ee9b28-a65a-40a5-b53c-9097d831a7ab",
+              "name": "List of metrics",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/metrics?rsid=<string>&locale=en_US",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "metrics"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The report suite ID",
+                      "key": "rsid",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The locale for response labels",
+                      "key": "locale",
+                      "value": "en_US"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"name\": \"<string>\",\n    \"type\": \"PERCENT\",\n    \"extraTitleInfo\": \"<string>\",\n    \"category\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"name\": \"<string>\",\n    \"type\": \"INT\",\n    \"extraTitleInfo\": \"<string>\",\n    \"category\": \"<string>\",\n    \"description\": \"<string>\"\n  }\n]",
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-56ee9b28-a65a-40a5-b53c-9097d831a7ab"
+            },
+            {
+              "id": "a70dd2f5-a175-43cd-8263-797485a2b610",
+              "name": "Missing or invalid rsid",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/metrics?rsid=<string>&locale=en_US",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "metrics"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The report suite ID",
+                      "key": "rsid",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The locale for response labels",
+                      "key": "locale",
+                      "value": "en_US"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\",\n  \"errorId\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-a70dd2f5-a175-43cd-8263-797485a2b610"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:34.000Z",
+          "updatedAt": "2026-06-05T15:02:34.000Z",
+          "uid": "35240-6f3b1888-c5bf-4950-abbb-fd43e9ce0623"
+        }
+      ],
+      "id": "5dca0af1-97ce-48e7-bf7a-6c7edfd3ab55",
+      "createdAt": "2026-06-05T15:02:34.000Z",
+      "updatedAt": "2026-06-05T15:02:34.000Z",
+      "uid": "35240-5dca0af1-97ce-48e7-bf7a-6c7edfd3ab55"
+    },
+    {
+      "name": "dimensions",
+      "item": [
+        {
+          "name": "Adobe Analytics List Dimensions",
+          "id": "02a92887-dbb1-4853-8aa8-6439b104532e",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/dimensions?rsid=<string>&locale=en_US",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "dimensions"
+              ],
+              "query": [
+                {
+                  "description": "(Required) The report suite ID",
+                  "key": "rsid",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The locale for response labels",
+                  "key": "locale",
+                  "value": "en_US"
+                }
+              ]
+            },
+            "description": "Returns all dimensions available in the specified report suite. Each dimension represents a category for grouping and filtering report data, such as page, browser, or custom eVar/prop."
+          },
+          "response": [
+            {
+              "id": "1d33a142-f1f5-4be7-825e-8bea33038471",
+              "name": "List of dimensions",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dimensions?rsid=<string>&locale=en_US",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dimensions"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The report suite ID",
+                      "key": "rsid",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The locale for response labels",
+                      "key": "locale",
+                      "value": "en_US"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"category\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"name\": \"<string>\",\n    \"type\": \"<string>\",\n    \"category\": \"<string>\",\n    \"description\": \"<string>\"\n  }\n]",
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-1d33a142-f1f5-4be7-825e-8bea33038471"
+            },
+            {
+              "id": "c1873193-38ae-4bba-ada1-f834408aed64",
+              "name": "Missing or invalid rsid",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dimensions?rsid=<string>&locale=en_US",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dimensions"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The report suite ID",
+                      "key": "rsid",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The locale for response labels",
+                      "key": "locale",
+                      "value": "en_US"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\",\n  \"errorId\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-c1873193-38ae-4bba-ada1-f834408aed64"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:34.000Z",
+          "updatedAt": "2026-06-05T15:02:34.000Z",
+          "uid": "35240-02a92887-dbb1-4853-8aa8-6439b104532e"
+        }
+      ],
+      "id": "0ecf8575-46ab-4419-8f45-8c779d7e0ba6",
+      "createdAt": "2026-06-05T15:02:34.000Z",
+      "updatedAt": "2026-06-05T15:02:34.000Z",
+      "uid": "35240-0ecf8575-46ab-4419-8f45-8c779d7e0ba6"
+    },
+    {
+      "name": "reportsuites",
+      "item": [
+        {
+          "name": "collections",
+          "item": [
+            {
+              "name": "suites",
+              "item": [
+                {
+                  "name": "{rsid}",
+                  "item": [
+                    {
+                      "name": "Adobe Analytics Get a Report Suite",
+                      "id": "ae2ccbee-71c6-4055-80a2-c2ce38205213",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reportsuites/collections/suites/:rsid",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reportsuites",
+                            "collections",
+                            "suites",
+                            ":rsid"
+                          ],
+                          "variable": [
+                            {
+                              "id": "d7b45142-d41b-4ea7-9075-c539e8900864",
+                              "key": "rsid",
+                              "value": "<string>",
+                              "description": "(Required) The report suite ID"
+                            }
+                          ]
+                        },
+                        "description": "Returns details for a specific report suite by its ID."
+                      },
+                      "response": [
+                        {
+                          "id": "9d7674f1-b7e2-447b-9165-afac0ddff8b4",
+                          "name": "Report suite details",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/reportsuites/collections/suites/:rsid",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "reportsuites",
+                                "collections",
+                                "suites",
+                                ":rsid"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "rsid"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"rsid\": \"<string>\",\n  \"name\": \"<string>\",\n  \"timezoneZoneinfo\": \"<string>\",\n  \"type\": \"standard\"\n}",
+                          "createdAt": "2026-06-05T15:02:34.000Z",
+                          "updatedAt": "2026-06-05T15:02:34.000Z",
+                          "uid": "35240-9d7674f1-b7e2-447b-9165-afac0ddff8b4"
+                        },
+                        {
+                          "id": "91766444-852e-41ea-ae20-563cf9a31047",
+                          "name": "Report suite not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/reportsuites/collections/suites/:rsid",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "reportsuites",
+                                "collections",
+                                "suites",
+                                ":rsid"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "rsid"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\",\n  \"errorId\": \"<string>\"\n}",
+                          "createdAt": "2026-06-05T15:02:34.000Z",
+                          "updatedAt": "2026-06-05T15:02:34.000Z",
+                          "uid": "35240-91766444-852e-41ea-ae20-563cf9a31047"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:02:34.000Z",
+                      "updatedAt": "2026-06-05T15:02:34.000Z",
+                      "uid": "35240-ae2ccbee-71c6-4055-80a2-c2ce38205213"
+                    }
+                  ],
+                  "id": "dc16c5a0-36b5-445a-9803-d108cae65827",
+                  "createdAt": "2026-06-05T15:02:34.000Z",
+                  "updatedAt": "2026-06-05T15:02:34.000Z",
+                  "uid": "35240-dc16c5a0-36b5-445a-9803-d108cae65827"
+                },
+                {
+                  "name": "Adobe Analytics List Report Suites",
+                  "id": "7391b1a4-0a79-478a-add2-f5171f48904f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reportsuites/collections/suites?limit=10&page=0",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reportsuites",
+                        "collections",
+                        "suites"
+                      ],
+                      "query": [
+                        {
+                          "key": "limit",
+                          "value": "10"
+                        },
+                        {
+                          "key": "page",
+                          "value": "0"
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of report suites accessible to the authenticated user, including report suite ID, name, timezone, and type."
+                  },
+                  "response": [
+                    {
+                      "id": "4dd99bb0-8ce0-4ff7-9803-707f52858014",
+                      "name": "List of report suites",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reportsuites/collections/suites?limit=10&page=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reportsuites",
+                            "collections",
+                            "suites"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "key": "page",
+                              "value": "0"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"content\": [\n    {\n      \"rsid\": \"<string>\",\n      \"name\": \"<string>\",\n      \"timezoneZoneinfo\": \"<string>\",\n      \"type\": \"standard\"\n    },\n    {\n      \"rsid\": \"<string>\",\n      \"name\": \"<string>\",\n      \"timezoneZoneinfo\": \"<string>\",\n      \"type\": \"standard\"\n    }\n  ],\n  \"totalElements\": \"<integer>\",\n  \"totalPages\": \"<integer>\"\n}",
+                      "createdAt": "2026-06-05T15:02:34.000Z",
+                      "updatedAt": "2026-06-05T15:02:34.000Z",
+                      "uid": "35240-4dd99bb0-8ce0-4ff7-9803-707f52858014"
+                    },
+                    {
+                      "id": "789c1467-49e9-4ca7-8f1e-7e059fa9ba7a",
+                      "name": "Unauthorized",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reportsuites/collections/suites?limit=10&page=0",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reportsuites",
+                            "collections",
+                            "suites"
+                          ],
+                          "query": [
+                            {
+                              "key": "limit",
+                              "value": "10"
+                            },
+                            {
+                              "key": "page",
+                              "value": "0"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\",\n  \"errorId\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:34.000Z",
+                      "updatedAt": "2026-06-05T15:02:34.000Z",
+                      "uid": "35240-789c1467-49e9-4ca7-8f1e-7e059fa9ba7a"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:34.000Z",
+                  "updatedAt": "2026-06-05T15:02:34.000Z",
+                  "uid": "35240-7391b1a4-0a79-478a-add2-f5171f48904f"
+                }
+              ],
+              "id": "8fee93a4-a5f9-4b23-b90e-9776812f127a",
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-8fee93a4-a5f9-4b23-b90e-9776812f127a"
+            }
+          ],
+          "id": "c7e58508-3907-4253-9ffe-96f918393234",
+          "createdAt": "2026-06-05T15:02:34.000Z",
+          "updatedAt": "2026-06-05T15:02:34.000Z",
+          "uid": "35240-c7e58508-3907-4253-9ffe-96f918393234"
+        }
+      ],
+      "id": "646a4704-4c4c-4beb-9b0a-49c038ed11a1",
+      "createdAt": "2026-06-05T15:02:34.000Z",
+      "updatedAt": "2026-06-05T15:02:34.000Z",
+      "uid": "35240-646a4704-4c4c-4beb-9b0a-49c038ed11a1"
+    },
+    {
+      "name": "annotations",
+      "item": [
+        {
+          "name": "Adobe Analytics List Annotations",
+          "id": "7fd5595c-34d7-44cd-aeed-1bb36304577b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/annotations?locale=en_US&limit=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "annotations"
+              ],
+              "query": [
+                {
+                  "description": "The locale for response labels",
+                  "key": "locale",
+                  "value": "en_US"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Retrieves all annotations associated with report suites in the company. Annotations mark specific dates or date ranges in reports with descriptive notes."
+          },
+          "response": [
+            {
+              "id": "403f325d-2f59-401f-9555-fc21e7b8e296",
+              "name": "List of annotations",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/annotations?locale=en_US&limit=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "annotations"
+                  ],
+                  "query": [
+                    {
+                      "description": "The locale for response labels",
+                      "key": "locale",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"dateRange\": \"<string>\",\n    \"rsids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"color\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"dateRange\": \"<string>\",\n    \"rsids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"color\": \"<string>\"\n  }\n]",
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-403f325d-2f59-401f-9555-fc21e7b8e296"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:34.000Z",
+          "updatedAt": "2026-06-05T15:02:34.000Z",
+          "uid": "35240-7fd5595c-34d7-44cd-aeed-1bb36304577b"
+        },
+        {
+          "name": "Adobe Analytics Create an Annotation",
+          "id": "e4cc7b22-a902-403b-95ac-12a7ed54a544",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"dateRange\": \"<string>\",\n  \"description\": \"<string>\",\n  \"rsids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"color\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/annotations",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "annotations"
+              ]
+            },
+            "description": "Creates a new annotation for a report suite date range."
+          },
+          "response": [
+            {
+              "id": "df0ec97b-393d-4ab4-aece-b180aa2c8ec6",
+              "name": "Annotation created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"dateRange\": \"<string>\",\n  \"description\": \"<string>\",\n  \"rsids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"color\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/annotations",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "annotations"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"dateRange\": \"<string>\",\n  \"rsids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"color\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-df0ec97b-393d-4ab4-aece-b180aa2c8ec6"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:34.000Z",
+          "updatedAt": "2026-06-05T15:02:34.000Z",
+          "uid": "35240-e4cc7b22-a902-403b-95ac-12a7ed54a544"
+        }
+      ],
+      "id": "d10ad244-9ad9-48ca-9b4a-822439b6c066",
+      "createdAt": "2026-06-05T15:02:34.000Z",
+      "updatedAt": "2026-06-05T15:02:34.000Z",
+      "uid": "35240-d10ad244-9ad9-48ca-9b4a-822439b6c066"
+    },
+    {
+      "name": "dateranges",
+      "item": [
+        {
+          "name": "Adobe Analytics List Date Ranges",
+          "id": "09a2ff62-1986-4655-bef4-b8e570cc565b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/dateranges?locale=en_US&limit=10",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "dateranges"
+              ],
+              "query": [
+                {
+                  "description": "The locale for response labels",
+                  "key": "locale",
+                  "value": "en_US"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Returns saved date ranges available to the user or company."
+          },
+          "response": [
+            {
+              "id": "0b9570f4-e263-4a00-ba18-34c034f2ee88",
+              "name": "List of date ranges",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/dateranges?locale=en_US&limit=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "dateranges"
+                  ],
+                  "query": [
+                    {
+                      "description": "The locale for response labels",
+                      "key": "locale",
+                      "value": "en_US"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"definition\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"definition\": \"<string>\"\n  }\n]",
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-0b9570f4-e263-4a00-ba18-34c034f2ee88"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:34.000Z",
+          "updatedAt": "2026-06-05T15:02:34.000Z",
+          "uid": "35240-09a2ff62-1986-4655-bef4-b8e570cc565b"
+        }
+      ],
+      "id": "907fc3cb-c559-4875-a1fc-ad50ecf7aea7",
+      "createdAt": "2026-06-05T15:02:34.000Z",
+      "updatedAt": "2026-06-05T15:02:34.000Z",
+      "uid": "35240-907fc3cb-c559-4875-a1fc-ad50ecf7aea7"
+    },
+    {
+      "name": "componentmetadata",
+      "item": [
+        {
+          "name": "tags",
+          "item": [
+            {
+              "name": "Adobe Analytics List Tags",
+              "id": "0b8d86d3-e23a-430b-a937-be6fbf523f88",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/componentmetadata/tags",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "componentmetadata",
+                    "tags"
+                  ]
+                },
+                "description": "Returns all tags used on components within the company. Tags can be applied to segments, calculated metrics, projects, and other components."
+              },
+              "response": [
+                {
+                  "id": "eaf4efc8-476c-4373-8de8-3680e2699628",
+                  "name": "List of tags",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/componentmetadata/tags",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "componentmetadata",
+                        "tags"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\"\n  },\n  {\n    \"id\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string>\"\n  }\n]",
+                  "createdAt": "2026-06-05T15:02:34.000Z",
+                  "updatedAt": "2026-06-05T15:02:34.000Z",
+                  "uid": "35240-eaf4efc8-476c-4373-8de8-3680e2699628"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:34.000Z",
+              "updatedAt": "2026-06-05T15:02:34.000Z",
+              "uid": "35240-0b8d86d3-e23a-430b-a937-be6fbf523f88"
+            }
+          ],
+          "id": "d0436895-58ea-407c-920b-347c5e68e899",
+          "createdAt": "2026-06-05T15:02:34.000Z",
+          "updatedAt": "2026-06-05T15:02:34.000Z",
+          "uid": "35240-d0436895-58ea-407c-920b-347c5e68e899"
+        }
+      ],
+      "id": "be1adbab-2c5a-40b3-89b2-033b4d6f7698",
+      "createdAt": "2026-06-05T15:02:34.000Z",
+      "updatedAt": "2026-06-05T15:02:34.000Z",
+      "uid": "35240-be1adbab-2c5a-40b3-89b2-033b4d6f7698"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "globalCompanyId",
+      "value": "YOUR_GLOBAL_COMPANY_ID"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://analytics.adobe.io/api/{{globalCompanyId}}"
+    }
+  ]
+}

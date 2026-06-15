@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Analytics Data Repair API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Server Call Estimate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics Get Server Call Estimate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/datarepair/v1/:rsid/serverCallEstimate",
+            "params": [
+              {
+                "name": "rsid",
+                "value": "",
+                "type": "path",
+                "description": "The report suite ID"
+              },
+              {
+                "name": "dateRangeStart",
+                "value": "2026-01-15",
+                "type": "query",
+                "description": "Start of the date range for the repair in ISO 8601 format (YYYY-MM-DD)"
+              },
+              {
+                "name": "dateRangeEnd",
+                "value": "2026-01-15",
+                "type": "query",
+                "description": "End of the date range for the repair (inclusive) in ISO 8601 format (YYYY-MM-DD)"
+              }
+            ]
+          },
+          "docs": "Calculates the number of data rows that would be scanned for a repair job given the specified report suite and date range. This estimate is required before creating a repair job and returns a validationToken that must be passed to the job creation endpoint. The count determines the cost of the repair."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics List Data Repair Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/datarepair/v1/:rsid/job",
+            "params": [
+              {
+                "name": "rsid",
+                "value": "",
+                "type": "path",
+                "description": "The report suite ID"
+              }
+            ]
+          },
+          "docs": "Returns a list of the most recent 20 data repair jobs for the specified report suite, including both completed and in-progress jobs. Each job record includes status, progress, and result information."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Create a Data Repair Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/datarepair/v1/:rsid/job",
+            "params": [
+              {
+                "name": "rsid",
+                "value": "",
+                "type": "path",
+                "description": "The report suite ID"
+              },
+              {
+                "name": "validationToken",
+                "value": "CAUQAA",
+                "type": "query",
+                "description": "The token returned by the serverCallEstimate endpoint, confirming you have reviewed the cost estimate"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates and starts a new data repair job for the specified report suite and date range. The validationToken from the serverCallEstimate endpoint must be included as a query parameter. The request body defines which variables to repair and what actions to take (delete or set)."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Get a Data Repair Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/datarepair/v1/:rsid/job/:jobId",
+            "params": [
+              {
+                "name": "rsid",
+                "value": "",
+                "type": "path",
+                "description": "The report suite ID"
+              },
+              {
+                "name": "jobId",
+                "value": "500123",
+                "type": "path",
+                "description": "The repair job ID returned when the job was created"
+              }
+            ]
+          },
+          "docs": "Returns the current status and details for a specific data repair job, including progress percentage, number of rows processed, and completion status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

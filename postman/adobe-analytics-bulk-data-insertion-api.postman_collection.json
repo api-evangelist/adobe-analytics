@@ -1,0 +1,606 @@
+{
+  "info": {
+    "_postman_id": "e93a6116-53a7-4a37-9106-1b53abfbc45e",
+    "name": "Adobe Analytics Bulk Data Insertion API",
+    "description": "The Bulk Data Insertion API (BDIA) lets you upload server-side call data in batches of gzip-compressed CSV files. Each file contains one event per row and must conform to the BDIA file format specification. This API is the recommended successor to the single-event Data Insertion API for high-volume server-side data collection.\n\nContact Support:\n Name: Adobe Analytics Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:02:36.000Z",
+    "updatedAt": "2026-06-05T15:02:36.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e93a6116-53a7-4a37-9106-1b53abfbc45e"
+  },
+  "item": [
+    {
+      "name": "events",
+      "item": [
+        {
+          "name": "validate",
+          "item": [
+            {
+              "name": "Adobe Analytics Validate a Batch Events File",
+              "id": "45f4f061-c0f7-4a48-a4ee-7a28edbb6e4f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The visitor group ID. All files for the same visitors must share the same visitor group ID to ensure correct visitor stitching.",
+                    "key": "x-adobe-vgid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": "(Required) Gzip-compressed CSV file to validate",
+                      "key": "file",
+                      "type": "file",
+                      "value": null
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/events/validate",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events",
+                    "validate"
+                  ]
+                },
+                "description": "Synchronously validates a gzip-compressed CSV events file without ingesting the data. Returns an immediate response indicating whether the file passes format validation, along with detailed error messages for any rows that fail validation. Use this endpoint to test files before uploading to the events endpoint."
+              },
+              "response": [
+                {
+                  "id": "ab236dce-62c0-4ec4-b01b-b24b5ce998bf",
+                  "name": "Validation result",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) The visitor group ID. All files for the same visitors must share the same visitor group ID to ensure correct visitor stitching.",
+                        "key": "x-adobe-vgid",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) Gzip-compressed CSV file to validate",
+                          "key": "file",
+                          "type": "file"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/events/validate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        "validate"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"success\": \"<boolean>\",\n  \"message\": \"<string>\",\n  \"errors\": [\n    {\n      \"row\": \"<integer>\",\n      \"column\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"row\": \"<integer>\",\n      \"column\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-06-05T15:02:37.000Z",
+                  "updatedAt": "2026-06-05T15:02:37.000Z",
+                  "uid": "35240-ab236dce-62c0-4ec4-b01b-b24b5ce998bf"
+                },
+                {
+                  "id": "70599b37-ebd7-4097-8596-49a135ec1d01",
+                  "name": "File could not be read or is malformed",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) The visitor group ID. All files for the same visitors must share the same visitor group ID to ensure correct visitor stitching.",
+                        "key": "x-adobe-vgid",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) Gzip-compressed CSV file to validate",
+                          "key": "file",
+                          "type": "file"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/events/validate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        "validate"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:02:37.000Z",
+                  "updatedAt": "2026-06-05T15:02:37.000Z",
+                  "uid": "35240-70599b37-ebd7-4097-8596-49a135ec1d01"
+                },
+                {
+                  "id": "2f0d2e09-e085-46f8-9b02-ff7f66ac1f4b",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "(Required) The visitor group ID. All files for the same visitors must share the same visitor group ID to ensure correct visitor stitching.",
+                        "key": "x-adobe-vgid",
+                        "value": "<string>"
+                      },
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) Gzip-compressed CSV file to validate",
+                          "key": "file",
+                          "type": "file"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/events/validate",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "events",
+                        "validate"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:02:37.000Z",
+                  "updatedAt": "2026-06-05T15:02:37.000Z",
+                  "uid": "35240-2f0d2e09-e085-46f8-9b02-ff7f66ac1f4b"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:37.000Z",
+              "updatedAt": "2026-06-05T15:02:37.000Z",
+              "uid": "35240-45f4f061-c0f7-4a48-a4ee-7a28edbb6e4f"
+            }
+          ],
+          "id": "c94289db-b9e6-45db-ad19-693652f7a188",
+          "createdAt": "2026-06-05T15:02:37.000Z",
+          "updatedAt": "2026-06-05T15:02:37.000Z",
+          "uid": "35240-c94289db-b9e6-45db-ad19-693652f7a188"
+        },
+        {
+          "name": "Adobe Analytics Upload a Batch Events File",
+          "id": "c4b55441-d86a-499b-9243-bd573e55097f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The visitor group ID. All files for the same visitors must share the same visitor group ID to ensure correct visitor stitching.",
+                "key": "x-adobe-vgid",
+                "value": "<string>"
+              },
+              {
+                "description": "Optional unique identifier for the upload for deduplication. Duplicate uploads with the same key are rejected.",
+                "key": "x-adobe-idempotency-key",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "description": "(Required) Gzip-compressed CSV file containing event data",
+                  "key": "file",
+                  "type": "file",
+                  "value": null
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/events",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "events"
+              ]
+            },
+            "description": "Uploads a gzip-compressed CSV file containing batched Analytics event data. Each row in the CSV represents one Analytics hit. The file must include required columns (timestamp, marketingCloudVisitorID or customerID, and reportSuiteID) and may include any additional Analytics variables. The visitor group ID header (x-adobe-vgid) is required and must match the visitor group used for all files in a sequence to ensure correct visitor stitching."
+          },
+          "response": [
+            {
+              "id": "3ca82e2d-9a43-459f-a2f4-1c1eb529578a",
+              "name": "File uploaded and queued for processing",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The visitor group ID. All files for the same visitors must share the same visitor group ID to ensure correct visitor stitching.",
+                    "key": "x-adobe-vgid",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Optional unique identifier for the upload for deduplication. Duplicate uploads with the same key are rejected.",
+                    "key": "x-adobe-idempotency-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": "(Required) Gzip-compressed CSV file containing event data",
+                      "key": "file",
+                      "type": "file"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/events",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"uploadTrackingCode\": \"<string>\",\n  \"fileSize\": \"<integer>\",\n  \"receivedTime\": \"<dateTime>\"\n}",
+              "createdAt": "2026-06-05T15:02:37.000Z",
+              "updatedAt": "2026-06-05T15:02:37.000Z",
+              "uid": "35240-3ca82e2d-9a43-459f-a2f4-1c1eb529578a"
+            },
+            {
+              "id": "bf5c3741-ff5e-41d2-9e52-c6535c7f2d9e",
+              "name": "Invalid file format or missing required headers",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The visitor group ID. All files for the same visitors must share the same visitor group ID to ensure correct visitor stitching.",
+                    "key": "x-adobe-vgid",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Optional unique identifier for the upload for deduplication. Duplicate uploads with the same key are rejected.",
+                    "key": "x-adobe-idempotency-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": "(Required) Gzip-compressed CSV file containing event data",
+                      "key": "file",
+                      "type": "file"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/events",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:37.000Z",
+              "updatedAt": "2026-06-05T15:02:37.000Z",
+              "uid": "35240-bf5c3741-ff5e-41d2-9e52-c6535c7f2d9e"
+            },
+            {
+              "id": "c67f5f3e-5689-4ff9-bb6f-e95f3f6716aa",
+              "name": "Unauthorized - invalid or missing credentials",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The visitor group ID. All files for the same visitors must share the same visitor group ID to ensure correct visitor stitching.",
+                    "key": "x-adobe-vgid",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Optional unique identifier for the upload for deduplication. Duplicate uploads with the same key are rejected.",
+                    "key": "x-adobe-idempotency-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": "(Required) Gzip-compressed CSV file containing event data",
+                      "key": "file",
+                      "type": "file"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/events",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:37.000Z",
+              "updatedAt": "2026-06-05T15:02:37.000Z",
+              "uid": "35240-c67f5f3e-5689-4ff9-bb6f-e95f3f6716aa"
+            },
+            {
+              "id": "30e4c3b0-4f3a-481f-a7a3-3fb1eec71d43",
+              "name": "Rate limit exceeded",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The visitor group ID. All files for the same visitors must share the same visitor group ID to ensure correct visitor stitching.",
+                    "key": "x-adobe-vgid",
+                    "value": "<string>"
+                  },
+                  {
+                    "description": "Optional unique identifier for the upload for deduplication. Duplicate uploads with the same key are rejected.",
+                    "key": "x-adobe-idempotency-key",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": "(Required) Gzip-compressed CSV file containing event data",
+                      "key": "file",
+                      "type": "file"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/events",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "events"
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\"\n}",
+              "createdAt": "2026-06-05T15:02:37.000Z",
+              "updatedAt": "2026-06-05T15:02:37.000Z",
+              "uid": "35240-30e4c3b0-4f3a-481f-a7a3-3fb1eec71d43"
+            }
+          ],
+          "createdAt": "2026-06-05T15:02:37.000Z",
+          "updatedAt": "2026-06-05T15:02:37.000Z",
+          "uid": "35240-c4b55441-d86a-499b-9243-bd573e55097f"
+        }
+      ],
+      "id": "b9ad3bba-fb91-4cf9-92f6-6ef59559fd01",
+      "createdAt": "2026-06-05T15:02:37.000Z",
+      "updatedAt": "2026-06-05T15:02:37.000Z",
+      "uid": "35240-b9ad3bba-fb91-4cf9-92f6-6ef59559fd01"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://analytics-collection.adobe.io/aa/collect/v1"
+    }
+  ]
+}

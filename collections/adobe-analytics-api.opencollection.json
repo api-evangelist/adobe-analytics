@@ -1,0 +1,515 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Analytics API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics Run a Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/reports",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs an analytics report based on the provided report request definition. The request body specifies metrics, dimensions, date ranges, filters, and other parameters to define the report output."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Segments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics List Segments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/segments",
+            "params": [
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "The locale for response labels"
+              },
+              {
+                "name": "filterByIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of IDs to filter results"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of results per page (max 1000)"
+              },
+              {
+                "name": "page",
+                "value": "10",
+                "type": "query",
+                "description": "Page number (zero-indexed)"
+              },
+              {
+                "name": "expansion",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of additional fields to include. Valid values: reportSuiteName, ownerFullName, modified, tags, compatibility, definition, publishingStatus, definitionLastModified, categories"
+              },
+              {
+                "name": "includeType",
+                "value": "all",
+                "type": "query",
+                "description": "Controls which segments are returned. Use 'all' for all company segments (admin only), 'shared' for shared segments, 'templates' for template segments."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of segments for the company. Supports filtering by name, tag, owner, and report suite, as well as pagination and expansion of additional fields."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Create a Segment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/segments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new analytics segment. The segment definition uses the Analytics query language to specify filter criteria based on dimensions, metrics, and events."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Get a Segment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/segments/:segmentId",
+            "params": [
+              {
+                "name": "segmentId",
+                "value": "",
+                "type": "path",
+                "description": "The segment ID"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "The locale for response labels"
+              },
+              {
+                "name": "expansion",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of additional fields to include"
+              }
+            ]
+          },
+          "docs": "Retrieves a single segment by its ID, including its definition and associated metadata."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Update a Segment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/segments/:segmentId",
+            "params": [
+              {
+                "name": "segmentId",
+                "value": "",
+                "type": "path",
+                "description": "The segment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing segment. Supports partial updates — you can send only the fields you want to change. Tags, compatibility, and reportSuiteName cannot be edited via this endpoint."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Delete a Segment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/segments/:segmentId",
+            "params": [
+              {
+                "name": "segmentId",
+                "value": "",
+                "type": "path",
+                "description": "The segment ID"
+              }
+            ]
+          },
+          "docs": "Permanently deletes the specified segment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Calculated Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics List Calculated Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/calculatedmetrics",
+            "params": [
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "The locale for response labels"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "expansion",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated additional fields to include"
+              },
+              {
+                "name": "includeType",
+                "value": "all",
+                "type": "query",
+                "description": "Controls which calculated metrics are returned"
+              }
+            ]
+          },
+          "docs": "Retrieves all calculated metrics for the company. Supports filtering by owner, tags, report suite, and whether to include shared or template calculated metrics."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Create a Calculated Metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/calculatedmetrics",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new calculated metric using a definition that combines existing metrics with mathematical operators and functions."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Get a Calculated Metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/calculatedmetrics/:calculatedMetricId",
+            "params": [
+              {
+                "name": "calculatedMetricId",
+                "value": "",
+                "type": "path",
+                "description": "The calculated metric ID"
+              }
+            ]
+          },
+          "docs": "Retrieves a single calculated metric by its ID."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Update a Calculated Metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/calculatedmetrics/:calculatedMetricId",
+            "params": [
+              {
+                "name": "calculatedMetricId",
+                "value": "",
+                "type": "path",
+                "description": "The calculated metric ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing calculated metric definition or metadata."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Delete a Calculated Metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/calculatedmetrics/:calculatedMetricId",
+            "params": [
+              {
+                "name": "calculatedMetricId",
+                "value": "",
+                "type": "path",
+                "description": "The calculated metric ID"
+              }
+            ]
+          },
+          "docs": "Permanently deletes the specified calculated metric."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics List Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/metrics",
+            "params": [
+              {
+                "name": "rsid",
+                "value": "",
+                "type": "query",
+                "description": "The report suite ID"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "The locale for response labels"
+              }
+            ]
+          },
+          "docs": "Returns a list of all metrics available in the specified report suite, including standard metrics and any calculated metrics. Metrics are returned as objects containing the ID, name, type, and description."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Dimensions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics List Dimensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/dimensions",
+            "params": [
+              {
+                "name": "rsid",
+                "value": "",
+                "type": "query",
+                "description": "The report suite ID"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "The locale for response labels"
+              }
+            ]
+          },
+          "docs": "Returns all dimensions available in the specified report suite. Each dimension represents a category for grouping and filtering report data, such as page, browser, or custom eVar/prop."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Report Suites",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics List Report Suites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/reportsuites/collections/suites",
+            "params": [
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "10",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of report suites accessible to the authenticated user, including report suite ID, name, timezone, and type."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Get a Report Suite",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/reportsuites/collections/suites/:rsid",
+            "params": [
+              {
+                "name": "rsid",
+                "value": "",
+                "type": "path",
+                "description": "The report suite ID"
+              }
+            ]
+          },
+          "docs": "Returns details for a specific report suite by its ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Annotations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics List Annotations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/annotations",
+            "params": [
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "The locale for response labels"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves all annotations associated with report suites in the company. Annotations mark specific dates or date ranges in reports with descriptive notes."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Create an Annotation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/annotations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new annotation for a report suite date range."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics List Tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/componentmetadata/tags"
+          },
+          "docs": "Returns all tags used on components within the company. Tags can be applied to segments, calculated metrics, projects, and other components."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Date Ranges",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics List Date Ranges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/dateranges",
+            "params": [
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "The locale for response labels"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns saved date ranges available to the user or company."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

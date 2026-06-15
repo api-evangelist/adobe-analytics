@@ -1,0 +1,857 @@
+{
+  "info": {
+    "_postman_id": "ece8d390-a30c-4b98-abfa-5c19fe20912a",
+    "name": "Adobe Analytics Data Repair API",
+    "description": "The Data Repair API allows you to permanently delete or transform data that has already been ingested in Adobe Analytics. Use cases include deleting personally identifiable information (PII) to comply with privacy regulations and removing corrupted or erroneous data. The API requires a two-step workflow: first estimate the scope and cost using the server call estimate endpoint, then submit a repair job. This is a paid feature.\n\nContact Support:\n Name: Adobe Analytics Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:02:37.000Z",
+    "updatedAt": "2026-06-05T15:02:38.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ece8d390-a30c-4b98-abfa-5c19fe20912a"
+  },
+  "item": [
+    {
+      "name": "{rsid}",
+      "item": [
+        {
+          "name": "serverCallEstimate",
+          "item": [
+            {
+              "name": "Adobe Analytics Get Server Call Estimate",
+              "id": "464035f2-a199-4eb3-a1a1-342f12c76f98",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:rsid/serverCallEstimate?dateRangeStart=<date>&dateRangeEnd=<date>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":rsid",
+                    "serverCallEstimate"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Start of the date range for the repair in ISO 8601 format (YYYY-MM-DD)",
+                      "key": "dateRangeStart",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "(Required) End of the date range for the repair (inclusive) in ISO 8601 format (YYYY-MM-DD)",
+                      "key": "dateRangeEnd",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "33af4337-ccad-413c-9834-69f4a941f4fc",
+                      "key": "rsid",
+                      "value": "<string>",
+                      "description": "(Required) The report suite ID"
+                    }
+                  ]
+                },
+                "description": "Calculates the number of data rows that would be scanned for a repair job given the specified report suite and date range. This estimate is required before creating a repair job and returns a validationToken that must be passed to the job creation endpoint. The count determines the cost of the repair."
+              },
+              "response": [
+                {
+                  "id": "02aed46d-dd03-4176-8c64-207022ea8561",
+                  "name": "Server call estimate",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:rsid/serverCallEstimate?dateRangeStart=<date>&dateRangeEnd=<date>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":rsid",
+                        "serverCallEstimate"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Start of the date range for the repair in ISO 8601 format (YYYY-MM-DD)",
+                          "key": "dateRangeStart",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "(Required) End of the date range for the repair (inclusive) in ISO 8601 format (YYYY-MM-DD)",
+                          "key": "dateRangeEnd",
+                          "value": "<date>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "rsid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"reportSuiteId\": \"<string>\",\n  \"dateRangeStart\": \"<date>\",\n  \"dateRangeEnd\": \"<date>\",\n  \"serverCallEstimate\": \"<integer>\",\n  \"validationToken\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:02:38.000Z",
+                  "updatedAt": "2026-06-05T15:02:38.000Z",
+                  "uid": "35240-02aed46d-dd03-4176-8c64-207022ea8561"
+                },
+                {
+                  "id": "23151b57-cf0b-49cd-9355-63bd88d666dc",
+                  "name": "Invalid parameters",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:rsid/serverCallEstimate?dateRangeStart=<date>&dateRangeEnd=<date>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":rsid",
+                        "serverCallEstimate"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Start of the date range for the repair in ISO 8601 format (YYYY-MM-DD)",
+                          "key": "dateRangeStart",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "(Required) End of the date range for the repair (inclusive) in ISO 8601 format (YYYY-MM-DD)",
+                          "key": "dateRangeEnd",
+                          "value": "<date>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "rsid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:02:38.000Z",
+                  "updatedAt": "2026-06-05T15:02:38.000Z",
+                  "uid": "35240-23151b57-cf0b-49cd-9355-63bd88d666dc"
+                },
+                {
+                  "id": "bb1572dc-7753-4eb6-a915-ca8d5b5895cd",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:rsid/serverCallEstimate?dateRangeStart=<date>&dateRangeEnd=<date>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":rsid",
+                        "serverCallEstimate"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Start of the date range for the repair in ISO 8601 format (YYYY-MM-DD)",
+                          "key": "dateRangeStart",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "(Required) End of the date range for the repair (inclusive) in ISO 8601 format (YYYY-MM-DD)",
+                          "key": "dateRangeEnd",
+                          "value": "<date>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "rsid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:02:38.000Z",
+                  "updatedAt": "2026-06-05T15:02:38.000Z",
+                  "uid": "35240-bb1572dc-7753-4eb6-a915-ca8d5b5895cd"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:38.000Z",
+              "updatedAt": "2026-06-05T15:02:38.000Z",
+              "uid": "35240-464035f2-a199-4eb3-a1a1-342f12c76f98"
+            }
+          ],
+          "id": "76e18acc-d69d-4a5a-9112-99112800769d",
+          "createdAt": "2026-06-05T15:02:38.000Z",
+          "updatedAt": "2026-06-05T15:02:38.000Z",
+          "uid": "35240-76e18acc-d69d-4a5a-9112-99112800769d"
+        },
+        {
+          "name": "job",
+          "item": [
+            {
+              "name": "{jobId}",
+              "item": [
+                {
+                  "name": "Adobe Analytics Get a Data Repair Job",
+                  "id": "16dd12a5-c8b4-4cfe-90b6-a0bee139cca4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:rsid/job/:jobId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":rsid",
+                        "job",
+                        ":jobId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "63023cf4-e31b-46bb-ab23-5e8142f3a7f6",
+                          "key": "rsid",
+                          "value": "<string>",
+                          "description": "(Required) The report suite ID"
+                        },
+                        {
+                          "id": "1581c9a8-942b-4695-b0c0-fa8c952c1873",
+                          "key": "jobId",
+                          "value": "<integer>",
+                          "description": "(Required) The repair job ID returned when the job was created"
+                        }
+                      ]
+                    },
+                    "description": "Returns the current status and details for a specific data repair job, including progress percentage, number of rows processed, and completion status."
+                  },
+                  "response": [
+                    {
+                      "id": "e83744b6-c5e2-42c0-ba1f-dddbb45d9faf",
+                      "name": "Repair job details",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/:rsid/job/:jobId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":rsid",
+                            "job",
+                            ":jobId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "rsid"
+                            },
+                            {
+                              "key": "jobId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"jobId\": \"<integer>\",\n  \"reportSuiteId\": \"<string>\",\n  \"dateRangeStart\": \"<date>\",\n  \"dateRangeEnd\": \"<date>\",\n  \"status\": \"processing\",\n  \"progress\": \"<integer>\",\n  \"jobCreateTime\": \"<dateTime>\",\n  \"jobCompleteTime\": \"<dateTime>\",\n  \"serverCalls\": \"<integer>\",\n  \"nodesProcessed\": \"<integer>\"\n}",
+                      "createdAt": "2026-06-05T15:02:38.000Z",
+                      "updatedAt": "2026-06-05T15:02:38.000Z",
+                      "uid": "35240-e83744b6-c5e2-42c0-ba1f-dddbb45d9faf"
+                    },
+                    {
+                      "id": "b7300ea8-96dd-4702-9f6b-6f9618564af6",
+                      "name": "Job not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/:rsid/job/:jobId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            ":rsid",
+                            "job",
+                            ":jobId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "rsid"
+                            },
+                            {
+                              "key": "jobId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\"\n}",
+                      "createdAt": "2026-06-05T15:02:38.000Z",
+                      "updatedAt": "2026-06-05T15:02:38.000Z",
+                      "uid": "35240-b7300ea8-96dd-4702-9f6b-6f9618564af6"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:02:38.000Z",
+                  "updatedAt": "2026-06-05T15:02:38.000Z",
+                  "uid": "35240-16dd12a5-c8b4-4cfe-90b6-a0bee139cca4"
+                }
+              ],
+              "id": "8735c785-83e8-4f63-be20-66be1c0457f4",
+              "createdAt": "2026-06-05T15:02:38.000Z",
+              "updatedAt": "2026-06-05T15:02:38.000Z",
+              "uid": "35240-8735c785-83e8-4f63-be20-66be1c0457f4"
+            },
+            {
+              "name": "Adobe Analytics List Data Repair Jobs",
+              "id": "bca8460b-5bf0-41e6-b71b-13e2e9fcb8b1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/:rsid/job",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":rsid",
+                    "job"
+                  ],
+                  "variable": [
+                    {
+                      "id": "85227482-e839-45b3-8792-faf1a3408032",
+                      "key": "rsid",
+                      "value": "<string>",
+                      "description": "(Required) The report suite ID"
+                    }
+                  ]
+                },
+                "description": "Returns a list of the most recent 20 data repair jobs for the specified report suite, including both completed and in-progress jobs. Each job record includes status, progress, and result information."
+              },
+              "response": [
+                {
+                  "id": "0131bb89-3343-40ca-8a14-d435dba1936b",
+                  "name": "List of repair jobs",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:rsid/job",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":rsid",
+                        "job"
+                      ],
+                      "variable": [
+                        {
+                          "key": "rsid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"jobId\": \"<integer>\",\n    \"reportSuiteId\": \"<string>\",\n    \"dateRangeStart\": \"<date>\",\n    \"dateRangeEnd\": \"<date>\",\n    \"status\": \"complete\",\n    \"progress\": \"<integer>\",\n    \"jobCreateTime\": \"<dateTime>\",\n    \"jobCompleteTime\": \"<dateTime>\",\n    \"serverCalls\": \"<integer>\",\n    \"nodesProcessed\": \"<integer>\"\n  },\n  {\n    \"jobId\": \"<integer>\",\n    \"reportSuiteId\": \"<string>\",\n    \"dateRangeStart\": \"<date>\",\n    \"dateRangeEnd\": \"<date>\",\n    \"status\": \"processing\",\n    \"progress\": \"<integer>\",\n    \"jobCreateTime\": \"<dateTime>\",\n    \"jobCompleteTime\": \"<dateTime>\",\n    \"serverCalls\": \"<integer>\",\n    \"nodesProcessed\": \"<integer>\"\n  }\n]",
+                  "createdAt": "2026-06-05T15:02:38.000Z",
+                  "updatedAt": "2026-06-05T15:02:38.000Z",
+                  "uid": "35240-0131bb89-3343-40ca-8a14-d435dba1936b"
+                },
+                {
+                  "id": "1f146488-2465-4ad7-85ad-f67e3cfa7217",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/:rsid/job",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":rsid",
+                        "job"
+                      ],
+                      "variable": [
+                        {
+                          "key": "rsid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:02:38.000Z",
+                  "updatedAt": "2026-06-05T15:02:38.000Z",
+                  "uid": "35240-1f146488-2465-4ad7-85ad-f67e3cfa7217"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:38.000Z",
+              "updatedAt": "2026-06-05T15:02:38.000Z",
+              "uid": "35240-bca8460b-5bf0-41e6-b71b-13e2e9fcb8b1"
+            },
+            {
+              "name": "Adobe Analytics Create a Data Repair Job",
+              "id": "20046993-a2ac-4096-9ddc-e16366f739f6",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"variables\": {\n    \"elit_2\": {\n      \"action\": \"set\",\n      \"setValue\": \"<string>\",\n      \"filter\": {\n        \"condition\": \"startswith\",\n        \"matchValue\": \"<string>\"\n      }\n    },\n    \"dolor_6\": {\n      \"action\": \"set\",\n      \"setValue\": \"<string>\",\n      \"filter\": {\n        \"condition\": \"contains\",\n        \"matchValue\": \"<string>\"\n      }\n    },\n    \"ipsum58\": {\n      \"action\": \"delete\",\n      \"setValue\": \"<string>\",\n      \"filter\": {\n        \"condition\": \"contains\",\n        \"matchValue\": \"<string>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/:rsid/job?validationToken=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ":rsid",
+                    "job"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The token returned by the serverCallEstimate endpoint, confirming you have reviewed the cost estimate",
+                      "key": "validationToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "id": "be7d6219-d8fc-45dc-9ee6-add6d2f82de2",
+                      "key": "rsid",
+                      "value": "<string>",
+                      "description": "(Required) The report suite ID"
+                    }
+                  ]
+                },
+                "description": "Creates and starts a new data repair job for the specified report suite and date range. The validationToken from the serverCallEstimate endpoint must be included as a query parameter. The request body defines which variables to repair and what actions to take (delete or set)."
+              },
+              "response": [
+                {
+                  "id": "42c9ceeb-364a-4ab9-8a13-94c046a628bd",
+                  "name": "Repair job created and started",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"variables\": {\n    \"elit_2\": {\n      \"action\": \"set\",\n      \"setValue\": \"<string>\",\n      \"filter\": {\n        \"condition\": \"startswith\",\n        \"matchValue\": \"<string>\"\n      }\n    },\n    \"dolor_6\": {\n      \"action\": \"set\",\n      \"setValue\": \"<string>\",\n      \"filter\": {\n        \"condition\": \"contains\",\n        \"matchValue\": \"<string>\"\n      }\n    },\n    \"ipsum58\": {\n      \"action\": \"delete\",\n      \"setValue\": \"<string>\",\n      \"filter\": {\n        \"condition\": \"contains\",\n        \"matchValue\": \"<string>\"\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:rsid/job?validationToken=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":rsid",
+                        "job"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The token returned by the serverCallEstimate endpoint, confirming you have reviewed the cost estimate",
+                          "key": "validationToken",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "rsid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"jobId\": \"<integer>\",\n  \"reportSuiteId\": \"<string>\",\n  \"dateRangeStart\": \"<date>\",\n  \"dateRangeEnd\": \"<date>\",\n  \"status\": \"processing\",\n  \"progress\": \"<integer>\",\n  \"jobCreateTime\": \"<dateTime>\",\n  \"jobCompleteTime\": \"<dateTime>\",\n  \"serverCalls\": \"<integer>\",\n  \"nodesProcessed\": \"<integer>\"\n}",
+                  "createdAt": "2026-06-05T15:02:38.000Z",
+                  "updatedAt": "2026-06-05T15:02:38.000Z",
+                  "uid": "35240-42c9ceeb-364a-4ab9-8a13-94c046a628bd"
+                },
+                {
+                  "id": "e3343d1d-91de-4652-ba20-c7d6fd0e1f00",
+                  "name": "Invalid job definition or validation token",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"variables\": {\n    \"elit_2\": {\n      \"action\": \"set\",\n      \"setValue\": \"<string>\",\n      \"filter\": {\n        \"condition\": \"startswith\",\n        \"matchValue\": \"<string>\"\n      }\n    },\n    \"dolor_6\": {\n      \"action\": \"set\",\n      \"setValue\": \"<string>\",\n      \"filter\": {\n        \"condition\": \"contains\",\n        \"matchValue\": \"<string>\"\n      }\n    },\n    \"ipsum58\": {\n      \"action\": \"delete\",\n      \"setValue\": \"<string>\",\n      \"filter\": {\n        \"condition\": \"contains\",\n        \"matchValue\": \"<string>\"\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:rsid/job?validationToken=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":rsid",
+                        "job"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The token returned by the serverCallEstimate endpoint, confirming you have reviewed the cost estimate",
+                          "key": "validationToken",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "rsid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:02:38.000Z",
+                  "updatedAt": "2026-06-05T15:02:38.000Z",
+                  "uid": "35240-e3343d1d-91de-4652-ba20-c7d6fd0e1f00"
+                },
+                {
+                  "id": "00eea03e-0c93-43d9-bc65-dd79c62b3969",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"variables\": {\n    \"elit_2\": {\n      \"action\": \"set\",\n      \"setValue\": \"<string>\",\n      \"filter\": {\n        \"condition\": \"startswith\",\n        \"matchValue\": \"<string>\"\n      }\n    },\n    \"dolor_6\": {\n      \"action\": \"set\",\n      \"setValue\": \"<string>\",\n      \"filter\": {\n        \"condition\": \"contains\",\n        \"matchValue\": \"<string>\"\n      }\n    },\n    \"ipsum58\": {\n      \"action\": \"delete\",\n      \"setValue\": \"<string>\",\n      \"filter\": {\n        \"condition\": \"contains\",\n        \"matchValue\": \"<string>\"\n      }\n    }\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/:rsid/job?validationToken=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        ":rsid",
+                        "job"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The token returned by the serverCallEstimate endpoint, confirming you have reviewed the cost estimate",
+                          "key": "validationToken",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "key": "rsid"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"errorCode\": \"<string>\",\n  \"errorDescription\": \"<string>\"\n}",
+                  "createdAt": "2026-06-05T15:02:38.000Z",
+                  "updatedAt": "2026-06-05T15:02:38.000Z",
+                  "uid": "35240-00eea03e-0c93-43d9-bc65-dd79c62b3969"
+                }
+              ],
+              "createdAt": "2026-06-05T15:02:38.000Z",
+              "updatedAt": "2026-06-05T15:02:38.000Z",
+              "uid": "35240-20046993-a2ac-4096-9ddc-e16366f739f6"
+            }
+          ],
+          "id": "3b33c420-f8c4-4726-ba65-196006089d2a",
+          "createdAt": "2026-06-05T15:02:38.000Z",
+          "updatedAt": "2026-06-05T15:02:38.000Z",
+          "uid": "35240-3b33c420-f8c4-4726-ba65-196006089d2a"
+        }
+      ],
+      "id": "995730d9-24db-43ea-b0a8-573ea3b87865",
+      "createdAt": "2026-06-05T15:02:38.000Z",
+      "updatedAt": "2026-06-05T15:02:38.000Z",
+      "uid": "35240-995730d9-24db-43ea-b0a8-573ea3b87865"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "globalCompanyId",
+      "value": "YOUR_GLOBAL_COMPANY_ID"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://analytics.adobe.io/api/{{globalCompanyId}}/datarepair/v1"
+    }
+  ]
+}
