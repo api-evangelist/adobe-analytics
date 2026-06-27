@@ -3,13 +3,10 @@
   "feeds": [
     {
       "source": "https://blog.adobe.com/en/topics/analytics",
-      "feed_url": "https://blog.adobe.com/en/topics/analytics",
-      "title": "Adobe Blog - Analytics",
-      "saved": 14,
-      "method": "html-scrape",
-      "note": "No RSS/Atom feed resolved (all common feed paths 404). Scraped post links from topic page; business.adobe.com body fetches time out, so publish dates unavailable - posts written with date:'' and 0000-00-00- prefix."
+      "saved": 0,
+      "error": "redirects to business.adobe.com/blog; timeout 60000ms on every fetch"
     }
   ],
   "post_count": 67,
-  "fetched": "2026-06-21T17:00:00Z"
+  "fetched": "2026-06-27T12:21:20Z"
 }
