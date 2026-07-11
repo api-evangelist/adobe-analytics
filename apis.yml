@@ -202,6 +202,12 @@ tags:
   - Marketing
   - Web Analytics
 common:
+  - type: VulnerabilityDisclosure
+    url: security/adobe-analytics-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/adobe-analytics-domain-security.yml
+  - type: Authentication
+    url: authentication/adobe-analytics-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/adobe-analytics/overview
   - type: Arazzo

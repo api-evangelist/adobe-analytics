@@ -1,0 +1,28 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/adobe-analytics-api-openapi.yml, openapi/adobe-analytics-bulk-data-insertion-api-openapi.yml,
+  openapi/adobe-analytics-data-repair-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: OAuth 2.0 access token from Adobe IMS
+  sources:
+  - openapi/adobe-analytics-api-openapi.yml
+  - openapi/adobe-analytics-bulk-data-insertion-api-openapi.yml
+  - openapi/adobe-analytics-data-repair-api-openapi.yml
+- name: apiKey
+  type: apiKey
+  in: header
+  parameter: x-api-key
+  description: Adobe Developer Console API key
+  sources:
+  - openapi/adobe-analytics-api-openapi.yml
+  - openapi/adobe-analytics-bulk-data-insertion-api-openapi.yml
+  - openapi/adobe-analytics-data-repair-api-openapi.yml
