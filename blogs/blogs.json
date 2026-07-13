@@ -2,11 +2,13 @@
   "repo": "adobe-analytics",
   "feeds": [
     {
-      "source": "https://blog.adobe.com/en/topics/analytics",
+      "source": "https://status.adobe.com/",
+      "feed_url": "https://status.adobe.com/",
+      "title": "",
       "saved": 0,
-      "error": "redirects to business.adobe.com/blog; timeout 60000ms on every fetch"
+      "method": "none"
     }
   ],
   "post_count": 67,
-  "fetched": "2026-06-27T12:21:20Z"
+  "fetched": "2026-07-11T11:50:51Z"
 }
