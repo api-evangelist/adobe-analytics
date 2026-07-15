@@ -202,6 +202,8 @@ tags:
   - Marketing
   - Web Analytics
 common:
+  - type: AgenticAccess
+    url: agentic-access/adobe-analytics-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/adobe-analytics-vulnerability-disclosure.yml
   - type: DomainSecurity
