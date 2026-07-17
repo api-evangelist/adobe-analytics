@@ -1,0 +1,37 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  https://developer.adobe.com/analytics-apis/docs/1.4/guides/eol/,
+  https://developer.adobe.com/analytics-apis/docs/2.0/guides/migration/,
+  https://status.adobe.com/, OpenAPI in openapi/
+description: >-
+  Adobe Analytics versions its APIs in the URI path (1.4 vs 2.0). The 1.4 APIs
+  and WSSE authentication reach end-of-life on August 12, 2026; the single-event
+  Data Insertion API is explicitly excluded from that EOL. Current development
+  targets the 2.0 APIs, which use Adobe IMS OAuth.
+versioning:
+  scheme: uri-path
+  current: "2.0"
+  previous: "1.4"
+  docs: https://developer.adobe.com/analytics-apis/docs/2.0/
+deprecation:
+  policy_url: https://developer.adobe.com/analytics-apis/docs/1.4/guides/eol/
+  migration_guide: https://developer.adobe.com/analytics-apis/docs/2.0/guides/migration/
+  sunset_header: false
+  events:
+    - version: "1.4"
+      status: deprecated
+      end_of_life: '2026-08-12'
+      note: >-
+        Adobe Analytics 1.4 APIs and WSSE authentication reach end-of-life and
+        cease to function on August 12, 2026. The Data Insertion API is excluded
+        from this EOL and continues to operate.
+sla:
+  url: https://status.adobe.com/
+  uptime_target: null
+status_page: https://status.adobe.com/
+deprecated_operations: []
+notes: >-
+  No RFC 8594 Sunset/Deprecation response headers are documented; deprecation is
+  communicated via versioned docs, EOL notices, and release notes. The 2.0
+  OpenAPI specs declare no operation-level `deprecated: true` flags.

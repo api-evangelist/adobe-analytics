@@ -1,0 +1,44 @@
+generated: '2026-06-20'
+method: searched
+source: live probes of Adobe Analytics API/portal hosts and the Adobe IMS authorization server
+description: >-
+  The Adobe Analytics API hosts (analytics.adobe.io, analytics-collection.adobe.io,
+  livestream.adobe.net) do not publish /.well-known/ discovery documents; the
+  developer portal (developer.adobe.com) returns its SPA 404 for these paths (not
+  real documents). The real OpenID Connect / OAuth 2.0 authorization server for
+  these APIs is Adobe IMS (ims-na1.adobelogin.com), which publishes valid RFC 8414
+  and OIDC discovery documents captured here.
+hosts:
+  - host: https://analytics.adobe.io
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+  - host: https://analytics-collection.adobe.io
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+  - host: https://developer.adobe.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        note: SPA 404 HTML, not a real RFC 9116 document
+      - path: /.well-known/openid-configuration
+        status: 200
+        note: SPA 404 HTML, not a real OIDC document
+  - host: https://ims-na1.adobelogin.com
+    note: Adobe Identity Management System — the OAuth2/OIDC authorization server issuing bearer tokens for the Analytics APIs
+    documents:
+      - path: /.well-known/openid-configuration
+        status: 200
+        file: adobe-analytics-ims-openid-configuration.json
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        file: adobe-analytics-ims-oauth-authorization-server.json

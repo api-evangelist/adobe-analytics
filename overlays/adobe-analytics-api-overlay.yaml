@@ -1,0 +1,24 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Adobe Analytics API
+  version: 1.0.0
+extends: openapi/adobe-analytics-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enrichment: '2026-06-20'
+      x-apievangelist-artifacts:
+        authentication: authentication/adobe-analytics-authentication.yml
+        errors: errors/adobe-analytics-problem-types.yml
+        conventions: conventions/adobe-analytics-conventions.yml
+        data-model: data-model/adobe-analytics-data-model.yml
+        mcp: mcp/adobe-analytics-mcp.yml
+        lifecycle: lifecycle/adobe-analytics-lifecycle.yml
+  - target: $.info
+    update:
+      x-apievangelist-auth: >-
+        Adobe IMS OAuth bearer token plus x-api-key from the Adobe Developer
+        Console; requests are scoped to /api/{globalCompanyId}.
+  - target: $.info
+    update:
+      x-apievangelist-mcp: https://aa-mcp.adobe.io/mcp

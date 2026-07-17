@@ -1,0 +1,51 @@
+generated: '2026-06-20'
+method: searched
+source: https://experienceleague.adobe.com/en/docs/analytics/release-notes/latest
+description: >-
+  Adobe Analytics publishes dated product release notes on Experience League;
+  the Analytics 2.0 API-relevant changes appear inline. Versioning of the API
+  itself is URI-path (2.0 current). This captures the recent window only — the
+  live release-notes page is the source of truth.
+scheme: dated-release-notes
+current_version: "2.0"
+changelog_url: https://experienceleague.adobe.com/en/docs/analytics/release-notes/latest
+api_changelog_url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/release-notes/
+entries:
+  - date: '2026-07-08'
+    title: Sub-hit Analysis
+    type: addition
+    breaking: false
+    highlights: >-
+      Granular product-level analysis below individual hits, enabling
+      segmentation on specific products within orders.
+  - date: '2026-07-08'
+    title: Activity Map extension UI refresh
+    type: change
+    breaking: false
+    highlights: Visual redesign of the Activity Map overlay with supporting technical improvements.
+  - date: '2026-07-01'
+    title: AA 2.0 API search features
+    type: addition
+    breaking: false
+    highlights: >-
+      New search capability on the Reports endpoint to return a subset of
+      dimension items in reports.
+  - date: '2026-07-01'
+    title: Automated recurring reports via APIs
+    type: addition
+    breaking: false
+    highlights: Schedule automatic Adobe Analytics reports for data pipelines on a defined cadence.
+  - date: '2026-07-01'
+    title: Dimension API expansion parameters
+    type: addition
+    breaking: false
+    highlights: >-
+      Additional Dimension API parameters to retrieve eVar configuration details
+      (allocation types, expirations, data types, merchandising options).
+  - date: '2026-08-12'
+    title: Analytics 1.4 API and WSSE authentication end-of-life
+    type: deprecation
+    breaking: true
+    highlights: >-
+      1.4 APIs and WSSE auth are discontinued. The Data Insertion API is excluded
+      from this end-of-life.

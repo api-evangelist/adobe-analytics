@@ -1,0 +1,46 @@
+# Adobe Analytics
+
+> Adobe Analytics provides real-time analytics and detailed segmentation across all marketing channels. The Adobe Analytics 2.0 APIs give programmatic access to reporting, segments, calculated metrics, dimensions, metrics, date ranges, annotations, and component administration — almost any action available in the Analytics UI. Companion APIs cover high-volume server-side data collection, real-time hit streaming, and privacy-driven data repair. Authentication is Adobe IMS OAuth (bearer access token) plus an Adobe Developer Console API key (x-api-key).
+
+## APIs
+
+- [Adobe Analytics API (2.0)](https://developer.adobe.com/analytics-apis/docs/2.0/): Reporting, segments, calculated metrics, dimensions, metrics, report suites, annotations, date ranges, tags. Base URL https://analytics.adobe.io/api/{globalCompanyId}
+- [Bulk Data Insertion API](https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/): Upload server-side call data in compressed CSV batches. Base URL https://analytics-collection.adobe.io/aa/collect/v1
+- [Livestream API](https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/): Real-time hit-by-hit streaming of processed traffic. Base URL https://livestream.adobe.net/api/1/stream
+- [Data Repair API](https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/): Permanently delete or transform previously ingested data for privacy compliance. Base URL https://analytics.adobe.io/api
+- [Data Insertion API (1.4)](https://developer.adobe.com/analytics-apis/docs/1.4/guides/data-insertion/): Single-event server-side submission (excluded from the 1.4 EOL). Base URL https://sc.omtrdc.net/b/ss
+- [Adobe Analytics 1.4 API (deprecated)](https://developer.adobe.com/analytics-apis/docs/1.4/): Legacy reporting/admin; end-of-life August 12, 2026.
+
+## Specs
+
+- [Adobe Analytics API OpenAPI](https://raw.githubusercontent.com/api-evangelist/adobe-analytics/refs/heads/main/openapi/adobe-analytics-api-openapi.yml)
+- [Bulk Data Insertion OpenAPI](https://raw.githubusercontent.com/api-evangelist/adobe-analytics/refs/heads/main/openapi/adobe-analytics-bulk-data-insertion-api-openapi.yml)
+- [Data Repair OpenAPI](https://raw.githubusercontent.com/api-evangelist/adobe-analytics/refs/heads/main/openapi/adobe-analytics-data-repair-api-openapi.yml)
+- [Livestream AsyncAPI](https://raw.githubusercontent.com/api-evangelist/adobe-analytics/refs/heads/main/asyncapi/adobe-analytics-livestream-asyncapi.yml)
+- [Upstream Adobe Swagger](https://raw.githubusercontent.com/AdobeDocs/analytics-2.0-apis/main/docs/swagger.json)
+
+## Agents & MCP
+
+- [Adobe Analytics MCP server](https://developer.adobe.com/analytics-mcp/docs/aa/): Adobe-hosted remote MCP server at https://aa-mcp.adobe.io/mcp (23 tools; discover components + run reports in natural language).
+- [MCP tool reference](https://developer.adobe.com/analytics-mcp/docs/aa/reference)
+
+## Docs
+
+- [Authentication (IMS OAuth)](https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/)
+- [Getting Started](https://developer.adobe.com/analytics-apis/docs/2.0/guides/)
+- [Rate Limits](https://developer.adobe.com/analytics-apis/docs/2.0/guides/rate-limits/)
+- [Migration Guide (1.4 to 2.0)](https://developer.adobe.com/analytics-apis/docs/2.0/guides/migration/)
+- [Release Notes](https://experienceleague.adobe.com/en/docs/analytics/release-notes/latest)
+- [Adobe Developer Console](https://developer.adobe.com/console/)
+
+## SDKs
+
+- [@adobe/aio-lib-analytics (JavaScript, official)](https://www.npmjs.com/package/@adobe/aio-lib-analytics)
+- [aanalytics2 (Python, community)](https://pypi.org/project/aanalytics2/)
+
+## Optional
+
+- [Status Page](https://status.adobe.com/)
+- [Terms of Service](https://www.adobe.com/legal/terms.html)
+- [Privacy Policy](https://www.adobe.com/privacy/policy.html)
+- [Experience League Community](https://experienceleaguecommunities.adobe.com/t5/adobe-analytics/ct-p/adobe-analytics-community)

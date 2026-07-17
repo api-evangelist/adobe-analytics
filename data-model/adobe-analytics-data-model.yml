@@ -1,0 +1,119 @@
+generated: '2026-06-20'
+method: derived
+source: >-
+  openapi/adobe-analytics-api-openapi.yml, openapi/adobe-analytics-data-repair-api-openapi.yml,
+  openapi/adobe-analytics-bulk-data-insertion-api-openapi.yml, json-schema/*
+description: >-
+  Entity-relationship graph derived from the Adobe Analytics 2.0 OpenAPI schemas
+  and id-reference fields. The Report Suite (rsid) is the central organizing
+  entity: nearly every component belongs to a report suite. Components (segments,
+  calculated metrics, date ranges, metrics, dimensions) are composed into report
+  requests.
+entities:
+  - name: ReportSuite
+    id: rsid
+    description: Container partitioning data collection; the top-level scope for all components and reports.
+    schema: json-schema/adobe-analytics-report-suite-schema.json
+  - name: Segment
+    id: segmentId
+    description: Reusable filter isolating a subset of visitors/visits/hits.
+    schema: json-schema/adobe-analytics-segment-schema.json
+  - name: CalculatedMetric
+    id: calculatedMetricId
+    description: Derived metric combining base metrics with formulas.
+    schema: json-schema/adobe-analytics-calculated-metric-schema.json
+  - name: Metric
+    id: id
+    description: A measurable quantity available in a report suite.
+    schema: json-schema/adobe-analytics-metric-schema.json
+  - name: Dimension
+    id: id
+    description: An attribute available for reporting/breakdown in a report suite.
+    schema: json-schema/adobe-analytics-dimension-schema.json
+  - name: DateRange
+    id: id
+    description: Saved reusable date range component.
+    schema: json-schema/adobe-analytics-date-range-schema.json
+  - name: Annotation
+    id: id
+    description: Note attached to a date/date-range within a report suite for context.
+    schema: json-schema/adobe-analytics-annotation-schema.json
+  - name: Tag
+    id: id
+    description: Label applied to components (segments, metrics) for organization and discovery.
+    schema: json-schema/adobe-analytics-tag-schema.json
+  - name: Owner
+    id: id
+    description: The user that owns a component.
+    schema: json-schema/adobe-analytics-owner-schema.json
+  - name: ReportRequest
+    description: Definition of a report (metrics, dimensions, filters, date range) submitted to run a report.
+    schema: json-schema/adobe-analytics-report-request-schema.json
+  - name: ReportResponse
+    description: The rows/summary returned by running a report.
+    schema: json-schema/adobe-analytics-report-response-schema.json
+  - name: RepairJob
+    id: jobId
+    description: Data Repair job that deletes/transforms previously ingested data in a report suite.
+    schema: json-schema/adobe-analytics-data-repair-repair-job-schema.json
+relationships:
+  - from: Segment
+    to: ReportSuite
+    type: belongs_to
+    via: rsid
+  - from: Segment
+    to: Owner
+    type: has_one
+    via: owner
+  - from: Segment
+    to: Tag
+    type: has_many
+    via: tags
+  - from: CalculatedMetric
+    to: ReportSuite
+    type: belongs_to
+    via: rsid
+  - from: CalculatedMetric
+    to: Owner
+    type: has_one
+    via: owner
+  - from: CalculatedMetric
+    to: Metric
+    type: has_many
+    via: definition (base metrics)
+  - from: Metric
+    to: ReportSuite
+    type: belongs_to
+    via: rsid
+  - from: Dimension
+    to: ReportSuite
+    type: belongs_to
+    via: rsid
+  - from: Annotation
+    to: ReportSuite
+    type: belongs_to
+    via: rsid
+  - from: Annotation
+    to: DateRange
+    type: has_one
+    via: dateRange
+  - from: ReportRequest
+    to: ReportSuite
+    type: belongs_to
+    via: rsid
+  - from: ReportRequest
+    to: Metric
+    type: has_many
+    via: metricContainer.metrics
+  - from: ReportRequest
+    to: Segment
+    type: has_many
+    via: globalFilters.segmentId
+  - from: ReportRequest
+    to: DateRange
+    type: has_one
+    via: globalFilters.dateRange
+  - from: RepairJob
+    to: ReportSuite
+    type: belongs_to
+    via: rsid

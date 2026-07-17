@@ -1,0 +1,53 @@
+generated: '2026-06-20'
+method: derived
+source: >-
+  openapi/*.yml, authentication/adobe-analytics-authentication.yml,
+  errors/adobe-analytics-problem-types.yml, lifecycle/adobe-analytics-lifecycle.yml,
+  rate-limits/adobe-analytics-rate-limits.yml,
+  https://developer.adobe.com/analytics-apis/docs/2.0/guides/
+description: >-
+  Cross-cutting request/response conventions for the Adobe Analytics 2.0 APIs,
+  derived from the OpenAPI and repo artifacts and confirmed against the developer
+  docs. Adobe scopes every 2.0 call to a global company ID in the URI path.
+authentication:
+  style: oauth2-bearer + api-key
+  detail: >-
+    Adobe IMS OAuth access token in the Authorization: Bearer header, plus an
+    x-api-key header carrying the Adobe Developer Console API key. See
+    authentication/adobe-analytics-authentication.yml.
+  docs: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
+company_scoping:
+  style: uri-path
+  detail: 2.0 requests are scoped to /api/{globalCompanyId}; the company ID is required in the path.
+pagination:
+  style: offset
+  params: [limit, page]
+  detail: List operations (segments, calculated metrics, report suites, etc.) accept limit and page query parameters.
+  response_fields: [totalElements, totalPages, number, numberOfElements]
+versioning:
+  style: uri-path
+  current: "2.0"
+  detail: Major version in the path (2.0 vs 1.4). See lifecycle/adobe-analytics-lifecycle.yml.
+error_envelope:
+  media_type: application/json
+  shape: "{ errorCode, errorDescription, errorId }"
+  rfc9457: false
+  detail: See errors/adobe-analytics-problem-types.yml.
+idempotency:
+  supported: false
+  detail: No Idempotency-Key header documented; PUT is used for full-resource updates.
+request_tracing:
+  request_id_header: null
+  detail: >-
+    No documented client request-id header; server error responses carry an
+    errorId for support correlation.
+metadata_expansion:
+  supported: true
+  detail: >-
+    Component list endpoints accept an `expansion` query parameter to inline
+    related metadata (e.g. ownership, definition, tags) on returned components.
+rate_limiting:
+  detail: >-
+    Rate limits apply per the docs; Bulk Data Insertion returns 429 on exceed.
+    See rate-limits/adobe-analytics-rate-limits.yml.
+  docs: https://developer.adobe.com/analytics-apis/docs/2.0/guides/rate-limits/

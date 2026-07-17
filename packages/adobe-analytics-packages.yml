@@ -1,0 +1,44 @@
+generated: '2026-06-20'
+method: searched
+source: >-
+  npm registry, PyPI, and Adobe Developer docs (developer.adobe.com/analytics-apis)
+description: >-
+  First-party and notable community client libraries for the Adobe Analytics 2.0
+  APIs. Adobe ships an official JavaScript SDK via the Adobe I/O (App Builder)
+  Core SDK family; Adobe publishes Python usage resources (example code) rather
+  than a single packaged Python SDK, so the widely used Python wrappers below are
+  community-maintained.
+packages:
+  - language: javascript
+    registry: npm
+    name: "@adobe/aio-lib-analytics"
+    url: https://www.npmjs.com/package/@adobe/aio-lib-analytics
+    repository: https://github.com/adobe/aio-lib-analytics
+    install: npm install @adobe/aio-lib-analytics
+    version: 4.0.2
+    official: true
+    description: >-
+      Adobe I/O JavaScript SDK wrapping the Adobe Analytics 2.0 APIs (reporting,
+      segments, calculated metrics, components). Part of the Adobe App Builder
+      Core SDK family.
+  - language: python
+    registry: pypi
+    name: aanalytics2
+    url: https://pypi.org/project/aanalytics2/
+    repository: https://github.com/pitchmuc/adobe-analytics-api-2.0
+    install: pip install aanalytics2
+    version: 0.5.3.post1
+    official: false
+    description: >-
+      Popular community Python wrapper for the Adobe Analytics 2.0 API (by
+      pitchmuc); covers reporting, segments, calculated metrics, and component
+      management.
+  - language: python
+    registry: github
+    name: AdobeDocs/analytics-2.0-apis (resources/python)
+    url: https://github.com/AdobeDocs/analytics-2.0-apis/tree/main/resources/python
+    install: null
+    official: true
+    description: >-
+      Adobe-published Python example resources (not a packaged SDK) demonstrating
+      IMS OAuth server-to-server auth and calling the 2.0 reporting endpoints.

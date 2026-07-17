@@ -1,0 +1,49 @@
+generated: '2026-06-20'
+method: derived
+source: >-
+  openapi/adobe-analytics-api-openapi.yml, openapi/adobe-analytics-bulk-data-insertion-api-openapi.yml,
+  openapi/adobe-analytics-data-repair-api-openapi.yml, authentication/adobe-analytics-authentication.yml,
+  well-known/adobe-analytics-ims-openid-configuration.json
+description: >-
+  Cross-cutting standards conformance for the Adobe Analytics 2.0 APIs, derived
+  from the OpenAPI security schemes, error shapes, and the Adobe IMS OIDC/OAuth
+  discovery documents.
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: >-
+      Bearer access tokens are issued by Adobe IMS; IMS publishes an RFC 8414
+      oauth-authorization-server document. Spec declares the token as http bearer
+      (bearerAuth) rather than an inline oauth2 flow.
+  - id: oidc
+    conforms: true
+    evidence: ims-na1.adobelogin.com publishes /.well-known/openid-configuration (issuer, authorize/v2, token/v3).
+  - id: rfc8414-oauth-metadata
+    conforms: true
+    evidence: ims-na1.adobelogin.com publishes /.well-known/oauth-authorization-server.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Error responses use a custom envelope {errorCode, errorDescription, errorId}
+      with application/json, not application/problem+json.
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: API/portal hosts do not serve a /.well-known/security.txt (adobe.com root does).
+  - id: pagination
+    conforms: true
+    evidence: List operations expose limit/page query parameters (offset-style pagination).
+  - id: idempotency
+    conforms: false
+    evidence: No Idempotency-Key header is documented; writes are PUT/POST without idempotency keys.
+  - id: json-api
+    conforms: false
+    evidence: Responses are Adobe-custom JSON, not JSON:API media type.
+  - id: mutual-tls
+    conforms: false
+    evidence: No mutualTLS security scheme declared.
+  - id: fhir-r4
+    conforms: false
+  - id: scim2
+    conforms: false
+  - id: odata
+    conforms: false

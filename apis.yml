@@ -6,7 +6,7 @@ description: >-
   enabling organizations to discover high-value audiences and power customer intelligence.
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 created: 2024-01-01T00:00:00.000Z
-modified: '2026-05-19'
+modified: '2026-06-20'
 specificationVersion: '0.19'
 apis:
   - name: Adobe Analytics API
@@ -202,6 +202,32 @@ tags:
   - Marketing
   - Web Analytics
 common:
+  - type: Packages
+    url: packages/adobe-analytics-packages.yml
+  - type: WellKnown
+    url: well-known/adobe-analytics-well-known.yml
+  - type: MCPServer
+    url: mcp/adobe-analytics-mcp.yml
+  - type: LLMsTxt
+    url: llms/adobe-analytics-llms.txt
+  - type: Overlay
+    url: overlays/adobe-analytics-api-overlay.yaml
+  - type: Overlay
+    url: overlays/adobe-analytics-bulk-data-insertion-api-overlay.yaml
+  - type: Overlay
+    url: overlays/adobe-analytics-data-repair-api-overlay.yaml
+  - type: Conformance
+    url: conformance/adobe-analytics-conformance.yml
+  - type: ErrorCatalog
+    url: errors/adobe-analytics-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/adobe-analytics-lifecycle.yml
+  - type: Conventions
+    url: conventions/adobe-analytics-conventions.yml
+  - type: ChangeLog
+    url: changelog/adobe-analytics-changelog.yml
+  - type: DataModel
+    url: data-model/adobe-analytics-data-model.yml
   - type: AgenticAccess
     url: agentic-access/adobe-analytics-agentic-access.yml
   - type: VulnerabilityDisclosure

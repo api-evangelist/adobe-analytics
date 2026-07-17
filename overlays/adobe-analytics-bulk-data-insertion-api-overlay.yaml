@@ -1,0 +1,18 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Adobe Analytics Bulk Data Insertion API
+  version: 1.0.0
+extends: openapi/adobe-analytics-bulk-data-insertion-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enrichment: '2026-06-20'
+      x-apievangelist-artifacts:
+        authentication: authentication/adobe-analytics-authentication.yml
+        errors: errors/adobe-analytics-problem-types.yml
+        conventions: conventions/adobe-analytics-conventions.yml
+  - target: $.info
+    update:
+      x-apievangelist-note: >-
+        Recommended successor to the single-event Data Insertion API; uploads
+        compressed CSV batches server-side. Returns 429 on rate-limit exceed.

@@ -1,0 +1,63 @@
+generated: '2026-06-20'
+method: derived
+format: adobe-custom
+source: >-
+  openapi/adobe-analytics-api-openapi.yml, openapi/adobe-analytics-bulk-data-insertion-api-openapi.yml,
+  openapi/adobe-analytics-data-repair-api-openapi.yml
+description: >-
+  Error catalog derived from the OpenAPI 4xx responses across the Adobe Analytics
+  2.0 APIs. Errors are returned as application/json (not RFC 9457 problem+json)
+  using a custom envelope. The Data Insertion (single-event) and Livestream
+  streaming interfaces are not spec-bearing here and are excluded.
+envelope:
+  media_type: application/json
+  schema: json-schema/adobe-analytics-error-response-schema.json
+  fields:
+    errorCode: Machine-readable error code.
+    errorDescription: Human-readable error message.
+    errorId: Unique identifier for tracking the error occurrence.
+problems:
+  - status: 400
+    title: Bad Request
+    description: The request was malformed or contained invalid parameters (e.g. missing or invalid rsid).
+    source_operations:
+      - openapi/adobe-analytics-api-openapi.yml#runReport
+      - openapi/adobe-analytics-api-openapi.yml#createSegment
+      - openapi/adobe-analytics-api-openapi.yml#listMetrics
+      - openapi/adobe-analytics-api-openapi.yml#listDimensions
+      - openapi/adobe-analytics-api-openapi.yml#getCalculatedMetric
+      - openapi/adobe-analytics-bulk-data-insertion-api-openapi.yml#uploadEvents
+      - openapi/adobe-analytics-bulk-data-insertion-api-openapi.yml#validateEvents
+      - openapi/adobe-analytics-data-repair-api-openapi.yml#getServerCallEstimate
+      - openapi/adobe-analytics-data-repair-api-openapi.yml#createRepairJob
+  - status: 401
+    title: Unauthorized
+    description: Missing, expired, or invalid Adobe IMS bearer token or x-api-key.
+    remediation: Obtain a fresh IMS access token and include a valid x-api-key from the Adobe Developer Console.
+    source_operations:
+      - openapi/adobe-analytics-api-openapi.yml#runReport
+      - openapi/adobe-analytics-api-openapi.yml#listSegments
+      - openapi/adobe-analytics-api-openapi.yml#createSegment
+      - openapi/adobe-analytics-api-openapi.yml#createCalculatedMetric
+      - openapi/adobe-analytics-bulk-data-insertion-api-openapi.yml#uploadEvents
+      - openapi/adobe-analytics-bulk-data-insertion-api-openapi.yml#validateEvents
+      - openapi/adobe-analytics-data-repair-api-openapi.yml#getServerCallEstimate
+      - openapi/adobe-analytics-data-repair-api-openapi.yml#listJobs
+      - openapi/adobe-analytics-data-repair-api-openapi.yml#createRepairJob
+  - status: 404
+    title: Not Found
+    description: The requested resource (segment, calculated metric, report suite, or repair job) does not exist.
+    source_operations:
+      - openapi/adobe-analytics-api-openapi.yml#getSegment
+      - openapi/adobe-analytics-api-openapi.yml#updateSegment
+      - openapi/adobe-analytics-api-openapi.yml#deleteSegment
+      - openapi/adobe-analytics-api-openapi.yml#getCalculatedMetric
+      - openapi/adobe-analytics-api-openapi.yml#getReportSuite
+      - openapi/adobe-analytics-data-repair-api-openapi.yml#getRepairJob
+  - status: 429
+    title: Too Many Requests
+    description: Rate limit exceeded for the Bulk Data Insertion endpoint.
+    remediation: Back off and retry per the documented rate limits; batch events into fewer, larger compressed CSV uploads.
+    source_operations:
+      - openapi/adobe-analytics-bulk-data-insertion-api-openapi.yml#uploadEvents
+docs: https://developer.adobe.com/analytics-apis/docs/2.0/guides/rate-limits/

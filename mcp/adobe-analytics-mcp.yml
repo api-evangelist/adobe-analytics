@@ -1,0 +1,79 @@
+generated: '2026-06-20'
+method: searched
+status: published
+source: https://developer.adobe.com/analytics-mcp/docs/aa/reference
+description: >-
+  Adobe publishes an official, Adobe-hosted (remote) Model Context Protocol server
+  for Adobe Analytics. It lets MCP clients (Claude, ChatGPT, Cursor) discover
+  components (report suites, dimensions, metrics, segments, date ranges, projects)
+  and run ranked/trended reports in natural language. Requests run under the
+  authenticated user's identity and enforce existing Adobe Analytics permissions;
+  the user's product profile must carry the "MCP Access" permission item.
+server:
+  name: adobe-analytics-mcp
+  transport: http
+  url: https://aa-mcp.adobe.io/mcp
+  hosted: true
+  auth: Adobe IMS OAuth (interactive connector or OAuth server-to-server)
+  docs: https://developer.adobe.com/analytics-mcp/docs/aa/
+  repository: https://github.com/AdobeDocs/analytics-mcp
+tools:
+  - name: describeAa
+    description: Starting point for learning how to use the Adobe Analytics MCP tools.
+  - name: setSessionDefaults
+    description: Sets the default report suite ID and global company ID for the session.
+  - name: getDefaultSessionReportSuiteId
+    description: Returns the current default report suite ID.
+  - name: clearDefaultSessionReportSuiteId
+    description: Clears the default report suite ID.
+  - name: findCompanies
+    description: Lists all companies accessible to the current user.
+  - name: findReportSuites
+    description: Finds report suites accessible within a specific company.
+    source_operation: openapi/adobe-analytics-api-openapi.yml#listReportSuites
+  - name: findDimensions
+    description: Discovers dimensions available for a given report suite.
+    source_operation: openapi/adobe-analytics-api-openapi.yml#listDimensions
+  - name: findMetrics
+    description: Identifies metrics available for the given report suite.
+    source_operation: openapi/adobe-analytics-api-openapi.yml#listMetrics
+  - name: findSegments
+    description: Locates segments accessible to the user.
+    source_operation: openapi/adobe-analytics-api-openapi.yml#listSegments
+  - name: findDateRanges
+    description: Finds saved date range components available to the user.
+    source_operation: openapi/adobe-analytics-api-openapi.yml#listDateRanges
+  - name: findProjects
+    description: Discovers workspace projects accessible to the user.
+  - name: runReport
+    description: Primary tool for pulling analytics data (ranked report, one dimension + one or more metrics over a date range).
+    source_operation: openapi/adobe-analytics-api-openapi.yml#runReport
+  - name: searchDimensionItems
+    description: Retrieves the top dimension items for a given dimension.
+  - name: describeSegment
+    description: Returns metadata for a given segment.
+    source_operation: openapi/adobe-analytics-api-openapi.yml#getSegment
+  - name: describeCalculatedMetric
+    description: Shows the metric formula and base metrics used by a calculated metric.
+    source_operation: openapi/adobe-analytics-api-openapi.yml#getCalculatedMetric
+  - name: describeProject
+    description: Shows details about a workspace project.
+  - name: listComponentUsage
+    description: Lists the most-used components ranked by frequency.
+  - name: listFrequentlyUsedWith
+    description: Lists components frequently used together in reports.
+  - name: listSimilarTo
+    description: Lists components similar to a specified component.
+  - name: upsertSegment
+    description: Creates a new segment or updates an existing one.
+    source_operation: openapi/adobe-analytics-api-openapi.yml#createSegment
+  - name: upsertCalculatedMetric
+    description: Creates or updates a calculated metric.
+    source_operation: openapi/adobe-analytics-api-openapi.yml#createCalculatedMetric
+  - name: createDateRange
+    description: Creates a new reusable date range component.
+  - name: upsertProject
+    description: Creates a new workspace project or updates an existing one.
+related:
+  - name: Customer Journey Analytics MCP server
+    url: https://developer.adobe.com/analytics-mcp/docs/cja/
