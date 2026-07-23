@@ -1,0 +1,113 @@
+openapi: 3.1.0
+info:
+  title: Adobe Analytics Annotations Date Ranges API
+  description: The Adobe Analytics 2.0 APIs provide programmatic access to data, reports, and administration features within Adobe Analytics. You can perform almost any action available in the Analytics user interface, including reporting, segment management, calculated metrics, dimensions, and component administration.
+  version: '2.0'
+  contact:
+    name: Adobe Analytics Support
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
+  termsOfService: https://www.adobe.com/legal/terms.html
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://analytics.adobe.io/api/{globalCompanyId}
+  description: Adobe Analytics Production API
+  variables:
+    globalCompanyId:
+      description: The global company ID for your Adobe Analytics organization
+      default: YOUR_GLOBAL_COMPANY_ID
+security:
+- bearerAuth: []
+  apiKey: []
+tags:
+- name: Date Ranges
+  description: Manage saved date ranges
+paths:
+  /dateranges:
+    get:
+      operationId: listDateRanges
+      summary: Adobe Analytics List Date Ranges
+      description: Returns saved date ranges available to the user or company.
+      tags:
+      - Date Ranges
+      parameters:
+      - $ref: '#/components/parameters/locale'
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 10
+        example: 10
+      responses:
+        '200':
+          description: List of date ranges
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DateRange'
+              examples:
+                Listdateranges200Example:
+                  summary: Default listDateRanges 200 response
+                  x-microcks-default: true
+                  value:
+                  - id: abc123
+                    name: Example Title
+                    description: A sample description.
+                    definition: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    locale:
+      name: locale
+      in: query
+      description: The locale for response labels
+      schema:
+        type: string
+        enum:
+        - en_US
+        - fr_FR
+        - jp_JP
+        - ja_JP
+        - de_DE
+        - es_ES
+        - ko_KR
+        - pt_BR
+        - zh_CN
+        - zh_TW
+  schemas:
+    DateRange:
+      type: object
+      description: A saved date range component
+      properties:
+        id:
+          type: string
+          description: Unique date range identifier
+          example: abc123
+        name:
+          type: string
+          description: Display name
+          example: Example Title
+        description:
+          type: string
+          description: Description of the date range
+          example: A sample description.
+        definition:
+          type: string
+          description: The date range definition expression
+          example: example_value
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 access token from Adobe IMS
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe Developer Console API key
+externalDocs:
+  description: Adobe Analytics 2.0 API Documentation
+  url: https://developer.adobe.com/analytics-apis/docs/2.0/

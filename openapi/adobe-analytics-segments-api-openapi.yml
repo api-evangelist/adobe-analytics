@@ -1,0 +1,521 @@
+openapi: 3.1.0
+info:
+  title: Adobe Analytics Annotations Segments API
+  description: The Adobe Analytics 2.0 APIs provide programmatic access to data, reports, and administration features within Adobe Analytics. You can perform almost any action available in the Analytics user interface, including reporting, segment management, calculated metrics, dimensions, and component administration.
+  version: '2.0'
+  contact:
+    name: Adobe Analytics Support
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
+  termsOfService: https://www.adobe.com/legal/terms.html
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://analytics.adobe.io/api/{globalCompanyId}
+  description: Adobe Analytics Production API
+  variables:
+    globalCompanyId:
+      description: The global company ID for your Adobe Analytics organization
+      default: YOUR_GLOBAL_COMPANY_ID
+security:
+- bearerAuth: []
+  apiKey: []
+tags:
+- name: Segments
+  description: Create, retrieve, update, and delete analytics segments
+paths:
+  /segments:
+    get:
+      operationId: listSegments
+      summary: Adobe Analytics List Segments
+      description: Retrieves a list of segments for the company. Supports filtering by name, tag, owner, and report suite, as well as pagination and expansion of additional fields.
+      tags:
+      - Segments
+      parameters:
+      - $ref: '#/components/parameters/locale'
+      - $ref: '#/components/parameters/filterByIds'
+      - name: limit
+        in: query
+        description: Maximum number of results per page (max 1000)
+        schema:
+          type: integer
+          default: 10
+          maximum: 1000
+        example: 10
+      - name: page
+        in: query
+        description: Page number (zero-indexed)
+        schema:
+          type: integer
+          default: 0
+        example: 10
+      - name: expansion
+        in: query
+        description: 'Comma-separated list of additional fields to include. Valid values: reportSuiteName, ownerFullName, modified, tags, compatibility, definition, publishingStatus, definitionLastModified, categories'
+        schema:
+          type: string
+        example: example_value
+      - name: includeType
+        in: query
+        description: Controls which segments are returned. Use 'all' for all company segments (admin only), 'shared' for shared segments, 'templates' for template segments.
+        schema:
+          type: string
+          enum:
+          - all
+          - shared
+          - templates
+        example: all
+      responses:
+        '200':
+          description: List of segments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SegmentList'
+              examples:
+                Listsegments200Example:
+                  summary: Default listSegments 200 response
+                  x-microcks-default: true
+                  value:
+                    content:
+                    - id: abc123
+                      name: Example Title
+                      description: A sample description.
+                      rsid: '500123'
+                      definition: example_value
+                      modified: '2026-01-15T10:30:00Z'
+                      tags: {}
+                    totalElements: 42
+                    totalPages: 42
+                    numberOfElements: 10
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Listsegments401Example:
+                  summary: Default listSegments 401 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+                    errorId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createSegment
+      summary: Adobe Analytics Create a Segment
+      description: Creates a new analytics segment. The segment definition uses the Analytics query language to specify filter criteria based on dimensions, metrics, and events.
+      tags:
+      - Segments
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SegmentCreate'
+            examples:
+              CreatesegmentRequestExample:
+                summary: Default createSegment request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  description: A sample description.
+                  rsid: '500123'
+                  definition: example_value
+      responses:
+        '200':
+          description: Segment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+              examples:
+                Createsegment200Example:
+                  summary: Default createSegment 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    description: A sample description.
+                    rsid: '500123'
+                    owner:
+                      id: abc123
+                      name: Example Title
+                      login: example_value
+                    definition: example_value
+                    modified: '2026-01-15T10:30:00Z'
+                    tags:
+                    - id: abc123
+                      name: Example Title
+                      description: A sample description.
+                      components: {}
+        '400':
+          description: Invalid segment definition
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Createsegment400Example:
+                  summary: Default createSegment 400 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+                    errorId: '500123'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Createsegment401Example:
+                  summary: Default createSegment 401 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+                    errorId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /segments/{segmentId}:
+    get:
+      operationId: getSegment
+      summary: Adobe Analytics Get a Segment
+      description: Retrieves a single segment by its ID, including its definition and associated metadata.
+      tags:
+      - Segments
+      parameters:
+      - $ref: '#/components/parameters/segmentId'
+      - $ref: '#/components/parameters/locale'
+      - name: expansion
+        in: query
+        description: Comma-separated list of additional fields to include
+        schema:
+          type: string
+        example: example_value
+      responses:
+        '200':
+          description: Segment details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+              examples:
+                Getsegment200Example:
+                  summary: Default getSegment 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    description: A sample description.
+                    rsid: '500123'
+                    owner:
+                      id: abc123
+                      name: Example Title
+                      login: example_value
+                    definition: example_value
+                    modified: '2026-01-15T10:30:00Z'
+                    tags:
+                    - id: abc123
+                      name: Example Title
+                      description: A sample description.
+                      components: {}
+        '404':
+          description: Segment not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Getsegment404Example:
+                  summary: Default getSegment 404 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+                    errorId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    put:
+      operationId: updateSegment
+      summary: Adobe Analytics Update a Segment
+      description: Updates an existing segment. Supports partial updates — you can send only the fields you want to change. Tags, compatibility, and reportSuiteName cannot be edited via this endpoint.
+      tags:
+      - Segments
+      parameters:
+      - $ref: '#/components/parameters/segmentId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SegmentCreate'
+            examples:
+              UpdatesegmentRequestExample:
+                summary: Default updateSegment request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  description: A sample description.
+                  rsid: '500123'
+                  definition: example_value
+      responses:
+        '200':
+          description: Updated segment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Segment'
+              examples:
+                Updatesegment200Example:
+                  summary: Default updateSegment 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    description: A sample description.
+                    rsid: '500123'
+                    owner:
+                      id: abc123
+                      name: Example Title
+                      login: example_value
+                    definition: example_value
+                    modified: '2026-01-15T10:30:00Z'
+                    tags:
+                    - id: abc123
+                      name: Example Title
+                      description: A sample description.
+                      components: {}
+        '404':
+          description: Segment not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Updatesegment404Example:
+                  summary: Default updateSegment 404 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+                    errorId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    delete:
+      operationId: deleteSegment
+      summary: Adobe Analytics Delete a Segment
+      description: Permanently deletes the specified segment.
+      tags:
+      - Segments
+      parameters:
+      - $ref: '#/components/parameters/segmentId'
+      responses:
+        '200':
+          description: Segment deleted successfully
+        '404':
+          description: Segment not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Deletesegment404Example:
+                  summary: Default deleteSegment 404 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+                    errorId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  parameters:
+    locale:
+      name: locale
+      in: query
+      description: The locale for response labels
+      schema:
+        type: string
+        enum:
+        - en_US
+        - fr_FR
+        - jp_JP
+        - ja_JP
+        - de_DE
+        - es_ES
+        - ko_KR
+        - pt_BR
+        - zh_CN
+        - zh_TW
+    segmentId:
+      name: segmentId
+      in: path
+      required: true
+      description: The segment ID
+      schema:
+        type: string
+    filterByIds:
+      name: filterByIds
+      in: query
+      description: Comma-separated list of IDs to filter results
+      schema:
+        type: string
+  schemas:
+    SegmentList:
+      type: object
+      description: Paginated list of segments
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Segment'
+          example: []
+        totalElements:
+          type: integer
+          description: Total number of segments available
+          example: 42
+        totalPages:
+          type: integer
+          description: Total number of pages
+          example: 42
+        numberOfElements:
+          type: integer
+          description: Number of elements on this page
+          example: 10
+    Segment:
+      type: object
+      description: An analytics segment definition
+      properties:
+        id:
+          type: string
+          description: Unique segment identifier
+          example: abc123
+        name:
+          type: string
+          description: Display name of the segment
+          example: Example Title
+        description:
+          type: string
+          description: Description of the segment's purpose
+          example: A sample description.
+        rsid:
+          type: string
+          description: The report suite this segment is based on
+          example: '500123'
+        owner:
+          $ref: '#/components/schemas/Owner'
+        definition:
+          type: object
+          description: The segment rule definition
+          example: example_value
+        modified:
+          type: string
+          format: date-time
+          description: Last modification timestamp
+          example: '2026-01-15T10:30:00Z'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+          example: []
+    Tag:
+      type: object
+      description: A tag applied to an Analytics component
+      properties:
+        id:
+          type: integer
+          description: Tag identifier
+          example: abc123
+        name:
+          type: string
+          description: Tag name
+          example: Example Title
+        description:
+          type: string
+          description: Tag description
+          example: A sample description.
+        components:
+          type: array
+          description: List of components this tag is applied to
+          items:
+            type: object
+          example: []
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        errorDescription:
+          type: string
+          description: Human-readable error message
+          example: example_value
+        errorId:
+          type: string
+          description: Unique ID for tracking this error
+          example: '500123'
+    Owner:
+      type: object
+      description: The owner of an Analytics component
+      properties:
+        id:
+          type: integer
+          description: Owner user ID
+          example: abc123
+        name:
+          type: string
+          description: Owner display name
+          example: Example Title
+        login:
+          type: string
+          description: Owner login identifier
+          example: example_value
+    SegmentCreate:
+      type: object
+      required:
+      - name
+      - rsid
+      - definition
+      description: Payload for creating or updating a segment
+      properties:
+        name:
+          type: string
+          description: Display name of the segment
+          maxLength: 255
+          example: Example Title
+        description:
+          type: string
+          description: Description of the segment's purpose
+          example: A sample description.
+        rsid:
+          type: string
+          description: Report suite ID this segment is based on
+          example: '500123'
+        definition:
+          type: object
+          description: The segment rule definition in Analytics query format
+          example: example_value
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 access token from Adobe IMS
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe Developer Console API key
+externalDocs:
+  description: Adobe Analytics 2.0 API Documentation
+  url: https://developer.adobe.com/analytics-apis/docs/2.0/

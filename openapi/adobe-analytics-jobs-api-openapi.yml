@@ -1,126 +1,32 @@
 openapi: 3.1.0
 info:
-  title: Adobe Analytics Data Repair API
-  description: >-
-    The Data Repair API allows you to permanently delete or transform data
-    that has already been ingested in Adobe Analytics. Use cases include
-    deleting personally identifiable information (PII) to comply with privacy
-    regulations and removing corrupted or erroneous data. The API requires
-    a two-step workflow: first estimate the scope and cost using the server
-    call estimate endpoint, then submit a repair job. This is a paid feature.
-  version: '1.0'
+  title: Adobe Analytics Annotations Jobs API
+  description: The Adobe Analytics 2.0 APIs provide programmatic access to data, reports, and administration features within Adobe Analytics. You can perform almost any action available in the Analytics user interface, including reporting, segment management, calculated metrics, dimensions, and component administration.
+  version: '2.0'
   contact:
     name: Adobe Analytics Support
     url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
   termsOfService: https://www.adobe.com/legal/terms.html
   x-last-validated: '2026-04-18'
-externalDocs:
-  description: Adobe Analytics Data Repair API Documentation
-  url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
 servers:
-- url: https://analytics.adobe.io/api/{globalCompanyId}/datarepair/v1
-  description: Adobe Analytics Data Repair API
+- url: https://analytics.adobe.io/api/{globalCompanyId}
+  description: Adobe Analytics Production API
   variables:
     globalCompanyId:
-      description: The global company ID for your Analytics organization
+      description: The global company ID for your Adobe Analytics organization
       default: YOUR_GLOBAL_COMPANY_ID
-tags:
-- name: Jobs
-  description: Create and monitor data repair jobs
-- name: Server Call Estimate
-  description: Estimate the scope and cost of a repair job
 security:
 - bearerAuth: []
   apiKey: []
+tags:
+- name: Jobs
+  description: Create and monitor data repair jobs
 paths:
-  /{rsid}/serverCallEstimate:
-    get:
-      operationId: getServerCallEstimate
-      summary: Adobe Analytics Get Server Call Estimate
-      description: >-
-        Calculates the number of data rows that would be scanned for a repair
-        job given the specified report suite and date range. This estimate is
-        required before creating a repair job and returns a validationToken
-        that must be passed to the job creation endpoint. The count determines
-        the cost of the repair.
-      tags:
-      - Server Call Estimate
-      parameters:
-      - $ref: '#/components/parameters/rsidPath'
-      - name: dateRangeStart
-        in: query
-        required: true
-        description: >-
-          Start of the date range for the repair in ISO 8601 format
-          (YYYY-MM-DD)
-        schema:
-          type: string
-          format: date
-        example: '2026-01-15'
-      - name: dateRangeEnd
-        in: query
-        required: true
-        description: >-
-          End of the date range for the repair (inclusive) in ISO 8601
-          format (YYYY-MM-DD)
-        schema:
-          type: string
-          format: date
-        example: '2026-01-15'
-      responses:
-        '200':
-          description: Server call estimate
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerCallEstimate'
-              examples:
-                Getservercallestimate200Example:
-                  summary: Default getServerCallEstimate 200 response
-                  x-microcks-default: true
-                  value:
-                    reportSuiteId: '500123'
-                    dateRangeStart: '2026-01-15'
-                    dateRangeEnd: '2026-01-15'
-                    serverCallEstimate: 10
-                    validationToken: CAUQAA
-        '400':
-          description: Invalid parameters
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                Getservercallestimate400Example:
-                  summary: Default getServerCallEstimate 400 response
-                  x-microcks-default: true
-                  value:
-                    errorCode: example_value
-                    errorDescription: example_value
-        '401':
-          description: Unauthorized
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-              examples:
-                Getservercallestimate401Example:
-                  summary: Default getServerCallEstimate 401 response
-                  x-microcks-default: true
-                  value:
-                    errorCode: example_value
-                    errorDescription: example_value
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
   /{rsid}/job:
     get:
       operationId: listJobs
       summary: Adobe Analytics List Data Repair Jobs
-      description: >-
-        Returns a list of the most recent 20 data repair jobs for the specified
-        report suite, including both completed and in-progress jobs. Each job
-        record includes status, progress, and result information.
+      description: Returns a list of the most recent 20 data repair jobs for the specified report suite, including both completed and in-progress jobs. Each job record includes status, progress, and result information.
       tags:
       - Jobs
       parameters:
@@ -168,11 +74,7 @@ paths:
     post:
       operationId: createRepairJob
       summary: Adobe Analytics Create a Data Repair Job
-      description: >-
-        Creates and starts a new data repair job for the specified report suite
-        and date range. The validationToken from the serverCallEstimate endpoint
-        must be included as a query parameter. The request body defines which
-        variables to repair and what actions to take (delete or set).
+      description: Creates and starts a new data repair job for the specified report suite and date range. The validationToken from the serverCallEstimate endpoint must be included as a query parameter. The request body defines which variables to repair and what actions to take (delete or set).
       tags:
       - Jobs
       parameters:
@@ -180,9 +82,7 @@ paths:
       - name: validationToken
         in: query
         required: true
-        description: >-
-          The token returned by the serverCallEstimate endpoint, confirming
-          you have reviewed the cost estimate
+        description: The token returned by the serverCallEstimate endpoint, confirming you have reviewed the cost estimate
         schema:
           type: string
         example: CAUQAA
@@ -253,10 +153,7 @@ paths:
     get:
       operationId: getRepairJob
       summary: Adobe Analytics Get a Data Repair Job
-      description: >-
-        Returns the current status and details for a specific data repair job,
-        including progress percentage, number of rows processed, and
-        completion status.
+      description: Returns the current status and details for a specific data repair job, including progress percentage, number of rows processed, and completion status.
       tags:
       - Jobs
       parameters:
@@ -307,102 +204,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      description: OAuth 2.0 access token from Adobe IMS
-    apiKey:
-      type: apiKey
-      in: header
-      name: x-api-key
-      description: Adobe Developer Console API key
-  parameters:
-    rsidPath:
-      name: rsid
-      in: path
-      required: true
-      description: The report suite ID
-      schema:
-        type: string
   schemas:
-    ServerCallEstimate:
-      type: object
-      description: Estimate of server calls for a proposed data repair job
-      properties:
-        reportSuiteId:
-          type: string
-          description: The report suite ID for the estimate
-          example: '500123'
-        dateRangeStart:
-          type: string
-          format: date
-          description: Start date of the repair range
-          example: '2026-01-15'
-        dateRangeEnd:
-          type: string
-          format: date
-          description: End date of the repair range
-          example: '2026-01-15'
-        serverCallEstimate:
-          type: integer
-          description: Estimated number of server calls (rows) that will be scanned
-          example: 10
-        validationToken:
-          type: string
-          description: Token required when creating the repair job
-          example: CAUQAA
-    RepairJobDefinition:
-      type: object
-      required:
-      - variables
-      description: Definition of a data repair job
-      properties:
-        variables:
-          type: object
-          description: >-
-            Map of variable names to repair actions. Keys are Analytics
-            variable names (e.g. eVar1, prop5, activitymap) and values are
-            action objects.
-          additionalProperties:
-            $ref: '#/components/schemas/RepairAction'
-          example: example_value
-    RepairAction:
-      type: object
-      required:
-      - action
-      description: The action to take on a specific variable
-      properties:
-        action:
-          type: string
-          description: The repair action to perform
-          enum:
-          - delete
-          - set
-          example: delete
-        setValue:
-          type: string
-          description: >-
-            The value to set the variable to (required when action is 'set')
-          example: example_value
-        filter:
-          $ref: '#/components/schemas/RepairFilter'
-    RepairFilter:
-      type: object
-      description: Optional filter to limit which rows are affected by the repair
-      properties:
-        condition:
-          type: string
-          description: The filter condition type
-          enum:
-          - contains
-          - streq
-          - startswith
-          example: contains
-        matchValue:
-          type: string
-          description: The value to match against for filtering
-          example: example_value
     RepairJob:
       type: object
       description: Status and details of a data repair job
@@ -457,6 +259,37 @@ components:
           type: integer
           description: Number of data nodes processed
           example: 10
+    RepairJobDefinition:
+      type: object
+      required:
+      - variables
+      description: Definition of a data repair job
+      properties:
+        variables:
+          type: object
+          description: Map of variable names to repair actions. Keys are Analytics variable names (e.g. eVar1, prop5, activitymap) and values are action objects.
+          additionalProperties:
+            $ref: '#/components/schemas/RepairAction'
+          example: example_value
+    RepairAction:
+      type: object
+      required:
+      - action
+      description: The action to take on a specific variable
+      properties:
+        action:
+          type: string
+          description: The repair action to perform
+          enum:
+          - delete
+          - set
+          example: delete
+        setValue:
+          type: string
+          description: The value to set the variable to (required when action is 'set')
+          example: example_value
+        filter:
+          $ref: '#/components/schemas/RepairFilter'
     ErrorResponse:
       type: object
       description: Error response from the API
@@ -469,3 +302,40 @@ components:
           type: string
           description: Human-readable error message
           example: example_value
+    RepairFilter:
+      type: object
+      description: Optional filter to limit which rows are affected by the repair
+      properties:
+        condition:
+          type: string
+          description: The filter condition type
+          enum:
+          - contains
+          - streq
+          - startswith
+          example: contains
+        matchValue:
+          type: string
+          description: The value to match against for filtering
+          example: example_value
+  parameters:
+    rsidPath:
+      name: rsid
+      in: path
+      required: true
+      description: The report suite ID
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 access token from Adobe IMS
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe Developer Console API key
+externalDocs:
+  description: Adobe Analytics 2.0 API Documentation
+  url: https://developer.adobe.com/analytics-apis/docs/2.0/

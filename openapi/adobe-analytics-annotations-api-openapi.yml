@@ -1,0 +1,252 @@
+openapi: 3.1.0
+info:
+  title: Adobe Analytics Annotations API
+  description: The Adobe Analytics 2.0 APIs provide programmatic access to data, reports, and administration features within Adobe Analytics. You can perform almost any action available in the Analytics user interface, including reporting, segment management, calculated metrics, dimensions, and component administration.
+  version: '2.0'
+  contact:
+    name: Adobe Analytics Support
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
+  termsOfService: https://www.adobe.com/legal/terms.html
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://analytics.adobe.io/api/{globalCompanyId}
+  description: Adobe Analytics Production API
+  variables:
+    globalCompanyId:
+      description: The global company ID for your Adobe Analytics organization
+      default: YOUR_GLOBAL_COMPANY_ID
+security:
+- bearerAuth: []
+  apiKey: []
+tags:
+- name: Annotations
+  description: Manage analytics annotations
+paths:
+  /annotations:
+    get:
+      operationId: listAnnotations
+      summary: Adobe Analytics List Annotations
+      description: Retrieves all annotations associated with report suites in the company. Annotations mark specific dates or date ranges in reports with descriptive notes.
+      tags:
+      - Annotations
+      parameters:
+      - $ref: '#/components/parameters/locale'
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 10
+        example: 10
+      responses:
+        '200':
+          description: List of annotations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Annotation'
+              examples:
+                Listannotations200Example:
+                  summary: Default listAnnotations 200 response
+                  x-microcks-default: true
+                  value:
+                  - id: abc123
+                    name: Example Title
+                    description: A sample description.
+                    dateRange: example_value
+                    rsids:
+                    - example_value
+                    color: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+    post:
+      operationId: createAnnotation
+      summary: Adobe Analytics Create an Annotation
+      description: Creates a new annotation for a report suite date range.
+      tags:
+      - Annotations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AnnotationCreate'
+            examples:
+              CreateannotationRequestExample:
+                summary: Default createAnnotation request
+                x-microcks-default: true
+                value:
+                  name: Example Title
+                  description: A sample description.
+                  dateRange: example_value
+                  rsids:
+                  - example_value
+                  color: example_value
+      responses:
+        '200':
+          description: Annotation created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Annotation'
+              examples:
+                Createannotation200Example:
+                  summary: Default createAnnotation 200 response
+                  x-microcks-default: true
+                  value:
+                    id: abc123
+                    name: Example Title
+                    description: A sample description.
+                    dateRange: example_value
+                    rsids:
+                    - example_value
+                    color: example_value
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /componentmetadata/tags:
+    get:
+      operationId: listTags
+      summary: Adobe Analytics List Tags
+      description: Returns all tags used on components within the company. Tags can be applied to segments, calculated metrics, projects, and other components.
+      tags:
+      - Annotations
+      responses:
+        '200':
+          description: List of tags
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tag'
+              examples:
+                Listtags200Example:
+                  summary: Default listTags 200 response
+                  x-microcks-default: true
+                  value:
+                  - id: abc123
+                    name: Example Title
+                    description: A sample description.
+                    components:
+                    - {}
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Annotation:
+      type: object
+      description: An annotation marking a date range in reports
+      properties:
+        id:
+          type: string
+          description: Unique annotation identifier
+          example: abc123
+        name:
+          type: string
+          description: Display name of the annotation
+          example: Example Title
+        description:
+          type: string
+          description: Annotation text content
+          example: A sample description.
+        dateRange:
+          type: string
+          description: ISO 8601 date range covered by this annotation
+          example: example_value
+        rsids:
+          type: array
+          items:
+            type: string
+          description: List of report suite IDs this annotation applies to
+          example: []
+        color:
+          type: string
+          description: Display color for the annotation in reports
+          example: example_value
+    AnnotationCreate:
+      type: object
+      required:
+      - name
+      - dateRange
+      description: Payload for creating an annotation
+      properties:
+        name:
+          type: string
+          description: Display name
+          maxLength: 255
+          example: Example Title
+        description:
+          type: string
+          description: Annotation notes
+          example: A sample description.
+        dateRange:
+          type: string
+          description: ISO 8601 date range
+          example: example_value
+        rsids:
+          type: array
+          items:
+            type: string
+          description: Report suite IDs to apply to
+          example: []
+        color:
+          type: string
+          description: Hex color code
+          example: example_value
+    Tag:
+      type: object
+      description: A tag applied to an Analytics component
+      properties:
+        id:
+          type: integer
+          description: Tag identifier
+          example: abc123
+        name:
+          type: string
+          description: Tag name
+          example: Example Title
+        description:
+          type: string
+          description: Tag description
+          example: A sample description.
+        components:
+          type: array
+          description: List of components this tag is applied to
+          items:
+            type: object
+          example: []
+  parameters:
+    locale:
+      name: locale
+      in: query
+      description: The locale for response labels
+      schema:
+        type: string
+        enum:
+        - en_US
+        - fr_FR
+        - jp_JP
+        - ja_JP
+        - de_DE
+        - es_ES
+        - ko_KR
+        - pt_BR
+        - zh_CN
+        - zh_TW
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 access token from Adobe IMS
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe Developer Console API key
+externalDocs:
+  description: Adobe Analytics 2.0 API Documentation
+  url: https://developer.adobe.com/analytics-apis/docs/2.0/

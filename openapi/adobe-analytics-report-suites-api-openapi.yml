@@ -1,0 +1,201 @@
+openapi: 3.1.0
+info:
+  title: Adobe Analytics Annotations Report Suites API
+  description: The Adobe Analytics 2.0 APIs provide programmatic access to data, reports, and administration features within Adobe Analytics. You can perform almost any action available in the Analytics user interface, including reporting, segment management, calculated metrics, dimensions, and component administration.
+  version: '2.0'
+  contact:
+    name: Adobe Analytics Support
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
+  termsOfService: https://www.adobe.com/legal/terms.html
+  x-last-validated: '2026-04-18'
+servers:
+- url: https://analytics.adobe.io/api/{globalCompanyId}
+  description: Adobe Analytics Production API
+  variables:
+    globalCompanyId:
+      description: The global company ID for your Adobe Analytics organization
+      default: YOUR_GLOBAL_COMPANY_ID
+security:
+- bearerAuth: []
+  apiKey: []
+tags:
+- name: Report Suites
+  description: Retrieve report suite information and configuration
+paths:
+  /reportsuites/collections/suites:
+    get:
+      operationId: listReportSuites
+      summary: Adobe Analytics List Report Suites
+      description: Returns a list of report suites accessible to the authenticated user, including report suite ID, name, timezone, and type.
+      tags:
+      - Report Suites
+      parameters:
+      - name: limit
+        in: query
+        schema:
+          type: integer
+          default: 10
+        example: 10
+      - name: page
+        in: query
+        schema:
+          type: integer
+          default: 0
+        example: 10
+      responses:
+        '200':
+          description: List of report suites
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportSuiteList'
+              examples:
+                Listreportsuites200Example:
+                  summary: Default listReportSuites 200 response
+                  x-microcks-default: true
+                  value:
+                    content:
+                    - rsid: '500123'
+                      name: Example Title
+                      timezoneZoneinfo: example_value
+                      type: standard
+                    totalElements: 42
+                    totalPages: 42
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Listreportsuites401Example:
+                  summary: Default listReportSuites 401 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+                    errorId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /reportsuites/collections/suites/{rsid}:
+    get:
+      operationId: getReportSuite
+      summary: Adobe Analytics Get a Report Suite
+      description: Returns details for a specific report suite by its ID.
+      tags:
+      - Report Suites
+      parameters:
+      - $ref: '#/components/parameters/rsidPath'
+      responses:
+        '200':
+          description: Report suite details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportSuite'
+              examples:
+                Getreportsuite200Example:
+                  summary: Default getReportSuite 200 response
+                  x-microcks-default: true
+                  value:
+                    rsid: '500123'
+                    name: Example Title
+                    timezoneZoneinfo: example_value
+                    type: standard
+        '404':
+          description: Report suite not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Getreportsuite404Example:
+                  summary: Default getReportSuite 404 response
+                  x-microcks-default: true
+                  value:
+                    errorCode: example_value
+                    errorDescription: example_value
+                    errorId: '500123'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ReportSuite:
+      type: object
+      description: An Adobe Analytics report suite
+      properties:
+        rsid:
+          type: string
+          description: Report suite ID
+          example: '500123'
+        name:
+          type: string
+          description: Display name of the report suite
+          example: Example Title
+        timezoneZoneinfo:
+          type: string
+          description: Timezone for the report suite
+          example: example_value
+        type:
+          type: string
+          description: Report suite type
+          enum:
+          - standard
+          - virtual
+          example: standard
+    ReportSuiteList:
+      type: object
+      description: Paginated list of report suites
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportSuite'
+          example: []
+        totalElements:
+          type: integer
+          description: Total number of report suites
+          example: 42
+        totalPages:
+          type: integer
+          description: Total number of pages
+          example: 42
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        errorDescription:
+          type: string
+          description: Human-readable error message
+          example: example_value
+        errorId:
+          type: string
+          description: Unique ID for tracking this error
+          example: '500123'
+  parameters:
+    rsidPath:
+      name: rsid
+      in: path
+      required: true
+      description: The report suite ID
+      schema:
+        type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: OAuth 2.0 access token from Adobe IMS
+    apiKey:
+      type: apiKey
+      in: header
+      name: x-api-key
+      description: Adobe Developer Console API key
+externalDocs:
+  description: Adobe Analytics 2.0 API Documentation
+  url: https://developer.adobe.com/analytics-apis/docs/2.0/
