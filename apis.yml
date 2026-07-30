@@ -4,192 +4,477 @@ name: Adobe Analytics
 description: >-
   Adobe Analytics provides real-time analytics and detailed segmentation capabilities across all marketing channels,
   enabling organizations to discover high-value audiences and power customer intelligence.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/adobe-analytics.png
 created: 2024-01-01T00:00:00.000Z
 modified: '2026-06-20'
 specificationVersion: '0.19'
 apis:
-  - name: Adobe Analytics API
-    description: >-
-      The Adobe Analytics 2.0 APIs provide programmatic access to data, reports, and administration features within
-      Adobe Analytics. They allow you to perform almost any action available in the Analytics user interface, including
-      reporting, segment management, calculated metrics, and component administration.
-    image: https://www.adobe.com/content/dam/cc/icons/analytics.svg
-    baseUrl: https://analytics.adobe.io/api
-    tags:
-      - Analytics
-      - Data
-      - Marketing
-      - Metrics
-      - Reporting
-    properties:
-      - type: Documentation
-        url: https://developer.adobe.com/analytics-apis/docs/2.0/
-      - type: APIReference
-        url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/AdobeDocs/analytics-2.0-apis/main/docs/swagger.json
-      - type: OpenAPI
-        url: openapi/adobe-analytics-api-openapi.yml
-      - type: Authentication
-        url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
-      - type: GettingStarted
-        url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/
-      - type: RateLimits
-        url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/rate-limits/
-      - type: GettingStarted
-        url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/migration/
-        title: Migration Guide
-      - type: GitHubRepository
-        url: https://github.com/AdobeDocs/analytics-2.0-apis
-    contact:
-      - type: Support
-        url: https://experienceleague.adobe.com/docs/analytics.html
-      - type: Support
-        url: https://experienceleaguecommunities.adobe.com/t5/adobe-analytics/ct-p/adobe-analytics-community
-        title: Community
-    humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
-  - name: Adobe Analytics Bulk Data Insertion API
-    description: >-
-      The Bulk Data Insertion API (BDIA) lets you upload server-side call data in batches of compressed CSV files
-      instead of using client-side libraries such as AppMeasurement. It is the recommended successor to the single-event
-      Data Insertion API for high-volume server-side data collection.
-    image: https://www.adobe.com/content/dam/cc/icons/analytics.svg
-    baseUrl: https://analytics-collection.adobe.io/aa/collect/v1
-    tags:
-      - Analytics
-      - Batch Processing
-      - Data Collection
-      - Server-Side
-    properties:
-      - type: Documentation
-        url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
-      - type: APIReference
-        url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
-      - type: OpenAPI
-        url: openapi/adobe-analytics-bulk-data-insertion-api-openapi.yml
-      - type: Authentication
-        url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
-    contact:
-      - type: Support
-        url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
-      - type: Support
-        url: https://experienceleaguecommunities.adobe.com/t5/adobe-analytics/ct-p/adobe-analytics-community
-        title: Community
-    humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
-  - name: Adobe Analytics Livestream API
-    description: >-
-      The Livestream API is a reporting feature in Adobe Analytics that allows clients to receive traffic data processed
-      by Adobe Analytics in real time. Hits are streamed to the client on a hit-by-hit basis in the same order and rate
-      that they are processed by Adobe servers.
-    image: https://www.adobe.com/content/dam/cc/icons/analytics.svg
-    baseUrl: https://livestream.adobe.net/api/1/stream
-    tags:
-      - Analytics
-      - Data
-      - Real-Time
-      - Streaming
-    properties:
-      - type: Documentation
-        url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
-      - type: APIReference
-        url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/livestream/
-      - type: AsyncAPI
-        url: asyncapi/adobe-analytics-livestream-asyncapi.yml
-      - type: Authentication
-        url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
-      - type: ChangeLog
-        url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/release-notes/
-    contact:
-      - type: Support
-        url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
-      - type: Support
-        url: https://experienceleaguecommunities.adobe.com/t5/adobe-analytics/ct-p/adobe-analytics-community
-        title: Community
-    humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
-  - name: Adobe Analytics Data Repair API
-    description: >-
-      The Data Repair API allows you to permanently delete or transform data that has already been ingested in Adobe
-      Analytics. It provides endpoints for estimating repair scope, creating repair jobs, and monitoring job status.
-      This is a paid feature and Adobe recommends a careful, staged approach when using it.
-    image: https://www.adobe.com/content/dam/cc/icons/analytics.svg
-    baseUrl: https://analytics.adobe.io/api
-    tags:
-      - Analytics
-      - Compliance
-      - Data Management
-      - Privacy
-    properties:
-      - type: Documentation
-        url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
-      - type: APIReference
-        url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/data-repair/
-      - type: OpenAPI
-        url: openapi/adobe-analytics-data-repair-api-openapi.yml
-      - type: Authentication
-        url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
-    contact:
-      - type: Support
-        url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
-      - type: Support
-        url: https://experienceleaguecommunities.adobe.com/t5/adobe-analytics/ct-p/adobe-analytics-community
-        title: Community
-    humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
-  - name: Adobe Analytics Data Insertion API
-    description: >-
-      The Data Insertion API allows server-side data submission to Adobe Analytics one event at a time using HTTP GET or
-      POST requests. Unlike the Bulk Data Insertion API which processes compressed CSV files in batches, this API
-      handles individual hit submissions in real time and is explicitly excluded from the Analytics 1.4 API end-of-life
-      scheduled for August 12, 2026.
-    image: https://www.adobe.com/content/dam/cc/icons/analytics.svg
-    baseUrl: https://sc.omtrdc.net/b/ss
-    tags:
-      - Analytics
-      - Data Collection
-      - Real-Time
-      - Server-Side
-    properties:
-      - type: Documentation
-        url: https://developer.adobe.com/analytics-apis/docs/1.4/guides/data-insertion/
-      - type: APIReference
-        url: https://experienceleague.adobe.com/en/docs/analytics/import/c-data-insertion-api
-    contact:
-      - type: Support
-        url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
-      - type: Support
-        url: https://experienceleaguecommunities.adobe.com/t5/adobe-analytics/ct-p/adobe-analytics-community
-        title: Community
-    humanURL: https://developer.adobe.com/analytics-apis/docs/1.4/guides/data-insertion/
-  - name: Adobe Analytics 1.4 API
-    description: >-
-      The Adobe Analytics 1.4 APIs provide programmatic access to reporting, classifications, data sources, and report
-      suite configuration. This version is deprecated and scheduled for end-of-life on August 12, 2026, after which all
-      endpoints will cease to function. The Data Insertion API is excluded from this end-of-life.
-    image: https://www.adobe.com/content/dam/cc/icons/analytics.svg
-    baseUrl: https://api.omniture.com/admin/1.4
-    tags:
-      - Analytics
-      - Deprecated
-      - Legacy
-      - Reporting
-    properties:
-      - type: Documentation
-        url: https://developer.adobe.com/analytics-apis/docs/1.4/
-      - type: ReleaseNotes
-        url: https://developer.adobe.com/analytics-apis/docs/1.4/guides/eol/
-        title: Deprecation Notice
-      - type: GettingStarted
-        url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/migration/
-        title: Migration Guide
-      - type: GitHubRepository
-        url: https://github.com/AdobeDocs/analytics-1.4-apis
-    contact:
-      - type: Support
-        url: https://experienceleague.adobe.com/docs/analytics.html
-      - type: Support
-        url: https://experienceleaguecommunities.adobe.com/t5/adobe-analytics/ct-p/adobe-analytics-community
-        title: Community
-    humanURL: https://developer.adobe.com/analytics-apis/docs/1.4/
+- name: Adobe Analytics Livestream API
+  description: >-
+    The Livestream API is a reporting feature in Adobe Analytics that allows clients to receive traffic
+    data processed by Adobe Analytics in real time. Hits are streamed to the client on a hit-by-hit basis
+    in the same order and rate that they are processed by Adobe servers.
+  image: https://www.adobe.com/content/dam/cc/icons/analytics.svg
+  baseUrl: https://livestream.adobe.net/api/1/stream
+  tags:
+  - Analytics
+  - Data
+  - Real-Time
+  - Streaming
+  properties:
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
+  - type: APIReference
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/livestream/
+  - type: AsyncAPI
+    url: asyncapi/adobe-analytics-livestream-asyncapi.yml
+  - type: Authentication
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
+  - type: ChangeLog
+    url: >-
+      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/release-notes/
+  contact:
+  - type: Support
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
+  - type: Support
+    url: >-
+      https://experienceleaguecommunities.adobe.com/t5/adobe-analytics/ct-p/adobe-analytics-community
+    title: Community
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
+- name: Adobe Analytics Data Insertion API
+  description: >-
+    The Data Insertion API allows server-side data submission to Adobe Analytics one event at a time using
+    HTTP GET or POST requests. Unlike the Bulk Data Insertion API which processes compressed CSV files
+    in batches, this API handles individual hit submissions in real time and is explicitly excluded from
+    the Analytics 1.4 API end-of-life scheduled for August 12, 2026.
+  image: https://www.adobe.com/content/dam/cc/icons/analytics.svg
+  baseUrl: https://sc.omtrdc.net/b/ss
+  tags:
+  - Analytics
+  - Data Collection
+  - Real-Time
+  - Server-Side
+  properties:
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/1.4/guides/data-insertion/
+  - type: APIReference
+    url: https://experienceleague.adobe.com/en/docs/analytics/import/c-data-insertion-api
+  contact:
+  - type: Support
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
+  - type: Support
+    url: >-
+      https://experienceleaguecommunities.adobe.com/t5/adobe-analytics/ct-p/adobe-analytics-community
+    title: Community
+  humanURL: https://developer.adobe.com/analytics-apis/docs/1.4/guides/data-insertion/
+- name: Adobe Analytics 1.4 API
+  description: >-
+    The Adobe Analytics 1.4 APIs provide programmatic access to reporting, classifications, data sources,
+    and report suite configuration. This version is deprecated and scheduled for end-of-life on August
+    12, 2026, after which all endpoints will cease to function. The Data Insertion API is excluded from
+    this end-of-life.
+  image: https://www.adobe.com/content/dam/cc/icons/analytics.svg
+  baseUrl: https://api.omniture.com/admin/1.4
+  tags:
+  - Analytics
+  - Deprecated
+  - Legacy
+  - Reporting
+  properties:
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/1.4/
+  - type: ReleaseNotes
+    url: https://developer.adobe.com/analytics-apis/docs/1.4/guides/eol/
+    title: Deprecation Notice
+  - type: GettingStarted
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/migration/
+    title: Migration Guide
+  - type: GitHubRepository
+    url: https://github.com/AdobeDocs/analytics-1.4-apis
+  contact:
+  - type: Support
+    url: https://experienceleague.adobe.com/docs/analytics.html
+  - type: Support
+    url: >-
+      https://experienceleaguecommunities.adobe.com/t5/adobe-analytics/ct-p/adobe-analytics-community
+    title: Community
+  humanURL: https://developer.adobe.com/analytics-apis/docs/1.4/
+- aid: adobe-analytics:adobe-analytics-annotations-api
+  name: Adobe Analytics Annotations API
+  description: Manage analytics annotations
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Annotations
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-annotations-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: APIReference
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/
+  - type: Authentication
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
+  - type: GettingStarted
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/
+  - type: RateLimits
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/rate-limits/
+  - type: GettingStarted
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/migration/
+  - type: GitHubRepository
+    url: https://github.com/AdobeDocs/analytics-2.0-apis
+  - type: Documentation
+    url: >-
+      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
+  - type: APIReference
+    url: >-
+      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
+  - type: APIReference
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/data-repair/
+- aid: adobe-analytics:adobe-analytics-calculated-metrics-api
+  name: Adobe Analytics Calculated Metrics API
+  description: Manage calculated metrics built from existing metrics
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Calculated Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-calculated-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: APIReference
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/
+  - type: Authentication
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
+  - type: GettingStarted
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/
+  - type: RateLimits
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/rate-limits/
+  - type: GettingStarted
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/migration/
+  - type: GitHubRepository
+    url: https://github.com/AdobeDocs/analytics-2.0-apis
+  - type: Documentation
+    url: >-
+      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
+  - type: APIReference
+    url: >-
+      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
+  - type: APIReference
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/data-repair/
+- aid: adobe-analytics:adobe-analytics-date-ranges-api
+  name: Adobe Analytics Date Ranges API
+  description: Manage saved date ranges
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Date Ranges
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-date-ranges-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: APIReference
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/
+  - type: Authentication
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
+  - type: GettingStarted
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/
+  - type: RateLimits
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/rate-limits/
+  - type: GettingStarted
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/migration/
+  - type: GitHubRepository
+    url: https://github.com/AdobeDocs/analytics-2.0-apis
+  - type: Documentation
+    url: >-
+      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
+  - type: APIReference
+    url: >-
+      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
+  - type: APIReference
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/data-repair/
+- aid: adobe-analytics:adobe-analytics-dimensions-api
+  name: Adobe Analytics Dimensions API
+  description: Retrieve available dimensions for a report suite
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Dimensions
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-dimensions-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: APIReference
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/
+  - type: Authentication
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
+  - type: GettingStarted
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/
+  - type: RateLimits
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/rate-limits/
+  - type: GettingStarted
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/migration/
+  - type: GitHubRepository
+    url: https://github.com/AdobeDocs/analytics-2.0-apis
+  - type: Documentation
+    url: >-
+      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
+  - type: APIReference
+    url: >-
+      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
+  - type: APIReference
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/data-repair/
+- aid: adobe-analytics:adobe-analytics-events-api
+  name: Adobe Analytics Events API
+  description: Upload and validate batched event data files
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-events-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: APIReference
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/
+  - type: Authentication
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
+  - type: GettingStarted
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/
+  - type: RateLimits
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/rate-limits/
+  - type: GettingStarted
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/migration/
+  - type: GitHubRepository
+    url: https://github.com/AdobeDocs/analytics-2.0-apis
+  - type: Documentation
+    url: >-
+      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
+  - type: APIReference
+    url: >-
+      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
+  - type: APIReference
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/data-repair/
+- aid: adobe-analytics:adobe-analytics-jobs-api
+  name: Adobe Analytics Jobs API
+  description: Create and monitor data repair jobs
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-jobs-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: APIReference
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/
+  - type: Authentication
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
+  - type: GettingStarted
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/
+  - type: RateLimits
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/rate-limits/
+  - type: GettingStarted
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/migration/
+  - type: GitHubRepository
+    url: https://github.com/AdobeDocs/analytics-2.0-apis
+  - type: Documentation
+    url: >-
+      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
+  - type: APIReference
+    url: >-
+      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
+  - type: APIReference
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/data-repair/
+- aid: adobe-analytics:adobe-analytics-metrics-api
+  name: Adobe Analytics Metrics API
+  description: Retrieve available metrics for a report suite
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: APIReference
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/
+  - type: Authentication
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
+  - type: GettingStarted
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/
+  - type: RateLimits
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/rate-limits/
+  - type: GettingStarted
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/migration/
+  - type: GitHubRepository
+    url: https://github.com/AdobeDocs/analytics-2.0-apis
+  - type: Documentation
+    url: >-
+      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
+  - type: APIReference
+    url: >-
+      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
+  - type: APIReference
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/data-repair/
+- aid: adobe-analytics:adobe-analytics-report-suites-api
+  name: Adobe Analytics Report Suites API
+  description: Retrieve report suite information and configuration
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Report Suites
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-report-suites-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: APIReference
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/
+  - type: Authentication
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
+  - type: GettingStarted
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/
+  - type: RateLimits
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/rate-limits/
+  - type: GettingStarted
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/migration/
+  - type: GitHubRepository
+    url: https://github.com/AdobeDocs/analytics-2.0-apis
+  - type: Documentation
+    url: >-
+      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
+  - type: APIReference
+    url: >-
+      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
+  - type: APIReference
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/data-repair/
+- aid: adobe-analytics:adobe-analytics-reports-api
+  name: Adobe Analytics Reports API
+  description: Run analytics reports and retrieve data
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-reports-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: APIReference
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/
+  - type: Authentication
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
+  - type: GettingStarted
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/
+  - type: RateLimits
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/rate-limits/
+  - type: GettingStarted
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/migration/
+  - type: GitHubRepository
+    url: https://github.com/AdobeDocs/analytics-2.0-apis
+  - type: Documentation
+    url: >-
+      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
+  - type: APIReference
+    url: >-
+      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
+  - type: APIReference
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/data-repair/
+- aid: adobe-analytics:adobe-analytics-segments-api
+  name: Adobe Analytics Segments API
+  description: Create, retrieve, update, and delete analytics segments
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Segments
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-segments-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: APIReference
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/
+  - type: Authentication
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
+  - type: GettingStarted
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/
+  - type: RateLimits
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/rate-limits/
+  - type: GettingStarted
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/migration/
+  - type: GitHubRepository
+    url: https://github.com/AdobeDocs/analytics-2.0-apis
+  - type: Documentation
+    url: >-
+      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
+  - type: APIReference
+    url: >-
+      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
+  - type: APIReference
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/data-repair/
+- aid: adobe-analytics:adobe-analytics-server-call-estimate-api
+  name: Adobe Analytics Server Call Estimate API
+  description: Estimate the scope and cost of a repair job
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
+  tags:
+  - Server Call Estimate
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-server-call-estimate-api-openapi.yml
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  - type: APIReference
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/
+  - type: Authentication
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
+  - type: GettingStarted
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/
+  - type: RateLimits
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/rate-limits/
+  - type: GettingStarted
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/migration/
+  - type: GitHubRepository
+    url: https://github.com/AdobeDocs/analytics-2.0-apis
+  - type: Documentation
+    url: >-
+      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
+  - type: APIReference
+    url: >-
+      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
+  - type: Documentation
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
+  - type: APIReference
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/data-repair/
 maintainers:
   - name: Kin Lane
     email: kin@apievangelist.com
