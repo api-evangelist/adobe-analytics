@@ -1,0 +1,34 @@
+{
+  "provider": "adobe-analytics",
+  "sources": [
+    "adobe-analytics-annotations-api-openapi.yml",
+    "adobe-analytics-calculated-metrics-api-openapi.yml",
+    "adobe-analytics-date-ranges-api-openapi.yml",
+    "adobe-analytics-dimensions-api-openapi.yml",
+    "adobe-analytics-events-api-openapi.yml",
+    "adobe-analytics-jobs-api-openapi.yml",
+    "adobe-analytics-metrics-api-openapi.yml",
+    "adobe-analytics-report-suites-api-openapi.yml",
+    "adobe-analytics-reports-api-openapi.yml",
+    "adobe-analytics-segments-api-openapi.yml",
+    "adobe-analytics-server-call-estimate-api-openapi.yml"
+  ],
+  "outputs": [
+    "adobe-analytics-annotations-api-openapi.yml",
+    "adobe-analytics-calculated-metrics-api-openapi.yml",
+    "adobe-analytics-date-ranges-api-openapi.yml",
+    "adobe-analytics-dimensions-api-openapi.yml",
+    "adobe-analytics-events-api-openapi.yml",
+    "adobe-analytics-jobs-api-openapi.yml",
+    "adobe-analytics-metrics-api-openapi.yml",
+    "adobe-analytics-report-suites-api-openapi.yml",
+    "adobe-analytics-reports-api-openapi.yml",
+    "adobe-analytics-segments-api-openapi.yml",
+    "adobe-analytics-server-call-estimate-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
