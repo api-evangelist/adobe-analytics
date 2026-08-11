@@ -487,6 +487,15 @@ tags:
   - Marketing
   - Web Analytics
 common:
+  - type: IssueTracker
+    url: https://github.com/AdobeDocs/analytics-1.4-apis/issues
+  - type: CodeOfConduct
+    url: https://github.com/AdobeDocs/analytics-1.4-apis/blob/main/CODE_OF_CONDUCT.md
+  - type: ContributionGuide
+    url: https://github.com/AdobeDocs/analytics-1.4-apis/blob/main/.github/CONTRIBUTING.md
+  - type: License
+    name: Apache-2.0
+    url: https://github.com/AdobeDocs/analytics-1.4-apis/blob/main/LICENSE
   - type: Packages
     url: packages/adobe-analytics-packages.yml
   - type: WellKnown
