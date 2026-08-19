@@ -1,13 +1,14 @@
-generated: '2026-06-20'
+generated: '2026-08-13'
 method: searched
 source: >-
-  npm registry, PyPI, and Adobe Developer docs (developer.adobe.com/analytics-apis)
+  registry.npmjs.org, pypi.org/pypi/<pkg>/json, github.com/AdobeDocs/analytics-2.0-apis,
+  github.com/adobe/skills, and the Adobe Developer docs (developer.adobe.com/analytics-apis)
 description: >-
-  First-party and notable community client libraries for the Adobe Analytics 2.0
-  APIs. Adobe ships an official JavaScript SDK via the Adobe I/O (App Builder)
-  Core SDK family; Adobe publishes Python usage resources (example code) rather
-  than a single packaged Python SDK, so the widely used Python wrappers below are
-  community-maintained.
+  First-party and notable community client libraries for the Adobe Analytics 2.0 APIs.
+  Adobe ships an official JavaScript SDK via the Adobe I/O (App Builder) Core SDK family;
+  Adobe publishes Python usage resources (example code) rather than a packaged Python SDK,
+  so the widely used Python wrapper below is community-maintained. Versions and publish
+  dates were read from the registry metadata endpoints on 2026-08-13.
 packages:
   - language: javascript
     registry: npm
@@ -16,11 +17,47 @@ packages:
     repository: https://github.com/adobe/aio-lib-analytics
     install: npm install @adobe/aio-lib-analytics
     version: 4.0.2
+    published: '2025-09-03'
     official: true
     description: >-
       Adobe I/O JavaScript SDK wrapping the Adobe Analytics 2.0 APIs (reporting,
       segments, calculated metrics, components). Part of the Adobe App Builder
       Core SDK family.
+    currency_note: >-
+      Last release 2025-09-03 — roughly eleven months stale as of this pass, and it
+      predates the 2026 additions to the Analytics 2.0 surface (search features, the
+      MCP server, Data Feed / Classification / Data Warehouse endpoint families).
+      Read as a maintenance-mode SDK, not an actively tracked one.
+  - language: javascript
+    registry: npm
+    name: "@adobe/alloy"
+    url: https://www.npmjs.com/package/@adobe/alloy
+    repository: https://github.com/adobe/alloy
+    install: npm install @adobe/alloy
+    version: 2.35.0
+    published: '2026-07-30'
+    official: true
+    description: >-
+      The Adobe Experience Platform Web SDK ("alloy"). Client-side collection library,
+      not a REST API client — it sends events from a browser into Adobe Analytics (and
+      other Experience Cloud destinations) via a datastream. Included because it is the
+      Adobe-recommended first-party implementation path for getting data INTO Analytics.
+    currency_note: Actively released; latest 2026-07-30.
+  - language: javascript
+    registry: npm
+    name: "@adobe/aio-cli"
+    url: https://www.npmjs.com/package/@adobe/aio-cli
+    repository: https://github.com/adobe/aio-cli
+    install: npm install -g @adobe/aio-cli
+    version: 11.1.2
+    published: '2026-06-03'
+    official: true
+    description: >-
+      Adobe I/O CLI. General Adobe Developer tooling (credential/console management, App
+      Builder apps) used to provision the Adobe Developer Console project and OAuth
+      credentials the Analytics APIs require. There is no Analytics-specific CLI plugin —
+      `@adobe/aio-cli-plugin-analytics` does not exist on npm (checked 2026-08-13).
+    currency_note: Actively released; latest 2026-06-03.
   - language: python
     registry: pypi
     name: aanalytics2
@@ -28,17 +65,104 @@ packages:
     repository: https://github.com/pitchmuc/adobe-analytics-api-2.0
     install: pip install aanalytics2
     version: 0.5.3.post1
+    published: '2026-07-15'
     official: false
     description: >-
       Popular community Python wrapper for the Adobe Analytics 2.0 API (by
       pitchmuc); covers reporting, segments, calculated metrics, and component
       management.
+    currency_note: >-
+      Actively maintained (2026-07-15) — currently fresher than Adobe's own first-party
+      JavaScript SDK.
   - language: python
     registry: github
     name: AdobeDocs/analytics-2.0-apis (resources/python)
     url: https://github.com/AdobeDocs/analytics-2.0-apis/tree/main/resources/python
     install: null
+    version: null
+    published: null
     official: true
     description: >-
       Adobe-published Python example resources (not a packaged SDK) demonstrating
       IMS OAuth server-to-server auth and calling the 2.0 reporting endpoints.
+    currency_note: >-
+      version/published are null because this is repository sample code with no registry
+      release: there is no metadata endpoint to query and no version a consumer can pin.
+  - language: java
+    registry: maven
+    name: com.adobe.marketing.mobile:analytics
+    url: https://central.sonatype.com/artifact/com.adobe.marketing.mobile/analytics
+    repository: https://github.com/adobe/aepsdk-analytics-android
+    install: "implementation 'com.adobe.marketing.mobile:analytics:3.0.2'"
+    version: 3.0.2
+    published: '2025-02-11'
+    official: true
+    description: >-
+      Adobe Experience Platform Mobile SDK — Analytics extension for Android. Client-side
+      collection library (the mobile counterpart to alloy), not a REST API client.
+    currency_note: >-
+      Latest 3.0.2, published 2025-02-11 (read from repo1.maven.org maven-metadata.xml and
+      the artifact Last-Modified header). Eighteen months without a release.
+  - language: dotnet
+    registry: nuget
+    name: Adobe.ACPAnalytics.iOS
+    url: https://www.nuget.org/packages/Adobe.ACPAnalytics.iOS
+    install: dotnet add package Adobe.ACPAnalytics.iOS
+    version: 1.0.2
+    published: '2022-05-27'
+    official: true
+    description: >-
+      Adobe Inc.-published Xamarin binding for the legacy ACP Analytics mobile SDK (iOS);
+      an Android sibling, Adobe.ACPAnalytics.Android 1.0.1, is also published.
+    currency_note: >-
+      Latest 1.0.2 published 2022-05-27 — four years stale, and it binds the superseded ACP
+      generation of the mobile SDK rather than the current AEP one. Effectively abandoned.
+  - language: agent-plugin
+    registry: github
+    name: adobe/skills (plugins/adobe-analytics)
+    url: https://github.com/adobe/skills/tree/main/plugins/adobe-analytics
+    install: null
+    version: '1.0.0'
+    published: null
+    official: true
+    description: >-
+      Adobe's first-party Agent Skills plugin for Adobe Analytics — five SKILL.md
+      capabilities running on the hosted MCP server. Mirrored in skills/.
+    currency_note: >-
+      version 1.0.0 read from the plugin's own .claude-plugin/plugin.json; the repo
+      publishes no dated release, so `published` is null rather than guessed.
+official_count: 7
+registry_searches:
+  checked: '2026-08-13'
+  results:
+    - registry: npm
+      first_party_found: true
+    - registry: pypi
+      first_party_found: false
+      note: No Adobe-published Analytics package; only community wrappers.
+    - registry: maven
+      first_party_found: true
+      note: com.adobe.marketing.mobile:analytics (mobile collection SDK) only — no REST client.
+    - registry: nuget
+      first_party_found: true
+      note: >-
+        Adobe Inc.-authored ACPAnalytics Xamarin bindings only (last 2022); the rest of the
+        Adobe Analytics results are third-party (CData, Segment, community connectors).
+    - registry: rubygems
+      first_party_found: false
+      note: Search for "adobe analytics" returned no gems at all.
+    - registry: packagist
+      first_party_found: false
+      note: Only community packages (edisonlabs/adobe_analytics, tbe/lc_analytics, etc.).
+    - registry: crates.io
+      first_party_found: false
+      note: No Adobe Analytics crate; search returned unrelated crates.
+    - registry: pkg.go.dev
+      first_party_found: false
+notes: >-
+  There is NO first-party Adobe client library for the Analytics 2.0 REST API in any
+  language other than JavaScript. Every other official Adobe package found is a
+  client-side data-COLLECTION SDK (web via alloy, mobile via the AEP/ACP mobile SDKs) —
+  they send data into Analytics, they do not call the reporting/admin API. Java, .NET, Go,
+  Ruby, PHP and Rust consumers of the 2.0 API must call it over plain HTTP or use a
+  community wrapper. Recorded as an absence, not omitted.

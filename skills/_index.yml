@@ -1,0 +1,64 @@
+generated: '2026-08-13'
+method: searched
+source: https://github.com/adobe/skills/tree/main/plugins/adobe-analytics
+description: >-
+  Adobe publishes first-party Agent Skills for Adobe Analytics in the Adobe Skills
+  repository (github.com/adobe/skills), packaged as the `adobe-analytics` plugin for
+  Claude Code / Cursor and other supported clients. Every skill runs on top of the
+  Adobe-hosted Adobe Analytics MCP server at https://aa-mcp.adobe.io/mcp — the skills
+  call MCP tools (findReportSuites, setSessionDefaults, describeAa, findMetrics,
+  runReport, searchDimensionItems, ...), not the REST API directly. The SKILL.md files
+  here are saved VERBATIM from the Adobe repository; nothing in this directory was
+  authored by API Evangelist.
+publisher: Adobe
+plugin:
+  name: adobe-analytics
+  version: '1.0.0'
+  license: Apache-2.0
+  repository: https://github.com/adobe/skills
+  readme: https://github.com/adobe/skills/blob/main/plugins/adobe-analytics/README.md
+  docs: https://developer.adobe.com/analytics-mcp/docs/aa/skills/
+  mcp_servers:
+    - name: adobe-analytics
+      type: http
+      url: https://aa-mcp.adobe.io/mcp
+skills:
+  - name: aa-kpi-pulse
+    file: adobe-analytics-aa-kpi-pulse.md
+    source: https://github.com/adobe/skills/blob/main/plugins/adobe-analytics/skills/aa-kpi-pulse/SKILL.md
+    description: >-
+      Produces a compact KPI digest showing how key metrics changed over a period and
+      what is driving the movement (weekly recap / morning briefing / performance overview).
+    mcp_tools: [findReportSuites, setSessionDefaults, describeAa, findMetrics, listComponentUsage, runReport, searchDimensionItems]
+  - name: aa-top-movers-watchlist
+    file: adobe-analytics-aa-top-movers-watchlist.md
+    source: https://github.com/adobe/skills/blob/main/plugins/adobe-analytics/skills/aa-top-movers-watchlist/SKILL.md
+    description: >-
+      Identifies which items (pages, campaigns, products, channels, regions) had the biggest
+      increases and decreases between two periods.
+    mcp_tools: [findReportSuites, setSessionDefaults, describeAa, findMetrics, findDimensions, runReport, searchDimensionItems]
+  - name: aa-conversion-funnel-analysis
+    file: adobe-analytics-aa-conversion-funnel-analysis.md
+    source: https://github.com/adobe/skills/blob/main/plugins/adobe-analytics/skills/aa-conversion-funnel-analysis/SKILL.md
+    description: >-
+      Analyzes a multi-step conversion funnel to find where visitors drop off and which
+      steps have the largest losses.
+    mcp_tools: [findReportSuites, setSessionDefaults, findDimensions, findMetrics, searchDimensionItems, findSegments, upsertSegment, runReport]
+  - name: aa-segment-performance-comparator
+    file: adobe-analytics-aa-segment-performance-comparator.md
+    source: https://github.com/adobe/skills/blob/main/plugins/adobe-analytics/skills/aa-segment-performance-comparator/SKILL.md
+    description: >-
+      Compares the performance of two or more audience segments across key metrics side by side.
+    mcp_tools: [findReportSuites, setSessionDefaults, findSegments, findMetrics, runReport]
+  - name: aa-executive-briefing
+    file: adobe-analytics-aa-executive-briefing.md
+    source: https://github.com/adobe/skills/blob/main/plugins/adobe-analytics/skills/aa-executive-briefing/SKILL.md
+    description: >-
+      Generates a concise, executive-ready performance summary covering key metrics, trends,
+      and notable movement.
+    mcp_tools: [findReportSuites, setSessionDefaults, describeAa, findMetrics, listComponentUsage, runReport, searchDimensionItems]
+notes: >-
+  The `mcp_tools` lists are read from the "AA MCP Tools Used" section each SKILL.md
+  declares for itself; they are not inferred. Adobe also ships evals/*.json and
+  template.html alongside several skills in the upstream repository — those are not
+  mirrored here, only the SKILL.md contracts and the plugin README.

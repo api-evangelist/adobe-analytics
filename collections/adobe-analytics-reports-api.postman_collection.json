@@ -1,0 +1,279 @@
+{
+  "item": [
+    {
+      "id": "c4fe4c41-80ca-42da-b3d6-ca52e8670fb4",
+      "name": "Reports",
+      "description": {
+        "content": "Run analytics reports and retrieve data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7ffc4318-32c5-43fa-bf42-509cdac1b56f",
+          "name": "Adobe Analytics Run a Report",
+          "request": {
+            "name": "Adobe Analytics Run a Report",
+            "description": {
+              "content": "Runs an analytics report based on the provided report request definition. The request body specifies metrics, dimensions, date ranges, filters, and other parameters to define the report output.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reports"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The global company ID for your Adobe Analytics organization",
+                  "type": "any",
+                  "value": "{{globalCompanyId}}",
+                  "key": "globalCompanyId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"rsid\": \"<string>\",\n  \"globalFilters\": [\n    {\n      \"type\": \"<string>\",\n      \"dateRange\": \"<string>\",\n      \"segmentId\": \"<string>\",\n      \"dimension\": \"<string>\",\n      \"itemId\": \"<string>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"dateRange\": \"<string>\",\n      \"segmentId\": \"<string>\",\n      \"dimension\": \"<string>\",\n      \"itemId\": \"<string>\"\n    }\n  ],\n  \"metricContainer\": {\n    \"metrics\": [\n      {\n        \"id\": \"<string>\",\n        \"columnId\": \"<string>\",\n        \"filters\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"sort\": \"<string>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"columnId\": \"<string>\",\n        \"filters\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"sort\": \"<string>\"\n      }\n    ],\n    \"metricFilters\": [\n      {\n        \"type\": \"<string>\",\n        \"dateRange\": \"<string>\",\n        \"segmentId\": \"<string>\",\n        \"dimension\": \"<string>\",\n        \"itemId\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"dateRange\": \"<string>\",\n        \"segmentId\": \"<string>\",\n        \"dimension\": \"<string>\",\n        \"itemId\": \"<string>\"\n      }\n    ]\n  },\n  \"locale\": \"<string>\",\n  \"dimension\": \"<string>\",\n  \"settings\": {\n    \"limit\": 50,\n    \"page\": 0,\n    \"nonesBehavior\": \"<string>\"\n  },\n  \"statistics\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c0fa8b42-b297-4e23-94f9-0f7ac44ecb69",
+              "name": "Report results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rsid\": \"500123\",\n  \"locale\": \"example_value\",\n  \"globalFilters\": [\n    {\n      \"type\": \"dateRange\",\n      \"dateRange\": \"example_value\",\n      \"segmentId\": \"500123\",\n      \"dimension\": \"example_value\",\n      \"itemId\": \"500123\"\n    }\n  ],\n  \"metricContainer\": {\n    \"metrics\": [\n      {}\n    ],\n    \"metricFilters\": [\n      {}\n    ]\n  },\n  \"dimension\": \"example_value\",\n  \"settings\": {\n    \"limit\": 10,\n    \"page\": 10,\n    \"nonesBehavior\": \"exclude-nones\"\n  },\n  \"statistics\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalPages\": 42,\n  \"numberOfElements\": 10,\n  \"rows\": [\n    {\n      \"itemId\": \"500123\",\n      \"value\": \"example_value\",\n      \"data\": {}\n    }\n  ],\n  \"columns\": \"example_value\",\n  \"summaryData\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4608df2a-0387-40df-b13d-5f8de0fae1dd",
+              "name": "Invalid request body or parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rsid\": \"500123\",\n  \"locale\": \"example_value\",\n  \"globalFilters\": [\n    {\n      \"type\": \"dateRange\",\n      \"dateRange\": \"example_value\",\n      \"segmentId\": \"500123\",\n      \"dimension\": \"example_value\",\n      \"itemId\": \"500123\"\n    }\n  ],\n  \"metricContainer\": {\n    \"metrics\": [\n      {}\n    ],\n    \"metricFilters\": [\n      {}\n    ]\n  },\n  \"dimension\": \"example_value\",\n  \"settings\": {\n    \"limit\": 10,\n    \"page\": 10,\n    \"nonesBehavior\": \"exclude-nones\"\n  },\n  \"statistics\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"errorDescription\": \"example_value\",\n  \"errorId\": \"500123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c79fd56f-bf39-4937-b346-caa010debdae",
+              "name": "Unauthorized - missing or invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reports"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"rsid\": \"500123\",\n  \"locale\": \"example_value\",\n  \"globalFilters\": [\n    {\n      \"type\": \"dateRange\",\n      \"dateRange\": \"example_value\",\n      \"segmentId\": \"500123\",\n      \"dimension\": \"example_value\",\n      \"itemId\": \"500123\"\n    }\n  ],\n  \"metricContainer\": {\n    \"metrics\": [\n      {}\n    ],\n    \"metricFilters\": [\n      {}\n    ]\n  },\n  \"dimension\": \"example_value\",\n  \"settings\": {\n    \"limit\": 10,\n    \"page\": 10,\n    \"nonesBehavior\": \"exclude-nones\"\n  },\n  \"statistics\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"errorDescription\": \"example_value\",\n  \"errorId\": \"500123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The global company ID for your Adobe Analytics organization",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "YOUR_GLOBAL_COMPANY_ID",
+      "key": "globalCompanyId"
+    },
+    {
+      "type": "string",
+      "value": "https://analytics.adobe.io/api/{{globalCompanyId}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0f4c2417-6773-4055-80b1-b3f7a4586b59",
+    "name": "Adobe Analytics Annotations Reports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Adobe Analytics 2.0 APIs provide programmatic access to data, reports, and administration features within Adobe Analytics. You can perform almost any action available in the Analytics user interface, including reporting, segment management, calculated metrics, dimensions, and component administration.\n\nContact Support:\n Name: Adobe Analytics Support",
+      "type": "text/plain"
+    }
+  }
+}

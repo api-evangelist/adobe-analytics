@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Analytics Annotations Server Call Estimate API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Server Call Estimate",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics Get Server Call Estimate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/:rsid/serverCallEstimate",
+            "params": [
+              {
+                "name": "rsid",
+                "value": "",
+                "type": "path",
+                "description": "The report suite ID"
+              },
+              {
+                "name": "dateRangeStart",
+                "value": "2026-01-15",
+                "type": "query",
+                "description": "Start of the date range for the repair in ISO 8601 format (YYYY-MM-DD)"
+              },
+              {
+                "name": "dateRangeEnd",
+                "value": "2026-01-15",
+                "type": "query",
+                "description": "End of the date range for the repair (inclusive) in ISO 8601 format (YYYY-MM-DD)"
+              }
+            ]
+          },
+          "docs": "Calculates the number of data rows that would be scanned for a repair job given the specified report suite and date range. This estimate is required before creating a repair job and returns a validationToken that must be passed to the job creation endpoint. The count determines the cost of the repair."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

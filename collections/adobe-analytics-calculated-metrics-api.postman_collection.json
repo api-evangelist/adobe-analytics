@@ -1,0 +1,827 @@
+{
+  "item": [
+    {
+      "id": "628990e1-ebda-4775-a55a-55531ea85d25",
+      "name": "Calculated Metrics",
+      "description": {
+        "content": "Manage calculated metrics built from existing metrics",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "37027e0f-f7e5-4299-bc9f-7cc1e7d8a1b2",
+          "name": "Adobe Analytics List Calculated Metrics",
+          "request": {
+            "name": "Adobe Analytics List Calculated Metrics",
+            "description": {
+              "content": "Retrieves all calculated metrics for the company. Supports filtering by owner, tags, report suite, and whether to include shared or template calculated metrics.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calculatedmetrics"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "locale",
+                  "value": "<string>",
+                  "description": "The locale for response labels"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "expansion",
+                  "value": "<string>",
+                  "description": "Comma-separated additional fields to include"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeType",
+                  "value": "<string>",
+                  "description": "Controls which calculated metrics are returned"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The global company ID for your Adobe Analytics organization",
+                  "type": "any",
+                  "value": "{{globalCompanyId}}",
+                  "key": "globalCompanyId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2d32dd96-baad-4a38-adaf-60fd434b21e8",
+              "name": "List of calculated metrics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calculatedmetrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "10"
+                    },
+                    {
+                      "key": "expansion",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "includeType",
+                      "value": "all"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"id\": \"abc123\",\n      \"name\": \"Example Title\",\n      \"description\": \"A sample description.\",\n      \"rsid\": \"500123\",\n      \"definition\": \"example_value\",\n      \"modified\": \"2026-01-15T10:30:00Z\",\n      \"type\": \"DECIMAL\"\n    }\n  ],\n  \"totalElements\": 42,\n  \"totalPages\": 42\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc360693-f2ed-4f4f-ab01-64555e1e2983",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calculatedmetrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "10"
+                    },
+                    {
+                      "key": "expansion",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "includeType",
+                      "value": "all"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"errorDescription\": \"example_value\",\n  \"errorId\": \"500123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2587018f-39d3-4024-b39d-14af0eb5de1d",
+          "name": "Adobe Analytics Create a Calculated Metric",
+          "request": {
+            "name": "Adobe Analytics Create a Calculated Metric",
+            "description": {
+              "content": "Creates a new calculated metric using a definition that combines existing metrics with mathematical operators and functions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calculatedmetrics"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The global company ID for your Adobe Analytics organization",
+                  "type": "any",
+                  "value": "{{globalCompanyId}}",
+                  "key": "globalCompanyId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"rsid\": \"<string>\",\n  \"definition\": \"<object>\",\n  \"description\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2d074529-5951-43c1-b338-4674068559ba",
+              "name": "Calculated metric created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calculatedmetrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"rsid\": \"500123\",\n  \"definition\": \"example_value\",\n  \"type\": \"DECIMAL\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"rsid\": \"500123\",\n  \"owner\": {\n    \"id\": \"abc123\",\n    \"name\": \"Example Title\",\n    \"login\": \"example_value\"\n  },\n  \"definition\": \"example_value\",\n  \"modified\": \"2026-01-15T10:30:00Z\",\n  \"type\": \"DECIMAL\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d507ca4-a5d7-48a5-963b-a40d049bb8cb",
+              "name": "Invalid definition",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calculatedmetrics"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"rsid\": \"500123\",\n  \"definition\": \"example_value\",\n  \"type\": \"DECIMAL\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"errorDescription\": \"example_value\",\n  \"errorId\": \"500123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "df8f38ff-90d2-49b7-8220-f7d789acaeec",
+          "name": "Adobe Analytics Get a Calculated Metric",
+          "request": {
+            "name": "Adobe Analytics Get a Calculated Metric",
+            "description": {
+              "content": "Retrieves a single calculated metric by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calculatedmetrics",
+                ":calculatedMetricId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "calculatedMetricId",
+                  "description": "(Required) The calculated metric ID"
+                },
+                {
+                  "description": "The global company ID for your Adobe Analytics organization",
+                  "type": "any",
+                  "value": "{{globalCompanyId}}",
+                  "key": "globalCompanyId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5452b71b-db5b-45e8-bf18-01c3d0e407d5",
+              "name": "Calculated metric details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calculatedmetrics",
+                    ":calculatedMetricId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "calculatedMetricId",
+                      "description": "(Required) The calculated metric ID"
+                    },
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"rsid\": \"500123\",\n  \"owner\": {\n    \"id\": \"abc123\",\n    \"name\": \"Example Title\",\n    \"login\": \"example_value\"\n  },\n  \"definition\": \"example_value\",\n  \"modified\": \"2026-01-15T10:30:00Z\",\n  \"type\": \"DECIMAL\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8fb67716-a750-436e-8357-f33e9baa3522",
+              "name": "Not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calculatedmetrics",
+                    ":calculatedMetricId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "calculatedMetricId",
+                      "description": "(Required) The calculated metric ID"
+                    },
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"errorDescription\": \"example_value\",\n  \"errorId\": \"500123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "16089e70-8b46-42cb-8366-e47f4894ab10",
+          "name": "Adobe Analytics Update a Calculated Metric",
+          "request": {
+            "name": "Adobe Analytics Update a Calculated Metric",
+            "description": {
+              "content": "Updates an existing calculated metric definition or metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calculatedmetrics",
+                ":calculatedMetricId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "calculatedMetricId",
+                  "description": "(Required) The calculated metric ID"
+                },
+                {
+                  "description": "The global company ID for your Adobe Analytics organization",
+                  "type": "any",
+                  "value": "{{globalCompanyId}}",
+                  "key": "globalCompanyId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"rsid\": \"<string>\",\n  \"definition\": \"<object>\",\n  \"description\": \"<string>\",\n  \"type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "733955c6-7313-4ef4-baa4-8065c9053d8c",
+              "name": "Updated calculated metric",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calculatedmetrics",
+                    ":calculatedMetricId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "calculatedMetricId",
+                      "description": "(Required) The calculated metric ID"
+                    },
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"rsid\": \"500123\",\n  \"definition\": \"example_value\",\n  \"type\": \"DECIMAL\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"rsid\": \"500123\",\n  \"owner\": {\n    \"id\": \"abc123\",\n    \"name\": \"Example Title\",\n    \"login\": \"example_value\"\n  },\n  \"definition\": \"example_value\",\n  \"modified\": \"2026-01-15T10:30:00Z\",\n  \"type\": \"DECIMAL\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aebce168-f130-438a-8f6e-6cb7ccbc0c86",
+          "name": "Adobe Analytics Delete a Calculated Metric",
+          "request": {
+            "name": "Adobe Analytics Delete a Calculated Metric",
+            "description": {
+              "content": "Permanently deletes the specified calculated metric.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calculatedmetrics",
+                ":calculatedMetricId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "calculatedMetricId",
+                  "description": "(Required) The calculated metric ID"
+                },
+                {
+                  "description": "The global company ID for your Adobe Analytics organization",
+                  "type": "any",
+                  "value": "{{globalCompanyId}}",
+                  "key": "globalCompanyId"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "04259dbf-dda4-4af9-a28b-0e212e07db4b",
+              "name": "Deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calculatedmetrics",
+                    ":calculatedMetricId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "calculatedMetricId",
+                      "description": "(Required) The calculated metric ID"
+                    },
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The global company ID for your Adobe Analytics organization",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "YOUR_GLOBAL_COMPANY_ID",
+      "key": "globalCompanyId"
+    },
+    {
+      "type": "string",
+      "value": "https://analytics.adobe.io/api/{{globalCompanyId}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f6b53e7c-515e-4803-9918-35db0efa0e40",
+    "name": "Adobe Analytics Annotations Calculated Metrics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Adobe Analytics 2.0 APIs provide programmatic access to data, reports, and administration features within Adobe Analytics. You can perform almost any action available in the Analytics user interface, including reporting, segment management, calculated metrics, dimensions, and component administration.\n\nContact Support:\n Name: Adobe Analytics Support",
+      "type": "text/plain"
+    }
+  }
+}

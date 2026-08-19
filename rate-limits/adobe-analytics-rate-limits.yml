@@ -4,59 +4,85 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Adobe Analytics
 providerId: adobe-analytics
 created: '2026-05-04'
-modified: '2026-05-05'
-reconciled: false
+generated: '2026-08-13'
+method: searched
+modified: '2026-08-13'
+reconciled: true
+source: https://developer.adobe.com/analytics-apis/docs/2.0/guides/faq/
+sources:
+  - https://developer.adobe.com/analytics-apis/docs/2.0/guides/faq/
+  - https://raw.githubusercontent.com/AdobeDocs/analytics-2.0-apis/main/src/pages/guides/faq.md
 tags:
   - Rate Limiting
   - Analytics
   - Web Analytics
-notes: >-
-  Adobe Analytics API throttling is documented per endpoint but exact
-  per-second / per-minute numbers vary by company configuration and Reporting
-  API version (1.4 vs 2.0). Adobe documents that 429s should trigger
-  exponential backoff; specific numeric ceilings are deferred to
-  developer.adobe.com/analytics-apis.
 description: >-
-  Adobe Analytics enforces request rate limits per Adobe IMS organization /
-  company. Reporting API 2.0, Bulk Data Insertion, Livestream, and Data Repair
-  each have their own throttling envelopes; sustained excess returns 429.
-  Limits apply across all keys for a single company.
-sources:
-  - https://developer.adobe.com/analytics-apis/docs/2.0/
-  - https://experienceleague.adobe.com/docs/analytics/analyze/analysis-workspace/build-workspace-project/api-throttling.html
-responseCodes:
-  throttled: 429
-  serviceUnavailable: 503
+  Adobe publishes a single hard numeric rate limit for the Adobe Analytics 2.0 APIs in
+  the Analytics 2.0 API FAQ: 12 requests every 6 seconds per user (approximately 120
+  requests per minute). Exceeding it returns HTTP 429 with an Adobe error envelope
+  carrying error_code 429050. Adobe also documents a 60-second request timeout on
+  adobe.io. No RateLimit-* / X-RateLimit-* response headers are documented, and none is
+  claimed here — an agent gets no runtime budget signal from this API and must treat the
+  429 itself as the only feedback.
+limit_count: 1
 limits:
-  - name: Reporting API 2.0 throttling
-    scope: company
-    metric: requests_per_minute
-    limit: see https://developer.adobe.com/analytics-apis/docs/2.0/
-    notes: >-
-      Per-company-scoped rate limits enforced by the Reporting API; sustained
-      excess returns HTTP 429 with a Retry-After header.
+  - name: Adobe Analytics 2.0 API request rate
+    scope: per-user
+    window: 6s
+    limit: 12
+    equivalent: ~120 requests per minute
+    burst: null
+    applies_to:
+      - https://analytics.adobe.io/api/{globalCompanyId}
+    quote: >-
+      "The enforced rate limit for API calls is 12 requests every 6 seconds per user (or
+      approximately 120 requests per minute)."
+    source: https://developer.adobe.com/analytics-apis/docs/2.0/guides/faq/
+response_on_exhaustion:
+  status: 429
+  media_type: application/json
+  body: '{"error_code":"429050","message":"Too many requests"}'
+  quote: >-
+    "When you exceed this rate limit, API calls return a 429 HTTP response code with the
+    following response body: {"error_code":"429050","message":"Too many requests"}"
+headers:
+  documented: false
+  ratelimit_headers: []
+  retry_after: false
+  note: >-
+    Adobe documents no RateLimit-*, X-RateLimit-* or Retry-After response headers for the
+    Analytics 2.0 APIs. Clients cannot read remaining budget or reset time from a response;
+    they must implement client-side pacing and back off on 429.
+timeouts:
+  - name: adobe.io request timeout
+    seconds: 60
+    quote: 'Requests submitted through adobe.io currently time out at 60 seconds.'
+    source: https://developer.adobe.com/analytics-apis/docs/2.0/guides/faq/
+undocumented_surfaces:
   - name: Bulk Data Insertion API
-    scope: company
-    metric: requests_per_minute
-    limit: see https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-ingestion/
-    notes: >-
-      Bulk ingestion accepts compressed batches; per-file size limits apply.
+    host: https://analytics-collection.adobe.io/aa/collect/v1
+    note: >-
+      No numeric request-rate ceiling is published for bulk ingestion; Adobe documents
+      per-file format and size constraints instead. Recorded as undocumented rather than
+      estimated.
   - name: Livestream API
-    scope: company
-    metric: concurrent_connections
-    limit: see https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
-    notes: Long-lived streaming connection with per-company concurrency caps.
+    host: https://livestream.adobe.net
+    note: No published concurrency or connection-rate ceiling.
+  - name: Data Repair API
+    host: https://analytics.adobe.io/api/{globalCompanyId}/datarepair/v1
+    note: >-
+      No separate published rate limit; server-call estimate must be run before a repair
+      job, which acts as the practical throttle.
 policies:
-  - name: Backoff Strategy
-    description: Exponential backoff with jitter; honor Retry-After when present.
-  - name: Per-company scope
+  - name: Adobe best-practice guidance
     description: >-
-      Limits are aggregated across all OAuth/JWT credentials issued under
-      a single Adobe IMS organization, not per API key.
-  - name: Async reporting
+      Adobe's own guidance in the same FAQ: make multiple smaller requests instead of one
+      large request, and request data once then cache it.
+    source: https://developer.adobe.com/analytics-apis/docs/2.0/guides/faq/
+  - name: Backoff strategy
     description: >-
-      Long-running reports should use the asynchronous reporting endpoints
-      to avoid synchronous throttling.
+      No Retry-After is served, so exponential backoff with jitter on 429 is the only
+      viable client strategy.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

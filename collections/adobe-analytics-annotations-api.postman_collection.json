@@ -1,0 +1,370 @@
+{
+  "item": [
+    {
+      "id": "15bbb48c-9cf0-4dc2-8caa-3eb76847a7e6",
+      "name": "Annotations",
+      "description": {
+        "content": "Manage analytics annotations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c691594e-81bb-4180-aac5-22cc672b1216",
+          "name": "Adobe Analytics List Annotations",
+          "request": {
+            "name": "Adobe Analytics List Annotations",
+            "description": {
+              "content": "Retrieves all annotations associated with report suites in the company. Annotations mark specific dates or date ranges in reports with descriptive notes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "annotations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "locale",
+                  "value": "<string>",
+                  "description": "The locale for response labels"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The global company ID for your Adobe Analytics organization",
+                  "type": "any",
+                  "value": "{{globalCompanyId}}",
+                  "key": "globalCompanyId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d9619860-10cd-47f4-803a-95e1d45014bd",
+              "name": "List of annotations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "annotations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"abc123\",\n    \"name\": \"Example Title\",\n    \"description\": \"A sample description.\",\n    \"dateRange\": \"example_value\",\n    \"rsids\": [\n      \"example_value\"\n    ],\n    \"color\": \"example_value\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0e88be7d-fb45-4580-99be-828e92a1dacd",
+          "name": "Adobe Analytics Create an Annotation",
+          "request": {
+            "name": "Adobe Analytics Create an Annotation",
+            "description": {
+              "content": "Creates a new annotation for a report suite date range.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "annotations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The global company ID for your Adobe Analytics organization",
+                  "type": "any",
+                  "value": "{{globalCompanyId}}",
+                  "key": "globalCompanyId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"dateRange\": \"<string>\",\n  \"description\": \"<string>\",\n  \"rsids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"color\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7a4d8c93-97a1-4624-9df8-101fbbd7841c",
+              "name": "Annotation created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "annotations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"dateRange\": \"example_value\",\n  \"rsids\": [\n    \"example_value\"\n  ],\n  \"color\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"dateRange\": \"example_value\",\n  \"rsids\": [\n    \"example_value\"\n  ],\n  \"color\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bc6a0727-85dd-456e-95c9-7c8b41b09ffa",
+          "name": "Adobe Analytics List Tags",
+          "request": {
+            "name": "Adobe Analytics List Tags",
+            "description": {
+              "content": "Returns all tags used on components within the company. Tags can be applied to segments, calculated metrics, projects, and other components.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "componentmetadata",
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The global company ID for your Adobe Analytics organization",
+                  "type": "any",
+                  "value": "{{globalCompanyId}}",
+                  "key": "globalCompanyId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ab4804a2-6714-4339-b808-5d8f5e7d400e",
+              "name": "List of tags",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "componentmetadata",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"abc123\",\n    \"name\": \"Example Title\",\n    \"description\": \"A sample description.\",\n    \"components\": [\n      {}\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The global company ID for your Adobe Analytics organization",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "YOUR_GLOBAL_COMPANY_ID",
+      "key": "globalCompanyId"
+    },
+    {
+      "type": "string",
+      "value": "https://analytics.adobe.io/api/{{globalCompanyId}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "800273c3-7418-4b3e-8d5e-df2e059b2589",
+    "name": "Adobe Analytics Annotations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Adobe Analytics 2.0 APIs provide programmatic access to data, reports, and administration features within Adobe Analytics. You can perform almost any action available in the Analytics user interface, including reporting, segment management, calculated metrics, dimensions, and component administration.\n\nContact Support:\n Name: Adobe Analytics Support",
+      "type": "text/plain"
+    }
+  }
+}

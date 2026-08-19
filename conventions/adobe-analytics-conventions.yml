@@ -47,7 +47,13 @@ metadata_expansion:
     Component list endpoints accept an `expansion` query parameter to inline
     related metadata (e.g. ownership, definition, tags) on returned components.
 rate_limiting:
+  limit: 12 requests every 6 seconds per user (~120/minute)
+  status_on_exhaustion: 429
+  error_body: '{"error_code":"429050","message":"Too many requests"}'
+  response_headers: none documented (no RateLimit-*, no X-RateLimit-*, no Retry-After)
+  request_timeout_seconds: 60
   detail: >-
-    Rate limits apply per the docs; Bulk Data Insertion returns 429 on exceed.
-    See rate-limits/adobe-analytics-rate-limits.yml.
-  docs: https://developer.adobe.com/analytics-apis/docs/2.0/guides/rate-limits/
+    Adobe publishes one numeric ceiling in the Analytics 2.0 API FAQ. Because no
+    rate-limit response headers are served, a client cannot read remaining budget and must
+    pace itself and back off on 429. See rate-limits/adobe-analytics-rate-limits.yml.
+  docs: https://developer.adobe.com/analytics-apis/docs/2.0/guides/faq/

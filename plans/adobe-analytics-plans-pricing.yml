@@ -4,34 +4,60 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Adobe Analytics
 providerId: adobe-analytics
 created: '2026-05-04'
-modified: '2026-05-05'
+generated: '2026-08-13'
+# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
+# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
+# 2026-08-13: attempted to reconcile against the Adobe pricing page. business.adobe.com
+# would not answer this run (see verification below), so the tier names are left in place
+# with method still `generated`, and the per-tier API-to-SKU mapping that the 2026-05-04
+# sweep asserted has been REMOVED because it could not be verified and a wrong packaging
+# claim is worse than a missing one.
+method: generated
+modified: '2026-08-13'
 reconciled: false
+plan_count: 3
+list_pricing_published: false
 tags:
   - Analytics
   - Business Intelligence
   - Customer Intelligence
   - Digital Marketing
   - Web Analytics
-notes: >-
-  Adobe Analytics is sold via enterprise contract through Adobe sales. List
-  pricing is not published; SKUs include Select, Prime, and Ultimate, priced
-  by server-call volume, included Workspace seats, and feature bundles. API
-  access is included with all SKUs at no extra charge.
 description: >-
-  Adobe Analytics is an enterprise web/customer analytics product priced
-  through contact-sales contracts based on server-call volume and feature
-  bundle (Select / Prime / Ultimate). The API surface is included with the
-  underlying license and is not separately metered.
+  Adobe Analytics is an enterprise product sold on contact-sales contracts. Adobe
+  publishes NO list price, no public per-tier quota, and no self-service signup: there is
+  no plan an API consumer can read a number off. Adobe markets three packages — Select,
+  Prime and Ultimate — priced by committed server-call volume and feature bundle. API
+  access is included with the underlying Analytics license and is not separately metered
+  or separately purchasable.
+notes: >-
+  A developer cannot obtain Adobe Analytics API access without an existing Adobe Analytics
+  contract and an Adobe Developer Console project provisioned by an org admin. For catalog
+  purposes this is a fully sales-gated commercial surface.
 sources:
   - https://business.adobe.com/products/analytics/adobe-analytics.html
+  - https://business.adobe.com/products/analytics/pricing.html
   - https://developer.adobe.com/analytics-apis/
+verification:
+  checked: '2026-08-13'
+  outcome: unverified
+  evidence:
+    - url: https://business.adobe.com/products/analytics/pricing.html
+      status: 0
+      note: >-
+        Connection opened over HTTP/2 and then returned no response before a 30s timeout
+        (curl exit 92), with and without a browser User-Agent. WebFetch on the same URL
+        timed out at 60s. business.adobe.com did not serve this run.
+    - url: https://business.adobe.com/products/analytics/adobe-analytics.html
+      status: 0
+      note: Same non-response.
 plans:
   - id: adobe-analytics-select
     name: Analytics Select
     type: enterprise
-    description: >-
-      Entry enterprise tier. Includes core Analysis Workspace, segmentation,
-      and reporting APIs.
+    price: contact sales
+    verified: false
+    description: Entry Adobe Analytics package.
     entries:
       - label: Server-call commit
         name: server_calls
@@ -43,17 +69,12 @@ plans:
         unit: 1
         price: contact sales
         userMultiplied: false
-    elements:
-      - name: Analysis Workspace
-      - name: Reporting API 2.0
-      - name: Segmentation API
-      - name: Data Insertion API
   - id: adobe-analytics-prime
     name: Analytics Prime
     type: enterprise
-    description: >-
-      Mid-tier enterprise. Adds Customer Journey Analytics integration,
-      advanced segmentation, and attribution modelling.
+    price: contact sales
+    verified: false
+    description: Mid-tier Adobe Analytics package.
     entries:
       - label: Server-call commit
         name: server_calls
@@ -65,18 +86,12 @@ plans:
         unit: 1
         price: contact sales
         userMultiplied: false
-    elements:
-      - name: All Select features
-      - name: Attribution IQ
-      - name: Advanced segmentation
-      - name: Bulk Data Insertion API
-      - name: Livestream API
   - id: adobe-analytics-ultimate
     name: Analytics Ultimate
     type: enterprise
-    description: >-
-      Top enterprise tier. Includes predictive analytics, premium support,
-      and Customer Journey Analytics.
+    price: contact sales
+    verified: false
+    description: Top-tier Adobe Analytics package.
     entries:
       - label: Server-call commit
         name: server_calls
@@ -88,12 +103,6 @@ plans:
         unit: 1
         price: contact sales
         userMultiplied: false
-    elements:
-      - name: All Prime features
-      - name: Predictive Workspace
-      - name: Customer Journey Analytics
-      - name: Data Repair API
-      - name: Premium support
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

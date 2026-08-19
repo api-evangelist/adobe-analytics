@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Analytics Annotations Metrics API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics List Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/metrics",
+            "params": [
+              {
+                "name": "rsid",
+                "value": "",
+                "type": "query",
+                "description": "The report suite ID"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "The locale for response labels"
+              }
+            ]
+          },
+          "docs": "Returns a list of all metrics available in the specified report suite, including standard metrics and any calculated metrics. Metrics are returned as objects containing the ID, name, type, and description."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

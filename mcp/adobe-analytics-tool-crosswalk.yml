@@ -1,0 +1,177 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  mcp/adobe-analytics-mcp.yml (tool list searched from
+  https://developer.adobe.com/analytics-mcp/docs/aa/reference),
+  openapi/_original/adobe-analytics-api-openapi.yml,
+  openapi/_original/adobe-analytics-data-repair-api-openapi.yml,
+  openapi/_original/adobe-analytics-bulk-data-insertion-api-openapi.yml
+description: >-
+  Binds each tool on the Adobe-hosted Adobe Analytics MCP server
+  (https://aa-mcp.adobe.io/mcp) to the Adobe Analytics 2.0 REST operation(s) that back
+  it, so an agent can see which MCP calls have a public REST equivalent (and therefore a
+  documented request/response schema) and which are MCP-only. The live MCP schema is
+  auth-gated — an anonymous POST tools/list to the endpoint returns HTTP 401
+  ("Missing or empty Authorization token") — so bindings below are mapped by tool name
+  and documented behavior against the OpenAPI, not by reading the served inputSchema.
+  Confidence is recorded honestly per row.
+surfaces:
+  openapi:
+    files:
+      - openapi/_original/adobe-analytics-api-openapi.yml
+      - openapi/_original/adobe-analytics-data-repair-api-openapi.yml
+      - openapi/_original/adobe-analytics-bulk-data-insertion-api-openapi.yml
+    base_url: 'https://analytics.adobe.io/api/{globalCompanyId}'
+    gated: false
+  graphql: null
+  mcp:
+    url: https://aa-mcp.adobe.io/mcp
+    transport: http
+    gated: true
+    gate_evidence:
+      probed: '2026-08-13'
+      method: 'POST tools/list (jsonrpc 2.0, anonymous)'
+      http_status: 401
+      body: 'Missing or empty Authorization token'
+    oauth_protected_resource: well-known/adobe-analytics-aa-mcp-oauth-protected-resource.json
+crosswalk:
+  - tool: findReportSuites
+    category: discovery
+    rest: [listReportSuites]
+    binding: openapi/_original/adobe-analytics-api-openapi.yml#/paths/~1reportsuites~1collections~1suites/get
+    confidence: high
+  - tool: findDimensions
+    category: discovery
+    rest: [listDimensions]
+    binding: openapi/_original/adobe-analytics-api-openapi.yml#/paths/~1dimensions/get
+    confidence: high
+  - tool: findMetrics
+    category: discovery
+    rest: [listMetrics]
+    binding: openapi/_original/adobe-analytics-api-openapi.yml#/paths/~1metrics/get
+    confidence: high
+  - tool: findSegments
+    category: discovery
+    rest: [listSegments]
+    binding: openapi/_original/adobe-analytics-api-openapi.yml#/paths/~1segments/get
+    confidence: high
+  - tool: findDateRanges
+    category: discovery
+    rest: [listDateRanges]
+    binding: openapi/_original/adobe-analytics-api-openapi.yml#/paths/~1dateranges/get
+    confidence: high
+  - tool: runReport
+    category: reporting
+    rest: [runReport]
+    binding: openapi/_original/adobe-analytics-api-openapi.yml#/paths/~1reports/post
+    confidence: high
+    note: >-
+      The MCP tool wraps the same POST /reports report-request body documented in the
+      OpenAPI; the tool exposes a simplified natural-language-friendly shape over it.
+  - tool: describeSegment
+    category: describe
+    rest: [getSegment]
+    binding: openapi/_original/adobe-analytics-api-openapi.yml#/paths/~1segments~1{segmentId}/get
+    confidence: high
+  - tool: describeCalculatedMetric
+    category: describe
+    rest: [getCalculatedMetric]
+    binding: openapi/_original/adobe-analytics-api-openapi.yml#/paths/~1calculatedmetrics~1{calculatedMetricId}/get
+    confidence: high
+  - tool: upsertSegment
+    category: write
+    rest: [createSegment, updateSegment]
+    binding: openapi/_original/adobe-analytics-api-openapi.yml#/paths/~1segments/post
+    confidence: medium
+    note: >-
+      Upsert semantics: REST splits this into POST /segments (create) and
+      PUT /segments/{segmentId} (update). Which one the tool selects is not observable
+      without an authenticated introspection.
+  - tool: upsertCalculatedMetric
+    category: write
+    rest: [createCalculatedMetric, updateCalculatedMetric]
+    binding: openapi/_original/adobe-analytics-api-openapi.yml#/paths/~1calculatedmetrics/post
+    confidence: medium
+    note: Same upsert-over-POST/PUT split as upsertSegment.
+  - tool: createDateRange
+    category: write
+    rest: []
+    binding: null
+    confidence: low
+    note: >-
+      GET /dateranges is documented in the harvested OpenAPI but no POST /dateranges
+      operation is present in it, so no REST binding can be asserted. Adobe's live
+      Date Ranges endpoint documentation may cover creation.
+  - tool: searchDimensionItems
+    category: reporting
+    rest: [runReport]
+    binding: openapi/_original/adobe-analytics-api-openapi.yml#/paths/~1reports/post
+    confidence: medium
+    note: >-
+      Top dimension items are retrieved through the reporting endpoint (a ranked report
+      on the requested dimension) rather than a dedicated REST operation.
+mcp_only:
+  - tool: describeAa
+    reason: Server-side usage guide / prompt scaffolding; no REST equivalent.
+  - tool: setSessionDefaults
+    reason: MCP session state (default report suite + global company ID); REST is stateless and takes rsid per call.
+  - tool: getDefaultSessionReportSuiteId
+    reason: MCP session state read.
+  - tool: clearDefaultSessionReportSuiteId
+    reason: MCP session state clear.
+  - tool: findCompanies
+    reason: >-
+      Resolves the globalCompanyId for the authenticated user. In REST this is the
+      /discovery/me call on analytics.adobe.io, which is not present in the harvested OpenAPI.
+  - tool: findProjects
+    reason: Analysis Workspace projects; no project operation in the harvested OpenAPI.
+  - tool: describeProject
+    reason: Analysis Workspace project detail; no REST operation in the harvested OpenAPI.
+  - tool: upsertProject
+    reason: Analysis Workspace project write; no REST operation in the harvested OpenAPI.
+  - tool: listComponentUsage
+    reason: Component-usage ranking; no equivalent operation in the harvested OpenAPI.
+  - tool: listFrequentlyUsedWith
+    reason: Component co-occurrence intelligence; no REST equivalent.
+  - tool: listSimilarTo
+    reason: Component similarity intelligence; no REST equivalent.
+rest_only:
+  - operationId: deleteSegment
+    reason: No destructive segment-delete tool is exposed on the MCP server.
+  - operationId: deleteCalculatedMetric
+    reason: No destructive calculated-metric-delete tool is exposed on the MCP server.
+  - operationId: listCalculatedMetrics
+    reason: No list-calculated-metrics tool; the MCP surface exposes describeCalculatedMetric only.
+  - operationId: getReportSuite
+    reason: No single-report-suite detail tool; findReportSuites covers listing.
+  - operationId: listAnnotations
+    reason: Annotations are not on the MCP tool surface.
+  - operationId: createAnnotation
+    reason: Annotations are not on the MCP tool surface.
+  - operationId: listTags
+    reason: Component tags are not on the MCP tool surface.
+  - operationId: uploadEvents
+    reason: Bulk Data Insertion (data collection) is a separate host and not exposed via MCP.
+  - operationId: validateEvents
+    reason: Bulk Data Insertion validation is not exposed via MCP.
+  - operationId: getServerCallEstimate
+    reason: Data Repair API is not exposed via MCP.
+  - operationId: listJobs
+    reason: Data Repair API is not exposed via MCP.
+  - operationId: createRepairJob
+    reason: Data Repair API is not exposed via MCP (destructive privacy operation).
+  - operationId: getRepairJob
+    reason: Data Repair API is not exposed via MCP.
+coverage:
+  mcp_tools_total: 23
+  crosswalk_rows: 12
+  mcp_tools_bound_to_rest: 11
+  mcp_tools_unbound_in_crosswalk: 1
+  mcp_only: 11
+  rest_operations_total: 25
+  rest_operations_with_tool: 12
+  rest_only: 13
+  bound_confidence:
+    high: 8
+    medium: 3
+    low: 1

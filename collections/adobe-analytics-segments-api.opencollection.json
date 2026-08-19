@@ -1,0 +1,161 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Analytics Annotations Segments API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Segments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics List Segments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/segments",
+            "params": [
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "The locale for response labels"
+              },
+              {
+                "name": "filterByIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of IDs to filter results"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query",
+                "description": "Maximum number of results per page (max 1000)"
+              },
+              {
+                "name": "page",
+                "value": "10",
+                "type": "query",
+                "description": "Page number (zero-indexed)"
+              },
+              {
+                "name": "expansion",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of additional fields to include. Valid values: reportSuiteName, ownerFullName, modified, tags, compatibility, definition, publishingStatus, definitionLastModified, categories"
+              },
+              {
+                "name": "includeType",
+                "value": "all",
+                "type": "query",
+                "description": "Controls which segments are returned. Use 'all' for all company segments (admin only), 'shared' for shared segments, 'templates' for template segments."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of segments for the company. Supports filtering by name, tag, owner, and report suite, as well as pagination and expansion of additional fields."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Create a Segment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/segments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new analytics segment. The segment definition uses the Analytics query language to specify filter criteria based on dimensions, metrics, and events."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Get a Segment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/segments/:segmentId",
+            "params": [
+              {
+                "name": "segmentId",
+                "value": "",
+                "type": "path",
+                "description": "The segment ID"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "The locale for response labels"
+              },
+              {
+                "name": "expansion",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated list of additional fields to include"
+              }
+            ]
+          },
+          "docs": "Retrieves a single segment by its ID, including its definition and associated metadata."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Update a Segment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/segments/:segmentId",
+            "params": [
+              {
+                "name": "segmentId",
+                "value": "",
+                "type": "path",
+                "description": "The segment ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing segment. Supports partial updates — you can send only the fields you want to change. Tags, compatibility, and reportSuiteName cannot be edited via this endpoint."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Delete a Segment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/segments/:segmentId",
+            "params": [
+              {
+                "name": "segmentId",
+                "value": "",
+                "type": "path",
+                "description": "The segment ID"
+              }
+            ]
+          },
+          "docs": "Permanently deletes the specified segment."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

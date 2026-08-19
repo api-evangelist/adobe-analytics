@@ -1,0 +1,62 @@
+generated: '2026-08-13'
+method: probed
+source: >-
+  https://aa-mcp.adobe.io/.well-known/oauth-protected-resource (HTTP 200),
+  https://aa-mcp.adobe.io/.well-known/oauth-authorization-server (HTTP 200),
+  https://ims-na1.adobelogin.com/.well-known/openid-configuration
+docs: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
+description: >-
+  Adobe Analytics access tokens are issued by Adobe IMS (Identity Management System).
+  The Adobe Analytics 2.0 REST OpenAPI declares its credential as an HTTP bearer scheme
+  plus an x-api-key header and does NOT declare an inline oauth2 flow with a scope map,
+  so the scopes below are not derivable from the spec. They are taken from the two RFC
+  8414 / RFC 9728 discovery documents the Adobe Analytics MCP server publishes
+  anonymously — those are the authoritative machine-readable statement of what the
+  Analytics OAuth surface accepts. Saved copies live in well-known/.
+authorization_server:
+  issuer: https://aa-mcp.adobe.io
+  authorization_endpoint: https://ims-na1.adobelogin.com/ims/authorize/v2
+  token_endpoint: https://ims-na1.adobelogin.com/ims/token/v3
+  revocation_endpoint: https://ims-na1.adobelogin.com/ims/revoke
+  registration_endpoint: https://aa-mcp.adobe.io/register
+  grant_types_supported: [authorization_code]
+  response_types_supported: [code]
+  code_challenge_methods_supported: [S256]
+  token_endpoint_auth_methods_supported: [none]
+  files:
+    - well-known/adobe-analytics-aa-mcp-oauth-authorization-server.json
+    - well-known/adobe-analytics-aa-mcp-oauth-protected-resource.json
+    - well-known/adobe-analytics-ims-openid-configuration.json
+    - well-known/adobe-analytics-ims-oauth-authorization-server.json
+protected_resource:
+  resource: https://aa-mcp.adobe.io/mcp
+  bearer_methods_supported: [header]
+scopes:
+  - name: openid
+    description: >-
+      Standard OpenID Connect scope; requests an ID token identifying the Adobe user.
+    standard: true
+  - name: AdobeID
+    description: >-
+      Adobe IMS scope granting a token bound to the user's Adobe ID. Required on every
+      Adobe Analytics OAuth authorization.
+    standard: false
+  - name: additional_info.projectedProductContext
+    description: >-
+      Adobe IMS scope that projects the user's product entitlements (product profiles and
+      permission items) into the token. This is what carries the Adobe Analytics company
+      access and, for the MCP server, the "MCP Access" permission item.
+    standard: false
+authorization:
+  model: >-
+    Scopes are coarse. Actual authorization is enforced downstream by Adobe Analytics
+    product profiles and permission items (report suite access, component access,
+    admin rights) attached to the authenticated user, not by fine-grained OAuth scopes.
+    There is no per-endpoint or per-resource scope on the Analytics 2.0 REST API.
+  credential_types:
+    - OAuth Server-to-Server (client credentials, Adobe Developer Console)
+    - OAuth User Authentication (authorization code + PKCE, used by the MCP server)
+notes: >-
+  No scopes/permissions reference page enumerating per-operation scopes is published for
+  the Adobe Analytics 2.0 API — the docs describe credential setup, not a scope catalog.
+  Recording that absence honestly rather than inventing per-operation scopes.

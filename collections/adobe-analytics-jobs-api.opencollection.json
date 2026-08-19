@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Analytics Annotations Jobs API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics List Data Repair Jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/:rsid/job",
+            "params": [
+              {
+                "name": "rsid",
+                "value": "",
+                "type": "path",
+                "description": "The report suite ID"
+              }
+            ]
+          },
+          "docs": "Returns a list of the most recent 20 data repair jobs for the specified report suite, including both completed and in-progress jobs. Each job record includes status, progress, and result information."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Create a Data Repair Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/:rsid/job",
+            "params": [
+              {
+                "name": "rsid",
+                "value": "",
+                "type": "path",
+                "description": "The report suite ID"
+              },
+              {
+                "name": "validationToken",
+                "value": "CAUQAA",
+                "type": "query",
+                "description": "The token returned by the serverCallEstimate endpoint, confirming you have reviewed the cost estimate"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates and starts a new data repair job for the specified report suite and date range. The validationToken from the serverCallEstimate endpoint must be included as a query parameter. The request body defines which variables to repair and what actions to take (delete or set)."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Get a Data Repair Job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/:rsid/job/:jobId",
+            "params": [
+              {
+                "name": "rsid",
+                "value": "",
+                "type": "path",
+                "description": "The report suite ID"
+              },
+              {
+                "name": "jobId",
+                "value": "500123",
+                "type": "path",
+                "description": "The repair job ID returned when the job was created"
+              }
+            ]
+          },
+          "docs": "Returns the current status and details for a specific data repair job, including progress percentage, number of rows processed, and completion status."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

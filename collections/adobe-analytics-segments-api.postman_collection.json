@@ -1,0 +1,1062 @@
+{
+  "item": [
+    {
+      "id": "c2d3b35c-815d-44ec-9a7e-16669289ba0b",
+      "name": "Segments",
+      "description": {
+        "content": "Create, retrieve, update, and delete analytics segments",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "de367d47-4eea-4c8d-9b2d-ddca2a4f8de5",
+          "name": "Adobe Analytics List Segments",
+          "request": {
+            "name": "Adobe Analytics List Segments",
+            "description": {
+              "content": "Retrieves a list of segments for the company. Supports filtering by name, tag, owner, and report suite, as well as pagination and expansion of additional fields.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "segments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "locale",
+                  "value": "<string>",
+                  "description": "The locale for response labels"
+                },
+                {
+                  "disabled": false,
+                  "key": "filterByIds",
+                  "value": "<string>",
+                  "description": "Comma-separated list of IDs to filter results"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Maximum number of results per page (max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "0",
+                  "description": "Page number (zero-indexed)"
+                },
+                {
+                  "disabled": false,
+                  "key": "expansion",
+                  "value": "<string>",
+                  "description": "Comma-separated list of additional fields to include. Valid values: reportSuiteName, ownerFullName, modified, tags, compatibility, definition, publishingStatus, definitionLastModified, categories"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeType",
+                  "value": "<string>",
+                  "description": "Controls which segments are returned. Use 'all' for all company segments (admin only), 'shared' for shared segments, 'templates' for template segments."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "The global company ID for your Adobe Analytics organization",
+                  "type": "any",
+                  "value": "{{globalCompanyId}}",
+                  "key": "globalCompanyId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7beaf677-df77-4251-ae4c-8ac7ff468704",
+              "name": "List of segments",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "segments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterByIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "10"
+                    },
+                    {
+                      "key": "expansion",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "includeType",
+                      "value": "all"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"content\": [\n    {\n      \"id\": \"abc123\",\n      \"name\": \"Example Title\",\n      \"description\": \"A sample description.\",\n      \"rsid\": \"500123\",\n      \"definition\": \"example_value\",\n      \"modified\": \"2026-01-15T10:30:00Z\",\n      \"tags\": {}\n    }\n  ],\n  \"totalElements\": 42,\n  \"totalPages\": 42,\n  \"numberOfElements\": 10\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98210699-ae3e-430c-88cf-f1f43af52d2e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "segments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filterByIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "10"
+                    },
+                    {
+                      "key": "expansion",
+                      "value": "example_value"
+                    },
+                    {
+                      "key": "includeType",
+                      "value": "all"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"errorDescription\": \"example_value\",\n  \"errorId\": \"500123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7df1f7e4-7951-4a34-88d7-13b8519ca4a2",
+          "name": "Adobe Analytics Create a Segment",
+          "request": {
+            "name": "Adobe Analytics Create a Segment",
+            "description": {
+              "content": "Creates a new analytics segment. The segment definition uses the Analytics query language to specify filter criteria based on dimensions, metrics, and events.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "segments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The global company ID for your Adobe Analytics organization",
+                  "type": "any",
+                  "value": "{{globalCompanyId}}",
+                  "key": "globalCompanyId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"rsid\": \"<string>\",\n  \"definition\": \"<object>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c294f693-f157-40f0-b8d5-e608495b8779",
+              "name": "Segment created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "segments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"rsid\": \"500123\",\n  \"definition\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"rsid\": \"500123\",\n  \"owner\": {\n    \"id\": \"abc123\",\n    \"name\": \"Example Title\",\n    \"login\": \"example_value\"\n  },\n  \"definition\": \"example_value\",\n  \"modified\": \"2026-01-15T10:30:00Z\",\n  \"tags\": [\n    {\n      \"id\": \"abc123\",\n      \"name\": \"Example Title\",\n      \"description\": \"A sample description.\",\n      \"components\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e628e506-07ea-431a-928b-0edb6c1ca35d",
+              "name": "Invalid segment definition",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "segments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"rsid\": \"500123\",\n  \"definition\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"errorDescription\": \"example_value\",\n  \"errorId\": \"500123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f341ca34-2c63-4c8a-869e-9fb0d93cb0bd",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "segments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"rsid\": \"500123\",\n  \"definition\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"errorDescription\": \"example_value\",\n  \"errorId\": \"500123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "caa62c72-7eed-4d75-a035-0e229c9fc73d",
+          "name": "Adobe Analytics Get a Segment",
+          "request": {
+            "name": "Adobe Analytics Get a Segment",
+            "description": {
+              "content": "Retrieves a single segment by its ID, including its definition and associated metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "segments",
+                ":segmentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "locale",
+                  "value": "<string>",
+                  "description": "The locale for response labels"
+                },
+                {
+                  "disabled": false,
+                  "key": "expansion",
+                  "value": "<string>",
+                  "description": "Comma-separated list of additional fields to include"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "segmentId",
+                  "description": "(Required) The segment ID"
+                },
+                {
+                  "description": "The global company ID for your Adobe Analytics organization",
+                  "type": "any",
+                  "value": "{{globalCompanyId}}",
+                  "key": "globalCompanyId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "93610513-efa7-4c72-8c88-582d18e900ef",
+              "name": "Segment details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "segments",
+                    ":segmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expansion",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "segmentId",
+                      "description": "(Required) The segment ID"
+                    },
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"rsid\": \"500123\",\n  \"owner\": {\n    \"id\": \"abc123\",\n    \"name\": \"Example Title\",\n    \"login\": \"example_value\"\n  },\n  \"definition\": \"example_value\",\n  \"modified\": \"2026-01-15T10:30:00Z\",\n  \"tags\": [\n    {\n      \"id\": \"abc123\",\n      \"name\": \"Example Title\",\n      \"description\": \"A sample description.\",\n      \"components\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc06788d-60f9-43e1-818a-851e282148e0",
+              "name": "Segment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "segments",
+                    ":segmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "locale",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "expansion",
+                      "value": "example_value"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "segmentId",
+                      "description": "(Required) The segment ID"
+                    },
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"errorDescription\": \"example_value\",\n  \"errorId\": \"500123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba7f08f1-4876-4a01-a575-e308e33a2a85",
+          "name": "Adobe Analytics Update a Segment",
+          "request": {
+            "name": "Adobe Analytics Update a Segment",
+            "description": {
+              "content": "Updates an existing segment. Supports partial updates — you can send only the fields you want to change. Tags, compatibility, and reportSuiteName cannot be edited via this endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "segments",
+                ":segmentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "segmentId",
+                  "description": "(Required) The segment ID"
+                },
+                {
+                  "description": "The global company ID for your Adobe Analytics organization",
+                  "type": "any",
+                  "value": "{{globalCompanyId}}",
+                  "key": "globalCompanyId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"rsid\": \"<string>\",\n  \"definition\": \"<object>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bd74fc9b-4918-4619-84a5-58f281d421fa",
+              "name": "Updated segment",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "segments",
+                    ":segmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "segmentId",
+                      "description": "(Required) The segment ID"
+                    },
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"rsid\": \"500123\",\n  \"definition\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"abc123\",\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"rsid\": \"500123\",\n  \"owner\": {\n    \"id\": \"abc123\",\n    \"name\": \"Example Title\",\n    \"login\": \"example_value\"\n  },\n  \"definition\": \"example_value\",\n  \"modified\": \"2026-01-15T10:30:00Z\",\n  \"tags\": [\n    {\n      \"id\": \"abc123\",\n      \"name\": \"Example Title\",\n      \"description\": \"A sample description.\",\n      \"components\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4838916c-4e54-4393-ad3d-e4e16563b886",
+              "name": "Segment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "segments",
+                    ":segmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "segmentId",
+                      "description": "(Required) The segment ID"
+                    },
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Example Title\",\n  \"description\": \"A sample description.\",\n  \"rsid\": \"500123\",\n  \"definition\": \"example_value\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"errorDescription\": \"example_value\",\n  \"errorId\": \"500123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bccfc308-84f5-4cc7-8106-ebee73d26deb",
+          "name": "Adobe Analytics Delete a Segment",
+          "request": {
+            "name": "Adobe Analytics Delete a Segment",
+            "description": {
+              "content": "Permanently deletes the specified segment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "segments",
+                ":segmentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "segmentId",
+                  "description": "(Required) The segment ID"
+                },
+                {
+                  "description": "The global company ID for your Adobe Analytics organization",
+                  "type": "any",
+                  "value": "{{globalCompanyId}}",
+                  "key": "globalCompanyId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1d05fa01-5897-4f28-9f20-625e11230a56",
+              "name": "Segment deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "segments",
+                    ":segmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "segmentId",
+                      "description": "(Required) The segment ID"
+                    },
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c76f03da-b27c-47bc-b176-0126191e0118",
+              "name": "Segment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "segments",
+                    ":segmentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "segmentId",
+                      "description": "(Required) The segment ID"
+                    },
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"errorDescription\": \"example_value\",\n  \"errorId\": \"500123\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The global company ID for your Adobe Analytics organization",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "YOUR_GLOBAL_COMPANY_ID",
+      "key": "globalCompanyId"
+    },
+    {
+      "type": "string",
+      "value": "https://analytics.adobe.io/api/{{globalCompanyId}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "585cc53b-14eb-45fd-b94d-30862dff011b",
+    "name": "Adobe Analytics Annotations Segments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Adobe Analytics 2.0 APIs provide programmatic access to data, reports, and administration features within Adobe Analytics. You can perform almost any action available in the Analytics user interface, including reporting, segment management, calculated metrics, dimensions, and component administration.\n\nContact Support:\n Name: Adobe Analytics Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,6 +1,6 @@
-generated: '2026-06-20'
-method: searched
-source: live probes of Adobe Analytics API/portal hosts and the Adobe IMS authorization server
+generated: '2026-08-13'
+method: probed
+source: live probes of Adobe Analytics API/portal/MCP hosts and the Adobe IMS authorization server
 description: >-
   The Adobe Analytics API hosts (analytics.adobe.io, analytics-collection.adobe.io,
   livestream.adobe.net) do not publish /.well-known/ discovery documents; the
@@ -21,9 +21,15 @@ hosts:
         status: 404
       - path: /.well-known/ai-plugin.json
         status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
   - host: https://analytics-collection.adobe.io
     documents:
       - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/agent-card.json
         status: 404
   - host: https://developer.adobe.com
     documents:
@@ -33,6 +39,27 @@ hosts:
       - path: /.well-known/openid-configuration
         status: 200
         note: SPA 404 HTML, not a real OIDC document
+      - path: /.well-known/agent-card.json
+        status: 200
+        note: SPA 404 HTML, not an AgentCard — treated as a miss
+  - host: https://aa-mcp.adobe.io
+    note: >-
+      The Adobe-hosted Adobe Analytics MCP server. Serves real RFC 9728 protected-resource
+      metadata and RFC 8414 authorization-server metadata anonymously (probed 2026-08-13);
+      the MCP endpoint itself is auth-gated (POST tools/list returns 401).
+    documents:
+      - path: /.well-known/oauth-protected-resource
+        status: 200
+        file: adobe-analytics-aa-mcp-oauth-protected-resource.json
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        file: adobe-analytics-aa-mcp-oauth-authorization-server.json
+      - path: /.well-known/agent-card.json
+        status: 500
+        note: NoResourceFoundException — no A2A agent card served
+      - path: /.well-known/agent.json
+        status: 500
+        note: NoResourceFoundException — no legacy A2A agent card served
   - host: https://ims-na1.adobelogin.com
     note: Adobe Identity Management System — the OAuth2/OIDC authorization server issuing bearer tokens for the Analytics APIs
     documents:

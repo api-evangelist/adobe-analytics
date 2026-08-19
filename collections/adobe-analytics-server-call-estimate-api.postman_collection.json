@@ -1,0 +1,314 @@
+{
+  "item": [
+    {
+      "id": "a6ced7e0-eec6-4229-a257-277c3912d07c",
+      "name": "Server Call Estimate",
+      "description": {
+        "content": "Estimate the scope and cost of a repair job",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bc7db617-921c-4909-89c0-25dbb9da7d71",
+          "name": "Adobe Analytics Get Server Call Estimate",
+          "request": {
+            "name": "Adobe Analytics Get Server Call Estimate",
+            "description": {
+              "content": "Calculates the number of data rows that would be scanned for a repair job given the specified report suite and date range. This estimate is required before creating a repair job and returns a validationToken that must be passed to the job creation endpoint. The count determines the cost of the repair.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ":rsid",
+                "serverCallEstimate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dateRangeStart",
+                  "value": "<date>",
+                  "description": "(Required) Start of the date range for the repair in ISO 8601 format (YYYY-MM-DD)"
+                },
+                {
+                  "disabled": false,
+                  "key": "dateRangeEnd",
+                  "value": "<date>",
+                  "description": "(Required) End of the date range for the repair (inclusive) in ISO 8601 format (YYYY-MM-DD)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "rsid",
+                  "description": "(Required) The report suite ID"
+                },
+                {
+                  "description": "The global company ID for your Adobe Analytics organization",
+                  "type": "any",
+                  "value": "{{globalCompanyId}}",
+                  "key": "globalCompanyId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a40c554f-539d-48bc-8ddb-cb34a2ff7841",
+              "name": "Server call estimate",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":rsid",
+                    "serverCallEstimate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dateRangeStart",
+                      "value": "2026-01-15"
+                    },
+                    {
+                      "key": "dateRangeEnd",
+                      "value": "2026-01-15"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rsid",
+                      "description": "(Required) The report suite ID"
+                    },
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"reportSuiteId\": \"500123\",\n  \"dateRangeStart\": \"2026-01-15\",\n  \"dateRangeEnd\": \"2026-01-15\",\n  \"serverCallEstimate\": 10,\n  \"validationToken\": \"CAUQAA\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef389840-c2f9-4735-8003-ffee8e29b650",
+              "name": "Invalid parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":rsid",
+                    "serverCallEstimate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dateRangeStart",
+                      "value": "2026-01-15"
+                    },
+                    {
+                      "key": "dateRangeEnd",
+                      "value": "2026-01-15"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rsid",
+                      "description": "(Required) The report suite ID"
+                    },
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"errorDescription\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b9d01d0-e6d1-4369-9435-8e227d7bbeed",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":rsid",
+                    "serverCallEstimate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dateRangeStart",
+                      "value": "2026-01-15"
+                    },
+                    {
+                      "key": "dateRangeEnd",
+                      "value": "2026-01-15"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "rsid",
+                      "description": "(Required) The report suite ID"
+                    },
+                    {
+                      "description": "The global company ID for your Adobe Analytics organization",
+                      "type": "any",
+                      "value": "{{globalCompanyId}}",
+                      "key": "globalCompanyId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"example_value\",\n  \"errorDescription\": \"example_value\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The global company ID for your Adobe Analytics organization",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "YOUR_GLOBAL_COMPANY_ID",
+      "key": "globalCompanyId"
+    },
+    {
+      "type": "string",
+      "value": "https://analytics.adobe.io/api/{{globalCompanyId}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b050f51a-bf23-4ffc-9e14-a95d8a975a44",
+    "name": "Adobe Analytics Annotations Server Call Estimate API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Adobe Analytics 2.0 APIs provide programmatic access to data, reports, and administration features within Adobe Analytics. You can perform almost any action available in the Analytics user interface, including reporting, segment management, calculated metrics, dimensions, and component administration.\n\nContact Support:\n Name: Adobe Analytics Support",
+      "type": "text/plain"
+    }
+  }
+}

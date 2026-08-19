@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Analytics Annotations Date Ranges API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Date Ranges",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics List Date Ranges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/dateranges",
+            "params": [
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "The locale for response labels"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns saved date ranges available to the user or company."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

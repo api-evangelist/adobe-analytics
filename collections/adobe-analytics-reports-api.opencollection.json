@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Analytics Annotations Reports API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reports",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics Run a Report",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/reports",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs an analytics report based on the provided report request definition. The request body specifies metrics, dimensions, date ranges, filters, and other parameters to define the report output."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Analytics Annotations Report Suites API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Report Suites",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics List Report Suites",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/reportsuites/collections/suites",
+            "params": [
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "10",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of report suites accessible to the authenticated user, including report suite ID, name, timezone, and type."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Get a Report Suite",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/reportsuites/collections/suites/:rsid",
+            "params": [
+              {
+                "name": "rsid",
+                "value": "",
+                "type": "path",
+                "description": "The report suite ID"
+              }
+            ]
+          },
+          "docs": "Returns details for a specific report suite by its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

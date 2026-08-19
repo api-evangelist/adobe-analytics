@@ -1,0 +1,141 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Analytics Annotations Calculated Metrics API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Calculated Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics List Calculated Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/calculatedmetrics",
+            "params": [
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "The locale for response labels"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "10",
+                "type": "query"
+              },
+              {
+                "name": "expansion",
+                "value": "example_value",
+                "type": "query",
+                "description": "Comma-separated additional fields to include"
+              },
+              {
+                "name": "includeType",
+                "value": "all",
+                "type": "query",
+                "description": "Controls which calculated metrics are returned"
+              }
+            ]
+          },
+          "docs": "Retrieves all calculated metrics for the company. Supports filtering by owner, tags, report suite, and whether to include shared or template calculated metrics."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Create a Calculated Metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/calculatedmetrics",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new calculated metric using a definition that combines existing metrics with mathematical operators and functions."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Get a Calculated Metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/calculatedmetrics/:calculatedMetricId",
+            "params": [
+              {
+                "name": "calculatedMetricId",
+                "value": "",
+                "type": "path",
+                "description": "The calculated metric ID"
+              }
+            ]
+          },
+          "docs": "Retrieves a single calculated metric by its ID."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Update a Calculated Metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/calculatedmetrics/:calculatedMetricId",
+            "params": [
+              {
+                "name": "calculatedMetricId",
+                "value": "",
+                "type": "path",
+                "description": "The calculated metric ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing calculated metric definition or metadata."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Delete a Calculated Metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/calculatedmetrics/:calculatedMetricId",
+            "params": [
+              {
+                "name": "calculatedMetricId",
+                "value": "",
+                "type": "path",
+                "description": "The calculated metric ID"
+              }
+            ]
+          },
+          "docs": "Permanently deletes the specified calculated metric."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

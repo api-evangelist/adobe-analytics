@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Analytics Annotations API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Annotations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics List Annotations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/annotations",
+            "params": [
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "The locale for response labels"
+              },
+              {
+                "name": "limit",
+                "value": "10",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves all annotations associated with report suites in the company. Annotations mark specific dates or date ranges in reports with descriptive notes."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics Create an Annotation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/annotations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new annotation for a report suite date range."
+        },
+        {
+          "info": {
+            "name": "Adobe Analytics List Tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/componentmetadata/tags"
+          },
+          "docs": "Returns all tags used on components within the company. Tags can be applied to segments, calculated metrics, projects, and other components."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

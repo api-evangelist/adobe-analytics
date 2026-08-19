@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Adobe Analytics Annotations Dimensions API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Dimensions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Adobe Analytics List Dimensions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://analytics.adobe.io/api/{globalCompanyId}/dimensions",
+            "params": [
+              {
+                "name": "rsid",
+                "value": "",
+                "type": "query",
+                "description": "The report suite ID"
+              },
+              {
+                "name": "locale",
+                "value": "",
+                "type": "query",
+                "description": "The locale for response labels"
+              }
+            ]
+          },
+          "docs": "Returns all dimensions available in the specified report suite. Each dimension represents a category for grouping and filtering report data, such as page, browser, or custom eVar/prop."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
