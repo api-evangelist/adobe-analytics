@@ -254,6 +254,8 @@ apis:
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
   baseUrl: 'https://analytics-collection.adobe.io/aa/collect/v1'
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -288,6 +290,8 @@ apis:
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
   baseUrl: 'https://analytics.adobe.io/api/{globalCompanyId}/datarepair/v1'
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI
