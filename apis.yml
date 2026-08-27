@@ -116,7 +116,7 @@ apis:
   name: Adobe Analytics Annotations API
   description: Manage analytics annotations
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
-  baseUrl: 'https://analytics.adobe.io/api/{globalCompanyId}'
+  baseUrl: https://analytics.adobe.io/api/{globalCompanyId}
   tags:
   - Annotations
   properties:
@@ -150,7 +150,7 @@ apis:
   name: Adobe Analytics Calculated Metrics API
   description: Manage calculated metrics built from existing metrics
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
-  baseUrl: 'https://analytics.adobe.io/api/{globalCompanyId}'
+  baseUrl: https://analytics.adobe.io/api/{globalCompanyId}
   tags:
   - Calculated Metrics
   properties:
@@ -184,7 +184,7 @@ apis:
   name: Adobe Analytics Date Ranges API
   description: Manage saved date ranges
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
-  baseUrl: 'https://analytics.adobe.io/api/{globalCompanyId}'
+  baseUrl: https://analytics.adobe.io/api/{globalCompanyId}
   tags:
   - Date Ranges
   properties:
@@ -218,7 +218,7 @@ apis:
   name: Adobe Analytics Dimensions API
   description: Retrieve available dimensions for a report suite
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
-  baseUrl: 'https://analytics.adobe.io/api/{globalCompanyId}'
+  baseUrl: https://analytics.adobe.io/api/{globalCompanyId}
   tags:
   - Dimensions
   properties:
@@ -252,7 +252,7 @@ apis:
   name: Adobe Analytics Events API
   description: Upload and validate batched event data files
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
-  baseUrl: 'https://analytics-collection.adobe.io/aa/collect/v1'
+  baseUrl: https://analytics-collection.adobe.io/aa/collect/v1
   tags:
   - Event
   tags_raw:
@@ -288,7 +288,7 @@ apis:
   name: Adobe Analytics Jobs API
   description: Create and monitor data repair jobs
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
-  baseUrl: 'https://analytics.adobe.io/api/{globalCompanyId}/datarepair/v1'
+  baseUrl: https://analytics.adobe.io/api/{globalCompanyId}/datarepair/v1
   tags:
   - Job
   tags_raw:
@@ -324,7 +324,7 @@ apis:
   name: Adobe Analytics Metrics API
   description: Retrieve available metrics for a report suite
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
-  baseUrl: 'https://analytics.adobe.io/api/{globalCompanyId}'
+  baseUrl: https://analytics.adobe.io/api/{globalCompanyId}
   tags:
   - Metrics
   properties:
@@ -358,7 +358,7 @@ apis:
   name: Adobe Analytics Report Suites API
   description: Retrieve report suite information and configuration
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
-  baseUrl: 'https://analytics.adobe.io/api/{globalCompanyId}'
+  baseUrl: https://analytics.adobe.io/api/{globalCompanyId}
   tags:
   - Report Suites
   properties:
@@ -392,7 +392,7 @@ apis:
   name: Adobe Analytics Reports API
   description: Run analytics reports and retrieve data
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
-  baseUrl: 'https://analytics.adobe.io/api/{globalCompanyId}'
+  baseUrl: https://analytics.adobe.io/api/{globalCompanyId}
   tags:
   - Reports
   properties:
@@ -426,7 +426,7 @@ apis:
   name: Adobe Analytics Segments API
   description: Create, retrieve, update, and delete analytics segments
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
-  baseUrl: 'https://analytics.adobe.io/api/{globalCompanyId}'
+  baseUrl: https://analytics.adobe.io/api/{globalCompanyId}
   tags:
   - Segments
   properties:
@@ -460,7 +460,7 @@ apis:
   name: Adobe Analytics Server Call Estimate API
   description: Estimate the scope and cost of a repair job
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
-  baseUrl: 'https://analytics.adobe.io/api/{globalCompanyId}/datarepair/v1'
+  baseUrl: https://analytics.adobe.io/api/{globalCompanyId}/datarepair/v1
   tags:
   - Server Call Estimate
   properties:
@@ -490,172 +490,6 @@ apis:
     url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
   - type: APIReference
     url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/data-repair/
-- aid: adobe-analytics:adobe-analytics-classification-api
-  name: Adobe Analytics Classification API
-  description: >-
-    Import, update, and remove classification values that group and label dimension items
-    (for example mapping campaign tracking codes to campaign names, owners, and channels)
-    in an Adobe Analytics report suite.
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/classifications/
-  baseUrl: 'https://analytics.adobe.io/api/{globalCompanyId}'
-  tags:
-  - Analytics
-  - Classifications
-  - Data Management
-  properties:
-  - type: OpenAPI
-    url: openapi/_original/adobe-analytics-classification-api-openapi.json
-  - type: Documentation
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/classifications/
-  - type: APIReference
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/classification
-  - type: Authentication
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
-- aid: adobe-analytics:adobe-analytics-data-feeds-api
-  name: Adobe Analytics Data Feed API
-  description: >-
-    Create, update, retrieve, and manage Adobe Analytics data feeds and column presets —
-    the scheduled raw hit-level exports that deliver every column of collected data to
-    customer-controlled storage (FTP, S3, Azure, GCP).
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-feed/
-  baseUrl: 'https://analytics.adobe.io/api/{globalCompanyId}'
-  tags:
-  - Analytics
-  - Data Export
-  - Raw Data
-  properties:
-  - type: OpenAPI
-    url: openapi/_original/adobe-analytics-data-feeds-api-openapi.json
-  - type: Documentation
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-feed/
-  - type: APIReference
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/data-feeds
-  - type: Authentication
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
-- aid: adobe-analytics:adobe-analytics-data-warehouse-api
-  name: Adobe Analytics Data Warehouse API
-  description: >-
-    Schedule, manage, and retrieve Adobe Analytics Data Warehouse requests — non-sampled,
-    long-running exports of granular report data delivered to email or cloud storage.
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-warehouse/
-  baseUrl: 'https://analytics.adobe.io/api/{globalCompanyId}'
-  tags:
-  - Analytics
-  - Data Export
-  - Reporting
-  properties:
-  - type: OpenAPI
-    url: openapi/_original/adobe-analytics-data-warehouse-api-openapi.json
-  - type: Documentation
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-warehouse/
-  - type: APIReference
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/data-warehouse
-  - type: Authentication
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
-- aid: adobe-analytics:adobe-analytics-data-sources-api
-  name: Adobe Analytics Data Sources API
-  description: >-
-    Manage Data Sources uploads into an Adobe Analytics report suite — the batch channel
-    for bringing offline, CRM, and third-party data into Analytics reporting.
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-sources/
-  baseUrl: 'https://analytics.adobe.io/api/{globalCompanyId}'
-  tags:
-  - Analytics
-  - Data Ingestion
-  - Offline Data
-  properties:
-  - type: OpenAPI
-    url: openapi/_original/adobe-analytics-data-sources-api-openapi.json
-  - type: Documentation
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-sources/
-  - type: APIReference
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/data-sources
-  - type: Authentication
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
-- aid: adobe-analytics:adobe-analytics-marketing-channels-api
-  name: Adobe Analytics Marketing Channels API
-  description: >-
-    Retrieve the Marketing Channel processing rules configured for an Adobe Analytics
-    report suite — the rules that classify inbound traffic into paid search, display,
-    email, social, and other acquisition channels.
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/marketing-channels
-  baseUrl: 'https://analytics.adobe.io/api/{globalCompanyId}'
-  tags:
-  - Analytics
-  - Attribution
-  - Marketing
-  properties:
-  - type: OpenAPI
-    url: openapi/_original/adobe-analytics-marketing-channels-api-openapi.json
-  - type: Documentation
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/marketing-channels
-  - type: APIReference
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/marketing-channels
-  - type: Authentication
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
-- aid: adobe-analytics:adobe-analytics-cloud-locations-api
-  name: Adobe Analytics Cloud Locations API
-  description: >-
-    Manage the cloud export accounts and locations Adobe Analytics writes exported data to
-    (Amazon S3, Azure Blob, Google Cloud Platform), including account properties and
-    location definitions.
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/cloudloc/
-  baseUrl: 'https://analytics.adobe.io/api/{globalCompanyId}'
-  tags:
-  - Analytics
-  - Cloud Storage
-  - Data Export
-  properties:
-  - type: OpenAPI
-    url: openapi/_original/adobe-analytics-cloud-locations-api-openapi.json
-  - type: Documentation
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/cloudloc/
-  - type: APIReference
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/cloud-locations
-  - type: Authentication
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
-- aid: adobe-analytics:adobe-analytics-report-suites-admin-api
-  name: Adobe Analytics Report Suites Admin API
-  description: >-
-    Administer Adobe Analytics report suites — create suites, and read and update the
-    settings that govern collection and reporting behavior. Distinct from the read-only
-    report suite discovery operations on the core 2.0 reporting API.
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/report-suites
-  baseUrl: 'https://analytics.adobe.io/api/{globalCompanyId}'
-  tags:
-  - Administration
-  - Analytics
-  - Configuration
-  properties:
-  - type: OpenAPI
-    url: openapi/_original/adobe-analytics-report-suites-admin-api-openapi.json
-  - type: Documentation
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/report-suites
-  - type: APIReference
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/report-suites
-  - type: Authentication
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
-- aid: adobe-analytics:adobe-analytics-component-migration-api
-  name: Adobe Analytics Component Migration API
-  description: >-
-    Map Adobe Analytics dimensions and metrics to their Customer Journey Analytics
-    equivalents, supporting migration of segments and calculated metrics from Adobe
-    Analytics report suites to CJA data views.
-  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/compmigration/
-  baseUrl: 'https://analytics.adobe.io/api/{globalCompanyId}'
-  tags:
-  - Analytics
-  - Customer Journey Analytics
-  - Migration
-  properties:
-  - type: OpenAPI
-    url: openapi/_original/adobe-analytics-component-migration-api-openapi.json
-  - type: Documentation
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/compmigration/
-  - type: APIReference
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/component-migration
-  - type: Authentication
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
 maintainers:
   - name: Kin Lane
     email: kin@apievangelist.com
