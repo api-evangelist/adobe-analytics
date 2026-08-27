@@ -1,0 +1,52 @@
+# Kin Score artifact — adobe-analytics — 2026-08-27T123021
+# The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
+---
+kin_score:
+  slug: adobe-analytics
+  schema_version: 0.15.1
+  scored_at: '2026-08-27'
+  run_ts: 2026-08-27T123021
+  composite: 67.4
+  band: exemplar
+  facets:
+    discoverability: 83.3
+    contract_quality: 71.4
+    governance: 45.5
+    operational_transparency: 57.9
+    developer_ergonomics: 70.2
+    commercial_clarity: 71.1
+    contract_governance: 45.5
+    access_clarity: 71.1
+  agent_readiness:
+    score: 66.5
+    band: agent-native
+    dimensions:
+      spec_presence: true
+      agentic_access: derived
+      reversibility_documented: false
+      mcp_server: verified
+      auth_clarity: served
+      idempotency: verified
+      error_semantics: verified
+      openapi_examples: verified
+      rate_limit_signal: documented
+      event_surface_described: derived
+      agent_skills: true
+      well_known_catalog: false
+      consent_identity: false
+      agent_card: false
+      dry_run_mode: false
+      delegated_identity: served
+      protected_resource_metadata: verified
+      dynamic_client_registration: true
+      agentic_commerce: false
+  provenance:
+    mcp: first-party
+    skills: first-party
+    agentic_access: derived
+    conformance: derived
+    contracts:
+      total: 11
+      derived: 0
+      coverage: 0.0
+      callable: 100.0
