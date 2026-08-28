@@ -12,8 +12,8 @@ info:
     bearer token and Developer Console API key headers.
   version: 1.0.0
 sourceDescriptions:
-- name: bulkDataInsertionApi
-  url: ../openapi/adobe-analytics-bulk-data-insertion-api-openapi.yml
+- name: eventsApi
+  url: ../openapi/adobe-analytics-events-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: validate-then-upload-events

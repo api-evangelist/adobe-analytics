@@ -12,8 +12,14 @@ info:
     API key headers.
   version: 1.0.0
 sourceDescriptions:
-- name: analyticsApi
-  url: ../openapi/adobe-analytics-api-openapi.yml
+- name: annotationsApi
+  url: ../openapi/adobe-analytics-annotations-api-openapi.yml
+  type: openapi
+- name: dateRangesApi
+  url: ../openapi/adobe-analytics-date-ranges-api-openapi.yml
+  type: openapi
+- name: reportsApi
+  url: ../openapi/adobe-analytics-reports-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: annotate-and-run-report

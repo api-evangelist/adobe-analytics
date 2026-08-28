@@ -11,8 +11,11 @@ info:
     Adobe IMS bearer token and Developer Console API key headers.
   version: 1.0.0
 sourceDescriptions:
-- name: analyticsApi
-  url: ../openapi/adobe-analytics-api-openapi.yml
+- name: reportSuitesApi
+  url: ../openapi/adobe-analytics-report-suites-api-openapi.yml
+  type: openapi
+- name: reportsApi
+  url: ../openapi/adobe-analytics-reports-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: select-report-suite-and-run-report

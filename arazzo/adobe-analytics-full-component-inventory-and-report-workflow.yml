@@ -12,8 +12,17 @@ info:
     IMS bearer token and Developer Console API key headers.
   version: 1.0.0
 sourceDescriptions:
-- name: analyticsApi
-  url: ../openapi/adobe-analytics-api-openapi.yml
+- name: dimensionsApi
+  url: ../openapi/adobe-analytics-dimensions-api-openapi.yml
+  type: openapi
+- name: metricsApi
+  url: ../openapi/adobe-analytics-metrics-api-openapi.yml
+  type: openapi
+- name: reportSuitesApi
+  url: ../openapi/adobe-analytics-report-suites-api-openapi.yml
+  type: openapi
+- name: reportsApi
+  url: ../openapi/adobe-analytics-reports-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: full-component-inventory-and-report

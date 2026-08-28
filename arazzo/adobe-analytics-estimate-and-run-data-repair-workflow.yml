@@ -12,8 +12,11 @@ info:
     including the Adobe IMS bearer token and Developer Console API key headers.
   version: 1.0.0
 sourceDescriptions:
-- name: dataRepairApi
-  url: ../openapi/adobe-analytics-data-repair-api-openapi.yml
+- name: jobsApi
+  url: ../openapi/adobe-analytics-jobs-api-openapi.yml
+  type: openapi
+- name: serverCallEstimateApi
+  url: ../openapi/adobe-analytics-server-call-estimate-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: estimate-and-run-data-repair

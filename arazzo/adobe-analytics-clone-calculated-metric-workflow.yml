@@ -12,8 +12,8 @@ info:
     headers.
   version: 1.0.0
 sourceDescriptions:
-- name: analyticsApi
-  url: ../openapi/adobe-analytics-api-openapi.yml
+- name: calculatedMetricsApi
+  url: ../openapi/adobe-analytics-calculated-metrics-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: clone-calculated-metric

@@ -13,8 +13,14 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: analyticsApi
-  url: ../openapi/adobe-analytics-api-openapi.yml
+- name: dimensionsApi
+  url: ../openapi/adobe-analytics-dimensions-api-openapi.yml
+  type: openapi
+- name: metricsApi
+  url: ../openapi/adobe-analytics-metrics-api-openapi.yml
+  type: openapi
+- name: reportsApi
+  url: ../openapi/adobe-analytics-reports-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: discover-components-and-run-report
