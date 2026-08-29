@@ -1,0 +1,553 @@
+openapi: 3.2.0
+info:
+  title: Adobe Analytics Data Warehouse Data Warehouse Scheduled Requests API
+  description: "Adobe Analytics Data Warehouse API 2.0 \n\n Note: Adobe may add optional request and response members (name/value pairs) to existing API objects at any time and without notice or changes in versioning. Adobe recommends that you refer to the API documentation of any third-party tool you integrate with our APIs so that such additions are ignored in processing if not understood. If implemented properly, such additions are non-breaking changes for your implementation. Adobe will not remove parameters or add required parameters without first providing standard notification through release notes."
+  version: v2
+servers:
+- url: https://analytics.adobe.io/api
+tags:
+- name: Data Warehouse Scheduled Requests API
+  description: The data warehouse scheduled requests API
+paths:
+  /{globalCompanyId}/data_warehouse/scheduled:
+    get:
+      tags:
+      - Data Warehouse Scheduled Requests API
+      summary: Retrieves summarized information data warehouse scheduled requests that match specified filters
+      operationId: getScheduledRequest_2
+      parameters:
+      - name: globalCompanyId
+        in: path
+        description: The Global Company ID for the Adobe Analytics organization
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorization'
+      - $ref: '#/components/parameters/x-api-key'
+      - name: rsid
+        in: query
+        description: A report suite identifier.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: createdAfter
+        in: query
+        description: Filters for requests created on or after the specified datetime.
+        schema:
+          type: string
+      - name: createdBefore
+        in: query
+        description: Filters for requests created on or before the specified datetime.
+        schema:
+          type: string
+      - name: updatedAfter
+        in: query
+        description: Filters for requests updated on or after the specified datetime.
+        schema:
+          type: string
+      - name: updatedBefore
+        in: query
+        description: Filters for requests updated on or before the specified datetime.
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: 'Filters for requests based on status. Valid values are: ''Scheduled'', ''Completed'', ''Canceled'', and ''Error''.'
+        schema:
+          type: array
+          items:
+            type: string
+      - name: sort
+        in: query
+        description: Determines ordering of requests. Valid columns are 'createdDate', and 'updatedDate' and valid directions are 'asc' and 'desc' seperated by a colon.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Max number of requests that will be returned.
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '400':
+          description: Unexpected Error - failed to get scheduled request info.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsAsrErrorResponse'
+        '200':
+          description: Response body includes information about the Data Warehouse Scheduled Requests that match the filters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DwTemplateSchedules'
+    post:
+      tags:
+      - Data Warehouse Scheduled Requests API
+      summary: Create a data warehouse scheduled request
+      description: "Creates a new scheduled Data Warehouse request. An example definition for testing the API is shown below. This creates a request that generates a single report. To use the example, replace 'request.rsid' with an rsid to which you have Data Warehouse access (shown as 'sistr2' in the example), and then add a valid 'exportLocationUUID' under delivery.\n\n```json\n{\n  \"schedule\": {\n    \"periodSettings\": {\n      \"frequency\": \"runOnceSetPeriod\"\n    }\n  },\n  \"request\": {\n    \"name\": \"Run-Once Example\",\n      \"reportParameters\": {\n          \"reportRange\": {\n              \"startDateTime\": \"2023-01-01T00:00:00Z\",\n              \"endDateTime\": \"2023-01-01T23:59:59Z\"\n          },\n          \"dimensionList\": [\n          ],\n          \"metricList\": [\n              {\n                  \"id\": \"metrics/visitors\"\n              }\n          ]\n      },\n    \"rsid\": \"sistr2\"\n  },\n  \"delivery\": {\n      \"exportLocationUUID\": \"00000000-0000-0000-0000-000000000000\",\n      \"email\": {\n          \"notificationEmailTo\": \"donotuse@adobe.com\"\n      }\n  }\n}\n```\n\n Below is an example of a request that generates a daily report (for yesterday's data) for 10 days.\n\n```json\n{\n  \"schedule\": {\n    \"periodSettings\": {\n      \"frequency\": \"daily\"\n    }, \"cancelSettings\": {\n      \"cancelMethod\": \"afterOccurrences\",\n      \"endAfterNumOccurrences\": 10\n    }\n  },\n  \"request\": {\n    \"name\": \"Run Daily Example\",\n      \"reportParameters\": {\n          \"reportRange\": {\n              \"preset\": \"Yesterday\"\n          },\n          \"dimensionList\": [\n          ],\n          \"metricList\": [\n              {\n                  \"id\": \"metrics/visitors\"\n              }\n          ]\n      },\n    \"rsid\": \"sistr2\"\n  },\n  \"delivery\": {\n      \"exportLocationUUID\": \"00000000-0000-0000-0000-000000000000\",\n      \"email\": {\n          \"notificationEmailTo\": \"donotuse@adobe.com\"\n      }\n  }\n}\n```\n\nThe 'id' of items in the 'metricList' are identity service names. The example below shows a 'metricList' entry with the participation metric.\n\n```json\n{\n  \"id\": \"metrics/campaigninstances\",\n  \"properties\": {\n     \"isParticipation\": true\n   }\n}\n\n```\n\nFor 'dimensionList', the entries can reference an identity service or a segment service. The 'id' in the following 'dimensionList' example is specified as the path of an identity service.\n\n```json\n{\n  \"id\": \"variables/geocity\",\n}\n\n```\n\nThe example below shows a 'dimensionList' entry that references a segment service, instead of the identity service shown in the previous example. Note that when a 'namespace' is not specified with a service, it is assumed to be an identity service.\n\n```json\n{\n  \"namespace\": \"Segment Service\",\n  \"id\": \"s0_000000000000000000000000\",\n}\n\n```\n\n"
+      operationId: createDataWarehouseScheduledJob
+      parameters:
+      - name: globalCompanyId
+        in: path
+        description: The Global Company ID for the Adobe Analytics organization
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorization'
+      - $ref: '#/components/parameters/x-api-key'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataWarehouseTemplateRequest'
+      responses:
+        '400':
+          description: Bad Request - DW Scheduled Request Not Created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsAsrErrorResponse'
+        '200':
+          description: Response describes the created scheduled Data Warehouse request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestView'
+  /{globalCompanyId}/data_warehouse/scheduled/{UUID}:
+    get:
+      tags:
+      - Data Warehouse Scheduled Requests API
+      summary: Retrieves a detailed data warehouse scheduled request
+      operationId: getScheduledRequest_1
+      parameters:
+      - name: globalCompanyId
+        in: path
+        description: The Global Company ID for the Adobe Analytics organization
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorization'
+      - $ref: '#/components/parameters/x-api-key'
+      - name: UUID
+        in: path
+        description: The schedule request ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '400':
+          description: Bad Request - failed to get scheduled request info.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsAsrErrorResponse'
+        '200':
+          description: Response body describes the scheduled Data Warehouse request for the specified ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestView'
+    put:
+      tags:
+      - Data Warehouse Scheduled Requests API
+      summary: Updates a data warehouse scheduled request
+      description: "Updates an existing scheduled Data Warehouse request. An example request body is shown below. This example cancels a request and all recent reports for the UUID, as specified as a path parameter.\n\n```json\n{\n  \"metadata\": {\n    \"status\": \"cancelIncludeReports\"\n  }\n}\n```\n\n"
+      operationId: updateDataWarehouseTemplate
+      parameters:
+      - name: globalCompanyId
+        in: path
+        description: The Global Company ID for the Adobe Analytics organization
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorization'
+      - $ref: '#/components/parameters/x-api-key'
+      - name: UUID
+        in: path
+        description: The schedule request ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataWarehouseTemplatePatch'
+      responses:
+        '400':
+          description: Bad Request - Data Warehouse Request was not updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsAsrErrorResponse'
+        '200':
+          description: Response indicates the scheduled Data Warehouse request has been updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestView'
+components:
+  schemas:
+    TruncatedRequestInfo:
+      type: object
+      properties:
+        scheduledRequestUUID:
+          type: string
+        scheduledRequestLegacyID:
+          type: integer
+          format: int32
+        status:
+          type: string
+        createdDate:
+          type: string
+        updatedDate:
+          type: string
+        ownerInfo:
+          $ref: '#/components/schemas/TuncatedOwnerInfo'
+    DeliverySettings:
+      type: object
+      properties:
+        exportLocationUUID:
+          type: string
+        email:
+          $ref: '#/components/schemas/EmailSettings'
+    ReportSettings:
+      type: object
+      properties:
+        dimensionList:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportColumn'
+        metricList:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportColumn'
+        segmentList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Segment'
+        dateGranularity:
+          type: string
+        numberOfRowsInTable:
+          type: integer
+          format: int32
+        reportRange:
+          $ref: '#/components/schemas/ReportRange'
+        sortByMetrics:
+          type: boolean
+    TuncatedOwnerInfo:
+      type: object
+      properties:
+        login:
+          type: string
+        imsUserId:
+          type: string
+    AnalyticsAsrErrorResponse:
+      properties:
+        errorDescription:
+          type: string
+        errorCode:
+          type: string
+        errorId:
+          type: string
+    SharingInfo:
+      type: object
+      properties:
+        shareWithOtherUsers:
+          type: boolean
+    ReportColumn:
+      type: object
+      properties:
+        namespace:
+          type: string
+        id:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            type: object
+    TruncatedTemplateReportParameters:
+      type: object
+      properties:
+        name:
+          type: string
+        rsid:
+          type: string
+    EmailSettings:
+      type: object
+      properties:
+        notificationEmailTo:
+          type: string
+        notificationEmailFrom:
+          type: string
+        notificationEmailSubject:
+          type: string
+        notificationEmailNotes:
+          type: string
+    PatchMetadata:
+      type: object
+      properties:
+        status:
+          type: string
+    OutputFileSettings:
+      type: object
+      properties:
+        compressionFormat:
+          type: string
+        outputFileBasename:
+          type: string
+        fileFormat:
+          type: string
+        sendEmptyFileForNoDataReport:
+          type: boolean
+        beginningOfReportComments:
+          type: string
+        sendDigitalSignatureFile:
+          type: boolean
+        sendManifestFile:
+          type: boolean
+    ReportRange:
+      type: object
+      properties:
+        preset:
+          type: string
+        startDateTime:
+          type: string
+        endDateTime:
+          type: string
+    RequestInfo:
+      type: object
+      properties:
+        scheduledRequestUUID:
+          type: string
+        scheduledRequestLegacyID:
+          type: integer
+          format: int32
+        status:
+          type: string
+        createdDate:
+          type: string
+        updatedDate:
+          type: string
+        jobType:
+          type: string
+        ownerInfo:
+          $ref: '#/components/schemas/OwnerInfo'
+    DataWarehouseTemplateRequest:
+      type: object
+      properties:
+        schedule:
+          $ref: '#/components/schemas/TemplateSchedule'
+        request:
+          $ref: '#/components/schemas/TemplateReportParameters'
+        delivery:
+          $ref: '#/components/schemas/DeliverySettings'
+    DataWarehouseTemplatePatch:
+      type: object
+      properties:
+        schedule:
+          $ref: '#/components/schemas/TemplateSchedule'
+        request:
+          $ref: '#/components/schemas/RequestPatch'
+        delivery:
+          $ref: '#/components/schemas/DeliverySettings'
+        metadata:
+          $ref: '#/components/schemas/PatchMetadata'
+    TemplateReportParameters:
+      type: object
+      properties:
+        name:
+          type: string
+        sharing:
+          $ref: '#/components/schemas/SharingInfo'
+        outputFile:
+          $ref: '#/components/schemas/OutputFileSettings'
+        reportParameters:
+          $ref: '#/components/schemas/ReportSettings'
+        rsid:
+          type: string
+    RequestPatch:
+      type: object
+      properties:
+        name:
+          type: string
+        sharing:
+          $ref: '#/components/schemas/SharingInfo'
+        outputFile:
+          $ref: '#/components/schemas/OutputFileSettings'
+        reportParameters:
+          $ref: '#/components/schemas/ReportParameterPatch'
+    LegacyDeliveryFTPSettings:
+      type: object
+      properties:
+        username:
+          type: string
+        host:
+          type: string
+        port:
+          type: integer
+          format: int32
+        directory:
+          type: string
+    TemplateSchedule:
+      type: object
+      properties:
+        scheduleAt:
+          type: string
+        periodSettings:
+          $ref: '#/components/schemas/FrequencySettings'
+        cancelSettings:
+          $ref: '#/components/schemas/CancelSettings'
+    LegacyDeliveryS3Settings:
+      type: object
+      properties:
+        awsBucket:
+          type: string
+        awsAccessKey:
+          type: string
+        awsPath:
+          type: string
+    DeliverySettingsResponse:
+      type: object
+      properties:
+        exportLocationUUID:
+          type: string
+        email:
+          $ref: '#/components/schemas/EmailSettings'
+        legacyEmail:
+          type: boolean
+        legacyAzure:
+          $ref: '#/components/schemas/LegacyAzureSettings'
+        legacyFTP:
+          $ref: '#/components/schemas/LegacyDeliveryFTPSettings'
+        legacyS3:
+          $ref: '#/components/schemas/LegacyDeliveryS3Settings'
+    DwTemplateSchedules:
+      properties:
+        total:
+          type: integer
+          format: int64
+        totalReturned:
+          type: integer
+          format: int64
+        scheduledRequests:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestTruncatedView'
+    RequestView:
+      properties:
+        schedule:
+          $ref: '#/components/schemas/TemplateSchedule'
+        request:
+          $ref: '#/components/schemas/TemplateReportParameters'
+        delivery:
+          $ref: '#/components/schemas/DeliverySettingsResponse'
+        metadata:
+          $ref: '#/components/schemas/RequestInfo'
+    TruncatedReportInfo:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/TruncatedReportMetadata'
+    FrequencySettings:
+      type: object
+      properties:
+        frequency:
+          type: string
+        every:
+          type: integer
+          format: int32
+        dayOfMonth:
+          type: integer
+          format: int32
+        dayOfWeek:
+          type: string
+        month:
+          type: string
+        weekOfMonth:
+          type: string
+    ReportParameterPatch:
+      type: object
+      properties:
+        numberOfRowsInTable:
+          type: integer
+          format: int32
+    TruncatedReportMetadata:
+      type: object
+      properties:
+        legacyReportID:
+          type: integer
+          format: int32
+        uuid:
+          type: string
+        status:
+          type: string
+    Segment:
+      type: object
+      properties:
+        namespace:
+          type: string
+        id:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            type: object
+    OwnerInfo:
+      type: object
+      properties:
+        company:
+          type: string
+        login:
+          type: string
+        imsUserId:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+    LegacyAzureSettings:
+      type: object
+      properties:
+        account:
+          type: string
+        container:
+          type: string
+        prefix:
+          type: string
+    CancelSettings:
+      type: object
+      properties:
+        cancelMethod:
+          type: string
+        cancelDate:
+          type: string
+        endAfterNumOccurrences:
+          type: integer
+          format: int32
+    RequestTruncatedView:
+      type: object
+      properties:
+        mostRecentReport:
+          $ref: '#/components/schemas/TruncatedReportInfo'
+        request:
+          $ref: '#/components/schemas/TruncatedTemplateReportParameters'
+        metadata:
+          $ref: '#/components/schemas/TruncatedRequestInfo'
+  parameters:
+    authorization:
+      name: Authorization
+      in: header
+      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
+      required: true
+      schema:
+        type: string
+    x-api-key:
+      name: x-api-key
+      in: header
+      description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
+      required: true
+      schema:
+        type: string

@@ -1,0 +1,230 @@
+openapi: 3.2.0
+info:
+  title: Adobe Analytics Data Sources Account API
+  description: A service for managing and uploading data to Data Sources accounts.
+  version: '1.0'
+servers:
+- url: https://analytics.adobe.io/api
+tags:
+- name: Account
+  description: Manage Data Sources accounts associated with a report suite
+paths:
+  /{globalCompanyId}/datasources/account/{report_suite_id}:
+    get:
+      tags:
+      - Account
+      summary: Retrieve all Data Sources accounts
+      description: Retrieves information for all Data Sources accounts associated with the given report suite.
+      operationId: getAllAccounts
+      parameters:
+      - name: globalCompanyId
+        in: path
+        description: The Global Company ID for the Adobe Analytics organization
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorization'
+      - $ref: '#/components/parameters/x-api-key'
+      - name: report_suite_id
+        in: path
+        description: The report suite ID to search for accounts
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DataSourcesAccount'
+      security:
+      - global_company_id: []
+      - ims_user_token: []
+    post:
+      tags:
+      - Account
+      summary: Create a Data Sources account
+      description: Creates a new Data Sources account associated with the given report suite.
+      operationId: createAccount
+      parameters:
+      - name: globalCompanyId
+        in: path
+        description: The Global Company ID for the Adobe Analytics organization
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorization'
+      - $ref: '#/components/parameters/x-api-key'
+      - name: report_suite_id
+        in: path
+        description: The report suite ID associated with this account
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: The type of data associated with this account
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: The name of the account
+        schema:
+          type: string
+      - name: email
+        in: query
+        description: The email address to receive notifications regarding this account
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataSourcesAccount'
+      security:
+      - global_company_id: []
+      - ims_user_token: []
+  /{globalCompanyId}/datasources/account/{report_suite_id}/{data_source_id}:
+    get:
+      tags:
+      - Account
+      summary: Retrieve a single Data Sources account
+      description: Retrieves information for a Data Sources account associated with the given report suite.
+      operationId: getAccount
+      parameters:
+      - name: globalCompanyId
+        in: path
+        description: The Global Company ID for the Adobe Analytics organization
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorization'
+      - $ref: '#/components/parameters/x-api-key'
+      - name: report_suite_id
+        in: path
+        description: The report suite ID associated with the account
+        required: true
+        schema:
+          type: string
+      - name: data_source_id
+        in: path
+        description: The Data Source ID of the account to retrieve
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataSourcesAccount'
+      security:
+      - global_company_id: []
+      - ims_user_token: []
+    delete:
+      tags:
+      - Account
+      summary: Delete a Data Sources account
+      description: Deletes a Data Sources account associated with the given report suite. WARNING - This action cannot be undone.
+      operationId: deleteAccount
+      parameters:
+      - name: globalCompanyId
+        in: path
+        description: The Global Company ID for the Adobe Analytics organization
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorization'
+      - $ref: '#/components/parameters/x-api-key'
+      - name: report_suite_id
+        in: path
+        description: The report suite ID associated with the Data Sources account
+        required: true
+        schema:
+          type: string
+      - name: data_source_id
+        in: path
+        description: The Data Source ID of the account to delete
+        required: true
+        schema:
+          type: string
+      responses:
+        default:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationResponse'
+      security:
+      - global_company_id: []
+      - ims_user_token: []
+components:
+  parameters:
+    x-api-key:
+      name: x-api-key
+      in: header
+      description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
+      required: true
+      schema:
+        type: string
+    authorization:
+      name: Authorization
+      in: header
+      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
+      required: true
+      schema:
+        type: string
+  schemas:
+    OperationResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: Operation successful
+    DataSourcesAccount:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The client provided descriptive name for this account
+          example: My Data Sources Account
+        email:
+          type: string
+          example: noreply@mycompany.com
+        data_source_id:
+          type: integer
+          description: The ID of the Data Sources account
+          format: int32
+          example: 1
+        type:
+          type: string
+          description: The Type of data this account can accept
+          example: generic
+        ftp_hostname:
+          type: string
+          example: ftp.omniture.com
+        ftp_username:
+          type: string
+          example: my_username
+        ftp_password:
+          type: string
+          example: 3z1475tf
+  securitySchemes:
+    global_company_id:
+      type: apiKey
+      description: An Adobe global company ID
+      name: x-proxy-global-company-id
+      in: header
+    ims_user_token:
+      type: http
+      description: An Adobe IMS user access token
+      scheme: Bearer

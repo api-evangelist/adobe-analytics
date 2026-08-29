@@ -1,19 +1,19 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Adobe Analytics Annotations Server Call Estimate API
-  description: The Adobe Analytics 2.0 APIs provide programmatic access to data, reports, and administration features within Adobe Analytics. You can perform almost any action available in the Analytics user interface, including reporting, segment management, calculated metrics, dimensions, and component administration.
-  version: '2.0'
+  title: Adobe Analytics Data Repair Server Call Estimate API
+  description: 'The Data Repair API allows you to permanently delete or transform data that has already been ingested in Adobe Analytics. Use cases include deleting personally identifiable information (PII) to comply with privacy regulations and removing corrupted or erroneous data. The API requires a two-step workflow: first estimate the scope and cost using the server call estimate endpoint, then submit a repair job. This is a paid feature.'
+  version: '1.0'
   contact:
     name: Adobe Analytics Support
     url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
   termsOfService: https://www.adobe.com/legal/terms.html
   x-last-validated: '2026-04-18'
 servers:
-- url: https://analytics.adobe.io/api/{globalCompanyId}
-  description: Adobe Analytics Production API
+- url: https://analytics.adobe.io/api/{globalCompanyId}/datarepair/v1
+  description: Adobe Analytics Data Repair API
   variables:
     globalCompanyId:
-      description: The global company ID for your Adobe Analytics organization
+      description: The global company ID for your Analytics organization
       default: YOUR_GLOBAL_COMPANY_ID
 security:
 - bearerAuth: []
@@ -94,7 +94,27 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    rsidPath:
+      name: rsid
+      in: path
+      required: true
+      description: The report suite ID
+      schema:
+        type: string
   schemas:
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        errorDescription:
+          type: string
+          description: Human-readable error message
+          example: example_value
     ServerCallEstimate:
       type: object
       description: Estimate of server calls for a proposed data repair job
@@ -121,26 +141,6 @@ components:
           type: string
           description: Token required when creating the repair job
           example: CAUQAA
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code
-          example: example_value
-        errorDescription:
-          type: string
-          description: Human-readable error message
-          example: example_value
-  parameters:
-    rsidPath:
-      name: rsid
-      in: path
-      required: true
-      description: The report suite ID
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http
@@ -152,5 +152,5 @@ components:
       name: x-api-key
       description: Adobe Developer Console API key
 externalDocs:
-  description: Adobe Analytics 2.0 API Documentation
-  url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  description: Adobe Analytics Data Repair API Documentation
+  url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/

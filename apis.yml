@@ -504,6 +504,163 @@ apis:
     url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
   - type: APIReference
     url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/data-repair/
+- aid: adobe-analytics:adobe-analytics-account-api
+  name: Adobe Analytics Account API
+  description: Manage Data Sources accounts associated with a report suite
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
+  tags:
+  - Account
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-account-api-openapi.yml
+- aid: adobe-analytics:adobe-analytics-analytics-cloud-locations-account-api-api
+  name: Adobe Analytics Analytics Cloud Locations Account API
+  description: The analytics Cloud Locations account API for user token
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
+  tags:
+  - Analytics Cloud Locations Account API
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-analytics-cloud-locations-account-api-api-openapi.yml
+- aid: adobe-analytics:adobe-analytics-analytics-cloud-locations-location-api-api
+  name: Adobe Analytics Analytics Cloud Locations Location API
+  description: The analytics Cloud Locations Location API for user token
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
+  tags:
+  - Analytics Cloud Locations Location API
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-analytics-cloud-locations-location-api-api-openapi.yml
+- aid: adobe-analytics:adobe-analytics-classification-dataset-api
+  name: Adobe Analytics Classification Dataset API
+  description: >-
+    The Classification Dataset API from Adobe Analytics — 3 operation(s) for classification dataset.
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
+  tags:
+  - Classification Dataset
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-classification-dataset-api-openapi.yml
+- aid: adobe-analytics:adobe-analytics-classification-job-api
+  name: Adobe Analytics Classification Job API
+  description: >-
+    The Classification Job API from Adobe Analytics — 10 operation(s) for classification job.
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
+  tags:
+  - Classification Job
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-classification-job-api-openapi.yml
+- aid: adobe-analytics:adobe-analytics-collections-suites-api
+  name: Adobe Analytics Collections Suites API
+  description: The Collections Suites API from Adobe Analytics — 2 operation(s) for collections suites.
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
+  tags:
+  - Collections Suites
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-collections-suites-api-openapi.yml
+- aid: adobe-analytics:adobe-analytics-column-preset-api-api
+  name: Adobe Analytics Column Preset API
+  description: API to create, update and retrieve column presets for datafeeds with a user token
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
+  tags:
+  - Column Preset API
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-column-preset-api-api-openapi.yml
+- aid: adobe-analytics:adobe-analytics-component-migration-api
+  name: Adobe Analytics Component migration API
+  description: >-
+    API Methods for migrating projects with components from Adobe Analytics to Customer Journey Analytics
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
+  tags:
+  - Component migration
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-component-migration-api-openapi.yml
+- aid: adobe-analytics:adobe-analytics-data-warehouse-report-api-api
+  name: Adobe Analytics Data Warehouse Report API
+  description: The data warehouse report API
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
+  tags:
+  - Data Warehouse Report API
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-data-warehouse-report-api-api-openapi.yml
+- aid: adobe-analytics:adobe-analytics-data-warehouse-scheduled-requests-api-api
+  name: Adobe Analytics Data Warehouse Scheduled Requests API
+  description: The data warehouse scheduled requests API
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
+  tags:
+  - Data Warehouse Scheduled Requests API
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-data-warehouse-scheduled-requests-api-api-openapi.yml
+- aid: adobe-analytics:adobe-analytics-datafeed-api-api
+  name: Adobe Analytics Datafeed API
+  description: API to create, update and retrieve datafeed with a user token
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
+  tags:
+  - Datafeed API
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-datafeed-api-api-openapi.yml
+- aid: adobe-analytics:adobe-analytics-dimensions-mappings-api
+  name: Adobe Analytics Dimensions mappings API
+  description: Methods to map Analytics dimensions to CJA data views within an XDM schema
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
+  tags:
+  - Dimensions mappings
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-dimensions-mappings-api-openapi.yml
+- aid: adobe-analytics:adobe-analytics-job-api
+  name: Adobe Analytics Job API
+  description: Upload and monitor data of Data Sources accounts
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
+  tags:
+  - Job
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-job-api-openapi.yml
+- aid: adobe-analytics:adobe-analytics-manage-api-api
+  name: Adobe Analytics Manage API
+  description: API for users to resend, reprocess and redo datafeed requests with a user token
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
+  tags:
+  - Manage API
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-manage-api-api-openapi.yml
+- aid: adobe-analytics:adobe-analytics-marketing-channels-api
+  name: Adobe Analytics Marketing Channels API
+  description: The Marketing Channels API from Adobe Analytics — 1 operation(s) for marketing channels.
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
+  tags:
+  - Marketing Channels
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-marketing-channels-api-openapi.yml
+- aid: adobe-analytics:adobe-analytics-metrics-mappings-api
+  name: Adobe Analytics Metrics mappings API
+  description: Methods to map Analytics metrics to CJA data views within an XDM schema
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
+  tags:
+  - Metrics mappings
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-metrics-mappings-api-openapi.yml
+- aid: adobe-analytics:adobe-analytics-virtual-report-suites-api
+  name: Adobe Analytics Virtual Report Suites API
+  description: >-
+    The Virtual Report Suites API from Adobe Analytics — 4 operation(s) for virtual report suites.
+  humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
+  tags:
+  - Virtual Report Suites
+  properties:
+  - type: OpenAPI
+    url: openapi/adobe-analytics-virtual-report-suites-api-openapi.yml
 maintainers:
   - name: Kin Lane
     email: kin@apievangelist.com

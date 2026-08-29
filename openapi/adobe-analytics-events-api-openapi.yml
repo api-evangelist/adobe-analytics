@@ -1,20 +1,20 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Adobe Analytics Annotations Events API
-  description: The Adobe Analytics 2.0 APIs provide programmatic access to data, reports, and administration features within Adobe Analytics. You can perform almost any action available in the Analytics user interface, including reporting, segment management, calculated metrics, dimensions, and component administration.
-  version: '2.0'
+  title: Adobe Analytics Bulk Data Insertion Events API
+  description: The Bulk Data Insertion API (BDIA) lets you upload server-side call data in batches of gzip-compressed CSV files. Each file contains one event per row and must conform to the BDIA file format specification. This API is the recommended successor to the single-event Data Insertion API for high-volume server-side data collection.
+  version: '1.0'
   contact:
     name: Adobe Analytics Support
     url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
   termsOfService: https://www.adobe.com/legal/terms.html
   x-last-validated: '2026-04-18'
 servers:
-- url: https://analytics.adobe.io/api/{globalCompanyId}
-  description: Adobe Analytics Production API
-  variables:
-    globalCompanyId:
-      description: The global company ID for your Adobe Analytics organization
-      default: YOUR_GLOBAL_COMPANY_ID
+- url: https://analytics-collection.adobe.io/aa/collect/v1
+  description: Production (auto-routed)
+- url: https://analytics-collection-us.adobe.io/aa/collect/v1
+  description: US region
+- url: https://analytics-collection-eu.adobe.io/aa/collect/v1
+  description: EU region
 security:
 - bearerAuth: []
   apiKey: []
@@ -190,21 +190,17 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ValidationError:
+    ErrorResponse:
       type: object
-      description: A single validation error from file validation
+      description: Error response from the API
       properties:
-        row:
-          type: integer
-          description: Row number where the error occurred (1-indexed)
-          example: 10
-        column:
+        errorCode:
           type: string
-          description: Column name where the error occurred
+          description: Machine-readable error code
           example: example_value
-        message:
+        errorDescription:
           type: string
-          description: Description of the validation error
+          description: Human-readable error message
           example: example_value
     ValidationResponse:
       type: object
@@ -224,18 +220,6 @@ components:
           items:
             $ref: '#/components/schemas/ValidationError'
           example: []
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code
-          example: example_value
-        errorDescription:
-          type: string
-          description: Human-readable error message
-          example: example_value
     UploadResponse:
       type: object
       description: Response after a successful file upload
@@ -253,6 +237,22 @@ components:
           format: date-time
           description: Timestamp when the file was received
           example: '2026-01-15T10:30:00Z'
+    ValidationError:
+      type: object
+      description: A single validation error from file validation
+      properties:
+        row:
+          type: integer
+          description: Row number where the error occurred (1-indexed)
+          example: 10
+        column:
+          type: string
+          description: Column name where the error occurred
+          example: example_value
+        message:
+          type: string
+          description: Description of the validation error
+          example: example_value
   parameters:
     visitorGroupId:
       name: x-adobe-vgid
@@ -272,5 +272,5 @@ components:
       name: x-api-key
       description: Adobe Developer Console API key
 externalDocs:
-  description: Adobe Analytics 2.0 API Documentation
-  url: https://developer.adobe.com/analytics-apis/docs/2.0/
+  description: Adobe Analytics Bulk Data Insertion API Documentation
+  url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/

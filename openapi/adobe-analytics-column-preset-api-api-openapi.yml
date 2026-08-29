@@ -1,0 +1,258 @@
+openapi: 3.2.0
+info:
+  title: Adobe Analytics 2.0 Data Feed API. Create, update retrieve, and manage data feeds and column presets. Column Preset API
+  description: "Adobe Analytics Data Feed API 2.0\n\n Note: Adobe may add optional request and response members (name/value pairs) to existing API objects at any time and without notice or changes in versioning. Adobe recommends that you refer to the API documentation of any third-party tool you integrate with our APIs so that such additions are ignored in processing if not understood. If implemented properly, such additions are non-breaking changes for your implementation. Adobe will not remove parameters or add required parameters without first providing standard notification through release notes."
+  version: v2
+servers:
+- url: https://analytics.adobe.io/api
+tags:
+- name: Column Preset API
+  description: API to create, update and retrieve column presets for datafeeds with a user token
+paths:
+  /{globalCompanyId}/data_feeds/columnNames/all:
+    get:
+      tags:
+      - Column Preset API
+      summary: Get all column names
+      operationId: getAllColumnNames_1
+      parameters:
+      - name: globalCompanyId
+        in: path
+        description: The Global Company ID for the Adobe Analytics organization
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorization'
+      - $ref: '#/components/parameters/x-api-key'
+      responses:
+        '404':
+          description: Column names not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsAsrErrorResponse'
+        '500':
+          description: Error occurred while retrieving all columns
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsAsrErrorResponse'
+        '200':
+          description: All Column Names retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ColumnList'
+  /{globalCompanyId}/data_feeds/columnPreset:
+    post:
+      tags:
+      - Column Preset API
+      summary: Create a new column preset
+      operationId: createColumnPresetByRsid_1
+      parameters:
+      - name: globalCompanyId
+        in: path
+        description: The Global Company ID for the Adobe Analytics organization
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorization'
+      - $ref: '#/components/parameters/x-api-key'
+      - name: rsid
+        in: query
+        description: The report suite ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ColumnPresetCreateBody_User'
+      responses:
+        '404':
+          description: Column Presets for report suite not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsAsrErrorResponse'
+        '400':
+          description: Bad Request - Unable to create Column Preset.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsAsrErrorResponse'
+        '500':
+          description: Error occurred while creating column preset.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsAsrErrorResponse'
+        '200':
+          description: Column Presets for report suite created successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ColumnPresetView'
+  /{globalCompanyId}/data_feeds/columnPreset/{presetId}:
+    get:
+      tags:
+      - Column Preset API
+      summary: Get a column preset by ID
+      operationId: getColumnPreset_1
+      parameters:
+      - name: globalCompanyId
+        in: path
+        description: The Global Company ID for the Adobe Analytics organization
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorization'
+      - $ref: '#/components/parameters/x-api-key'
+      - name: presetId
+        in: path
+        description: The column preset ID
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '404':
+          description: Column preset not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsAsrErrorResponse'
+        '500':
+          description: Error occurred while retrieving columnPreset.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsAsrErrorResponse'
+        '200':
+          description: Column Preset retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ColumnPresetView'
+  /{globalCompanyId}/data_feeds/columnPresets:
+    get:
+      tags:
+      - Column Preset API
+      summary: Get column presets accessible by rsid
+      operationId: getColumnPresetByRsid_1
+      parameters:
+      - name: globalCompanyId
+        in: path
+        description: The Global Company ID for the Adobe Analytics organization
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorization'
+      - $ref: '#/components/parameters/x-api-key'
+      - name: rsid
+        in: query
+        description: The report suite ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '404':
+          description: Column Presets for report suite not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsAsrErrorResponse'
+        '500':
+          description: Error occurred while retrieving column presets for rsid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsAsrErrorResponse'
+        '200':
+          description: Column Presets for report suite retrieved successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ColumnPresetList'
+components:
+  schemas:
+    ColumnName:
+      type: object
+      properties:
+        name:
+          type: string
+    ColumnList:
+      properties:
+        data:
+          type: array
+          items:
+            type: string
+    ColumnPresetList:
+      properties:
+        total:
+          type: integer
+          format: int32
+        columnPresets:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleColumnPresetView'
+    ColumnPresetCreateBody_User:
+      required:
+      - columnNames
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+        columnNames:
+          type: array
+          items:
+            $ref: '#/components/schemas/ColumnName_User'
+    SimpleColumnPresetView:
+      type: object
+      properties:
+        columnPresetId:
+          type: integer
+          format: int32
+        name:
+          type: string
+    AnalyticsAsrErrorResponse:
+      properties:
+        errorDescription:
+          type: string
+        errorCode:
+          type: string
+        errorId:
+          type: string
+    ColumnPresetView:
+      properties:
+        columnNames:
+          type: array
+          items:
+            $ref: '#/components/schemas/ColumnName'
+        name:
+          type: string
+        columnPresetId:
+          type: integer
+          format: int32
+    ColumnName_User:
+      type: object
+      properties:
+        name:
+          type: string
+  parameters:
+    authorization:
+      name: Authorization
+      in: header
+      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
+      required: true
+      schema:
+        type: string
+    x-api-key:
+      name: x-api-key
+      in: header
+      description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
+      required: true
+      schema:
+        type: string

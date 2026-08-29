@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Adobe Analytics Annotations Dimensions API
+  title: Adobe Analytics Dimensions API
   description: The Adobe Analytics 2.0 APIs provide programmatic access to data, reports, and administration features within Adobe Analytics. You can perform almost any action available in the Analytics user interface, including reporting, segment management, calculated metrics, dimensions, and component administration.
   version: '2.0'
   contact:
@@ -70,31 +70,6 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    locale:
-      name: locale
-      in: query
-      description: The locale for response labels
-      schema:
-        type: string
-        enum:
-        - en_US
-        - fr_FR
-        - jp_JP
-        - ja_JP
-        - de_DE
-        - es_ES
-        - ko_KR
-        - pt_BR
-        - zh_CN
-        - zh_TW
-    rsid:
-      name: rsid
-      in: query
-      required: true
-      description: The report suite ID
-      schema:
-        type: string
   schemas:
     Dimension:
       type: object
@@ -140,6 +115,31 @@ components:
           type: string
           description: Unique ID for tracking this error
           example: '500123'
+  parameters:
+    rsid:
+      name: rsid
+      in: query
+      required: true
+      description: The report suite ID
+      schema:
+        type: string
+    locale:
+      name: locale
+      in: query
+      description: The locale for response labels
+      schema:
+        type: string
+        enum:
+        - en_US
+        - fr_FR
+        - jp_JP
+        - ja_JP
+        - de_DE
+        - es_ES
+        - ko_KR
+        - pt_BR
+        - zh_CN
+        - zh_TW
   securitySchemes:
     bearerAuth:
       type: http

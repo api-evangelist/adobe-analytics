@@ -1,0 +1,342 @@
+openapi: 3.2.0
+info:
+  title: Adobe Analytics Data Warehouse Data Warehouse Report API
+  description: "Adobe Analytics Data Warehouse API 2.0 \n\n Note: Adobe may add optional request and response members (name/value pairs) to existing API objects at any time and without notice or changes in versioning. Adobe recommends that you refer to the API documentation of any third-party tool you integrate with our APIs so that such additions are ignored in processing if not understood. If implemented properly, such additions are non-breaking changes for your implementation. Adobe will not remove parameters or add required parameters without first providing standard notification through release notes."
+  version: v2
+servers:
+- url: https://analytics.adobe.io/api
+tags:
+- name: Data Warehouse Report API
+  description: The data warehouse report API
+paths:
+  /{globalCompanyId}/data_warehouse/report/{UUID}:
+    get:
+      tags:
+      - Data Warehouse Report API
+      summary: Retrieves a detailed data warehouse report for a scheduled request
+      operationId: get
+      parameters:
+      - name: globalCompanyId
+        in: path
+        description: The Global Company ID for the Adobe Analytics organization
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorization'
+      - $ref: '#/components/parameters/x-api-key'
+      - name: UUID
+        in: path
+        description: The report ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '400':
+          description: Unexpected Error - failed to get DW request info.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsAsrErrorResponse'
+        '200':
+          description: Response containing the Data Warehouse report for the specified ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportView'
+    put:
+      tags:
+      - Data Warehouse Report API
+      summary: Updates a data warehouse report
+      description: Updates an existing scheduled Data Warehouse request.
+      operationId: updateDataWarehouseJob
+      parameters:
+      - name: globalCompanyId
+        in: path
+        description: The Global Company ID for the Adobe Analytics organization
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorization'
+      - $ref: '#/components/parameters/x-api-key'
+      - name: UUID
+        in: path
+        description: The report ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataWarehouseJobPut'
+      responses:
+        '400':
+          description: Unexpected Error - DW Job was not updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsAsrErrorResponse'
+        '200':
+          description: Response body describes the updated Data Warehouse report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportView'
+  /{globalCompanyId}/data_warehouse/report:
+    get:
+      tags:
+      - Data Warehouse Report API
+      summary: Retrieves summarized information for data warehouse reports that match specified filters
+      operationId: get_1
+      parameters:
+      - name: globalCompanyId
+        in: path
+        description: The Global Company ID for the Adobe Analytics organization
+        required: true
+        schema:
+          type: string
+      - $ref: '#/components/parameters/authorization'
+      - $ref: '#/components/parameters/x-api-key'
+      - name: scheduledRequestUUID
+        in: query
+        description: The ID for a data warehouse scheduled request. This is required.
+        schema:
+          type: string
+      - name: createdAfter
+        in: query
+        description: Filters for reports created on or after the specified datetime.
+        schema:
+          type: string
+      - name: createdBefore
+        in: query
+        description: Filters for reports created on or before the specified datetime.
+        schema:
+          type: string
+      - name: updatedAfter
+        in: query
+        description: Filters for reports updated on or after the specified datetime.
+        schema:
+          type: string
+      - name: updatedBefore
+        in: query
+        description: Filters for reports updated on or before the specified datetime.
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: Filters for reports based on specified status. Valid values are 'Completed', 'Canceled', 'Error - Failure To Send', 'Error - Processing', 'Created', 'Processing', and 'Pending'.
+        schema:
+          type: array
+          items:
+            type: string
+      - name: sort
+        in: query
+        description: Determines ordering of requests. Valid columns are 'createdDate', and 'updatedDate' and valid directions are 'asc' and 'desc' seperated by a colon.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Max number of requests that will be returned.
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '400':
+          description: Unexpected Error - failed to get DW request info.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyticsAsrErrorResponse'
+        '200':
+          description: Returns a list of Data Warehouse reports that match the specified filters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DwRequestGetJobs'
+components:
+  schemas:
+    LegacyDeliveryFTPSettings:
+      type: object
+      properties:
+        username:
+          type: string
+        host:
+          type: string
+        port:
+          type: integer
+          format: int32
+        directory:
+          type: string
+    DwRequestGetJobs:
+      properties:
+        total:
+          type: integer
+          format: int64
+        totalReturned:
+          type: integer
+          format: int64
+        reportList:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportTruncatedView'
+    EmailSettings:
+      type: object
+      properties:
+        notificationEmailTo:
+          type: string
+        notificationEmailFrom:
+          type: string
+        notificationEmailSubject:
+          type: string
+        notificationEmailNotes:
+          type: string
+    ReportView:
+      properties:
+        delivery:
+          $ref: '#/components/schemas/DeliverySettingsResponse'
+        outputFile:
+          $ref: '#/components/schemas/OutputFileSettings'
+        metadata:
+          $ref: '#/components/schemas/ReportMetadata'
+        report:
+          $ref: '#/components/schemas/ReportData'
+    LegacyAzureSettings:
+      type: object
+      properties:
+        account:
+          type: string
+        container:
+          type: string
+        prefix:
+          type: string
+    LegacyDeliveryS3Settings:
+      type: object
+      properties:
+        awsBucket:
+          type: string
+        awsAccessKey:
+          type: string
+        awsPath:
+          type: string
+    DeliverySettingsResponse:
+      type: object
+      properties:
+        exportLocationUUID:
+          type: string
+        email:
+          $ref: '#/components/schemas/EmailSettings'
+        legacyEmail:
+          type: boolean
+        legacyAzure:
+          $ref: '#/components/schemas/LegacyAzureSettings'
+        legacyFTP:
+          $ref: '#/components/schemas/LegacyDeliveryFTPSettings'
+        legacyS3:
+          $ref: '#/components/schemas/LegacyDeliveryS3Settings'
+    OutputFileSettings:
+      type: object
+      properties:
+        compressionFormat:
+          type: string
+        outputFileBasename:
+          type: string
+        fileFormat:
+          type: string
+        sendEmptyFileForNoDataReport:
+          type: boolean
+        beginningOfReportComments:
+          type: string
+        sendDigitalSignatureFile:
+          type: boolean
+        sendManifestFile:
+          type: boolean
+    DataWarehouseJobPut:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    AnalyticsAsrErrorResponse:
+      properties:
+        errorDescription:
+          type: string
+        errorCode:
+          type: string
+        errorId:
+          type: string
+    ReportTruncatedView:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/TruncatedReportMetadata'
+        report:
+          $ref: '#/components/schemas/TruncatedReportData'
+    TruncatedReportData:
+      type: object
+      properties:
+        fromDate:
+          type: string
+        toDate:
+          type: string
+    ReportMetadata:
+      type: object
+      properties:
+        legacyReportID:
+          type: integer
+          format: int32
+        reportUUID:
+          type: string
+        scheduledRequestUUID:
+          type: string
+        createdDate:
+          type: string
+        updatedDate:
+          type: string
+        startedDate:
+          type: string
+        completedDate:
+          type: string
+        status:
+          type: string
+        currentTask:
+          type: string
+        jobType:
+          type: string
+    TruncatedReportMetadata:
+      type: object
+      properties:
+        legacyReportID:
+          type: integer
+          format: int32
+        uuid:
+          type: string
+        status:
+          type: string
+    Metadata:
+      type: object
+      properties:
+        status:
+          type: string
+    ReportData:
+      type: object
+      properties:
+        rsid:
+          type: string
+        fromDate:
+          type: string
+        toDate:
+          type: string
+  parameters:
+    authorization:
+      name: Authorization
+      in: header
+      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
+      required: true
+      schema:
+        type: string
+    x-api-key:
+      name: x-api-key
+      in: header
+      description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
+      required: true
+      schema:
+        type: string
