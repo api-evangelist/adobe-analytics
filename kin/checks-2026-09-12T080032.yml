@@ -1,16 +1,16 @@
 ---
 kin_checks:
   slug: adobe-analytics
-  schema_version: 0.18.2
-  scored_at: '2026-09-04'
-  run_ts: 2026-09-04T062714
+  schema_version: 0.21.0
+  scored_at: '2026-09-12'
+  run_ts: 2026-09-12T080032
   note: Actionable checks only (missed + partial). earned/na are every other check
-    in rubric/scoring-0.18.2.yml; counts below let you verify that.
+    in rubric/scoring-0.21.0.yml; counts below let you verify that.
   counts:
-    total: 132
-    earned: 63
-    partial: 23
-    missed: 30
+    total: 136
+    earned: 64
+    partial: 25
+    missed: 31
     na: 16
   checks:
   - id: base_url_per_api
@@ -46,9 +46,6 @@ kin_checks:
     status: missed
   - id: overlay_published
     status: missed
-  - id: status_page_present
-    status: missed
-    detail: pointer liveness 0.0
   - id: rate_limits_rich
     status: missed
   - id: webhooks_advertised
@@ -67,6 +64,10 @@ kin_checks:
   - id: os_security_policy
     status: missed
   - id: os_releases
+    status: missed
+  - id: upsert_alternate_key
+    status: missed
+  - id: upsert_named
     status: missed
   - id: reversibility_documented
     status: missed
@@ -126,10 +127,17 @@ kin_checks:
   - id: conformance_declared
     status: partial
     earned: 1.5
+  - id: status_page_present
+    status: partial
+    earned: 3.0
+    detail: pointer liveness 0.5
   - id: github_org_present
     status: partial
     earned: 1.0
     detail: pointer liveness 0.5
+  - id: postman_present
+    status: partial
+    earned: 0.5
   - id: blog_present
     status: partial
     earned: 0.5

@@ -673,6 +673,8 @@ tags:
   - Marketing
   - Web Analytics
 common:
+  - type: Website
+    url: https://www.adobe.com/
   - type: CapabilityMap
     url: capabilities/adobe-analytics-capability-edges.yml
     name: Adobe Analytics Business Capability Map
