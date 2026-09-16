@@ -1,9 +1,8 @@
 aid: adobe-analytics
 url: https://raw.githubusercontent.com/api-evangelist/adobe-analytics/refs/heads/main/apis.yml
 name: Adobe Analytics
-description: >-
-  Adobe Analytics provides real-time analytics and detailed segmentation capabilities across all marketing channels,
-  enabling organizations to discover high-value audiences and power customer intelligence.
+description: Adobe Analytics provides real-time analytics and detailed segmentation capabilities across
+  all marketing channels, enabling organizations to discover high-value audiences and power customer intelligence.
 deliveryModel:
   model: open-core
   license: Apache-2.0
@@ -32,15 +31,14 @@ accessModel:
   generated: '2026-07-22'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/adobe-analytics.png
-created: 2024-01-01T00:00:00.000Z
-modified: '2026-08-13'
+created: 2024-01-01 00:00:00+00:00
+modified: '2026-09-16'
 specificationVersion: '0.23'
 apis:
 - name: Adobe Analytics Livestream API
-  description: >-
-    The Livestream API is a reporting feature in Adobe Analytics that allows clients to receive traffic
-    data processed by Adobe Analytics in real time. Hits are streamed to the client on a hit-by-hit basis
-    in the same order and rate that they are processed by Adobe servers.
+  description: The Livestream API is a reporting feature in Adobe Analytics that allows clients to receive
+    traffic data processed by Adobe Analytics in real time. Hits are streamed to the client on a hit-by-hit
+    basis in the same order and rate that they are processed by Adobe servers.
   image: https://www.adobe.com/content/dam/cc/icons/analytics.svg
   baseUrl: https://livestream.adobe.net/api/1/stream
   tags:
@@ -58,22 +56,19 @@ apis:
   - type: Authentication
     url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
   - type: ChangeLog
-    url: >-
-      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/release-notes/
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/release-notes/
   contact:
   - type: Support
     url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
   - type: Support
-    url: >-
-      https://experienceleaguecommunities.adobe.com/t5/adobe-analytics/ct-p/adobe-analytics-community
+    url: https://experienceleaguecommunities.adobe.com/t5/adobe-analytics/ct-p/adobe-analytics-community
     title: Community
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
 - name: Adobe Analytics Data Insertion API
-  description: >-
-    The Data Insertion API allows server-side data submission to Adobe Analytics one event at a time using
-    HTTP GET or POST requests. Unlike the Bulk Data Insertion API which processes compressed CSV files
-    in batches, this API handles individual hit submissions in real time and is explicitly excluded from
-    the Analytics 1.4 API end-of-life scheduled for August 12, 2026.
+  description: The Data Insertion API allows server-side data submission to Adobe Analytics one event
+    at a time using HTTP GET or POST requests. Unlike the Bulk Data Insertion API which processes compressed
+    CSV files in batches, this API handles individual hit submissions in real time and is explicitly excluded
+    from the Analytics 1.4 API end-of-life scheduled for August 12, 2026.
   image: https://www.adobe.com/content/dam/cc/icons/analytics.svg
   baseUrl: https://sc.omtrdc.net/b/ss
   tags:
@@ -90,16 +85,14 @@ apis:
   - type: Support
     url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
   - type: Support
-    url: >-
-      https://experienceleaguecommunities.adobe.com/t5/adobe-analytics/ct-p/adobe-analytics-community
+    url: https://experienceleaguecommunities.adobe.com/t5/adobe-analytics/ct-p/adobe-analytics-community
     title: Community
   humanURL: https://developer.adobe.com/analytics-apis/docs/1.4/guides/data-insertion/
 - name: Adobe Analytics 1.4 API
-  description: >-
-    The Adobe Analytics 1.4 APIs provide programmatic access to reporting, classifications, data sources,
-    and report suite configuration. This version is deprecated and scheduled for end-of-life on August
-    12, 2026, after which all endpoints will cease to function. The Data Insertion API is excluded from
-    this end-of-life.
+  description: The Adobe Analytics 1.4 APIs provide programmatic access to reporting, classifications,
+    data sources, and report suite configuration. This version is deprecated and scheduled for end-of-life
+    on August 12, 2026, after which all endpoints will cease to function. The Data Insertion API is excluded
+    from this end-of-life.
   image: https://www.adobe.com/content/dam/cc/icons/analytics.svg
   baseUrl: https://api.omniture.com/admin/1.4
   tags:
@@ -122,8 +115,7 @@ apis:
   - type: Support
     url: https://experienceleague.adobe.com/docs/analytics.html
   - type: Support
-    url: >-
-      https://experienceleaguecommunities.adobe.com/t5/adobe-analytics/ct-p/adobe-analytics-community
+    url: https://experienceleaguecommunities.adobe.com/t5/adobe-analytics/ct-p/adobe-analytics-community
     title: Community
   humanURL: https://developer.adobe.com/analytics-apis/docs/1.4/
 - aid: adobe-analytics:adobe-analytics-annotations-api
@@ -151,11 +143,9 @@ apis:
   - type: GitHubRepository
     url: https://github.com/AdobeDocs/analytics-2.0-apis
   - type: Documentation
-    url: >-
-      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
   - type: APIReference
-    url: >-
-      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
   - type: APIReference
@@ -185,11 +175,9 @@ apis:
   - type: GitHubRepository
     url: https://github.com/AdobeDocs/analytics-2.0-apis
   - type: Documentation
-    url: >-
-      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
   - type: APIReference
-    url: >-
-      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
   - type: APIReference
@@ -219,11 +207,9 @@ apis:
   - type: GitHubRepository
     url: https://github.com/AdobeDocs/analytics-2.0-apis
   - type: Documentation
-    url: >-
-      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
   - type: APIReference
-    url: >-
-      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
   - type: APIReference
@@ -253,11 +239,9 @@ apis:
   - type: GitHubRepository
     url: https://github.com/AdobeDocs/analytics-2.0-apis
   - type: Documentation
-    url: >-
-      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
   - type: APIReference
-    url: >-
-      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
   - type: APIReference
@@ -289,11 +273,9 @@ apis:
   - type: GitHubRepository
     url: https://github.com/AdobeDocs/analytics-2.0-apis
   - type: Documentation
-    url: >-
-      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
   - type: APIReference
-    url: >-
-      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
   - type: APIReference
@@ -325,11 +307,9 @@ apis:
   - type: GitHubRepository
     url: https://github.com/AdobeDocs/analytics-2.0-apis
   - type: Documentation
-    url: >-
-      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
   - type: APIReference
-    url: >-
-      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
   - type: APIReference
@@ -359,11 +339,9 @@ apis:
   - type: GitHubRepository
     url: https://github.com/AdobeDocs/analytics-2.0-apis
   - type: Documentation
-    url: >-
-      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
   - type: APIReference
-    url: >-
-      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
   - type: APIReference
@@ -393,11 +371,9 @@ apis:
   - type: GitHubRepository
     url: https://github.com/AdobeDocs/analytics-2.0-apis
   - type: Documentation
-    url: >-
-      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
   - type: APIReference
-    url: >-
-      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
   - type: APIReference
@@ -427,11 +403,9 @@ apis:
   - type: GitHubRepository
     url: https://github.com/AdobeDocs/analytics-2.0-apis
   - type: Documentation
-    url: >-
-      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
   - type: APIReference
-    url: >-
-      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
   - type: APIReference
@@ -461,11 +435,9 @@ apis:
   - type: GitHubRepository
     url: https://github.com/AdobeDocs/analytics-2.0-apis
   - type: Documentation
-    url: >-
-      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
   - type: APIReference
-    url: >-
-      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
   - type: APIReference
@@ -495,11 +467,9 @@ apis:
   - type: GitHubRepository
     url: https://github.com/AdobeDocs/analytics-2.0-apis
   - type: Documentation
-    url: >-
-      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/
   - type: APIReference
-    url: >-
-      https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
+    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/bulk-data-insertion/endpoints/
   - type: Documentation
     url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/data-repair/
   - type: APIReference
@@ -514,7 +484,7 @@ apis:
   - type: OpenAPI
     url: openapi/adobe-analytics-account-api-openapi.yml
 - aid: adobe-analytics:adobe-analytics-analytics-cloud-locations-account-api-api
-  name: Adobe Analytics Analytics Cloud Locations Account API
+  name: Adobe Analytics Cloud Locations Account API
   description: The analytics Cloud Locations account API for user token
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
   tags:
@@ -523,7 +493,7 @@ apis:
   - type: OpenAPI
     url: openapi/adobe-analytics-analytics-cloud-locations-account-api-api-openapi.yml
 - aid: adobe-analytics:adobe-analytics-analytics-cloud-locations-location-api-api
-  name: Adobe Analytics Analytics Cloud Locations Location API
+  name: Adobe Analytics Cloud Locations Location API
   description: The analytics Cloud Locations Location API for user token
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
   tags:
@@ -533,8 +503,8 @@ apis:
     url: openapi/adobe-analytics-analytics-cloud-locations-location-api-api-openapi.yml
 - aid: adobe-analytics:adobe-analytics-classification-dataset-api
   name: Adobe Analytics Classification Dataset API
-  description: >-
-    The Classification Dataset API from Adobe Analytics — 3 operation(s) for classification dataset.
+  description: The Classification Dataset API from Adobe Analytics — 3 operation(s) for classification
+    dataset.
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
   tags:
   - Classification Dataset
@@ -543,8 +513,7 @@ apis:
     url: openapi/adobe-analytics-classification-dataset-api-openapi.yml
 - aid: adobe-analytics:adobe-analytics-classification-job-api
   name: Adobe Analytics Classification Job API
-  description: >-
-    The Classification Job API from Adobe Analytics — 10 operation(s) for classification job.
+  description: The Classification Job API from Adobe Analytics — 10 operation(s) for classification job.
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
   tags:
   - Classification Job
@@ -571,8 +540,8 @@ apis:
     url: openapi/adobe-analytics-column-preset-api-api-openapi.yml
 - aid: adobe-analytics:adobe-analytics-component-migration-api
   name: Adobe Analytics Component migration API
-  description: >-
-    API Methods for migrating projects with components from Adobe Analytics to Customer Journey Analytics
+  description: API Methods for migrating projects with components from Adobe Analytics to Customer Journey
+    Analytics
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
   tags:
   - Component migration
@@ -653,8 +622,8 @@ apis:
     url: openapi/adobe-analytics-metrics-mappings-api-openapi.yml
 - aid: adobe-analytics:adobe-analytics-virtual-report-suites-api
   name: Adobe Analytics Virtual Report Suites API
-  description: >-
-    The Virtual Report Suites API from Adobe Analytics — 4 operation(s) for virtual report suites.
+  description: The Virtual Report Suites API from Adobe Analytics — 4 operation(s) for virtual report
+    suites.
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/guides/endpoints/livestream/
   tags:
   - Virtual Report Suites
@@ -662,263 +631,267 @@ apis:
   - type: OpenAPI
     url: openapi/adobe-analytics-virtual-report-suites-api-openapi.yml
 maintainers:
-  - name: Kin Lane
-    email: kin@apievangelist.com
+- name: Kin Lane
+  email: kin@apievangelist.com
 tags:
-  - Adobe
-  - Analytics
-  - Business Intelligence
-  - Customer Intelligence
-  - Digital Marketing
-  - Marketing
-  - Web Analytics
+- Adobe
+- Analytics
+- Business Intelligence
+- Customer Intelligence
+- Digital Marketing
+- Marketing
+- Web Analytics
 common:
-  - type: Website
-    url: https://www.adobe.com/
-  - type: CapabilityMap
-    url: capabilities/adobe-analytics-capability-edges.yml
-    name: Adobe Analytics Business Capability Map
-  - type: IssueTracker
-    url: https://github.com/AdobeDocs/analytics-1.4-apis/issues
-  - type: CodeOfConduct
-    url: https://github.com/AdobeDocs/analytics-1.4-apis/blob/main/CODE_OF_CONDUCT.md
-  - type: ContributionGuide
-    url: https://github.com/AdobeDocs/analytics-1.4-apis/blob/main/.github/CONTRIBUTING.md
-  - type: License
-    name: Apache-2.0
-    url: https://github.com/AdobeDocs/analytics-1.4-apis/blob/main/LICENSE
-  - type: Packages
-    url: packages/adobe-analytics-packages.yml
-  - type: WellKnown
-    url: well-known/adobe-analytics-well-known.yml
-  - type: MCPServer
-    url: mcp/adobe-analytics-mcp.yml
-  - type: LLMsTxt
-    url: llms/adobe-analytics-llms.txt
-  - type: Overlay
-    url: overlays/adobe-analytics-api-overlay.yaml
-  - type: Overlay
-    url: overlays/adobe-analytics-bulk-data-insertion-api-overlay.yaml
-  - type: Overlay
-    url: overlays/adobe-analytics-data-repair-api-overlay.yaml
-  - type: Conformance
-    url: conformance/adobe-analytics-conformance.yml
-  - type: ErrorCatalog
-    url: errors/adobe-analytics-problem-types.yml
-  - type: Lifecycle
-    url: lifecycle/adobe-analytics-lifecycle.yml
-  - type: Conventions
-    url: conventions/adobe-analytics-conventions.yml
-  - type: ChangeLog
-    url: changelog/adobe-analytics-changelog.yml
-  - type: DataModel
-    url: data-model/adobe-analytics-data-model.yml
-  - type: AgenticAccess
-    url: agentic-access/adobe-analytics-agentic-access.yml
-  - type: VulnerabilityDisclosure
-    url: security/adobe-analytics-vulnerability-disclosure.yml
-  - type: DomainSecurity
-    url: security/adobe-analytics-domain-security.yml
-  - type: Authentication
-    url: authentication/adobe-analytics-authentication.yml
-  - type: PostmanWorkspace
-    url: https://www.postman.com/kinlaneapi/adobe-analytics/overview
-  - type: Arazzo
-    url: arazzo/adobe-analytics-annotate-and-run-report-workflow.yml
-    name: Adobe Analytics Annotate a Date Range and Run a Report
-  - type: Arazzo
-    url: arazzo/adobe-analytics-clone-calculated-metric-workflow.yml
-    name: Adobe Analytics Clone a Calculated Metric
-  - type: Arazzo
-    url: arazzo/adobe-analytics-clone-segment-workflow.yml
-    name: Adobe Analytics Clone a Segment
-  - type: Arazzo
-    url: arazzo/adobe-analytics-create-calculated-metric-and-run-report-workflow.yml
-    name: Adobe Analytics Create a Calculated Metric and Run a Report
-  - type: Arazzo
-    url: arazzo/adobe-analytics-create-segment-and-run-report-workflow.yml
-    name: Adobe Analytics Create a Segment and Run a Segmented Report
-  - type: Arazzo
-    url: arazzo/adobe-analytics-discover-components-and-run-report-workflow.yml
-    name: Adobe Analytics Discover Components and Run a Report
-  - type: Arazzo
-    url: arazzo/adobe-analytics-estimate-and-run-data-repair-workflow.yml
-    name: Adobe Analytics Estimate and Run a Data Repair Job
-  - type: Arazzo
-    url: arazzo/adobe-analytics-full-component-inventory-and-report-workflow.yml
-    name: Adobe Analytics Full Component Inventory and Report
-  - type: Arazzo
-    url: arazzo/adobe-analytics-report-on-existing-segment-workflow.yml
-    name: Adobe Analytics Report on an Existing Segment
-  - type: Arazzo
-    url: arazzo/adobe-analytics-select-report-suite-and-run-report-workflow.yml
-    name: Adobe Analytics Select a Report Suite and Run a Report
-  - type: Arazzo
-    url: arazzo/adobe-analytics-upsert-segment-workflow.yml
-    name: Adobe Analytics Upsert a Segment
-  - type: Arazzo
-    url: arazzo/adobe-analytics-validate-then-upload-events-workflow.yml
-    name: Adobe Analytics Validate then Upload a Batch Events File
-  - type: Portal
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/
-  - type: Documentation
-    url: https://experienceleague.adobe.com/docs/analytics.html
-  - type: GettingStarted
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/
-  - type: Console
-    url: https://developer.adobe.com/console/
-  - type: Authentication
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
-  - type: Support
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
-  - type: Support
-    url: https://experienceleaguecommunities.adobe.com/t5/adobe-analytics/ct-p/adobe-analytics-community
-  - type: StackOverflow
-    url: https://stackoverflow.com/questions/tagged/adobe-analytics
-  - type: GitHubOrganization
-    url: https://github.com/AdobeDocs
-  - type: ChangeLog
-    url: https://experienceleague.adobe.com/en/docs/analytics/release-notes/latest
-  - type: TermsOfService
-    url: https://www.adobe.com/legal/terms.html
-  - type: PrivacyPolicy
-    url: https://www.adobe.com/privacy/policy.html
-  - type: StatusPage
-    url: https://status.adobe.com/
-  - type: Blog
-    url: https://blog.adobe.com/en/topics/analytics
-  - type: GitHubRepository
-    url: https://github.com/AdobeDocs/analytics-2.0-apis
-  - type: JSONSchema
-    url: json-schema/adobe-analytics-report-request-schema.json
-  - type: JSONLD
-    url: json-ld/adobe-analytics-context.jsonld
-  - type: Features
-    data:
-      - name: Real-Time Analytics
-        description: Access and analyze data in real time as visitors interact with digital properties.
-      - name: Custom Segmentation
-        description: Build custom segments to isolate and analyze specific visitor groups and behaviors.
-      - name: Calculated Metrics
-        description: Create derived metrics combining existing metrics with mathematical formulas.
-      - name: Report Suites
-        description: Organize and partition data collection across multiple sites and business units.
-      - name: Annotations
-        description: Mark specific dates or ranges in reports with notes for contextual analysis.
-      - name: Bulk Data Insertion
-        description: Upload server-side event data in compressed CSV batches for high-volume collection.
-      - name: Data Repair
-        description: Permanently delete or transform previously ingested data for privacy compliance.
-      - name: Livestream
-        description: Receive real-time streaming hit data as each event is processed by Adobe servers.
-      - name: Dimension And Metric Exploration
-        description: Programmatically discover all available dimensions and metrics in report suites.
-      - name: Component Tagging
-        description: Apply tags to segments, metrics, and other components for organization and discovery.
-  - type: UseCases
-    data:
-      - name: Marketing Campaign Analysis
-        description: Measure effectiveness of marketing campaigns across channels with attribution and conversion tracking.
-      - name: Customer Journey Optimization
-        description: Analyze multi-touch customer journeys to identify drop-off points and optimize conversion paths.
-      - name: Content Performance Tracking
-        description: Evaluate which content resonates most with audiences and drives engagement.
-      - name: Audience Discovery And Targeting
-        description: Discover high-value audience segments for personalized marketing and advertising.
-      - name: Privacy Compliance Data Management
-        description: Delete or repair PII and sensitive data to comply with GDPR, CCPA, and other regulations.
-      - name: Real-Time Monitoring And Alerting
-        description: Monitor live traffic and KPIs with streaming data for immediate anomaly detection.
-      - name: Server-Side Data Collection
-        description: Collect analytics data from backend systems, IoT devices, and server-side applications.
-      - name: Cross-Channel Reporting
-        description: Combine web, mobile, and offline data for unified cross-channel analytics reporting.
-  - type: Integrations
-    data:
-      - name: Adobe Experience Platform
-        description: Send Analytics data to Experience Platform for unified customer profiles and journey orchestration.
-      - name: Adobe Target
-        description: Use Analytics segments to power personalization and A/B testing in Adobe Target.
-      - name: Adobe Audience Manager
-        description: Share audience segments between Analytics and Audience Manager for cross-channel activation.
-      - name: Adobe Campaign
-        description: Integrate campaign data with Analytics for end-to-end campaign performance measurement.
-      - name: Adobe Customer Journey Analytics
-        description: Extend Analytics data into CJA for cross-channel analysis with Experience Platform data.
-      - name: Adobe Launch
-        description: Deploy and manage Analytics tags via Adobe Experience Platform Launch tag management.
-      - name: Google Ads
-        description: Import Google Ads cost and click data for integrated paid search analytics.
-      - name: Microsoft Power BI
-        description: Connect Analytics data to Power BI dashboards for enterprise reporting and visualization.
-  - type: GitHubRepository
-    url: https://github.com/AdobeDocs/analytics-mcp
-    title: Analytics MCP Servers Documentation
-  - type: GitHubRepository
-    url: https://github.com/AdobeDocs/analytics-1.4-apis
-    title: Analytics 1.4 APIs Documentation
-  - type: Training
-    url: https://experienceleague.adobe.com/docs/analytics-learn/tutorials/overview.html
-  - type: JSONLD
-    url: json-ld/adobe-analytics-bulk-data-insertion-context.jsonld
-  - type: JSONLD
-    url: json-ld/adobe-analytics-data-repair-context.jsonld
-  - type: SpectralRules
-    url: rules/adobe-analytics-spectral-rules.yml
-  - type: Vocabulary
-    url: vocabulary/adobe-analytics-vocabulary.yaml
-  - type: SDKs
-    url: packages/adobe-analytics-packages.yml
-    title: Official and community client libraries (7 first-party packages)
-  - type: RateLimits
-    url: rate-limits/adobe-analytics-rate-limits.yml
-    title: Published rate limits — 12 requests / 6 seconds per user
-  - type: Plans
-    url: plans/adobe-analytics-plans-pricing.yml
-    title: Enterprise packages (contact sales; no list pricing published)
-  - type: FinOps
-    url: finops/adobe-analytics-finops.yml
-  - type: Deprecation
-    url: lifecycle/adobe-analytics-lifecycle.yml
-    title: Adobe Analytics 1.4 API end-of-life policy (EOL 2026-08-12)
-  - type: Security
-    url: security/adobe-analytics-vulnerability-disclosure.yml
-    title: Adobe PSIRT vulnerability disclosure + HackerOne program
-  - type: TrustCenter
-    url: security/adobe-analytics-trust-center.yml
-  - type: Compliance
-    url: security/adobe-analytics-trust-center.yml
-    title: Adobe Experience Cloud certifications (FedRAMP Tailored, SOC 2 Type 2, ISO 27001:2022, CSA STAR L2)
-  - type: OAuthScopes
-    url: scopes/adobe-analytics-scopes.yml
-  - type: ToolCrosswalk
-    url: mcp/adobe-analytics-tool-crosswalk.yml
-    title: MCP tool to REST operation crosswalk
-  - type: AgentSkill
-    url: skills/_index.yml
-    title: Five Adobe-published Agent Skills for the Adobe Analytics MCP server
-  - type: LLMsTxt
-    url: llms/adobe-analytics-experienceleague-llms.txt
-    title: Adobe-published llms.txt for the Experience League documentation host (verbatim)
-  - type: OpenCollection
-    url: collections/adobe-analytics-api.opencollection.json
-  - type: PostmanCollection
-    url: postman/adobe-analytics-api.postman_collection.json
-  - type: SpectralRules
-    url: rules/adobe-analytics-asyncapi-spectral-rules.yml
-  - type: SpectralRules
-    url: rules/adobe-analytics-jsonschema-spectral-rules.yml
-  - type: Documentation
-    url: https://developer.adobe.com/analytics-mcp/docs/aa/
-    title: Adobe Analytics MCP server documentation
-  - type: Pricing
-    url: https://business.adobe.com/products/analytics/pricing.html
-  - type: APIReference
-    url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/
-    title: Adobe Analytics 2.0 API reference
-  - type: SignUp
-    url: https://developer.adobe.com/console/
-    title: Adobe Developer Console — create the project and OAuth credentials
+- type: Website
+  url: https://www.adobe.com/
+- type: CapabilityMap
+  url: capabilities/adobe-analytics-capability-edges.yml
+  name: Adobe Analytics Business Capability Map
+- type: IssueTracker
+  url: https://github.com/AdobeDocs/analytics-1.4-apis/issues
+- type: CodeOfConduct
+  url: https://github.com/AdobeDocs/analytics-1.4-apis/blob/main/CODE_OF_CONDUCT.md
+- type: ContributionGuide
+  url: https://github.com/AdobeDocs/analytics-1.4-apis/blob/main/.github/CONTRIBUTING.md
+- type: License
+  name: Apache-2.0
+  url: https://github.com/AdobeDocs/analytics-1.4-apis/blob/main/LICENSE
+- type: Packages
+  url: packages/adobe-analytics-packages.yml
+- type: WellKnown
+  url: well-known/adobe-analytics-well-known.yml
+- type: MCPServer
+  url: mcp/adobe-analytics-mcp.yml
+- type: LLMsTxt
+  url: llms/adobe-analytics-llms.txt
+- type: Overlay
+  url: overlays/adobe-analytics-api-overlay.yaml
+- type: Overlay
+  url: overlays/adobe-analytics-bulk-data-insertion-api-overlay.yaml
+- type: Overlay
+  url: overlays/adobe-analytics-data-repair-api-overlay.yaml
+- type: Conformance
+  url: conformance/adobe-analytics-conformance.yml
+- type: ErrorCatalog
+  url: errors/adobe-analytics-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/adobe-analytics-lifecycle.yml
+- type: Conventions
+  url: conventions/adobe-analytics-conventions.yml
+- type: ChangeLog
+  url: changelog/adobe-analytics-changelog.yml
+- type: DataModel
+  url: data-model/adobe-analytics-data-model.yml
+- type: AgenticAccess
+  url: agentic-access/adobe-analytics-agentic-access.yml
+- type: VulnerabilityDisclosure
+  url: security/adobe-analytics-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/adobe-analytics-domain-security.yml
+- type: Authentication
+  url: authentication/adobe-analytics-authentication.yml
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/adobe-analytics/overview
+- type: Arazzo
+  url: arazzo/adobe-analytics-annotate-and-run-report-workflow.yml
+  name: Adobe Analytics Annotate a Date Range and Run a Report
+- type: Arazzo
+  url: arazzo/adobe-analytics-clone-calculated-metric-workflow.yml
+  name: Adobe Analytics Clone a Calculated Metric
+- type: Arazzo
+  url: arazzo/adobe-analytics-clone-segment-workflow.yml
+  name: Adobe Analytics Clone a Segment
+- type: Arazzo
+  url: arazzo/adobe-analytics-create-calculated-metric-and-run-report-workflow.yml
+  name: Adobe Analytics Create a Calculated Metric and Run a Report
+- type: Arazzo
+  url: arazzo/adobe-analytics-create-segment-and-run-report-workflow.yml
+  name: Adobe Analytics Create a Segment and Run a Segmented Report
+- type: Arazzo
+  url: arazzo/adobe-analytics-discover-components-and-run-report-workflow.yml
+  name: Adobe Analytics Discover Components and Run a Report
+- type: Arazzo
+  url: arazzo/adobe-analytics-estimate-and-run-data-repair-workflow.yml
+  name: Adobe Analytics Estimate and Run a Data Repair Job
+- type: Arazzo
+  url: arazzo/adobe-analytics-full-component-inventory-and-report-workflow.yml
+  name: Adobe Analytics Full Component Inventory and Report
+- type: Arazzo
+  url: arazzo/adobe-analytics-report-on-existing-segment-workflow.yml
+  name: Adobe Analytics Report on an Existing Segment
+- type: Arazzo
+  url: arazzo/adobe-analytics-select-report-suite-and-run-report-workflow.yml
+  name: Adobe Analytics Select a Report Suite and Run a Report
+- type: Arazzo
+  url: arazzo/adobe-analytics-upsert-segment-workflow.yml
+  name: Adobe Analytics Upsert a Segment
+- type: Arazzo
+  url: arazzo/adobe-analytics-validate-then-upload-events-workflow.yml
+  name: Adobe Analytics Validate then Upload a Batch Events File
+- type: Portal
+  url: https://developer.adobe.com/analytics-apis/docs/2.0/
+- type: Documentation
+  url: https://experienceleague.adobe.com/docs/analytics.html
+- type: GettingStarted
+  url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/
+- type: Console
+  url: https://developer.adobe.com/console/
+- type: Authentication
+  url: https://developer.adobe.com/analytics-apis/docs/2.0/guides/authentication/
+- type: Support
+  url: https://developer.adobe.com/analytics-apis/docs/2.0/support/
+- type: Support
+  url: https://experienceleaguecommunities.adobe.com/t5/adobe-analytics/ct-p/adobe-analytics-community
+- type: StackOverflow
+  url: https://stackoverflow.com/questions/tagged/adobe-analytics
+- type: GitHubOrganization
+  url: https://github.com/AdobeDocs
+- type: ChangeLog
+  url: https://experienceleague.adobe.com/en/docs/analytics/release-notes/latest
+- type: TermsOfService
+  url: https://www.adobe.com/legal/terms.html
+- type: PrivacyPolicy
+  url: https://www.adobe.com/privacy/policy.html
+- type: StatusPage
+  url: https://status.adobe.com/
+- type: Blog
+  url: https://blog.adobe.com/en/topics/analytics
+- type: GitHubRepository
+  url: https://github.com/AdobeDocs/analytics-2.0-apis
+- type: JSONSchema
+  url: json-schema/adobe-analytics-report-request-schema.json
+- type: JSONLD
+  url: json-ld/adobe-analytics-context.jsonld
+- type: Features
+  data:
+  - name: Real-Time Analytics
+    description: Access and analyze data in real time as visitors interact with digital properties.
+  - name: Custom Segmentation
+    description: Build custom segments to isolate and analyze specific visitor groups and behaviors.
+  - name: Calculated Metrics
+    description: Create derived metrics combining existing metrics with mathematical formulas.
+  - name: Report Suites
+    description: Organize and partition data collection across multiple sites and business units.
+  - name: Annotations
+    description: Mark specific dates or ranges in reports with notes for contextual analysis.
+  - name: Bulk Data Insertion
+    description: Upload server-side event data in compressed CSV batches for high-volume collection.
+  - name: Data Repair
+    description: Permanently delete or transform previously ingested data for privacy compliance.
+  - name: Livestream
+    description: Receive real-time streaming hit data as each event is processed by Adobe servers.
+  - name: Dimension And Metric Exploration
+    description: Programmatically discover all available dimensions and metrics in report suites.
+  - name: Component Tagging
+    description: Apply tags to segments, metrics, and other components for organization and discovery.
+- type: UseCases
+  data:
+  - name: Marketing Campaign Analysis
+    description: Measure effectiveness of marketing campaigns across channels with attribution and conversion
+      tracking.
+  - name: Customer Journey Optimization
+    description: Analyze multi-touch customer journeys to identify drop-off points and optimize conversion
+      paths.
+  - name: Content Performance Tracking
+    description: Evaluate which content resonates most with audiences and drives engagement.
+  - name: Audience Discovery And Targeting
+    description: Discover high-value audience segments for personalized marketing and advertising.
+  - name: Privacy Compliance Data Management
+    description: Delete or repair PII and sensitive data to comply with GDPR, CCPA, and other regulations.
+  - name: Real-Time Monitoring And Alerting
+    description: Monitor live traffic and KPIs with streaming data for immediate anomaly detection.
+  - name: Server-Side Data Collection
+    description: Collect analytics data from backend systems, IoT devices, and server-side applications.
+  - name: Cross-Channel Reporting
+    description: Combine web, mobile, and offline data for unified cross-channel analytics reporting.
+- type: Integrations
+  data:
+  - name: Adobe Experience Platform
+    description: Send Analytics data to Experience Platform for unified customer profiles and journey
+      orchestration.
+  - name: Adobe Target
+    description: Use Analytics segments to power personalization and A/B testing in Adobe Target.
+  - name: Adobe Audience Manager
+    description: Share audience segments between Analytics and Audience Manager for cross-channel activation.
+  - name: Adobe Campaign
+    description: Integrate campaign data with Analytics for end-to-end campaign performance measurement.
+  - name: Adobe Customer Journey Analytics
+    description: Extend Analytics data into CJA for cross-channel analysis with Experience Platform data.
+  - name: Adobe Launch
+    description: Deploy and manage Analytics tags via Adobe Experience Platform Launch tag management.
+  - name: Google Ads
+    description: Import Google Ads cost and click data for integrated paid search analytics.
+  - name: Microsoft Power BI
+    description: Connect Analytics data to Power BI dashboards for enterprise reporting and visualization.
+- type: GitHubRepository
+  url: https://github.com/AdobeDocs/analytics-mcp
+  title: Analytics MCP Servers Documentation
+- type: GitHubRepository
+  url: https://github.com/AdobeDocs/analytics-1.4-apis
+  title: Analytics 1.4 APIs Documentation
+- type: Training
+  url: https://experienceleague.adobe.com/docs/analytics-learn/tutorials/overview.html
+- type: JSONLD
+  url: json-ld/adobe-analytics-bulk-data-insertion-context.jsonld
+- type: JSONLD
+  url: json-ld/adobe-analytics-data-repair-context.jsonld
+- type: SpectralRules
+  url: rules/adobe-analytics-spectral-rules.yml
+- type: Vocabulary
+  url: vocabulary/adobe-analytics-vocabulary.yaml
+- type: SDKs
+  url: packages/adobe-analytics-packages.yml
+  title: Official and community client libraries (7 first-party packages)
+- type: RateLimits
+  url: rate-limits/adobe-analytics-rate-limits.yml
+  title: Published rate limits — 12 requests / 6 seconds per user
+- type: Plans
+  url: plans/adobe-analytics-plans-pricing.yml
+  title: Enterprise packages (contact sales; no list pricing published)
+- type: FinOps
+  url: finops/adobe-analytics-finops.yml
+- type: Deprecation
+  url: lifecycle/adobe-analytics-lifecycle.yml
+  title: Adobe Analytics 1.4 API end-of-life policy (EOL 2026-08-12)
+- type: Security
+  url: security/adobe-analytics-vulnerability-disclosure.yml
+  title: Adobe PSIRT vulnerability disclosure + HackerOne program
+- type: TrustCenter
+  url: security/adobe-analytics-trust-center.yml
+- type: Compliance
+  url: security/adobe-analytics-trust-center.yml
+  title: Adobe Experience Cloud certifications (FedRAMP Tailored, SOC 2 Type 2, ISO 27001:2022, CSA STAR
+    L2)
+- type: OAuthScopes
+  url: scopes/adobe-analytics-scopes.yml
+- type: ToolCrosswalk
+  url: mcp/adobe-analytics-tool-crosswalk.yml
+  title: MCP tool to REST operation crosswalk
+- type: AgentSkill
+  url: skills/_index.yml
+  title: Five Adobe-published Agent Skills for the Adobe Analytics MCP server
+- type: LLMsTxt
+  url: llms/adobe-analytics-experienceleague-llms.txt
+  title: Adobe-published llms.txt for the Experience League documentation host (verbatim)
+- type: OpenCollection
+  url: collections/adobe-analytics-api.opencollection.json
+- type: PostmanCollection
+  url: postman/adobe-analytics-api.postman_collection.json
+- type: SpectralRules
+  url: rules/adobe-analytics-asyncapi-spectral-rules.yml
+- type: SpectralRules
+  url: rules/adobe-analytics-jsonschema-spectral-rules.yml
+- type: Documentation
+  url: https://developer.adobe.com/analytics-mcp/docs/aa/
+  title: Adobe Analytics MCP server documentation
+- type: Pricing
+  url: https://business.adobe.com/products/analytics/pricing.html
+- type: APIReference
+  url: https://developer.adobe.com/analytics-apis/docs/2.0/apis/
+  title: Adobe Analytics 2.0 API reference
+- type: SignUp
+  url: https://developer.adobe.com/console/
+  title: Adobe Developer Console — create the project and OAuth credentials
 x-enrichment:
   date: '2026-08-13'
   status: enriched
