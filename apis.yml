@@ -124,6 +124,8 @@ apis:
   humanURL: https://developer.adobe.com/analytics-apis/docs/2.0/
   baseUrl: https://analytics.adobe.io/api/{globalCompanyId}
   tags:
+  - Annotation
+  tags_raw:
   - Annotations
   properties:
   - type: OpenAPI
