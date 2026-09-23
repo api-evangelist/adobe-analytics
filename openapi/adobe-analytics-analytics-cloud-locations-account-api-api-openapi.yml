@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Adobe Analytics Cloud Locations Analytics Cloud Locations Account API
+  title: Adobe Analytics Cloud Locations Analytics Cloud Locations…
   description: Adobe Analytics Cloud Locations API
   version: v2
 servers:
@@ -209,8 +209,18 @@ paths:
       - x-user-auth: []
 components:
   schemas:
+    UserArnResponse:
+      properties:
+        userARN:
+          type: string
     ObjectNode:
       type: object
+    ExportLocationDeleteResponse:
+      properties:
+        message:
+          type: string
+        uuid:
+          type: string
     AccountRequest:
       type: object
       properties:
@@ -226,15 +236,13 @@ components:
           type: string
         sharedTo:
           type: string
-    ExportLocationDeleteResponse:
+    AnalyticsAsrErrorResponse:
       properties:
-        message:
+        errorDescription:
           type: string
-        uuid:
+        errorCode:
           type: string
-    UserArnResponse:
-      properties:
-        userARN:
+        errorId:
           type: string
     AccountResponse:
       properties:
@@ -288,14 +296,6 @@ components:
           type: boolean
         last:
           type: boolean
-    AnalyticsAsrErrorResponse:
-      properties:
-        errorDescription:
-          type: string
-        errorCode:
-          type: string
-        errorId:
-          type: string
   parameters:
     authorization:
       name: Authorization

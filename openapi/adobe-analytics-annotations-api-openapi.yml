@@ -137,6 +137,28 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Tag:
+      type: object
+      description: A tag applied to an Analytics component
+      properties:
+        id:
+          type: integer
+          description: Tag identifier
+          example: abc123
+        name:
+          type: string
+          description: Tag name
+          example: Example Title
+        description:
+          type: string
+          description: Tag description
+          example: A sample description.
+        components:
+          type: array
+          description: List of components this tag is applied to
+          items:
+            type: object
+          example: []
     AnnotationCreate:
       type: object
       required:
@@ -167,28 +189,6 @@ components:
           type: string
           description: Hex color code
           example: example_value
-    Tag:
-      type: object
-      description: A tag applied to an Analytics component
-      properties:
-        id:
-          type: integer
-          description: Tag identifier
-          example: abc123
-        name:
-          type: string
-          description: Tag name
-          example: Example Title
-        description:
-          type: string
-          description: Tag description
-          example: A sample description.
-        components:
-          type: array
-          description: List of components this tag is applied to
-          items:
-            type: object
-          example: []
     Annotation:
       type: object
       description: An annotation marking a date range in reports

@@ -233,6 +233,28 @@ paths:
     servers:
     - url: https://analytics.adobe.io/api
 components:
+  parameters:
+    rsidPath:
+      name: rsid
+      in: path
+      required: true
+      description: The report suite ID
+      schema:
+        type: string
+    authorization:
+      name: Authorization
+      in: header
+      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
+      required: true
+      schema:
+        type: string
+    x-api-key:
+      name: x-api-key
+      in: header
+      description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
+      required: true
+      schema:
+        type: string
   schemas:
     ReportSuite:
       type: object
@@ -257,22 +279,6 @@ components:
           - standard
           - virtual
           example: standard
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code
-          example: example_value
-        errorDescription:
-          type: string
-          description: Human-readable error message
-          example: example_value
-        errorId:
-          type: string
-          description: Unique ID for tracking this error
-          example: '500123'
     ReportSuiteList:
       type: object
       description: Paginated list of report suites
@@ -290,6 +296,22 @@ components:
           type: integer
           description: Total number of pages
           example: 42
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        errorDescription:
+          type: string
+          description: Human-readable error message
+          example: example_value
+        errorId:
+          type: string
+          description: Unique ID for tracking this error
+          example: '500123'
     TimezoneSettings:
       properties:
         currentTimezoneOffset:
@@ -321,28 +343,6 @@ components:
         axleActivated:
           title: Axle activated for suite
           type: boolean
-  parameters:
-    rsidPath:
-      name: rsid
-      in: path
-      required: true
-      description: The report suite ID
-      schema:
-        type: string
-    authorization:
-      name: Authorization
-      in: header
-      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
-      required: true
-      schema:
-        type: string
-    x-api-key:
-      name: x-api-key
-      in: header
-      description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
-      required: true
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

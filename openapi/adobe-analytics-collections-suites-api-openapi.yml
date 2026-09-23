@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
   title: Report Suite Collections Suites API
-  description: 'Note: Adobe may add optional request and response members (name/value pairs) to existing API objects at any time and without notice or changes in versioning. Adobe recommends that you refer to the API documentation of any third-party tool you integrate with our APIs so that such additions are ignored in processing if not understood. If implemented properly, such additions are non-breaking changes for your implementation. Adobe will not remove parameters or add required parameters without first providing standard notification through release notes.'
+  description: 'Note: Adobe may add optional request and response members (name/value pairs) to existing API objects at any time and without notice or changes in versioning.'
 servers:
 - url: https://analytics.adobe.io/api
 tags:
@@ -128,6 +128,31 @@ paths:
                 $ref: '#/components/schemas/Suite'
 components:
   schemas:
+    AnalyticsAsrErrorResponse:
+      properties:
+        errorDescription:
+          type: string
+        errorCode:
+          type: string
+        errorId:
+          type: string
+    CalendarSettings:
+      properties:
+        rsid:
+          type: string
+        anchorDate:
+          type: string
+          format: date-time
+        type:
+          type: string
+          enum:
+          - GREGORIAN
+          - NRF
+          - QRS
+          - CUSTOM_454
+          - CUSTOM_445
+          - MODIFIED_GREGORIAN
+          - CUSTOM_544
     Suite:
       properties:
         calendarType:
@@ -149,31 +174,6 @@ components:
           type: string
         id:
           title: Suite id
-          type: string
-    CalendarSettings:
-      properties:
-        rsid:
-          type: string
-        anchorDate:
-          type: string
-          format: date-time
-        type:
-          type: string
-          enum:
-          - GREGORIAN
-          - NRF
-          - QRS
-          - CUSTOM_454
-          - CUSTOM_445
-          - MODIFIED_GREGORIAN
-          - CUSTOM_544
-    AnalyticsAsrErrorResponse:
-      properties:
-        errorDescription:
-          type: string
-        errorCode:
-          type: string
-        errorId:
           type: string
   parameters:
     authorization:

@@ -1,7 +1,10 @@
 openapi: 3.2.0
 info:
-  title: Adobe Analytics 2.0 Data Feed API. Create, update retrieve, and manage data feeds and column presets. Column Preset API
-  description: "Adobe Analytics Data Feed API 2.0\n\n Note: Adobe may add optional request and response members (name/value pairs) to existing API objects at any time and without notice or changes in versioning. Adobe recommends that you refer to the API documentation of any third-party tool you integrate with our APIs so that such additions are ignored in processing if not understood. If implemented properly, such additions are non-breaking changes for your implementation. Adobe will not remove parameters or add required parameters without first providing standard notification through release notes."
+  title: Adobe Analytics 2.0 Data Feed API.
+  description: 'Adobe Analytics Data Feed API 2.0
+
+
+    Note: Adobe may add optional request and response members (name/value pairs) to existing API objects at any time and without notice or changes in versioning.'
   version: v2
 servers:
 - url: https://analytics.adobe.io/api
@@ -177,17 +180,6 @@ paths:
                 $ref: '#/components/schemas/ColumnPresetList'
 components:
   schemas:
-    ColumnName:
-      type: object
-      properties:
-        name:
-          type: string
-    ColumnList:
-      properties:
-        data:
-          type: array
-          items:
-            type: string
     ColumnPresetList:
       properties:
         total:
@@ -209,14 +201,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ColumnName_User'
-    SimpleColumnPresetView:
-      type: object
-      properties:
-        columnPresetId:
-          type: integer
-          format: int32
-        name:
-          type: string
     AnalyticsAsrErrorResponse:
       properties:
         errorDescription:
@@ -225,6 +209,22 @@ components:
           type: string
         errorId:
           type: string
+    ColumnName:
+      type: object
+      properties:
+        name:
+          type: string
+    ColumnName_User:
+      type: object
+      properties:
+        name:
+          type: string
+    ColumnList:
+      properties:
+        data:
+          type: array
+          items:
+            type: string
     ColumnPresetView:
       properties:
         columnNames:
@@ -236,9 +236,12 @@ components:
         columnPresetId:
           type: integer
           format: int32
-    ColumnName_User:
+    SimpleColumnPresetView:
       type: object
       properties:
+        columnPresetId:
+          type: integer
+          format: int32
         name:
           type: string
   parameters:

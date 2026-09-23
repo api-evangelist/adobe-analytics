@@ -338,38 +338,32 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    segmentId:
-      name: segmentId
-      in: path
-      required: true
-      description: The segment ID
-      schema:
-        type: string
-    filterByIds:
-      name: filterByIds
-      in: query
-      description: Comma-separated list of IDs to filter results
-      schema:
-        type: string
-    locale:
-      name: locale
-      in: query
-      description: The locale for response labels
-      schema:
-        type: string
-        enum:
-        - en_US
-        - fr_FR
-        - jp_JP
-        - ja_JP
-        - de_DE
-        - es_ES
-        - ko_KR
-        - pt_BR
-        - zh_CN
-        - zh_TW
   schemas:
+    SegmentCreate:
+      type: object
+      required:
+      - name
+      - rsid
+      - definition
+      description: Payload for creating or updating a segment
+      properties:
+        name:
+          type: string
+          description: Display name of the segment
+          maxLength: 255
+          example: Example Title
+        description:
+          type: string
+          description: Description of the segment's purpose
+          example: A sample description.
+        rsid:
+          type: string
+          description: Report suite ID this segment is based on
+          example: '500123'
+        definition:
+          type: object
+          description: The segment rule definition in Analytics query format
+          example: example_value
     ErrorResponse:
       type: object
       description: Error response from the API
@@ -386,6 +380,49 @@ components:
           type: string
           description: Unique ID for tracking this error
           example: '500123'
+    SegmentList:
+      type: object
+      description: Paginated list of segments
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Segment'
+          example: []
+        totalElements:
+          type: integer
+          description: Total number of segments available
+          example: 42
+        totalPages:
+          type: integer
+          description: Total number of pages
+          example: 42
+        numberOfElements:
+          type: integer
+          description: Number of elements on this page
+          example: 10
+    Tag:
+      type: object
+      description: A tag applied to an Analytics component
+      properties:
+        id:
+          type: integer
+          description: Tag identifier
+          example: abc123
+        name:
+          type: string
+          description: Tag name
+          example: Example Title
+        description:
+          type: string
+          description: Tag description
+          example: A sample description.
+        components:
+          type: array
+          description: List of components this tag is applied to
+          items:
+            type: object
+          example: []
     Segment:
       type: object
       description: An analytics segment definition
@@ -438,74 +475,37 @@ components:
           type: string
           description: Owner login identifier
           example: example_value
-    SegmentCreate:
-      type: object
-      required:
-      - name
-      - rsid
-      - definition
-      description: Payload for creating or updating a segment
-      properties:
-        name:
-          type: string
-          description: Display name of the segment
-          maxLength: 255
-          example: Example Title
-        description:
-          type: string
-          description: Description of the segment's purpose
-          example: A sample description.
-        rsid:
-          type: string
-          description: Report suite ID this segment is based on
-          example: '500123'
-        definition:
-          type: object
-          description: The segment rule definition in Analytics query format
-          example: example_value
-    Tag:
-      type: object
-      description: A tag applied to an Analytics component
-      properties:
-        id:
-          type: integer
-          description: Tag identifier
-          example: abc123
-        name:
-          type: string
-          description: Tag name
-          example: Example Title
-        description:
-          type: string
-          description: Tag description
-          example: A sample description.
-        components:
-          type: array
-          description: List of components this tag is applied to
-          items:
-            type: object
-          example: []
-    SegmentList:
-      type: object
-      description: Paginated list of segments
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/Segment'
-          example: []
-        totalElements:
-          type: integer
-          description: Total number of segments available
-          example: 42
-        totalPages:
-          type: integer
-          description: Total number of pages
-          example: 42
-        numberOfElements:
-          type: integer
-          description: Number of elements on this page
-          example: 10
+  parameters:
+    segmentId:
+      name: segmentId
+      in: path
+      required: true
+      description: The segment ID
+      schema:
+        type: string
+    filterByIds:
+      name: filterByIds
+      in: query
+      description: Comma-separated list of IDs to filter results
+      schema:
+        type: string
+    locale:
+      name: locale
+      in: query
+      description: The locale for response labels
+      schema:
+        type: string
+        enum:
+        - en_US
+        - fr_FR
+        - jp_JP
+        - ja_JP
+        - de_DE
+        - es_ES
+        - ko_KR
+        - pt_BR
+        - zh_CN
+        - zh_TW
   securitySchemes:
     bearerAuth:
       type: http

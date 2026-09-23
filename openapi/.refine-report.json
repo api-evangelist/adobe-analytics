@@ -64,19 +64,37 @@
     "adobe-analytics-report-suites-admin-api-openapi.json: declared missing tag: Collections Suites",
     "adobe-analytics-report-suites-admin-api-openapi.json: declared missing tag: Report Suites",
     "adobe-analytics-report-suites-admin-api-openapi.json: declared missing tag: Virtual Report Suites",
-    "tag 'Report Suites' spans 2 source specs (adobe-analytics-api-openapi.yml, adobe-analytics-report-suites-admin-api-openapi.json): per-path servers applied"
+    "tag 'Report Suites' spans 2 source specs (adobe-analytics-api-openapi.yml, adobe-analytics-report-suites-admin-api-openapi.json): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
+    "adobe-analytics-account-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adobe-analytics-analytics-cloud-locations-account-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adobe-analytics-analytics-cloud-locations-location-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "adobe-analytics-annotations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "adobe-analytics-calculated-metrics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adobe-analytics-classification-dataset-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adobe-analytics-classification-job-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adobe-analytics-collections-suites-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adobe-analytics-column-preset-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adobe-analytics-component-migration-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adobe-analytics-data-warehouse-report-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adobe-analytics-data-warehouse-scheduled-requests-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adobe-analytics-datafeed-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "adobe-analytics-date-ranges-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "adobe-analytics-dimensions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adobe-analytics-dimensions-mappings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "adobe-analytics-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adobe-analytics-job-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "adobe-analytics-jobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adobe-analytics-manage-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adobe-analytics-marketing-channels-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "adobe-analytics-metrics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adobe-analytics-metrics-mappings-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "adobe-analytics-report-suites-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "adobe-analytics-reports-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "adobe-analytics-segments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "adobe-analytics-server-call-estimate-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+    "adobe-analytics-server-call-estimate-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "adobe-analytics-virtual-report-suites-api-openapi.yml: previously refined output, superseded by openapi/_original/"
   ]
 }

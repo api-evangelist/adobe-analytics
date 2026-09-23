@@ -326,22 +326,6 @@ components:
           type: string
           description: Unique ID for tracking this error
           example: '500123'
-    Owner:
-      type: object
-      description: The owner of an Analytics component
-      properties:
-        id:
-          type: integer
-          description: Owner user ID
-          example: abc123
-        name:
-          type: string
-          description: Owner display name
-          example: Example Title
-        login:
-          type: string
-          description: Owner login identifier
-          example: example_value
     CalculatedMetricList:
       type: object
       description: Paginated list of calculated metrics
@@ -359,6 +343,22 @@ components:
           type: integer
           description: Total number of pages
           example: 42
+    Owner:
+      type: object
+      description: The owner of an Analytics component
+      properties:
+        id:
+          type: integer
+          description: Owner user ID
+          example: abc123
+        name:
+          type: string
+          description: Owner display name
+          example: Example Title
+        login:
+          type: string
+          description: Owner login identifier
+          example: example_value
     CalculatedMetric:
       type: object
       description: A calculated metric definition

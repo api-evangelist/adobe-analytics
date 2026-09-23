@@ -205,17 +205,17 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
+    RepairJobDefinition:
       type: object
-      description: Error response from the API
+      required:
+      - variables
+      description: Definition of a data repair job
       properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code
-          example: example_value
-        errorDescription:
-          type: string
-          description: Human-readable error message
+        variables:
+          type: object
+          description: Map of variable names to repair actions. Keys are Analytics variable names (e.g. eVar1, prop5, activitymap) and values are action objects.
+          additionalProperties:
+            $ref: '#/components/schemas/RepairAction'
           example: example_value
     RepairFilter:
       type: object
@@ -232,6 +232,18 @@ components:
         matchValue:
           type: string
           description: The value to match against for filtering
+          example: example_value
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        errorDescription:
+          type: string
+          description: Human-readable error message
           example: example_value
     RepairAction:
       type: object
@@ -306,18 +318,6 @@ components:
           type: integer
           description: Number of data nodes processed
           example: 10
-    RepairJobDefinition:
-      type: object
-      required:
-      - variables
-      description: Definition of a data repair job
-      properties:
-        variables:
-          type: object
-          description: Map of variable names to repair actions. Keys are Analytics variable names (e.g. eVar1, prop5, activitymap) and values are action objects.
-          additionalProperties:
-            $ref: '#/components/schemas/RepairAction'
-          example: example_value
   parameters:
     rsidPath:
       name: rsid

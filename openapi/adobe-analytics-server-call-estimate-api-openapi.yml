@@ -94,27 +94,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    rsidPath:
-      name: rsid
-      in: path
-      required: true
-      description: The report suite ID
-      schema:
-        type: string
   schemas:
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code
-          example: example_value
-        errorDescription:
-          type: string
-          description: Human-readable error message
-          example: example_value
     ServerCallEstimate:
       type: object
       description: Estimate of server calls for a proposed data repair job
@@ -141,6 +121,26 @@ components:
           type: string
           description: Token required when creating the repair job
           example: CAUQAA
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        errorDescription:
+          type: string
+          description: Human-readable error message
+          example: example_value
+  parameters:
+    rsidPath:
+      name: rsid
+      in: path
+      required: true
+      description: The report suite ID
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http
