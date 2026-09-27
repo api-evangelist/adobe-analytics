@@ -184,8 +184,6 @@ paths:
       - x-user-auth: []
 components:
   schemas:
-    ObjectNode:
-      type: object
     LocationResponse:
       properties:
         shared:
@@ -224,11 +222,30 @@ components:
           type: string
         properties:
           $ref: '#/components/schemas/ObjectNode'
-    ExportLocationDeleteResponse:
+    ObjectNode:
+      type: object
+    LocationRequest:
+      type: object
       properties:
-        message:
+        type:
           type: string
-        uuid:
+        accountUuid:
+          type: string
+        properties:
+          $ref: '#/components/schemas/ObjectNode'
+        name:
+          type: string
+        description:
+          type: string
+        application:
+          type: string
+          enum:
+          - TAXONOMIST
+          - DATA_WAREHOUSE
+          - DATA_FEED
+        applicationTag:
+          type: string
+        sharedTo:
           type: string
     LocationResponsePage:
       properties:
@@ -255,28 +272,11 @@ components:
         totalElements:
           type: integer
           format: int64
-    LocationRequest:
-      type: object
+    ExportLocationDeleteResponse:
       properties:
-        type:
+        message:
           type: string
-        accountUuid:
-          type: string
-        properties:
-          $ref: '#/components/schemas/ObjectNode'
-        name:
-          type: string
-        description:
-          type: string
-        application:
-          type: string
-          enum:
-          - TAXONOMIST
-          - DATA_WAREHOUSE
-          - DATA_FEED
-        applicationTag:
-          type: string
-        sharedTo:
+        uuid:
           type: string
     AnalyticsAsrErrorResponse:
       properties:
@@ -287,17 +287,17 @@ components:
         errorId:
           type: string
   parameters:
-    authorization:
-      name: Authorization
-      in: header
-      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
-      required: true
-      schema:
-        type: string
     x-api-key:
       name: x-api-key
       in: header
       description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
+      required: true
+      schema:
+        type: string
+    authorization:
+      name: Authorization
+      in: header
+      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
       required: true
       schema:
         type: string

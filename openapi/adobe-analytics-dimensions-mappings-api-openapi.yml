@@ -154,20 +154,6 @@ paths:
       - x-user-auth: []
 components:
   schemas:
-    FieldMappingDto:
-      properties:
-        cjaId:
-          type: string
-        dataId:
-          type: string
-        xdmMapped:
-          type: boolean
-        aaId:
-          type: string
-        rsid:
-          type: string
-        xdmNotes:
-          type: string
     Response:
       type: string
       format: binary
@@ -182,6 +168,20 @@ components:
         method:
           type: string
         message:
+          type: string
+    FieldMappingDto:
+      properties:
+        cjaId:
+          type: string
+        dataId:
+          type: string
+        xdmMapped:
+          type: boolean
+        aaId:
+          type: string
+        rsid:
+          type: string
+        xdmNotes:
           type: string
   securitySchemes:
     x-service-auth:

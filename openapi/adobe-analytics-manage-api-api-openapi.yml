@@ -175,6 +175,21 @@ paths:
               schema:
                 $ref: '#/components/schemas/DataFeedView'
 components:
+  parameters:
+    x-api-key:
+      name: x-api-key
+      in: header
+      description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
+      required: true
+      schema:
+        type: string
+    authorization:
+      name: Authorization
+      in: header
+      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
+      required: true
+      schema:
+        type: string
   schemas:
     Schedule:
       type: object
@@ -188,25 +203,20 @@ components:
         delay:
           type: integer
           format: int32
-    Metadata:
+    Packaging:
       type: object
       properties:
-        feedId:
+        type:
+          type: string
+        chunkSize:
           type: integer
           format: int32
-        feedState:
+        compression:
           type: string
-        timeZone:
+        manifest:
           type: string
-        createdBy:
-          type: string
-        creationDate:
-          type: string
-        modifiedBy:
-          type: string
-        modificationDate:
-          type: string
-      description: Metadata for DataFeedView
+        noDataManifest:
+          type: boolean
     LateHits:
       type: object
       properties:
@@ -240,14 +250,6 @@ components:
           $ref: '#/components/schemas/Packaging'
         replaceEscapedChars:
           type: boolean
-    AnalyticsAsrErrorResponse:
-      properties:
-        errorDescription:
-          type: string
-        errorCode:
-          type: string
-        errorId:
-          type: string
     Delivery:
       type: object
       properties:
@@ -257,32 +259,30 @@ components:
           type: array
           items:
             type: string
-    Packaging:
+    Metadata:
       type: object
       properties:
-        type:
-          type: string
-        chunkSize:
+        feedId:
           type: integer
           format: int32
-        compression:
+        feedState:
           type: string
-        manifest:
+        timeZone:
           type: string
-        noDataManifest:
-          type: boolean
-  parameters:
-    authorization:
-      name: Authorization
-      in: header
-      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
-      required: true
-      schema:
-        type: string
-    x-api-key:
-      name: x-api-key
-      in: header
-      description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
-      required: true
-      schema:
-        type: string
+        createdBy:
+          type: string
+        creationDate:
+          type: string
+        modifiedBy:
+          type: string
+        modificationDate:
+          type: string
+      description: Metadata for DataFeedView
+    AnalyticsAsrErrorResponse:
+      properties:
+        errorDescription:
+          type: string
+        errorCode:
+          type: string
+        errorId:
+          type: string

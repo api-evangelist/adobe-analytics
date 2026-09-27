@@ -765,60 +765,63 @@ paths:
                 $ref: '#/components/schemas/DataFeedRequestListView'
 components:
   schemas:
-    DataFeedRequestView:
-      type: object
+    DataFeedExtendedView:
       properties:
-        rsid:
-          type: string
-        feedId:
+        dynamicLookups:
+          type: boolean
+        schedule:
+          $ref: '#/components/schemas/Schedule'
+        delivery:
+          $ref: '#/components/schemas/Delivery'
+        columnPreset:
           type: integer
           format: int32
+        notes:
+          type: string
         feedName:
+          type: string
+        extendedMetadata:
+          $ref: '#/components/schemas/ExtendedMetadata'
+        rsid:
+          type: string
+        lateHits:
+          $ref: '#/components/schemas/LateHits'
+        packaging:
+          $ref: '#/components/schemas/Packaging'
+        replaceEscapedChars:
+          type: boolean
+    DataFeedCreateBody_User:
+      required:
+      - columnPreset
+      - delivery
+      - feedName
+      - rsid
+      - schedule
+      type: object
+      properties:
+        feedName:
+          type: string
+        rsid:
           type: string
         feedState:
           type: string
-        requestId:
-          type: integer
-          format: int64
-        submittedDate:
-          type: string
-        runCount:
+        columnPreset:
           type: integer
           format: int32
-        runAttempt:
+        notes:
           type: string
-        completeDate:
-          type: string
-        requestPeriodBegin:
-          type: string
-        requestPeriodEnd:
-          type: string
-        requestState:
-          type: string
-        useUTC:
-          type: integer
-          format: int32
-        errorCode:
-          type: integer
-          format: int32
-        errorMsg:
-          type: string
-        timezone:
-          type: string
-    Packaging_User:
-      type: object
-      properties:
-        type:
-          type: string
-        chunkSize:
-          type: integer
-          format: int32
-        compression:
-          type: string
-        manifest:
-          type: string
-        noDataManifest:
+        dynamicLookups:
           type: boolean
+        replaceEscapedChars:
+          type: boolean
+        schedule:
+          $ref: '#/components/schemas/Schedule_User'
+        packaging:
+          $ref: '#/components/schemas/Packaging_User'
+        delivery:
+          $ref: '#/components/schemas/Delivery_User'
+        lateHits:
+          $ref: '#/components/schemas/LateHits_User'
     DataFeedRequestsSearchBody:
       type: object
       properties:
@@ -866,6 +869,127 @@ components:
           type: string
         maxSubmittedDate:
           type: string
+    AnalyticsAsrErrorResponse:
+      properties:
+        errorDescription:
+          type: string
+        errorCode:
+          type: string
+        errorId:
+          type: string
+    DataFeedView:
+      properties:
+        dynamicLookups:
+          type: boolean
+        schedule:
+          $ref: '#/components/schemas/Schedule'
+        delivery:
+          $ref: '#/components/schemas/Delivery'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        columnPreset:
+          type: integer
+          format: int32
+        notes:
+          type: string
+        feedName:
+          type: string
+        rsid:
+          type: string
+        lateHits:
+          $ref: '#/components/schemas/LateHits'
+        packaging:
+          $ref: '#/components/schemas/Packaging'
+        replaceEscapedChars:
+          type: boolean
+    Metadata:
+      type: object
+      properties:
+        feedId:
+          type: integer
+          format: int32
+        feedState:
+          type: string
+        timeZone:
+          type: string
+        createdBy:
+          type: string
+        creationDate:
+          type: string
+        modifiedBy:
+          type: string
+        modificationDate:
+          type: string
+      description: Metadata for DataFeedView
+    ExtendedMetadata:
+      type: object
+      properties:
+        feedId:
+          type: integer
+          format: int32
+        feedState:
+          type: string
+        timeZone:
+          type: string
+        createdBy:
+          type: string
+        creationDate:
+          type: string
+        modifiedBy:
+          type: string
+        modificationDate:
+          type: string
+        legacyTransport:
+          $ref: '#/components/schemas/LegacyTransportConfig'
+      description: Extended Metadata for DataFeedExtendedView
+    DataFeedUpdateBody_User:
+      type: object
+      properties:
+        columnPreset:
+          type: integer
+          format: int32
+        notes:
+          type: string
+        dynamicLookups:
+          type: boolean
+        replaceEscapedChars:
+          type: boolean
+        metadata:
+          $ref: '#/components/schemas/UpdateMetadata_User'
+        schedule:
+          $ref: '#/components/schemas/Schedule_User'
+        packaging:
+          $ref: '#/components/schemas/Packaging_User'
+        delivery:
+          $ref: '#/components/schemas/Delivery_User'
+        lateHits:
+          $ref: '#/components/schemas/LateHits_User'
+    DataFeedList:
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataFeedView'
+    Schedule_User:
+      type: object
+      properties:
+        startDate:
+          type: string
+        endDate:
+          type: string
+        interval:
+          type: string
+        delay:
+          type: integer
+          format: int32
+    LateHits_User:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        lookback:
+          type: integer
+          format: int32
     Delivery_User:
       type: object
       properties:
@@ -875,6 +999,76 @@ components:
           type: array
           items:
             type: string
+    UpdateMetadata_User:
+      type: object
+      properties:
+        feedId:
+          type: integer
+          format: int32
+        feedState:
+          type: string
+      description: Metadata for the DataFeedUpdateBody
+    Delivery:
+      type: object
+      properties:
+        cloudLocationUUID:
+          type: string
+        notificationEmail:
+          type: array
+          items:
+            type: string
+    DataFeedRequestView:
+      type: object
+      properties:
+        rsid:
+          type: string
+        feedId:
+          type: integer
+          format: int32
+        feedName:
+          type: string
+        feedState:
+          type: string
+        requestId:
+          type: integer
+          format: int64
+        submittedDate:
+          type: string
+        runCount:
+          type: integer
+          format: int32
+        runAttempt:
+          type: string
+        completeDate:
+          type: string
+        requestPeriodBegin:
+          type: string
+        requestPeriodEnd:
+          type: string
+        requestState:
+          type: string
+        useUTC:
+          type: integer
+          format: int32
+        errorCode:
+          type: integer
+          format: int32
+        errorMsg:
+          type: string
+        timezone:
+          type: string
+    DataFeedRequestListView:
+      properties:
+        offset:
+          type: integer
+          format: int32
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataFeedRequestView'
+        limit:
+          type: integer
+          format: int32
     LegacyTransportConfig:
       type: object
       properties:
@@ -904,27 +1098,27 @@ components:
           type: string
         exportLocationId:
           type: string
-    DataFeedRequestListView:
-      properties:
-        offset:
-          type: integer
-          format: int32
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataFeedRequestView'
-        limit:
-          type: integer
-          format: int32
-    UpdateMetadata_User:
+    ReportSuiteList_User:
       type: object
       properties:
-        feedId:
+        rsids:
+          type: array
+          items:
+            type: string
+    Packaging_User:
+      type: object
+      properties:
+        type:
+          type: string
+        chunkSize:
           type: integer
           format: int32
-        feedState:
+        compression:
           type: string
-      description: Metadata for the DataFeedUpdateBody
+        manifest:
+          type: string
+        noDataManifest:
+          type: boolean
     Packaging:
       type: object
       properties:
@@ -939,66 +1133,14 @@ components:
           type: string
         noDataManifest:
           type: boolean
-    DataFeedCreateBody_User:
-      required:
-      - columnPreset
-      - delivery
-      - feedName
-      - rsid
-      - schedule
+    LateHits:
       type: object
       properties:
-        feedName:
-          type: string
-        rsid:
-          type: string
-        feedState:
-          type: string
-        columnPreset:
+        enabled:
+          type: boolean
+        lookback:
           type: integer
           format: int32
-        notes:
-          type: string
-        dynamicLookups:
-          type: boolean
-        replaceEscapedChars:
-          type: boolean
-        schedule:
-          $ref: '#/components/schemas/Schedule_User'
-        packaging:
-          $ref: '#/components/schemas/Packaging_User'
-        delivery:
-          $ref: '#/components/schemas/Delivery_User'
-        lateHits:
-          $ref: '#/components/schemas/LateHits_User'
-    Metadata:
-      type: object
-      properties:
-        feedId:
-          type: integer
-          format: int32
-        feedState:
-          type: string
-        timeZone:
-          type: string
-        createdBy:
-          type: string
-        creationDate:
-          type: string
-        modifiedBy:
-          type: string
-        modificationDate:
-          type: string
-      description: Metadata for DataFeedView
-    Delivery:
-      type: object
-      properties:
-        cloudLocationUUID:
-          type: string
-        notificationEmail:
-          type: array
-          items:
-            type: string
     Schedule:
       type: object
       properties:
@@ -1011,148 +1153,6 @@ components:
         delay:
           type: integer
           format: int32
-    Schedule_User:
-      type: object
-      properties:
-        startDate:
-          type: string
-        endDate:
-          type: string
-        interval:
-          type: string
-        delay:
-          type: integer
-          format: int32
-    LateHits_User:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-        lookback:
-          type: integer
-          format: int32
-    AnalyticsAsrErrorResponse:
-      properties:
-        errorDescription:
-          type: string
-        errorCode:
-          type: string
-        errorId:
-          type: string
-    DataFeedExtendedView:
-      properties:
-        dynamicLookups:
-          type: boolean
-        schedule:
-          $ref: '#/components/schemas/Schedule'
-        delivery:
-          $ref: '#/components/schemas/Delivery'
-        columnPreset:
-          type: integer
-          format: int32
-        notes:
-          type: string
-        feedName:
-          type: string
-        extendedMetadata:
-          $ref: '#/components/schemas/ExtendedMetadata'
-        rsid:
-          type: string
-        lateHits:
-          $ref: '#/components/schemas/LateHits'
-        packaging:
-          $ref: '#/components/schemas/Packaging'
-        replaceEscapedChars:
-          type: boolean
-    LateHits:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-        lookback:
-          type: integer
-          format: int32
-    DataFeedList:
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataFeedView'
-    DataFeedUpdateBody_User:
-      type: object
-      properties:
-        columnPreset:
-          type: integer
-          format: int32
-        notes:
-          type: string
-        dynamicLookups:
-          type: boolean
-        replaceEscapedChars:
-          type: boolean
-        metadata:
-          $ref: '#/components/schemas/UpdateMetadata_User'
-        schedule:
-          $ref: '#/components/schemas/Schedule_User'
-        packaging:
-          $ref: '#/components/schemas/Packaging_User'
-        delivery:
-          $ref: '#/components/schemas/Delivery_User'
-        lateHits:
-          $ref: '#/components/schemas/LateHits_User'
-    ExtendedMetadata:
-      type: object
-      properties:
-        feedId:
-          type: integer
-          format: int32
-        feedState:
-          type: string
-        timeZone:
-          type: string
-        createdBy:
-          type: string
-        creationDate:
-          type: string
-        modifiedBy:
-          type: string
-        modificationDate:
-          type: string
-        legacyTransport:
-          $ref: '#/components/schemas/LegacyTransportConfig'
-      description: Extended Metadata for DataFeedExtendedView
-    ReportSuiteList_User:
-      type: object
-      properties:
-        rsids:
-          type: array
-          items:
-            type: string
-    DataFeedView:
-      properties:
-        dynamicLookups:
-          type: boolean
-        schedule:
-          $ref: '#/components/schemas/Schedule'
-        delivery:
-          $ref: '#/components/schemas/Delivery'
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-        columnPreset:
-          type: integer
-          format: int32
-        notes:
-          type: string
-        feedName:
-          type: string
-        rsid:
-          type: string
-        lateHits:
-          $ref: '#/components/schemas/LateHits'
-        packaging:
-          $ref: '#/components/schemas/Packaging'
-        replaceEscapedChars:
-          type: boolean
   parameters:
     authorization:
       name: Authorization

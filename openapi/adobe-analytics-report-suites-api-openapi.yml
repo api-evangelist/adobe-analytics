@@ -233,28 +233,6 @@ paths:
     servers:
     - url: https://analytics.adobe.io/api
 components:
-  parameters:
-    rsidPath:
-      name: rsid
-      in: path
-      required: true
-      description: The report suite ID
-      schema:
-        type: string
-    authorization:
-      name: Authorization
-      in: header
-      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
-      required: true
-      schema:
-        type: string
-    x-api-key:
-      name: x-api-key
-      in: header
-      description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
-      required: true
-      schema:
-        type: string
   schemas:
     ReportSuite:
       type: object
@@ -312,6 +290,17 @@ components:
           type: string
           description: Unique ID for tracking this error
           example: '500123'
+    CreatedSuite:
+      properties:
+        rsid:
+          title: Report Suite id
+          type: string
+        created:
+          title: Suite created
+          type: boolean
+        axleActivated:
+          title: Axle activated for suite
+          type: boolean
     TimezoneSettings:
       properties:
         currentTimezoneOffset:
@@ -332,17 +321,28 @@ components:
           type: string
         errorId:
           type: string
-    CreatedSuite:
-      properties:
-        rsid:
-          title: Report Suite id
-          type: string
-        created:
-          title: Suite created
-          type: boolean
-        axleActivated:
-          title: Axle activated for suite
-          type: boolean
+  parameters:
+    rsidPath:
+      name: rsid
+      in: path
+      required: true
+      description: The report suite ID
+      schema:
+        type: string
+    x-api-key:
+      name: x-api-key
+      in: header
+      description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
+      required: true
+      schema:
+        type: string
+    authorization:
+      name: Authorization
+      in: header
+      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
+      required: true
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

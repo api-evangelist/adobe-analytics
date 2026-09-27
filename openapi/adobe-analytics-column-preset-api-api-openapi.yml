@@ -180,15 +180,11 @@ paths:
                 $ref: '#/components/schemas/ColumnPresetList'
 components:
   schemas:
-    ColumnPresetList:
+    ColumnName:
+      type: object
       properties:
-        total:
-          type: integer
-          format: int32
-        columnPresets:
-          type: array
-          items:
-            $ref: '#/components/schemas/SimpleColumnPresetView'
+        name:
+          type: string
     ColumnPresetCreateBody_User:
       required:
       - columnNames
@@ -201,17 +197,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ColumnName_User'
-    AnalyticsAsrErrorResponse:
-      properties:
-        errorDescription:
-          type: string
-        errorCode:
-          type: string
-        errorId:
-          type: string
-    ColumnName:
+    SimpleColumnPresetView:
       type: object
       properties:
+        columnPresetId:
+          type: integer
+          format: int32
         name:
           type: string
     ColumnName_User:
@@ -219,12 +210,6 @@ components:
       properties:
         name:
           type: string
-    ColumnList:
-      properties:
-        data:
-          type: array
-          items:
-            type: string
     ColumnPresetView:
       properties:
         columnNames:
@@ -236,26 +221,41 @@ components:
         columnPresetId:
           type: integer
           format: int32
-    SimpleColumnPresetView:
-      type: object
+    ColumnPresetList:
       properties:
-        columnPresetId:
+        total:
           type: integer
           format: int32
-        name:
+        columnPresets:
+          type: array
+          items:
+            $ref: '#/components/schemas/SimpleColumnPresetView'
+    ColumnList:
+      properties:
+        data:
+          type: array
+          items:
+            type: string
+    AnalyticsAsrErrorResponse:
+      properties:
+        errorDescription:
+          type: string
+        errorCode:
+          type: string
+        errorId:
           type: string
   parameters:
-    authorization:
-      name: Authorization
-      in: header
-      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
-      required: true
-      schema:
-        type: string
     x-api-key:
       name: x-api-key
       in: header
       description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
+      required: true
+      schema:
+        type: string
+    authorization:
+      name: Authorization
+      in: header
+      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
       required: true
       schema:
         type: string

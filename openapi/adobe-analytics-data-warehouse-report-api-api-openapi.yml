@@ -158,6 +158,72 @@ paths:
                 $ref: '#/components/schemas/DwRequestGetJobs'
 components:
   schemas:
+    DeliverySettingsResponse:
+      type: object
+      properties:
+        exportLocationUUID:
+          type: string
+        email:
+          $ref: '#/components/schemas/EmailSettings'
+        legacyEmail:
+          type: boolean
+        legacyAzure:
+          $ref: '#/components/schemas/LegacyAzureSettings'
+        legacyFTP:
+          $ref: '#/components/schemas/LegacyDeliveryFTPSettings'
+        legacyS3:
+          $ref: '#/components/schemas/LegacyDeliveryS3Settings'
+    LegacyDeliveryFTPSettings:
+      type: object
+      properties:
+        username:
+          type: string
+        host:
+          type: string
+        port:
+          type: integer
+          format: int32
+        directory:
+          type: string
+    ReportView:
+      properties:
+        delivery:
+          $ref: '#/components/schemas/DeliverySettingsResponse'
+        outputFile:
+          $ref: '#/components/schemas/OutputFileSettings'
+        metadata:
+          $ref: '#/components/schemas/ReportMetadata'
+        report:
+          $ref: '#/components/schemas/ReportData'
+    DwRequestGetJobs:
+      properties:
+        total:
+          type: integer
+          format: int64
+        totalReturned:
+          type: integer
+          format: int64
+        reportList:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportTruncatedView'
+    TruncatedReportMetadata:
+      type: object
+      properties:
+        legacyReportID:
+          type: integer
+          format: int32
+        uuid:
+          type: string
+        status:
+          type: string
+    TruncatedReportData:
+      type: object
+      properties:
+        fromDate:
+          type: string
+        toDate:
+          type: string
     EmailSettings:
       type: object
       properties:
@@ -168,6 +234,33 @@ components:
         notificationEmailSubject:
           type: string
         notificationEmailNotes:
+          type: string
+    LegacyAzureSettings:
+      type: object
+      properties:
+        account:
+          type: string
+        container:
+          type: string
+        prefix:
+          type: string
+    ReportData:
+      type: object
+      properties:
+        rsid:
+          type: string
+        fromDate:
+          type: string
+        toDate:
+          type: string
+    LegacyDeliveryS3Settings:
+      type: object
+      properties:
+        awsBucket:
+          type: string
+        awsAccessKey:
+          type: string
+        awsPath:
           type: string
     OutputFileSettings:
       type: object
@@ -186,84 +279,23 @@ components:
           type: boolean
         sendManifestFile:
           type: boolean
-    DwRequestGetJobs:
-      properties:
-        total:
-          type: integer
-          format: int64
-        totalReturned:
-          type: integer
-          format: int64
-        reportList:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReportTruncatedView'
-    ReportData:
+    ReportTruncatedView:
       type: object
       properties:
-        rsid:
-          type: string
-        fromDate:
-          type: string
-        toDate:
-          type: string
-    LegacyDeliveryFTPSettings:
-      type: object
-      properties:
-        username:
-          type: string
-        host:
-          type: string
-        port:
-          type: integer
-          format: int32
-        directory:
-          type: string
-    TruncatedReportData:
-      type: object
-      properties:
-        fromDate:
-          type: string
-        toDate:
-          type: string
-    TruncatedReportMetadata:
-      type: object
-      properties:
-        legacyReportID:
-          type: integer
-          format: int32
-        uuid:
-          type: string
-        status:
-          type: string
-    Metadata:
-      type: object
-      properties:
-        status:
-          type: string
-    LegacyAzureSettings:
-      type: object
-      properties:
-        account:
-          type: string
-        container:
-          type: string
-        prefix:
-          type: string
-    LegacyDeliveryS3Settings:
-      type: object
-      properties:
-        awsBucket:
-          type: string
-        awsAccessKey:
-          type: string
-        awsPath:
-          type: string
+        metadata:
+          $ref: '#/components/schemas/TruncatedReportMetadata'
+        report:
+          $ref: '#/components/schemas/TruncatedReportData'
     DataWarehouseJobPut:
       type: object
       properties:
         metadata:
           $ref: '#/components/schemas/Metadata'
+    Metadata:
+      type: object
+      properties:
+        status:
+          type: string
     AnalyticsAsrErrorResponse:
       properties:
         errorDescription:
@@ -272,21 +304,6 @@ components:
           type: string
         errorId:
           type: string
-    DeliverySettingsResponse:
-      type: object
-      properties:
-        exportLocationUUID:
-          type: string
-        email:
-          $ref: '#/components/schemas/EmailSettings'
-        legacyEmail:
-          type: boolean
-        legacyAzure:
-          $ref: '#/components/schemas/LegacyAzureSettings'
-        legacyFTP:
-          $ref: '#/components/schemas/LegacyDeliveryFTPSettings'
-        legacyS3:
-          $ref: '#/components/schemas/LegacyDeliveryS3Settings'
     ReportMetadata:
       type: object
       properties:
@@ -311,23 +328,6 @@ components:
           type: string
         jobType:
           type: string
-    ReportTruncatedView:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/TruncatedReportMetadata'
-        report:
-          $ref: '#/components/schemas/TruncatedReportData'
-    ReportView:
-      properties:
-        delivery:
-          $ref: '#/components/schemas/DeliverySettingsResponse'
-        outputFile:
-          $ref: '#/components/schemas/OutputFileSettings'
-        metadata:
-          $ref: '#/components/schemas/ReportMetadata'
-        report:
-          $ref: '#/components/schemas/ReportData'
   parameters:
     x-api-key:
       name: x-api-key

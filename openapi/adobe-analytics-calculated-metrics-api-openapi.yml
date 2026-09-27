@@ -275,57 +275,32 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    locale:
+      name: locale
+      in: query
+      description: The locale for response labels
+      schema:
+        type: string
+        enum:
+        - en_US
+        - fr_FR
+        - jp_JP
+        - ja_JP
+        - de_DE
+        - es_ES
+        - ko_KR
+        - pt_BR
+        - zh_CN
+        - zh_TW
+    calculatedMetricId:
+      name: calculatedMetricId
+      in: path
+      required: true
+      description: The calculated metric ID
+      schema:
+        type: string
   schemas:
-    CalculatedMetricCreate:
-      type: object
-      required:
-      - name
-      - rsid
-      - definition
-      description: Payload for creating or updating a calculated metric
-      properties:
-        name:
-          type: string
-          description: Display name
-          maxLength: 255
-          example: Example Title
-        description:
-          type: string
-          description: Description of what the metric measures
-          example: A sample description.
-        rsid:
-          type: string
-          description: Report suite ID
-          example: '500123'
-        definition:
-          type: object
-          description: The formula definition
-          example: example_value
-        type:
-          type: string
-          description: The metric output type
-          enum:
-          - DECIMAL
-          - TIME
-          - PERCENT
-          - CURRENCY
-          example: DECIMAL
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code
-          example: example_value
-        errorDescription:
-          type: string
-          description: Human-readable error message
-          example: example_value
-        errorId:
-          type: string
-          description: Unique ID for tracking this error
-          example: '500123'
     CalculatedMetricList:
       type: object
       description: Paginated list of calculated metrics
@@ -343,22 +318,6 @@ components:
           type: integer
           description: Total number of pages
           example: 42
-    Owner:
-      type: object
-      description: The owner of an Analytics component
-      properties:
-        id:
-          type: integer
-          description: Owner user ID
-          example: abc123
-        name:
-          type: string
-          description: Owner display name
-          example: Example Title
-        login:
-          type: string
-          description: Owner login identifier
-          example: example_value
     CalculatedMetric:
       type: object
       description: A calculated metric definition
@@ -399,31 +358,72 @@ components:
           - PERCENT
           - CURRENCY
           example: DECIMAL
-  parameters:
-    calculatedMetricId:
-      name: calculatedMetricId
-      in: path
-      required: true
-      description: The calculated metric ID
-      schema:
-        type: string
-    locale:
-      name: locale
-      in: query
-      description: The locale for response labels
-      schema:
-        type: string
-        enum:
-        - en_US
-        - fr_FR
-        - jp_JP
-        - ja_JP
-        - de_DE
-        - es_ES
-        - ko_KR
-        - pt_BR
-        - zh_CN
-        - zh_TW
+    CalculatedMetricCreate:
+      type: object
+      required:
+      - name
+      - rsid
+      - definition
+      description: Payload for creating or updating a calculated metric
+      properties:
+        name:
+          type: string
+          description: Display name
+          maxLength: 255
+          example: Example Title
+        description:
+          type: string
+          description: Description of what the metric measures
+          example: A sample description.
+        rsid:
+          type: string
+          description: Report suite ID
+          example: '500123'
+        definition:
+          type: object
+          description: The formula definition
+          example: example_value
+        type:
+          type: string
+          description: The metric output type
+          enum:
+          - DECIMAL
+          - TIME
+          - PERCENT
+          - CURRENCY
+          example: DECIMAL
+    Owner:
+      type: object
+      description: The owner of an Analytics component
+      properties:
+        id:
+          type: integer
+          description: Owner user ID
+          example: abc123
+        name:
+          type: string
+          description: Owner display name
+          example: Example Title
+        login:
+          type: string
+          description: Owner login identifier
+          example: example_value
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        errorDescription:
+          type: string
+          description: Human-readable error message
+          example: example_value
+        errorId:
+          type: string
+          description: Unique ID for tracking this error
+          example: '500123'
   securitySchemes:
     bearerAuth:
       type: http

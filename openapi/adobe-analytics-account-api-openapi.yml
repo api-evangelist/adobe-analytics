@@ -166,6 +166,15 @@ paths:
       - ims_user_token: []
 components:
   schemas:
+    OperationResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: Operation successful
     DataSourcesAccount:
       type: object
       properties:
@@ -194,27 +203,18 @@ components:
         ftp_password:
           type: string
           example: 3z1475tf
-    OperationResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-          example: true
-        message:
-          type: string
-          example: Operation successful
   parameters:
-    authorization:
-      name: Authorization
-      in: header
-      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
-      required: true
-      schema:
-        type: string
     x-api-key:
       name: x-api-key
       in: header
       description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
+      required: true
+      schema:
+        type: string
+    authorization:
+      name: Authorization
+      in: header
+      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
       required: true
       schema:
         type: string

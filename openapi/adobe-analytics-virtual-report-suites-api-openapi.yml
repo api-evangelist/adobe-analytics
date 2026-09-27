@@ -430,12 +430,6 @@ paths:
                 $ref: '#/components/schemas/VirtualReportSuite'
 components:
   schemas:
-    DeleteResponse:
-      properties:
-        result:
-          type: string
-        message:
-          type: string
     VirtualReportSuite:
       properties:
         internal:
@@ -501,18 +495,6 @@ components:
           $ref: '#/components/schemas/JsonNode'
         compatibility:
           $ref: '#/components/schemas/VrsCompatibility'
-    VrsCompatibility:
-      properties:
-        valid:
-          type: boolean
-        validator_version:
-          type: string
-        message:
-          type: string
-        supported_products:
-          type: array
-          items:
-            type: string
     JsonNode:
       type: object
       properties:
@@ -568,14 +550,24 @@ components:
           type: boolean
         'null':
           type: boolean
-    AnalyticsAsrErrorResponse:
+    DeleteResponse:
       properties:
-        errorDescription:
+        result:
           type: string
-        errorCode:
+        message:
           type: string
-        errorId:
+    VrsCompatibility:
+      properties:
+        valid:
+          type: boolean
+        validator_version:
           type: string
+        message:
+          type: string
+        supported_products:
+          type: array
+          items:
+            type: string
     CuratedComponent:
       required:
       - componentId
@@ -597,18 +589,26 @@ components:
           type: string
         login:
           type: string
+    AnalyticsAsrErrorResponse:
+      properties:
+        errorDescription:
+          type: string
+        errorCode:
+          type: string
+        errorId:
+          type: string
   parameters:
-    authorization:
-      name: Authorization
-      in: header
-      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
-      required: true
-      schema:
-        type: string
     x-api-key:
       name: x-api-key
       in: header
       description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
+      required: true
+      schema:
+        type: string
+    authorization:
+      name: Authorization
+      in: header
+      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
       required: true
       schema:
         type: string

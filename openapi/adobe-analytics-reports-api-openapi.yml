@@ -112,6 +112,75 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ReportRow:
+      type: object
+      description: A single row in a report result
+      properties:
+        itemId:
+          type: string
+          description: The dimension item ID
+          example: '500123'
+        value:
+          type: string
+          description: The dimension item display value
+          example: example_value
+        data:
+          type: array
+          description: Metric values for this row, in column order
+          items:
+            type: number
+          example: []
+    MetricContainer:
+      type: object
+      required:
+      - metrics
+      description: Container defining the metrics to include in a report
+      properties:
+        metrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportMetric'
+          example: []
+        metricFilters:
+          type: array
+          description: Filters applied at the metric level
+          items:
+            $ref: '#/components/schemas/ReportFilter'
+          example: []
+    ReportRequest:
+      type: object
+      required:
+      - rsid
+      - globalFilters
+      - metricContainer
+      description: Definition of an analytics report request
+      properties:
+        rsid:
+          type: string
+          description: The report suite ID to run the report against
+          example: examplersid
+        locale:
+          type: string
+          description: Locale for response labels
+          example: en_US
+        globalFilters:
+          type: array
+          description: List of global filters applied to the entire report
+          items:
+            $ref: '#/components/schemas/ReportFilter'
+          example: []
+        metricContainer:
+          $ref: '#/components/schemas/MetricContainer'
+        dimension:
+          type: string
+          description: The primary dimension ID for the report (e.g. variables/page)
+          example: variables/page
+        settings:
+          $ref: '#/components/schemas/ReportSettings'
+        statistics:
+          type: object
+          description: Statistical settings for the report
+          example: example_value
     ReportResponse:
       type: object
       description: The result of an analytics report request
@@ -137,67 +206,6 @@ components:
           type: object
           description: Totals and summary statistics
           example: example_value
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code
-          example: example_value
-        errorDescription:
-          type: string
-          description: Human-readable error message
-          example: example_value
-        errorId:
-          type: string
-          description: Unique ID for tracking this error
-          example: '500123'
-    ReportMetric:
-      type: object
-      required:
-      - id
-      description: A metric included in a report request
-      properties:
-        id:
-          type: string
-          description: The metric ID (e.g. metrics/visits)
-          example: abc123
-        columnId:
-          type: string
-          description: Column identifier for this metric in the response
-          example: '500123'
-        filters:
-          type: array
-          description: Metric-level filter IDs referencing metricFilters
-          items:
-            type: string
-          example: []
-        sort:
-          type: string
-          description: Sort direction for this metric
-          enum:
-          - ASC
-          - DESC
-          example: ASC
-    ReportRow:
-      type: object
-      description: A single row in a report result
-      properties:
-        itemId:
-          type: string
-          description: The dimension item ID
-          example: '500123'
-        value:
-          type: string
-          description: The dimension item display value
-          example: example_value
-        data:
-          type: array
-          description: Metric values for this row, in column order
-          items:
-            type: number
-          example: []
     ReportSettings:
       type: object
       description: Settings that control report output behavior
@@ -249,57 +257,49 @@ components:
           type: string
           description: Dimension item ID for breakdown filter
           example: '500123'
-    ReportRequest:
+    ReportMetric:
       type: object
       required:
-      - rsid
-      - globalFilters
-      - metricContainer
-      description: Definition of an analytics report request
+      - id
+      description: A metric included in a report request
       properties:
-        rsid:
+        id:
           type: string
-          description: The report suite ID to run the report against
-          example: examplersid
-        locale:
+          description: The metric ID (e.g. metrics/visits)
+          example: abc123
+        columnId:
           type: string
-          description: Locale for response labels
-          example: en_US
-        globalFilters:
+          description: Column identifier for this metric in the response
+          example: '500123'
+        filters:
           type: array
-          description: List of global filters applied to the entire report
+          description: Metric-level filter IDs referencing metricFilters
           items:
-            $ref: '#/components/schemas/ReportFilter'
+            type: string
           example: []
-        metricContainer:
-          $ref: '#/components/schemas/MetricContainer'
-        dimension:
+        sort:
           type: string
-          description: The primary dimension ID for the report (e.g. variables/page)
-          example: variables/page
-        settings:
-          $ref: '#/components/schemas/ReportSettings'
-        statistics:
-          type: object
-          description: Statistical settings for the report
+          description: Sort direction for this metric
+          enum:
+          - ASC
+          - DESC
+          example: ASC
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
           example: example_value
-    MetricContainer:
-      type: object
-      required:
-      - metrics
-      description: Container defining the metrics to include in a report
-      properties:
-        metrics:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReportMetric'
-          example: []
-        metricFilters:
-          type: array
-          description: Filters applied at the metric level
-          items:
-            $ref: '#/components/schemas/ReportFilter'
-          example: []
+        errorDescription:
+          type: string
+          description: Human-readable error message
+          example: example_value
+        errorId:
+          type: string
+          description: Unique ID for tracking this error
+          example: '500123'
   securitySchemes:
     bearerAuth:
       type: http

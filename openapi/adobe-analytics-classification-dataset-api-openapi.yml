@@ -186,6 +186,30 @@ paths:
           description: The dataset doesn't exist in the IMS ORG
 components:
   schemas:
+    Notification:
+      type: object
+      properties:
+        method:
+          type: string
+          enum:
+          - email
+          - rabbit
+        state:
+          type: string
+          enum:
+          - created
+          - queued
+          - validated
+          - failed_validation
+          - processing
+          - done_processing
+          - failed_processing
+          - completed
+        recipients:
+          type: array
+          items:
+            type: string
+      description: List of notifications to be sent for all imports and exports that occur.
     ApiClassificationSet:
       properties:
         owner:
@@ -236,14 +260,6 @@ components:
           description: List of notifications to be sent for all imports and exports that occur.
           items:
             $ref: '#/components/schemas/Notification'
-    ReportSuiteCompatibilityMetric:
-      properties:
-        metrics:
-          type: array
-          items:
-            $ref: '#/components/schemas/CompatibilityMetric'
-        report_suite_id:
-          type: string
     ClassificationSubscription:
       required:
       - dimension
@@ -265,6 +281,17 @@ components:
           description: Flag to indicate if the subscription is editable by the current user based on report suite permissions.
           readOnly: true
       description: A list of classification subscriptions. Subscriptions are not required at the time of creation but no data will be classified until at least one subscription exists.
+    CompatibilityMetric:
+      type: object
+      properties:
+        id:
+          type: array
+          items:
+            type: string
+        datasets:
+          type: array
+          items:
+            type: string
     ApiAnalyticsClassificationColumn:
       required:
       - display_name
@@ -293,17 +320,6 @@ components:
           type: string
           description: An optional classification dataset id, whose dataset classifies this column's data.
       description: A list of classification column definitions. Column definitions are not required at the time of creation but no data will be classified until at least one column definition exists.
-    CompatibilityMetric:
-      type: object
-      properties:
-        id:
-          type: array
-          items:
-            type: string
-        datasets:
-          type: array
-          items:
-            type: string
     ClassificationOwner:
       type: object
       properties:
@@ -312,42 +328,26 @@ components:
         email:
           type: string
       description: Contact information for a person responsible for the classification definition and/or data.
-    Notification:
-      type: object
+    ReportSuiteCompatibilityMetric:
       properties:
-        method:
-          type: string
-          enum:
-          - email
-          - rabbit
-        state:
-          type: string
-          enum:
-          - created
-          - queued
-          - validated
-          - failed_validation
-          - processing
-          - done_processing
-          - failed_processing
-          - completed
-        recipients:
+        metrics:
           type: array
           items:
-            type: string
-      description: List of notifications to be sent for all imports and exports that occur.
+            $ref: '#/components/schemas/CompatibilityMetric'
+        report_suite_id:
+          type: string
   parameters:
-    authorization:
-      name: Authorization
-      in: header
-      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
-      required: true
-      schema:
-        type: string
     x-api-key:
       name: x-api-key
       in: header
       description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
+      required: true
+      schema:
+        type: string
+    authorization:
+      name: Authorization
+      in: header
+      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
       required: true
       schema:
         type: string

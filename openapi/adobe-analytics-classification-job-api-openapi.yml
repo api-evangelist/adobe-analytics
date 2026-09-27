@@ -369,47 +369,55 @@ paths:
           description: Internal server error, upload file to internal storage failed
 components:
   schemas:
-    JobImportOptionsWithData:
+    Notification:
       type: object
       properties:
-        dataFormat:
+        method:
           type: string
-        encoding:
+          enum:
+          - email
+          - rabbit
+        state:
           type: string
-        jobName:
-          type: string
-        notifications:
+          enum:
+          - created
+          - queued
+          - validated
+          - failed_validation
+          - processing
+          - done_processing
+          - failed_processing
+          - completed
+        recipients:
           type: array
           items:
-            $ref: '#/components/schemas/Notification'
-        listDelimiter:
-          type: string
-        keyOptions:
-          $ref: '#/components/schemas/KeyOption'
-        jobImportOption:
-          $ref: '#/components/schemas/JobImportOptions'
-        data:
+            type: string
+      description: List of notifications to be sent for all imports and exports that occur.
+    ApiClassificationJobPage:
+      properties:
+        size:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        last:
+          type: boolean
+        totalPages:
+          type: integer
+          format: int32
+        page:
+          type: integer
+          format: int32
+        content:
           type: array
           items:
-            $ref: '#/components/schemas/JsonRecord'
-    JsonRecord:
-      type: object
-      properties:
-        key:
-          type: string
-        action:
-          type: string
-        data:
-          type: object
-          additionalProperties:
-            type: object
-    NotificationExtra:
-      type: object
-      properties:
-        key:
-          type: string
-        value:
-          type: string
+            $ref: '#/components/schemas/ApiClassificationJob'
+        first:
+          type: boolean
+        totalElements:
+          type: integer
+          format: int64
     ApiClassificationJob:
       properties:
         setName:
@@ -453,49 +461,6 @@ components:
         imsOrgId:
           type: string
           description: The IMS Org Id of the job.
-    ApiJobExportOptions:
-      type: object
-      properties:
-        dataFormat:
-          type: string
-        encoding:
-          type: string
-        jobName:
-          type: string
-        listDelimiter:
-          type: string
-        rowLimit:
-          type: integer
-          format: int32
-        offset:
-          type: integer
-          format: int32
-        columns:
-          type: array
-          items:
-            type: string
-        keys:
-          type: array
-          items:
-            type: string
-        keyRegex:
-          type: string
-        exactMatch:
-          type: object
-          additionalProperties:
-            type: object
-        regexMatch:
-          type: object
-          additionalProperties:
-            type: object
-        dateFilterStart:
-          type: string
-        dateFilterEnd:
-          type: string
-        notifications:
-          type: array
-          items:
-            $ref: '#/components/schemas/Notification'
     ImportApiJobRecord:
       properties:
         api_job_status:
@@ -545,23 +510,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/NotificationExtra'
-    ApiJobImportOptions:
-      type: object
-      properties:
-        dataFormat:
-          type: string
-        encoding:
-          type: string
-        jobName:
-          type: string
-        notifications:
-          type: array
-          items:
-            $ref: '#/components/schemas/Notification'
-        listDelimiter:
-          type: string
-        keyOptions:
-          $ref: '#/components/schemas/KeyOption'
     ApiJobHistory:
       type: object
       properties:
@@ -584,6 +532,107 @@ components:
           type: string
           description: The details of the job history
       description: The history of the job.
+    ApiJobImportOptions:
+      type: object
+      properties:
+        dataFormat:
+          type: string
+        encoding:
+          type: string
+        jobName:
+          type: string
+        notifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Notification'
+        listDelimiter:
+          type: string
+        keyOptions:
+          $ref: '#/components/schemas/KeyOption'
+    JobImportOptionsWithData:
+      type: object
+      properties:
+        dataFormat:
+          type: string
+        encoding:
+          type: string
+        jobName:
+          type: string
+        notifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Notification'
+        listDelimiter:
+          type: string
+        keyOptions:
+          $ref: '#/components/schemas/KeyOption'
+        jobImportOption:
+          $ref: '#/components/schemas/JobImportOptions'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/JsonRecord'
+    ApiJobExportOptions:
+      type: object
+      properties:
+        dataFormat:
+          type: string
+        encoding:
+          type: string
+        jobName:
+          type: string
+        listDelimiter:
+          type: string
+        rowLimit:
+          type: integer
+          format: int32
+        offset:
+          type: integer
+          format: int32
+        columns:
+          type: array
+          items:
+            type: string
+        keys:
+          type: array
+          items:
+            type: string
+        keyRegex:
+          type: string
+        exactMatch:
+          type: object
+          additionalProperties:
+            type: object
+        regexMatch:
+          type: object
+          additionalProperties:
+            type: object
+        dateFilterStart:
+          type: string
+        dateFilterEnd:
+          type: string
+        notifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Notification'
+    NotificationExtra:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    JsonRecord:
+      type: object
+      properties:
+        key:
+          type: string
+        action:
+          type: string
+        data:
+          type: object
+          additionalProperties:
+            type: object
     KeyOption:
       type: object
       properties:
@@ -594,67 +643,18 @@ components:
           type: string
         overwrite:
           type: boolean
-    ApiClassificationJobPage:
-      properties:
-        size:
-          type: integer
-          format: int32
-        numberOfElements:
-          type: integer
-          format: int32
-        last:
-          type: boolean
-        totalPages:
-          type: integer
-          format: int32
-        page:
-          type: integer
-          format: int32
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/ApiClassificationJob'
-        first:
-          type: boolean
-        totalElements:
-          type: integer
-          format: int64
-    Notification:
-      type: object
-      properties:
-        method:
-          type: string
-          enum:
-          - email
-          - rabbit
-        state:
-          type: string
-          enum:
-          - created
-          - queued
-          - validated
-          - failed_validation
-          - processing
-          - done_processing
-          - failed_processing
-          - completed
-        recipients:
-          type: array
-          items:
-            type: string
-      description: List of notifications to be sent for all imports and exports that occur.
   parameters:
-    authorization:
-      name: Authorization
-      in: header
-      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
-      required: true
-      schema:
-        type: string
     x-api-key:
       name: x-api-key
       in: header
       description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
+      required: true
+      schema:
+        type: string
+    authorization:
+      name: Authorization
+      in: header
+      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
       required: true
       schema:
         type: string

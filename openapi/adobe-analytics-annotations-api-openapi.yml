@@ -137,58 +137,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Tag:
-      type: object
-      description: A tag applied to an Analytics component
-      properties:
-        id:
-          type: integer
-          description: Tag identifier
-          example: abc123
-        name:
-          type: string
-          description: Tag name
-          example: Example Title
-        description:
-          type: string
-          description: Tag description
-          example: A sample description.
-        components:
-          type: array
-          description: List of components this tag is applied to
-          items:
-            type: object
-          example: []
-    AnnotationCreate:
-      type: object
-      required:
-      - name
-      - dateRange
-      description: Payload for creating an annotation
-      properties:
-        name:
-          type: string
-          description: Display name
-          maxLength: 255
-          example: Example Title
-        description:
-          type: string
-          description: Annotation notes
-          example: A sample description.
-        dateRange:
-          type: string
-          description: ISO 8601 date range
-          example: example_value
-        rsids:
-          type: array
-          items:
-            type: string
-          description: Report suite IDs to apply to
-          example: []
-        color:
-          type: string
-          description: Hex color code
-          example: example_value
     Annotation:
       type: object
       description: An annotation marking a date range in reports
@@ -219,6 +167,58 @@ components:
           type: string
           description: Display color for the annotation in reports
           example: example_value
+    AnnotationCreate:
+      type: object
+      required:
+      - name
+      - dateRange
+      description: Payload for creating an annotation
+      properties:
+        name:
+          type: string
+          description: Display name
+          maxLength: 255
+          example: Example Title
+        description:
+          type: string
+          description: Annotation notes
+          example: A sample description.
+        dateRange:
+          type: string
+          description: ISO 8601 date range
+          example: example_value
+        rsids:
+          type: array
+          items:
+            type: string
+          description: Report suite IDs to apply to
+          example: []
+        color:
+          type: string
+          description: Hex color code
+          example: example_value
+    Tag:
+      type: object
+      description: A tag applied to an Analytics component
+      properties:
+        id:
+          type: integer
+          description: Tag identifier
+          example: abc123
+        name:
+          type: string
+          description: Tag name
+          example: Example Title
+        description:
+          type: string
+          description: Tag description
+          example: A sample description.
+        components:
+          type: array
+          description: List of components this tag is applied to
+          items:
+            type: object
+          example: []
   parameters:
     locale:
       name: locale
