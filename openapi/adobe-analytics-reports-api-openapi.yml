@@ -130,23 +130,6 @@ components:
           items:
             type: number
           example: []
-    MetricContainer:
-      type: object
-      required:
-      - metrics
-      description: Container defining the metrics to include in a report
-      properties:
-        metrics:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReportMetric'
-          example: []
-        metricFilters:
-          type: array
-          description: Filters applied at the metric level
-          items:
-            $ref: '#/components/schemas/ReportFilter'
-          example: []
     ReportRequest:
       type: object
       required:
@@ -206,6 +189,23 @@ components:
           type: object
           description: Totals and summary statistics
           example: example_value
+    MetricContainer:
+      type: object
+      required:
+      - metrics
+      description: Container defining the metrics to include in a report
+      properties:
+        metrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportMetric'
+          example: []
+        metricFilters:
+          type: array
+          description: Filters applied at the metric level
+          items:
+            $ref: '#/components/schemas/ReportFilter'
+          example: []
     ReportSettings:
       type: object
       description: Settings that control report output behavior
@@ -227,6 +227,22 @@ components:
           - exclude-nones
           - return-nones
           example: exclude-nones
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        errorDescription:
+          type: string
+          description: Human-readable error message
+          example: example_value
+        errorId:
+          type: string
+          description: Unique ID for tracking this error
+          example: '500123'
     ReportFilter:
       type: object
       required:
@@ -284,22 +300,6 @@ components:
           - ASC
           - DESC
           example: ASC
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code
-          example: example_value
-        errorDescription:
-          type: string
-          description: Human-readable error message
-          example: example_value
-        errorId:
-          type: string
-          description: Unique ID for tracking this error
-          example: '500123'
   securitySchemes:
     bearerAuth:
       type: http

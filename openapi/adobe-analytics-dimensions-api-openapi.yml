@@ -70,6 +70,31 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  parameters:
+    locale:
+      name: locale
+      in: query
+      description: The locale for response labels
+      schema:
+        type: string
+        enum:
+        - en_US
+        - fr_FR
+        - jp_JP
+        - ja_JP
+        - de_DE
+        - es_ES
+        - ko_KR
+        - pt_BR
+        - zh_CN
+        - zh_TW
+    rsid:
+      name: rsid
+      in: query
+      required: true
+      description: The report suite ID
+      schema:
+        type: string
   schemas:
     Dimension:
       type: object
@@ -115,31 +140,6 @@ components:
           type: string
           description: Unique ID for tracking this error
           example: '500123'
-  parameters:
-    locale:
-      name: locale
-      in: query
-      description: The locale for response labels
-      schema:
-        type: string
-        enum:
-        - en_US
-        - fr_FR
-        - jp_JP
-        - ja_JP
-        - de_DE
-        - es_ES
-        - ko_KR
-        - pt_BR
-        - zh_CN
-        - zh_TW
-    rsid:
-      name: rsid
-      in: query
-      required: true
-      description: The report suite ID
-      schema:
-        type: string
   securitySchemes:
     bearerAuth:
       type: http

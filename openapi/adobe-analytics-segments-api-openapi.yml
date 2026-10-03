@@ -339,6 +339,59 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        errorDescription:
+          type: string
+          description: Human-readable error message
+          example: example_value
+        errorId:
+          type: string
+          description: Unique ID for tracking this error
+          example: '500123'
+    SegmentList:
+      type: object
+      description: Paginated list of segments
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Segment'
+          example: []
+        totalElements:
+          type: integer
+          description: Total number of segments available
+          example: 42
+        totalPages:
+          type: integer
+          description: Total number of pages
+          example: 42
+        numberOfElements:
+          type: integer
+          description: Number of elements on this page
+          example: 10
+    Owner:
+      type: object
+      description: The owner of an Analytics component
+      properties:
+        id:
+          type: integer
+          description: Owner user ID
+          example: abc123
+        name:
+          type: string
+          description: Owner display name
+          example: Example Title
+        login:
+          type: string
+          description: Owner login identifier
+          example: example_value
     Segment:
       type: object
       description: An analytics segment definition
@@ -375,27 +428,28 @@ components:
           items:
             $ref: '#/components/schemas/Tag'
           example: []
-    SegmentList:
+    Tag:
       type: object
-      description: Paginated list of segments
+      description: A tag applied to an Analytics component
       properties:
-        content:
+        id:
+          type: integer
+          description: Tag identifier
+          example: abc123
+        name:
+          type: string
+          description: Tag name
+          example: Example Title
+        description:
+          type: string
+          description: Tag description
+          example: A sample description.
+        components:
           type: array
+          description: List of components this tag is applied to
           items:
-            $ref: '#/components/schemas/Segment'
+            type: object
           example: []
-        totalElements:
-          type: integer
-          description: Total number of segments available
-          example: 42
-        totalPages:
-          type: integer
-          description: Total number of pages
-          example: 42
-        numberOfElements:
-          type: integer
-          description: Number of elements on this page
-          example: 10
     SegmentCreate:
       type: object
       required:
@@ -421,60 +475,6 @@ components:
           type: object
           description: The segment rule definition in Analytics query format
           example: example_value
-    Tag:
-      type: object
-      description: A tag applied to an Analytics component
-      properties:
-        id:
-          type: integer
-          description: Tag identifier
-          example: abc123
-        name:
-          type: string
-          description: Tag name
-          example: Example Title
-        description:
-          type: string
-          description: Tag description
-          example: A sample description.
-        components:
-          type: array
-          description: List of components this tag is applied to
-          items:
-            type: object
-          example: []
-    Owner:
-      type: object
-      description: The owner of an Analytics component
-      properties:
-        id:
-          type: integer
-          description: Owner user ID
-          example: abc123
-        name:
-          type: string
-          description: Owner display name
-          example: Example Title
-        login:
-          type: string
-          description: Owner login identifier
-          example: example_value
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code
-          example: example_value
-        errorDescription:
-          type: string
-          description: Human-readable error message
-          example: example_value
-        errorId:
-          type: string
-          description: Unique ID for tracking this error
-          example: '500123'
   parameters:
     segmentId:
       name: segmentId

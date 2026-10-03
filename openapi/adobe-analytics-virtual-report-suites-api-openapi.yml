@@ -495,6 +495,27 @@ components:
           $ref: '#/components/schemas/JsonNode'
         compatibility:
           $ref: '#/components/schemas/VrsCompatibility'
+    Owner:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+        login:
+          type: string
+    CuratedComponent:
+      required:
+      - componentId
+      type: object
+      properties:
+        componentId:
+          type: string
+        componentType:
+          type: string
+        curatedName:
+          type: string
     JsonNode:
       type: object
       properties:
@@ -550,12 +571,6 @@ components:
           type: boolean
         'null':
           type: boolean
-    DeleteResponse:
-      properties:
-        result:
-          type: string
-        message:
-          type: string
     VrsCompatibility:
       properties:
         valid:
@@ -568,26 +583,11 @@ components:
           type: array
           items:
             type: string
-    CuratedComponent:
-      required:
-      - componentId
-      type: object
+    DeleteResponse:
       properties:
-        componentId:
+        result:
           type: string
-        componentType:
-          type: string
-        curatedName:
-          type: string
-    Owner:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          type: string
-        login:
+        message:
           type: string
     AnalyticsAsrErrorResponse:
       properties:

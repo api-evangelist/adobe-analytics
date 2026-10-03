@@ -290,17 +290,6 @@ components:
           type: string
           description: Unique ID for tracking this error
           example: '500123'
-    CreatedSuite:
-      properties:
-        rsid:
-          title: Report Suite id
-          type: string
-        created:
-          title: Suite created
-          type: boolean
-        axleActivated:
-          title: Axle activated for suite
-          type: boolean
     TimezoneSettings:
       properties:
         currentTimezoneOffset:
@@ -313,6 +302,17 @@ components:
         timezoneId:
           type: integer
           format: int32
+    CreatedSuite:
+      properties:
+        rsid:
+          title: Report Suite id
+          type: string
+        created:
+          title: Suite created
+          type: boolean
+        axleActivated:
+          title: Axle activated for suite
+          type: boolean
     AnalyticsAsrErrorResponse:
       properties:
         errorDescription:

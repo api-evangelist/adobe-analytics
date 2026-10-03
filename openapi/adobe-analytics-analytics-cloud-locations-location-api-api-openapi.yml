@@ -184,6 +184,29 @@ paths:
       - x-user-auth: []
 components:
   schemas:
+    LocationRequest:
+      type: object
+      properties:
+        type:
+          type: string
+        accountUuid:
+          type: string
+        properties:
+          $ref: '#/components/schemas/ObjectNode'
+        name:
+          type: string
+        description:
+          type: string
+        application:
+          type: string
+          enum:
+          - TAXONOMIST
+          - DATA_WAREHOUSE
+          - DATA_FEED
+        applicationTag:
+          type: string
+        sharedTo:
+          type: string
     LocationResponse:
       properties:
         shared:
@@ -222,30 +245,11 @@ components:
           type: string
         properties:
           $ref: '#/components/schemas/ObjectNode'
-    ObjectNode:
-      type: object
-    LocationRequest:
-      type: object
+    ExportLocationDeleteResponse:
       properties:
-        type:
+        message:
           type: string
-        accountUuid:
-          type: string
-        properties:
-          $ref: '#/components/schemas/ObjectNode'
-        name:
-          type: string
-        description:
-          type: string
-        application:
-          type: string
-          enum:
-          - TAXONOMIST
-          - DATA_WAREHOUSE
-          - DATA_FEED
-        applicationTag:
-          type: string
-        sharedTo:
+        uuid:
           type: string
     LocationResponsePage:
       properties:
@@ -272,12 +276,6 @@ components:
         totalElements:
           type: integer
           format: int64
-    ExportLocationDeleteResponse:
-      properties:
-        message:
-          type: string
-        uuid:
-          type: string
     AnalyticsAsrErrorResponse:
       properties:
         errorDescription:
@@ -286,6 +284,8 @@ components:
           type: string
         errorId:
           type: string
+    ObjectNode:
+      type: object
   parameters:
     x-api-key:
       name: x-api-key

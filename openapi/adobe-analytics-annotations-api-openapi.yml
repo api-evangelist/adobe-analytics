@@ -137,36 +137,28 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Annotation:
+    Tag:
       type: object
-      description: An annotation marking a date range in reports
+      description: A tag applied to an Analytics component
       properties:
         id:
-          type: string
-          description: Unique annotation identifier
+          type: integer
+          description: Tag identifier
           example: abc123
         name:
           type: string
-          description: Display name of the annotation
+          description: Tag name
           example: Example Title
         description:
           type: string
-          description: Annotation text content
+          description: Tag description
           example: A sample description.
-        dateRange:
-          type: string
-          description: ISO 8601 date range covered by this annotation
-          example: example_value
-        rsids:
+        components:
           type: array
+          description: List of components this tag is applied to
           items:
-            type: string
-          description: List of report suite IDs this annotation applies to
+            type: object
           example: []
-        color:
-          type: string
-          description: Display color for the annotation in reports
-          example: example_value
     AnnotationCreate:
       type: object
       required:
@@ -197,28 +189,36 @@ components:
           type: string
           description: Hex color code
           example: example_value
-    Tag:
+    Annotation:
       type: object
-      description: A tag applied to an Analytics component
+      description: An annotation marking a date range in reports
       properties:
         id:
-          type: integer
-          description: Tag identifier
+          type: string
+          description: Unique annotation identifier
           example: abc123
         name:
           type: string
-          description: Tag name
+          description: Display name of the annotation
           example: Example Title
         description:
           type: string
-          description: Tag description
+          description: Annotation text content
           example: A sample description.
-        components:
+        dateRange:
+          type: string
+          description: ISO 8601 date range covered by this annotation
+          example: example_value
+        rsids:
           type: array
-          description: List of components this tag is applied to
           items:
-            type: object
+            type: string
+          description: List of report suite IDs this annotation applies to
           example: []
+        color:
+          type: string
+          description: Display color for the annotation in reports
+          example: example_value
   parameters:
     locale:
       name: locale

@@ -208,24 +208,7 @@ paths:
       security:
       - x-user-auth: []
 components:
-  parameters:
-    x-api-key:
-      name: x-api-key
-      in: header
-      description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
-      required: true
-      schema:
-        type: string
-    authorization:
-      name: Authorization
-      in: header
-      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
-      required: true
-      schema:
-        type: string
   schemas:
-    ObjectNode:
-      type: object
     AccountResponse:
       properties:
         accountProperties:
@@ -256,12 +239,6 @@ components:
       properties:
         userARN:
           type: string
-    ExportLocationDeleteResponse:
-      properties:
-        message:
-          type: string
-        uuid:
-          type: string
     AccountRequest:
       type: object
       properties:
@@ -276,14 +253,6 @@ components:
         description:
           type: string
         sharedTo:
-          type: string
-    AnalyticsAsrErrorResponse:
-      properties:
-        errorDescription:
-          type: string
-        errorCode:
-          type: string
-        errorId:
           type: string
     AccountResponsePage:
       type: object
@@ -311,6 +280,37 @@ components:
           type: boolean
         last:
           type: boolean
+    AnalyticsAsrErrorResponse:
+      properties:
+        errorDescription:
+          type: string
+        errorCode:
+          type: string
+        errorId:
+          type: string
+    ExportLocationDeleteResponse:
+      properties:
+        message:
+          type: string
+        uuid:
+          type: string
+    ObjectNode:
+      type: object
+  parameters:
+    x-api-key:
+      name: x-api-key
+      in: header
+      description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
+      required: true
+      schema:
+        type: string
+    authorization:
+      name: Authorization
+      in: header
+      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
+      required: true
+      schema:
+        type: string
   securitySchemes:
     x-user-auth:
       type: apiKey
