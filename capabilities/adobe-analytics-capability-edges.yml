@@ -12,7 +12,7 @@ capability_model:
   attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
     CC BY 4.0
   notice: NOTICE
-edge_count: 3
+edge_count: 5
 edges:
 - tag: Reports
   spec_file: adobe-analytics-reports-api-openapi.yml
@@ -35,6 +35,28 @@ edges:
     channels, enabling organizations to discover high-value audiences'''
   reason: Full CRUD over audience segment definitions in a marketing analytics platform — realises customer
     segmentation. Some chance it is treated purely as analytics filtering, hence not higher.
+- tag: Data Warehouse Report API
+  spec_file: adobe-analytics-data-warehouse-report-api-api-openapi.yml
+  capability_id: BC-610.50
+  capability_id_l1: BC-610
+  capability_name: Analytics & BI Management
+  confidence: 0.72
+  evidence: GET /{globalCompanyId}/data_warehouse/report/{UUID} — 'Retrieves a detailed data warehouse
+    report for a scheduled request'; schemas ReportData, ReportMetadata, DeliverySettingsResponse
+  reason: The operations retrieve and update analytics data-warehouse reports with delivery settings (FTP/S3/email).
+    That is reporting/BI delivery of analytical data, best matched by Analytics & BI Management rather
+    than any marketing-execution capability.
+- tag: Data Warehouse Scheduled Requests API
+  spec_file: adobe-analytics-data-warehouse-scheduled-requests-api-api-openapi.yml
+  capability_id: BC-610.50
+  capability_id_l1: BC-610
+  capability_name: Analytics & BI Management
+  confidence: 0.7
+  evidence: POST /{globalCompanyId}/data_warehouse/scheduled — 'Create a data warehouse scheduled request';
+    schemas TemplateReportParameters, TemplateSchedule, ReportColumn, Segment
+  reason: Creating and maintaining scheduled analytical report requests with report parameters, columns
+    and segments is scheduled BI report delivery, i.e. Analytics & BI Management. Some ambiguity because
+    it is also arguably pure reporting infrastructure.
 - tag: Metrics
   spec_file: adobe-analytics-metrics-api-openapi.yml
   capability_id: BC-610.50
