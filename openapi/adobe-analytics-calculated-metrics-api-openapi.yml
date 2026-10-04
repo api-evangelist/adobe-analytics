@@ -276,22 +276,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code
-          example: example_value
-        errorDescription:
-          type: string
-          description: Human-readable error message
-          example: example_value
-        errorId:
-          type: string
-          description: Unique ID for tracking this error
-          example: '500123'
     Owner:
       type: object
       description: The owner of an Analytics component
@@ -308,6 +292,22 @@ components:
           type: string
           description: Owner login identifier
           example: example_value
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        errorDescription:
+          type: string
+          description: Human-readable error message
+          example: example_value
+        errorId:
+          type: string
+          description: Unique ID for tracking this error
+          example: '500123'
     CalculatedMetric:
       type: object
       description: A calculated metric definition
@@ -348,6 +348,23 @@ components:
           - PERCENT
           - CURRENCY
           example: DECIMAL
+    CalculatedMetricList:
+      type: object
+      description: Paginated list of calculated metrics
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/CalculatedMetric'
+          example: []
+        totalElements:
+          type: integer
+          description: Total number of calculated metrics available
+          example: 42
+        totalPages:
+          type: integer
+          description: Total number of pages
+          example: 42
     CalculatedMetricCreate:
       type: object
       required:
@@ -382,23 +399,6 @@ components:
           - PERCENT
           - CURRENCY
           example: DECIMAL
-    CalculatedMetricList:
-      type: object
-      description: Paginated list of calculated metrics
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/CalculatedMetric'
-          example: []
-        totalElements:
-          type: integer
-          description: Total number of calculated metrics available
-          example: 42
-        totalPages:
-          type: integer
-          description: Total number of pages
-          example: 42
   parameters:
     locale:
       name: locale

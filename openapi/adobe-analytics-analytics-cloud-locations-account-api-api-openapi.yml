@@ -235,24 +235,19 @@ components:
           type: string
         uuid:
           type: string
-    UserArnResponse:
+    ExportLocationDeleteResponse:
       properties:
-        userARN:
+        message:
           type: string
-    AccountRequest:
-      type: object
+        uuid:
+          type: string
+    AnalyticsAsrErrorResponse:
       properties:
-        type:
+        errorDescription:
           type: string
-        secret:
+        errorCode:
           type: string
-        accountProperties:
-          $ref: '#/components/schemas/ObjectNode'
-        name:
-          type: string
-        description:
-          type: string
-        sharedTo:
+        errorId:
           type: string
     AccountResponsePage:
       type: object
@@ -280,34 +275,39 @@ components:
           type: boolean
         last:
           type: boolean
-    AnalyticsAsrErrorResponse:
+    AccountRequest:
+      type: object
       properties:
-        errorDescription:
+        type:
           type: string
-        errorCode:
+        secret:
           type: string
-        errorId:
+        accountProperties:
+          $ref: '#/components/schemas/ObjectNode'
+        name:
           type: string
-    ExportLocationDeleteResponse:
-      properties:
-        message:
+        description:
           type: string
-        uuid:
+        sharedTo:
           type: string
     ObjectNode:
       type: object
+    UserArnResponse:
+      properties:
+        userARN:
+          type: string
   parameters:
-    x-api-key:
-      name: x-api-key
-      in: header
-      description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
-      required: true
-      schema:
-        type: string
     authorization:
       name: Authorization
       in: header
       description: The access token copied from your AA API client integration, prefixed with "Bearer ".
+      required: true
+      schema:
+        type: string
+    x-api-key:
+      name: x-api-key
+      in: header
+      description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
       required: true
       schema:
         type: string

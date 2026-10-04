@@ -430,71 +430,6 @@ paths:
                 $ref: '#/components/schemas/VirtualReportSuite'
 components:
   schemas:
-    VirtualReportSuite:
-      properties:
-        internal:
-          type: boolean
-        dataSchema:
-          type: string
-          enum:
-          - ExperienceCloudPlatform
-          - Stitched
-          - Cache
-          - CacheAndMid
-        curatedComponents:
-          type: array
-          items:
-            $ref: '#/components/schemas/CuratedComponent'
-        backgroundSessionsEnabled:
-          type: boolean
-        timezone:
-          type: integer
-          format: int32
-        siteTitle:
-          type: string
-        description:
-          type: string
-        type:
-          type: string
-        parentRsid:
-          type: string
-        globalCompanyKey:
-          type: string
-        reportSuiteName:
-          type: string
-        isDeleted:
-          type: boolean
-        currentTimezoneOffset:
-          type: number
-          format: float
-        curationEnabled:
-          type: boolean
-        modified:
-          type: string
-          format: date-time
-        id:
-          type: string
-        dataCurrentAsOf:
-          type: string
-          format: date-time
-        segmentList:
-          type: array
-          items:
-            type: string
-        owner:
-          $ref: '#/components/schemas/Owner'
-        parentRsidName:
-          type: string
-        rsid:
-          type: string
-        name:
-          type: string
-        timezoneZoneinfo:
-          type: string
-        sessionDefinition:
-          $ref: '#/components/schemas/JsonNode'
-        compatibility:
-          $ref: '#/components/schemas/VrsCompatibility'
     Owner:
       type: object
       properties:
@@ -571,6 +506,14 @@ components:
           type: boolean
         'null':
           type: boolean
+    AnalyticsAsrErrorResponse:
+      properties:
+        errorDescription:
+          type: string
+        errorCode:
+          type: string
+        errorId:
+          type: string
     VrsCompatibility:
       properties:
         valid:
@@ -583,32 +526,89 @@ components:
           type: array
           items:
             type: string
+    VirtualReportSuite:
+      properties:
+        internal:
+          type: boolean
+        dataSchema:
+          type: string
+          enum:
+          - ExperienceCloudPlatform
+          - Stitched
+          - Cache
+          - CacheAndMid
+        curatedComponents:
+          type: array
+          items:
+            $ref: '#/components/schemas/CuratedComponent'
+        backgroundSessionsEnabled:
+          type: boolean
+        timezone:
+          type: integer
+          format: int32
+        siteTitle:
+          type: string
+        description:
+          type: string
+        type:
+          type: string
+        parentRsid:
+          type: string
+        globalCompanyKey:
+          type: string
+        reportSuiteName:
+          type: string
+        isDeleted:
+          type: boolean
+        currentTimezoneOffset:
+          type: number
+          format: float
+        curationEnabled:
+          type: boolean
+        modified:
+          type: string
+          format: date-time
+        id:
+          type: string
+        dataCurrentAsOf:
+          type: string
+          format: date-time
+        segmentList:
+          type: array
+          items:
+            type: string
+        owner:
+          $ref: '#/components/schemas/Owner'
+        parentRsidName:
+          type: string
+        rsid:
+          type: string
+        name:
+          type: string
+        timezoneZoneinfo:
+          type: string
+        sessionDefinition:
+          $ref: '#/components/schemas/JsonNode'
+        compatibility:
+          $ref: '#/components/schemas/VrsCompatibility'
     DeleteResponse:
       properties:
         result:
           type: string
         message:
           type: string
-    AnalyticsAsrErrorResponse:
-      properties:
-        errorDescription:
-          type: string
-        errorCode:
-          type: string
-        errorId:
-          type: string
   parameters:
-    x-api-key:
-      name: x-api-key
-      in: header
-      description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
-      required: true
-      schema:
-        type: string
     authorization:
       name: Authorization
       in: header
       description: The access token copied from your AA API client integration, prefixed with "Bearer ".
+      required: true
+      schema:
+        type: string
+    x-api-key:
+      name: x-api-key
+      in: header
+      description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
       required: true
       schema:
         type: string

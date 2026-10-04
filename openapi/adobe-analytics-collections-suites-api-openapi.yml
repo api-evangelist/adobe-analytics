@@ -128,31 +128,6 @@ paths:
                 $ref: '#/components/schemas/Suite'
 components:
   schemas:
-    CalendarSettings:
-      properties:
-        rsid:
-          type: string
-        anchorDate:
-          type: string
-          format: date-time
-        type:
-          type: string
-          enum:
-          - GREGORIAN
-          - NRF
-          - QRS
-          - CUSTOM_454
-          - CUSTOM_445
-          - MODIFIED_GREGORIAN
-          - CUSTOM_544
-    AnalyticsAsrErrorResponse:
-      properties:
-        errorDescription:
-          type: string
-        errorCode:
-          type: string
-        errorId:
-          type: string
     Suite:
       properties:
         calendarType:
@@ -175,18 +150,43 @@ components:
         id:
           title: Suite id
           type: string
+    AnalyticsAsrErrorResponse:
+      properties:
+        errorDescription:
+          type: string
+        errorCode:
+          type: string
+        errorId:
+          type: string
+    CalendarSettings:
+      properties:
+        rsid:
+          type: string
+        anchorDate:
+          type: string
+          format: date-time
+        type:
+          type: string
+          enum:
+          - GREGORIAN
+          - NRF
+          - QRS
+          - CUSTOM_454
+          - CUSTOM_445
+          - MODIFIED_GREGORIAN
+          - CUSTOM_544
   parameters:
-    x-api-key:
-      name: x-api-key
-      in: header
-      description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
-      required: true
-      schema:
-        type: string
     authorization:
       name: Authorization
       in: header
       description: The access token copied from your AA API client integration, prefixed with "Bearer ".
+      required: true
+      schema:
+        type: string
+    x-api-key:
+      name: x-api-key
+      in: header
+      description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
       required: true
       schema:
         type: string

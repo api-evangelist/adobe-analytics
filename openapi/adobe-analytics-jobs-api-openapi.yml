@@ -205,18 +205,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RepairJobDefinition:
-      type: object
-      required:
-      - variables
-      description: Definition of a data repair job
-      properties:
-        variables:
-          type: object
-          description: Map of variable names to repair actions. Keys are Analytics variable names (e.g. eVar1, prop5, activitymap) and values are action objects.
-          additionalProperties:
-            $ref: '#/components/schemas/RepairAction'
-          example: example_value
     ErrorResponse:
       type: object
       description: Error response from the API
@@ -228,41 +216,6 @@ components:
         errorDescription:
           type: string
           description: Human-readable error message
-          example: example_value
-    RepairAction:
-      type: object
-      required:
-      - action
-      description: The action to take on a specific variable
-      properties:
-        action:
-          type: string
-          description: The repair action to perform
-          enum:
-          - delete
-          - set
-          example: delete
-        setValue:
-          type: string
-          description: The value to set the variable to (required when action is 'set')
-          example: example_value
-        filter:
-          $ref: '#/components/schemas/RepairFilter'
-    RepairFilter:
-      type: object
-      description: Optional filter to limit which rows are affected by the repair
-      properties:
-        condition:
-          type: string
-          description: The filter condition type
-          enum:
-          - contains
-          - streq
-          - startswith
-          example: contains
-        matchValue:
-          type: string
-          description: The value to match against for filtering
           example: example_value
     RepairJob:
       type: object
@@ -318,6 +271,53 @@ components:
           type: integer
           description: Number of data nodes processed
           example: 10
+    RepairAction:
+      type: object
+      required:
+      - action
+      description: The action to take on a specific variable
+      properties:
+        action:
+          type: string
+          description: The repair action to perform
+          enum:
+          - delete
+          - set
+          example: delete
+        setValue:
+          type: string
+          description: The value to set the variable to (required when action is 'set')
+          example: example_value
+        filter:
+          $ref: '#/components/schemas/RepairFilter'
+    RepairJobDefinition:
+      type: object
+      required:
+      - variables
+      description: Definition of a data repair job
+      properties:
+        variables:
+          type: object
+          description: Map of variable names to repair actions. Keys are Analytics variable names (e.g. eVar1, prop5, activitymap) and values are action objects.
+          additionalProperties:
+            $ref: '#/components/schemas/RepairAction'
+          example: example_value
+    RepairFilter:
+      type: object
+      description: Optional filter to limit which rows are affected by the repair
+      properties:
+        condition:
+          type: string
+          description: The filter condition type
+          enum:
+          - contains
+          - streq
+          - startswith
+          example: contains
+        matchValue:
+          type: string
+          description: The value to match against for filtering
+          example: example_value
   parameters:
     rsidPath:
       name: rsid

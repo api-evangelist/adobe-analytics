@@ -71,48 +71,7 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    locale:
-      name: locale
-      in: query
-      description: The locale for response labels
-      schema:
-        type: string
-        enum:
-        - en_US
-        - fr_FR
-        - jp_JP
-        - ja_JP
-        - de_DE
-        - es_ES
-        - ko_KR
-        - pt_BR
-        - zh_CN
-        - zh_TW
-    rsid:
-      name: rsid
-      in: query
-      required: true
-      description: The report suite ID
-      schema:
-        type: string
   schemas:
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code
-          example: example_value
-        errorDescription:
-          type: string
-          description: Human-readable error message
-          example: example_value
-        errorId:
-          type: string
-          description: Unique ID for tracking this error
-          example: '500123'
     Metric:
       type: object
       description: An analytics metric available in a report suite
@@ -151,6 +110,47 @@ components:
           type: string
           description: Description of what the metric measures
           example: A sample description.
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        errorDescription:
+          type: string
+          description: Human-readable error message
+          example: example_value
+        errorId:
+          type: string
+          description: Unique ID for tracking this error
+          example: '500123'
+  parameters:
+    locale:
+      name: locale
+      in: query
+      description: The locale for response labels
+      schema:
+        type: string
+        enum:
+        - en_US
+        - fr_FR
+        - jp_JP
+        - ja_JP
+        - de_DE
+        - es_ES
+        - ko_KR
+        - pt_BR
+        - zh_CN
+        - zh_TW
+    rsid:
+      name: rsid
+      in: query
+      required: true
+      description: The report suite ID
+      schema:
+        type: string
   securitySchemes:
     bearerAuth:
       type: http

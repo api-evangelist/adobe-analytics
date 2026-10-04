@@ -154,9 +154,6 @@ paths:
       - x-user-auth: []
 components:
   schemas:
-    Response:
-      type: string
-      format: binary
     DeleteControllerResponse:
       properties:
         result:
@@ -169,6 +166,9 @@ components:
           type: string
         message:
           type: string
+    Response:
+      type: string
+      format: binary
     FieldMappingDto:
       properties:
         cjaId:

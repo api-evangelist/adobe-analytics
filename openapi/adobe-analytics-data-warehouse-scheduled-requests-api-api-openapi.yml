@@ -398,95 +398,24 @@ paths:
                 $ref: '#/components/schemas/RequestView'
 components:
   schemas:
-    TemplateReportParameters:
+    RequestTruncatedView:
       type: object
       properties:
-        name:
-          type: string
-        sharing:
-          $ref: '#/components/schemas/SharingInfo'
-        outputFile:
-          $ref: '#/components/schemas/OutputFileSettings'
-        reportParameters:
-          $ref: '#/components/schemas/ReportSettings'
-        rsid:
-          type: string
-    TemplateSchedule:
-      type: object
-      properties:
-        scheduleAt:
-          type: string
-        periodSettings:
-          $ref: '#/components/schemas/FrequencySettings'
-        cancelSettings:
-          $ref: '#/components/schemas/CancelSettings'
-    DataWarehouseTemplateRequest:
-      type: object
-      properties:
-        schedule:
-          $ref: '#/components/schemas/TemplateSchedule'
+        mostRecentReport:
+          $ref: '#/components/schemas/TruncatedReportInfo'
         request:
-          $ref: '#/components/schemas/TemplateReportParameters'
-        delivery:
-          $ref: '#/components/schemas/DeliverySettings'
-    TruncatedRequestInfo:
+          $ref: '#/components/schemas/TruncatedTemplateReportParameters'
+        metadata:
+          $ref: '#/components/schemas/TruncatedRequestInfo'
+    ReportRange:
       type: object
       properties:
-        scheduledRequestUUID:
+        preset:
           type: string
-        scheduledRequestLegacyID:
-          type: integer
-          format: int32
-        status:
+        startDateTime:
           type: string
-        createdDate:
+        endDateTime:
           type: string
-        updatedDate:
-          type: string
-        ownerInfo:
-          $ref: '#/components/schemas/TuncatedOwnerInfo'
-    TruncatedReportMetadata:
-      type: object
-      properties:
-        legacyReportID:
-          type: integer
-          format: int32
-        uuid:
-          type: string
-        status:
-          type: string
-    TuncatedOwnerInfo:
-      type: object
-      properties:
-        login:
-          type: string
-        imsUserId:
-          type: string
-    PatchMetadata:
-      type: object
-      properties:
-        status:
-          type: string
-    LegacyAzureSettings:
-      type: object
-      properties:
-        account:
-          type: string
-        container:
-          type: string
-        prefix:
-          type: string
-    Segment:
-      type: object
-      properties:
-        namespace:
-          type: string
-        id:
-          type: string
-        properties:
-          type: object
-          additionalProperties:
-            type: object
     RequestInfo:
       type: object
       properties:
@@ -505,15 +434,142 @@ components:
           type: string
         ownerInfo:
           $ref: '#/components/schemas/OwnerInfo'
-    RequestTruncatedView:
+    LegacyDeliveryFTPSettings:
       type: object
       properties:
-        mostRecentReport:
-          $ref: '#/components/schemas/TruncatedReportInfo'
-        request:
-          $ref: '#/components/schemas/TruncatedTemplateReportParameters'
+        username:
+          type: string
+        host:
+          type: string
+        port:
+          type: integer
+          format: int32
+        directory:
+          type: string
+    RequestPatch:
+      type: object
+      properties:
+        name:
+          type: string
+        sharing:
+          $ref: '#/components/schemas/SharingInfo'
+        outputFile:
+          $ref: '#/components/schemas/OutputFileSettings'
+        reportParameters:
+          $ref: '#/components/schemas/ReportParameterPatch'
+    TruncatedReportInfo:
+      type: object
+      properties:
         metadata:
-          $ref: '#/components/schemas/TruncatedRequestInfo'
+          $ref: '#/components/schemas/TruncatedReportMetadata'
+    FrequencySettings:
+      type: object
+      properties:
+        frequency:
+          type: string
+        every:
+          type: integer
+          format: int32
+        dayOfMonth:
+          type: integer
+          format: int32
+        dayOfWeek:
+          type: string
+        month:
+          type: string
+        weekOfMonth:
+          type: string
+    Segment:
+      type: object
+      properties:
+        namespace:
+          type: string
+        id:
+          type: string
+        properties:
+          type: object
+          additionalProperties:
+            type: object
+    LegacyDeliveryS3Settings:
+      type: object
+      properties:
+        awsBucket:
+          type: string
+        awsAccessKey:
+          type: string
+        awsPath:
+          type: string
+    RequestView:
+      properties:
+        schedule:
+          $ref: '#/components/schemas/TemplateSchedule'
+        request:
+          $ref: '#/components/schemas/TemplateReportParameters'
+        delivery:
+          $ref: '#/components/schemas/DeliverySettingsResponse'
+        metadata:
+          $ref: '#/components/schemas/RequestInfo'
+    PatchMetadata:
+      type: object
+      properties:
+        status:
+          type: string
+    OwnerInfo:
+      type: object
+      properties:
+        company:
+          type: string
+        login:
+          type: string
+        imsUserId:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+    TruncatedReportMetadata:
+      type: object
+      properties:
+        legacyReportID:
+          type: integer
+          format: int32
+        uuid:
+          type: string
+        status:
+          type: string
+    DeliverySettings:
+      type: object
+      properties:
+        exportLocationUUID:
+          type: string
+        email:
+          $ref: '#/components/schemas/EmailSettings'
+    SharingInfo:
+      type: object
+      properties:
+        shareWithOtherUsers:
+          type: boolean
+    AnalyticsAsrErrorResponse:
+      properties:
+        errorDescription:
+          type: string
+        errorCode:
+          type: string
+        errorId:
+          type: string
+    TemplateReportParameters:
+      type: object
+      properties:
+        name:
+          type: string
+        sharing:
+          $ref: '#/components/schemas/SharingInfo'
+        outputFile:
+          $ref: '#/components/schemas/OutputFileSettings'
+        reportParameters:
+          $ref: '#/components/schemas/ReportSettings'
+        rsid:
+          type: string
     ReportColumn:
       type: object
       properties:
@@ -525,29 +581,6 @@ components:
           type: object
           additionalProperties:
             type: object
-    RequestView:
-      properties:
-        schedule:
-          $ref: '#/components/schemas/TemplateSchedule'
-        request:
-          $ref: '#/components/schemas/TemplateReportParameters'
-        delivery:
-          $ref: '#/components/schemas/DeliverySettingsResponse'
-        metadata:
-          $ref: '#/components/schemas/RequestInfo'
-    TruncatedTemplateReportParameters:
-      type: object
-      properties:
-        name:
-          type: string
-        rsid:
-          type: string
-    ReportParameterPatch:
-      type: object
-      properties:
-        numberOfRowsInTable:
-          type: integer
-          format: int32
     DeliverySettingsResponse:
       type: object
       properties:
@@ -563,118 +596,38 @@ components:
           $ref: '#/components/schemas/LegacyDeliveryFTPSettings'
         legacyS3:
           $ref: '#/components/schemas/LegacyDeliveryS3Settings'
-    SharingInfo:
+    CancelSettings:
       type: object
       properties:
-        shareWithOtherUsers:
-          type: boolean
-    DwTemplateSchedules:
-      properties:
-        total:
-          type: integer
-          format: int64
-        totalReturned:
-          type: integer
-          format: int64
-        scheduledRequests:
-          type: array
-          items:
-            $ref: '#/components/schemas/RequestTruncatedView'
-    LegacyDeliveryFTPSettings:
-      type: object
-      properties:
-        username:
+        cancelMethod:
           type: string
-        host:
+        cancelDate:
           type: string
-        port:
+        endAfterNumOccurrences:
           type: integer
           format: int32
-        directory:
-          type: string
-    TruncatedReportInfo:
+    ReportParameterPatch:
       type: object
       properties:
-        metadata:
-          $ref: '#/components/schemas/TruncatedReportMetadata'
-    OwnerInfo:
+        numberOfRowsInTable:
+          type: integer
+          format: int32
+    TuncatedOwnerInfo:
       type: object
       properties:
-        company:
-          type: string
         login:
           type: string
         imsUserId:
           type: string
-        email:
-          type: string
-        phone:
-          type: string
-    ReportRange:
-      type: object
-      properties:
-        preset:
-          type: string
-        startDateTime:
-          type: string
-        endDateTime:
-          type: string
-    DataWarehouseTemplatePatch:
+    DataWarehouseTemplateRequest:
       type: object
       properties:
         schedule:
           $ref: '#/components/schemas/TemplateSchedule'
         request:
-          $ref: '#/components/schemas/RequestPatch'
+          $ref: '#/components/schemas/TemplateReportParameters'
         delivery:
           $ref: '#/components/schemas/DeliverySettings'
-        metadata:
-          $ref: '#/components/schemas/PatchMetadata'
-    OutputFileSettings:
-      type: object
-      properties:
-        compressionFormat:
-          type: string
-        outputFileBasename:
-          type: string
-        fileFormat:
-          type: string
-        sendEmptyFileForNoDataReport:
-          type: boolean
-        beginningOfReportComments:
-          type: string
-        sendDigitalSignatureFile:
-          type: boolean
-        sendManifestFile:
-          type: boolean
-    AnalyticsAsrErrorResponse:
-      properties:
-        errorDescription:
-          type: string
-        errorCode:
-          type: string
-        errorId:
-          type: string
-    LegacyDeliveryS3Settings:
-      type: object
-      properties:
-        awsBucket:
-          type: string
-        awsAccessKey:
-          type: string
-        awsPath:
-          type: string
-    RequestPatch:
-      type: object
-      properties:
-        name:
-          type: string
-        sharing:
-          $ref: '#/components/schemas/SharingInfo'
-        outputFile:
-          $ref: '#/components/schemas/OutputFileSettings'
-        reportParameters:
-          $ref: '#/components/schemas/ReportParameterPatch'
     EmailSettings:
       type: object
       properties:
@@ -685,6 +638,13 @@ components:
         notificationEmailSubject:
           type: string
         notificationEmailNotes:
+          type: string
+    TruncatedTemplateReportParameters:
+      type: object
+      properties:
+        name:
+          type: string
+        rsid:
           type: string
     ReportSettings:
       type: object
@@ -710,40 +670,80 @@ components:
           $ref: '#/components/schemas/ReportRange'
         sortByMetrics:
           type: boolean
-    DeliverySettings:
+    OutputFileSettings:
       type: object
       properties:
-        exportLocationUUID:
+        compressionFormat:
           type: string
-        email:
-          $ref: '#/components/schemas/EmailSettings'
-    FrequencySettings:
+        outputFileBasename:
+          type: string
+        fileFormat:
+          type: string
+        sendEmptyFileForNoDataReport:
+          type: boolean
+        beginningOfReportComments:
+          type: string
+        sendDigitalSignatureFile:
+          type: boolean
+        sendManifestFile:
+          type: boolean
+    TemplateSchedule:
       type: object
       properties:
-        frequency:
+        scheduleAt:
           type: string
-        every:
-          type: integer
-          format: int32
-        dayOfMonth:
-          type: integer
-          format: int32
-        dayOfWeek:
-          type: string
-        month:
-          type: string
-        weekOfMonth:
-          type: string
-    CancelSettings:
+        periodSettings:
+          $ref: '#/components/schemas/FrequencySettings'
+        cancelSettings:
+          $ref: '#/components/schemas/CancelSettings'
+    LegacyAzureSettings:
       type: object
       properties:
-        cancelMethod:
+        account:
           type: string
-        cancelDate:
+        container:
           type: string
-        endAfterNumOccurrences:
+        prefix:
+          type: string
+    DwTemplateSchedules:
+      properties:
+        total:
+          type: integer
+          format: int64
+        totalReturned:
+          type: integer
+          format: int64
+        scheduledRequests:
+          type: array
+          items:
+            $ref: '#/components/schemas/RequestTruncatedView'
+    TruncatedRequestInfo:
+      type: object
+      properties:
+        scheduledRequestUUID:
+          type: string
+        scheduledRequestLegacyID:
           type: integer
           format: int32
+        status:
+          type: string
+        createdDate:
+          type: string
+        updatedDate:
+          type: string
+        ownerInfo:
+          $ref: '#/components/schemas/TuncatedOwnerInfo'
+    DataWarehouseTemplatePatch:
+      type: object
+      properties:
+        schedule:
+          $ref: '#/components/schemas/TemplateSchedule'
+        request:
+          $ref: '#/components/schemas/RequestPatch'
+        delivery:
+          $ref: '#/components/schemas/DeliverySettings'
+        metadata:
+          $ref: '#/components/schemas/PatchMetadata'
   parameters:
     x-api-key:
       name: x-api-key

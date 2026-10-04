@@ -184,29 +184,31 @@ paths:
       - x-user-auth: []
 components:
   schemas:
-    LocationRequest:
-      type: object
+    LocationResponsePage:
       properties:
-        type:
-          type: string
-        accountUuid:
-          type: string
-        properties:
-          $ref: '#/components/schemas/ObjectNode'
-        name:
-          type: string
-        description:
-          type: string
-        application:
-          type: string
-          enum:
-          - TAXONOMIST
-          - DATA_WAREHOUSE
-          - DATA_FEED
-        applicationTag:
-          type: string
-        sharedTo:
-          type: string
+        number:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        last:
+          type: boolean
+        totalPages:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationResponse'
+        first:
+          type: boolean
+        totalElements:
+          type: integer
+          format: int64
     LocationResponse:
       properties:
         shared:
@@ -251,31 +253,6 @@ components:
           type: string
         uuid:
           type: string
-    LocationResponsePage:
-      properties:
-        number:
-          type: integer
-          format: int32
-        size:
-          type: integer
-          format: int32
-        numberOfElements:
-          type: integer
-          format: int32
-        last:
-          type: boolean
-        totalPages:
-          type: integer
-          format: int32
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/LocationResponse'
-        first:
-          type: boolean
-        totalElements:
-          type: integer
-          format: int64
     AnalyticsAsrErrorResponse:
       properties:
         errorDescription:
@@ -286,18 +263,41 @@ components:
           type: string
     ObjectNode:
       type: object
+    LocationRequest:
+      type: object
+      properties:
+        type:
+          type: string
+        accountUuid:
+          type: string
+        properties:
+          $ref: '#/components/schemas/ObjectNode'
+        name:
+          type: string
+        description:
+          type: string
+        application:
+          type: string
+          enum:
+          - TAXONOMIST
+          - DATA_WAREHOUSE
+          - DATA_FEED
+        applicationTag:
+          type: string
+        sharedTo:
+          type: string
   parameters:
-    x-api-key:
-      name: x-api-key
-      in: header
-      description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
-      required: true
-      schema:
-        type: string
     authorization:
       name: Authorization
       in: header
       description: The access token copied from your AA API client integration, prefixed with "Bearer ".
+      required: true
+      schema:
+        type: string
+    x-api-key:
+      name: x-api-key
+      in: header
+      description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
       required: true
       schema:
         type: string
