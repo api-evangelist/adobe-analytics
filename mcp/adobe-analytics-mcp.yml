@@ -100,3 +100,20 @@ skills:
   count: 5
   note: Adobe publishes five first-party Agent Skills that run on top of this MCP server, packaged as
     the `adobe-analytics` plugin in github.com/adobe/skills.
+rfc9728:
+  endpoint: https://aa-mcp.adobe.io/mcp
+  metadata_url: https://aa-mcp.adobe.io/.well-known/oauth-protected-resource
+  discovered_via: WWW-Authenticate resource_metadata on an anonymous POST initialize
+  fetched: '2026-09-25'
+  http_status: 200
+  content_type: application/json
+  document:
+    resource: https://aa-mcp.adobe.io/mcp
+    authorization_servers:
+    - https://aa-mcp.adobe.io
+    scopes_supported:
+    - openid
+    - AdobeID
+    - additional_info.projectedProductContext
+    bearer_methods_supported:
+    - header
