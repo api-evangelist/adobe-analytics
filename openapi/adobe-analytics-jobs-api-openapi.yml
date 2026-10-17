@@ -205,18 +205,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code
-          example: example_value
-        errorDescription:
-          type: string
-          description: Human-readable error message
-          example: example_value
     RepairJob:
       type: object
       description: Status and details of a data repair job
@@ -271,6 +259,30 @@ components:
           type: integer
           description: Number of data nodes processed
           example: 10
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        errorDescription:
+          type: string
+          description: Human-readable error message
+          example: example_value
+    RepairJobDefinition:
+      type: object
+      required:
+      - variables
+      description: Definition of a data repair job
+      properties:
+        variables:
+          type: object
+          description: Map of variable names to repair actions. Keys are Analytics variable names (e.g. eVar1, prop5, activitymap) and values are action objects.
+          additionalProperties:
+            $ref: '#/components/schemas/RepairAction'
+          example: example_value
     RepairAction:
       type: object
       required:
@@ -290,18 +302,6 @@ components:
           example: example_value
         filter:
           $ref: '#/components/schemas/RepairFilter'
-    RepairJobDefinition:
-      type: object
-      required:
-      - variables
-      description: Definition of a data repair job
-      properties:
-        variables:
-          type: object
-          description: Map of variable names to repair actions. Keys are Analytics variable names (e.g. eVar1, prop5, activitymap) and values are action objects.
-          additionalProperties:
-            $ref: '#/components/schemas/RepairAction'
-          example: example_value
     RepairFilter:
       type: object
       description: Optional filter to limit which rows are affected by the repair

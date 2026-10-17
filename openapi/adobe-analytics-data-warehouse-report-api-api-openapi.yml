@@ -158,6 +158,39 @@ paths:
                 $ref: '#/components/schemas/DwRequestGetJobs'
 components:
   schemas:
+    ReportTruncatedView:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/TruncatedReportMetadata'
+        report:
+          $ref: '#/components/schemas/TruncatedReportData'
+    OutputFileSettings:
+      type: object
+      properties:
+        compressionFormat:
+          type: string
+        outputFileBasename:
+          type: string
+        fileFormat:
+          type: string
+        sendEmptyFileForNoDataReport:
+          type: boolean
+        beginningOfReportComments:
+          type: string
+        sendDigitalSignatureFile:
+          type: boolean
+        sendManifestFile:
+          type: boolean
+    LegacyAzureSettings:
+      type: object
+      properties:
+        account:
+          type: string
+        container:
+          type: string
+        prefix:
+          type: string
     ReportData:
       type: object
       properties:
@@ -166,6 +199,95 @@ components:
         fromDate:
           type: string
         toDate:
+          type: string
+    TruncatedReportMetadata:
+      type: object
+      properties:
+        legacyReportID:
+          type: integer
+          format: int32
+        uuid:
+          type: string
+        status:
+          type: string
+    DwRequestGetJobs:
+      properties:
+        total:
+          type: integer
+          format: int64
+        totalReturned:
+          type: integer
+          format: int64
+        reportList:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportTruncatedView'
+    DeliverySettingsResponse:
+      type: object
+      properties:
+        exportLocationUUID:
+          type: string
+        email:
+          $ref: '#/components/schemas/EmailSettings'
+        legacyEmail:
+          type: boolean
+        legacyAzure:
+          $ref: '#/components/schemas/LegacyAzureSettings'
+        legacyFTP:
+          $ref: '#/components/schemas/LegacyDeliveryFTPSettings'
+        legacyS3:
+          $ref: '#/components/schemas/LegacyDeliveryS3Settings'
+    LegacyDeliveryFTPSettings:
+      type: object
+      properties:
+        username:
+          type: string
+        host:
+          type: string
+        port:
+          type: integer
+          format: int32
+        directory:
+          type: string
+    TruncatedReportData:
+      type: object
+      properties:
+        fromDate:
+          type: string
+        toDate:
+          type: string
+    DataWarehouseJobPut:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    AnalyticsAsrErrorResponse:
+      properties:
+        errorDescription:
+          type: string
+        errorCode:
+          type: string
+        errorId:
+          type: string
+    EmailSettings:
+      type: object
+      properties:
+        notificationEmailTo:
+          type: string
+        notificationEmailFrom:
+          type: string
+        notificationEmailSubject:
+          type: string
+        notificationEmailNotes:
+          type: string
+    LegacyDeliveryS3Settings:
+      type: object
+      properties:
+        awsBucket:
+          type: string
+        awsAccessKey:
+          type: string
+        awsPath:
           type: string
     ReportMetadata:
       type: object
@@ -191,73 +313,10 @@ components:
           type: string
         jobType:
           type: string
-    ReportTruncatedView:
+    Metadata:
       type: object
       properties:
-        metadata:
-          $ref: '#/components/schemas/TruncatedReportMetadata'
-        report:
-          $ref: '#/components/schemas/TruncatedReportData'
-    DataWarehouseJobPut:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-    OutputFileSettings:
-      type: object
-      properties:
-        compressionFormat:
-          type: string
-        outputFileBasename:
-          type: string
-        fileFormat:
-          type: string
-        sendEmptyFileForNoDataReport:
-          type: boolean
-        beginningOfReportComments:
-          type: string
-        sendDigitalSignatureFile:
-          type: boolean
-        sendManifestFile:
-          type: boolean
-    TruncatedReportMetadata:
-      type: object
-      properties:
-        legacyReportID:
-          type: integer
-          format: int32
-        uuid:
-          type: string
         status:
-          type: string
-    LegacyAzureSettings:
-      type: object
-      properties:
-        account:
-          type: string
-        container:
-          type: string
-        prefix:
-          type: string
-    LegacyDeliveryFTPSettings:
-      type: object
-      properties:
-        username:
-          type: string
-        host:
-          type: string
-        port:
-          type: integer
-          format: int32
-        directory:
-          type: string
-    AnalyticsAsrErrorResponse:
-      properties:
-        errorDescription:
-          type: string
-        errorCode:
-          type: string
-        errorId:
           type: string
     ReportView:
       properties:
@@ -269,77 +328,18 @@ components:
           $ref: '#/components/schemas/ReportMetadata'
         report:
           $ref: '#/components/schemas/ReportData'
-    EmailSettings:
-      type: object
-      properties:
-        notificationEmailTo:
-          type: string
-        notificationEmailFrom:
-          type: string
-        notificationEmailSubject:
-          type: string
-        notificationEmailNotes:
-          type: string
-    TruncatedReportData:
-      type: object
-      properties:
-        fromDate:
-          type: string
-        toDate:
-          type: string
-    Metadata:
-      type: object
-      properties:
-        status:
-          type: string
-    DeliverySettingsResponse:
-      type: object
-      properties:
-        exportLocationUUID:
-          type: string
-        email:
-          $ref: '#/components/schemas/EmailSettings'
-        legacyEmail:
-          type: boolean
-        legacyAzure:
-          $ref: '#/components/schemas/LegacyAzureSettings'
-        legacyFTP:
-          $ref: '#/components/schemas/LegacyDeliveryFTPSettings'
-        legacyS3:
-          $ref: '#/components/schemas/LegacyDeliveryS3Settings'
-    DwRequestGetJobs:
-      properties:
-        total:
-          type: integer
-          format: int64
-        totalReturned:
-          type: integer
-          format: int64
-        reportList:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReportTruncatedView'
-    LegacyDeliveryS3Settings:
-      type: object
-      properties:
-        awsBucket:
-          type: string
-        awsAccessKey:
-          type: string
-        awsPath:
-          type: string
   parameters:
-    authorization:
-      name: Authorization
-      in: header
-      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
-      required: true
-      schema:
-        type: string
     x-api-key:
       name: x-api-key
       in: header
       description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
+      required: true
+      schema:
+        type: string
+    authorization:
+      name: Authorization
+      in: header
+      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
       required: true
       schema:
         type: string

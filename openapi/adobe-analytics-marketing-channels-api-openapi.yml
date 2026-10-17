@@ -63,19 +63,22 @@ paths:
               schema:
                 $ref: '#/components/schemas/AnalyticsAsrErrorResponse'
 components:
+  parameters:
+    x-api-key:
+      name: x-api-key
+      in: header
+      description: The API key copied from your AA API client integration.
+      required: true
+      schema:
+        type: string
+    authorization:
+      name: Authorization
+      in: header
+      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
+      required: true
+      schema:
+        type: string
   schemas:
-    MarketingChannelsForReportSuite:
-      type: object
-      properties:
-        rsid:
-          type: string
-          description: The report suite ID that the returned marketing channels belong to.
-          example: examplersid
-        marketingChannels:
-          type: array
-          description: The list of marketing channels configured for the report suite.
-          items:
-            $ref: '#/components/schemas/AnalyticsMarketingChannel'
     MarketingChannelsRequest:
       type: object
       required:
@@ -88,6 +91,15 @@ components:
             type: string
           example:
           - examplersid
+    AnalyticsAsrErrorResponse:
+      type: object
+      properties:
+        errorDescription:
+          type: string
+        errorCode:
+          type: string
+        errorId:
+          type: string
     AnalyticsMarketingChannel:
       type: object
       properties:
@@ -121,27 +133,15 @@ components:
           type: boolean
           description: Whether this channel overrides the last-touch channel in attribution.
           example: false
-    AnalyticsAsrErrorResponse:
+    MarketingChannelsForReportSuite:
       type: object
       properties:
-        errorDescription:
+        rsid:
           type: string
-        errorCode:
-          type: string
-        errorId:
-          type: string
-  parameters:
-    authorization:
-      name: Authorization
-      in: header
-      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
-      required: true
-      schema:
-        type: string
-    x-api-key:
-      name: x-api-key
-      in: header
-      description: The API key copied from your AA API client integration.
-      required: true
-      schema:
-        type: string
+          description: The report suite ID that the returned marketing channels belong to.
+          example: examplersid
+        marketingChannels:
+          type: array
+          description: The list of marketing channels configured for the report suite.
+          items:
+            $ref: '#/components/schemas/AnalyticsMarketingChannel'

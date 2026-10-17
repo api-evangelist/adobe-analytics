@@ -176,14 +176,6 @@ paths:
                 $ref: '#/components/schemas/DataFeedView'
 components:
   schemas:
-    LateHits:
-      type: object
-      properties:
-        enabled:
-          type: boolean
-        lookback:
-          type: integer
-          format: int32
     DataFeedView:
       properties:
         dynamicLookups:
@@ -209,6 +201,26 @@ components:
           $ref: '#/components/schemas/Packaging'
         replaceEscapedChars:
           type: boolean
+    LateHits:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+        lookback:
+          type: integer
+          format: int32
+    Schedule:
+      type: object
+      properties:
+        startDate:
+          type: string
+        endDate:
+          type: string
+        interval:
+          type: string
+        delay:
+          type: integer
+          format: int32
     Packaging:
       type: object
       properties:
@@ -223,26 +235,6 @@ components:
           type: string
         noDataManifest:
           type: boolean
-    Schedule:
-      type: object
-      properties:
-        startDate:
-          type: string
-        endDate:
-          type: string
-        interval:
-          type: string
-        delay:
-          type: integer
-          format: int32
-    AnalyticsAsrErrorResponse:
-      properties:
-        errorDescription:
-          type: string
-        errorCode:
-          type: string
-        errorId:
-          type: string
     Delivery:
       type: object
       properties:
@@ -252,6 +244,14 @@ components:
           type: array
           items:
             type: string
+    AnalyticsAsrErrorResponse:
+      properties:
+        errorDescription:
+          type: string
+        errorCode:
+          type: string
+        errorId:
+          type: string
     Metadata:
       type: object
       properties:
@@ -272,17 +272,17 @@ components:
           type: string
       description: Metadata for DataFeedView
   parameters:
-    authorization:
-      name: Authorization
-      in: header
-      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
-      required: true
-      schema:
-        type: string
     x-api-key:
       name: x-api-key
       in: header
       description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
+      required: true
+      schema:
+        type: string
+    authorization:
+      name: Authorization
+      in: header
+      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
       required: true
       schema:
         type: string

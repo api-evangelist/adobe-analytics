@@ -234,6 +234,39 @@ paths:
     - url: https://analytics.adobe.io/api
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        errorDescription:
+          type: string
+          description: Human-readable error message
+          example: example_value
+        errorId:
+          type: string
+          description: Unique ID for tracking this error
+          example: '500123'
+    ReportSuiteList:
+      type: object
+      description: Paginated list of report suites
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReportSuite'
+          example: []
+        totalElements:
+          type: integer
+          description: Total number of report suites
+          example: 42
+        totalPages:
+          type: integer
+          description: Total number of pages
+          example: 42
     ReportSuite:
       type: object
       description: An Adobe Analytics report suite
@@ -257,39 +290,6 @@ components:
           - standard
           - virtual
           example: standard
-    ReportSuiteList:
-      type: object
-      description: Paginated list of report suites
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReportSuite'
-          example: []
-        totalElements:
-          type: integer
-          description: Total number of report suites
-          example: 42
-        totalPages:
-          type: integer
-          description: Total number of pages
-          example: 42
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code
-          example: example_value
-        errorDescription:
-          type: string
-          description: Human-readable error message
-          example: example_value
-        errorId:
-          type: string
-          description: Unique ID for tracking this error
-          example: '500123'
     CreatedSuite:
       properties:
         rsid:
@@ -329,17 +329,17 @@ components:
       description: The report suite ID
       schema:
         type: string
-    authorization:
-      name: Authorization
-      in: header
-      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
-      required: true
-      schema:
-        type: string
     x-api-key:
       name: x-api-key
       in: header
       description: The API key copied from your AA API client integration. For more information on how to obtain this value, see [Getting started with the CJA API](https://developer.adobe.com/cja-apis/docs/getting-started/).
+      required: true
+      schema:
+        type: string
+    authorization:
+      name: Authorization
+      in: header
+      description: The access token copied from your AA API client integration, prefixed with "Bearer ".
       required: true
       schema:
         type: string

@@ -190,34 +190,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: Error response from the API
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code
-          example: example_value
-        errorDescription:
-          type: string
-          description: Human-readable error message
-          example: example_value
-    ValidationError:
-      type: object
-      description: A single validation error from file validation
-      properties:
-        row:
-          type: integer
-          description: Row number where the error occurred (1-indexed)
-          example: 10
-        column:
-          type: string
-          description: Column name where the error occurred
-          example: example_value
-        message:
-          type: string
-          description: Description of the validation error
-          example: example_value
     ValidationResponse:
       type: object
       description: Result of a file validation request
@@ -236,6 +208,18 @@ components:
           items:
             $ref: '#/components/schemas/ValidationError'
           example: []
+    ErrorResponse:
+      type: object
+      description: Error response from the API
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+          example: example_value
+        errorDescription:
+          type: string
+          description: Human-readable error message
+          example: example_value
     UploadResponse:
       type: object
       description: Response after a successful file upload
@@ -253,6 +237,22 @@ components:
           format: date-time
           description: Timestamp when the file was received
           example: '2026-01-15T10:30:00Z'
+    ValidationError:
+      type: object
+      description: A single validation error from file validation
+      properties:
+        row:
+          type: integer
+          description: Row number where the error occurred (1-indexed)
+          example: 10
+        column:
+          type: string
+          description: Column name where the error occurred
+          example: example_value
+        message:
+          type: string
+          description: Description of the validation error
+          example: example_value
   parameters:
     visitorGroupId:
       name: x-adobe-vgid

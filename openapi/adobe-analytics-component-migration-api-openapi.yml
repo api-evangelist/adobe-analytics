@@ -119,18 +119,6 @@ components:
           type: string
         imsOrgId:
           type: string
-    ControllerResponse:
-      properties:
-        result:
-          type: string
-          enum:
-          - success
-          - failure
-          - partialSuccess
-        method:
-          type: string
-        message:
-          type: string
     IMigrationEvent:
       properties:
         cjaId:
@@ -151,6 +139,18 @@ components:
         globalCompanyId:
           type: string
         imsOrgId:
+          type: string
+    ControllerResponse:
+      properties:
+        result:
+          type: string
+          enum:
+          - success
+          - failure
+          - partialSuccess
+        method:
+          type: string
+        message:
           type: string
   securitySchemes:
     x-service-auth:
