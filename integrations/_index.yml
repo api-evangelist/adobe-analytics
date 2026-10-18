@@ -52,5 +52,5 @@
     - connectors/applications/adobe-analytics-data-feed
     vendor_link: https://www.adobe.com/analytics/adobe-analytics.html
     builder: Fivetran
-  status: pending-generation
+  status: not-a-workflow
   arazzo: null
