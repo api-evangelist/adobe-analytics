@@ -7,6 +7,8 @@ source:
 - https://monid.ai/tools/adobe-analytics
 checked:
 - https://composio.dev/toolkits/adobe-analytics
+- https://fivetran.com/docs-sitemap.xml
+- https://fivetran.com/docs/connectors/partner-built-program
 - https://hightouch.com/docs/destinations/adobe-analytics
 - https://monid.ai/tools/adobe-analytics
 - https://n8n.io/integrations/adobe-analytics/
@@ -67,4 +69,31 @@ edges:
       - insert
   detected_by: sweep-cdp.py
   first_seen: '2026-10-14'
+- partner_name: Fivetran
+  partner: fivetran
+  partner_match: aggregator
+  type: marketplace
+  marketplace: fivetran-connectors
+  channel: elt-connector
+  relationship: ipaas-bridge
+  direction: third-party
+  evidence: https://fivetran.com/docs/connectors/applications/adobe-analytics
+  category: null
+  contract_reference:
+    register: Fivetran connectors (fivetran.com/docs/connectors, docs-sitemap.xml + Partner-Built program)
+    spec_file: null
+    role: elt-connector:fivetran
+    registered_name: Adobe Analytics
+    matched_domain: adobe.com
+    matched_by: domain+name-among-holders
+    detected_by: sweep-data-integration.py
+    detected: '2026-10-18'
+    signal_note: one edge per (provider, platform); connectors, streams, packages and usage are context, never read
+    connector_paths:
+    - connectors/applications/adobe-analytics
+    - connectors/applications/adobe-analytics-data-feed
+    vendor_link: https://www.adobe.com/analytics/adobe-analytics.html
+    builder: Fivetran
+  detected_by: sweep-data-integration.py
+  first_seen: '2026-10-18'
 templates: []
