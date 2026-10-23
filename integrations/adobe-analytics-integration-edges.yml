@@ -21,6 +21,10 @@ checked:
 - https://rubygems.org/api/v1
 - https://www.twilio.com/docs/segment/connections/destinations/catalog/adobe-analytics
 - https://zapier.com/apps/adobe-analytics/integrations
+- https://exchange.adobe.com/apps
+- https://exchange.adobe.com/apps/browse/cc
+- https://exchange.adobe.com/apps/browse/ec
+- https://exchange.adobe.com/robots.txt
 summary: null
 marketplace_apps: []
 edges:
@@ -133,4 +137,528 @@ edges:
     builder: Fivetran
   detected_by: sweep-data-integration.py
   first_seen: '2026-10-18'
+- partner_name: 6sense
+  app: 6sense for Analytics and Target
+  apps:
+  - 6sense for Analytics and Target
+  listing_count: 1
+  partner: 6sense
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/105363
+  category: Adobe Exchange Experience Cloud listing (Analytics, Target)
+  products:
+  - Analytics
+  - Target
+  partner_url: https://6sense.com/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+- partner_name: Accenture PLC
+  app: Accenture | Intelligent Personalization Platform (AIPP)
+  apps:
+  - Accenture | Intelligent Personalization Platform (AIPP)
+  - Accenture | Marketing Automation Suite
+  - Avanade | B2B Experience-Driven Commerce Accelerator
+  - Avanade | ORBIT/Digital Experience Foundation for AEM-as-a-Cloud Service
+  listing_count: 4
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200053
+  category: Adobe Exchange Experience Cloud listing (Analytics, Campaign, Experience Platform, Experience Platform
+    services)
+  products:
+  - Analytics
+  - Campaign
+  - Experience Platform
+  - Experience Platform services
+  - Target
+  partner_url: https://www.accenture.com/adobe
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  partner_held:
+    candidate: accenture
+    why: 'market-fit gate: partner''s own tags carry no creative / media / marketing / analytics / content / commerce
+      / e-sign / work-management term'
+- partner_name: Adverity
+  app: Adverity Datatap
+  apps:
+  - Adverity Datatap
+  listing_count: 1
+  partner: adverity
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/100883
+  category: Adobe Exchange Experience Cloud listing (Analytics)
+  products:
+  - Analytics
+  partner_url: https://www.adverity.com/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: AppsFlyer
+  app: AppsFlyer Attribution
+  apps:
+  - AppsFlyer Attribution
+  listing_count: 1
+  partner: appsflyer
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/100038
+  category: Adobe Exchange Experience Cloud listing (Analytics)
+  products:
+  - Analytics
+  partner_url: https://appsflyer.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: CData Software
+  app: CData Adobe Analytics Connectors
+  apps:
+  - CData Adobe Analytics Connectors
+  listing_count: 1
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/108070
+  category: Adobe Exchange Experience Cloud listing (Analytics)
+  products:
+  - Analytics
+  partner_url: https://www.cdata.com/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+  partner_held:
+    candidate: cdata
+    why: 'market-fit gate: partner''s own tags carry no creative / media / marketing / analytics / content / commerce
+      / e-sign / work-management term'
+- partner_name: CDW
+  app: Sirius | Digital Foundation for Banking
+  apps:
+  - Sirius | Digital Foundation for Banking
+  listing_count: 1
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200158
+  category: Adobe Exchange Experience Cloud listing (Analytics, Campaign, Experience Platform services, Target)
+  products:
+  - Analytics
+  - Campaign
+  - Experience Platform services
+  - Target
+  partner_url: cdw.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+  partner_held:
+    candidate: cdw
+    why: 'market-fit gate: partner''s own tags carry no creative / media / marketing / analytics / content / commerce
+      / e-sign / work-management term'
+- partner_name: Cognizant Technology Solutions
+  app: Cognizant Netcentric | DigitalXn
+  apps:
+  - Cognizant Netcentric | DigitalXn
+  listing_count: 1
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200028
+  category: Adobe Exchange Experience Cloud listing (Analytics, Experience Platform apps, Experience Platform services,
+    Target)
+  products:
+  - Analytics
+  - Experience Platform apps
+  - Experience Platform services
+  - Target
+  partner_url: cognizant.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  partner_held:
+    candidate: cognizant-technology
+    why: 'market-fit gate: partner''s own tags carry no creative / media / marketing / analytics / content / commerce
+      / e-sign / work-management term'
+- partner_name: Deloitte Consulting
+  app: Deloitte Digital | Adobe Xccelerator
+  apps:
+  - Deloitte Digital | Adobe Xccelerator
+  - Deloitte Digital | Closed-Loop Marketing Solution
+  - Deloitte Digital | Connected Studio Powered by Adobe
+  - Deloitte Digital | Experience Management in Digital Banking
+  listing_count: 4
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200129
+  category: Adobe Exchange Experience Cloud listing (Advertising Cloud, Analytics, Campaign, Commerce)
+  products:
+  - Advertising Cloud
+  - Analytics
+  - Campaign
+  - Commerce
+  - Customer Journey Analytics
+  - Experience Platform apps
+  - Experience Platform services
+  - Journey Optimizer
+  - Marketo Engage
+  - Target
+  - Workfront
+  partner_url: www.deloitte.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  partner_held:
+    candidate: deloitte
+    why: systems integrator / consultancy (Adobe solution listing), not a publisher of its own product
+- partner_name: Epsilon
+  app: Agility Loyalty + Adobe Experience Cloud
+  apps:
+  - Agility Loyalty + Adobe Experience Cloud
+  - Epsilon | PeopleCloud Loyalty & Adobe Experience Cloud
+  listing_count: 2
+  partner: epsilon
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/91148
+  category: Adobe Exchange Experience Cloud listing (Analytics, Audience Manager, Campaign, Experience Manager)
+  products:
+  - Analytics
+  - Audience Manager
+  - Campaign
+  - Experience Manager
+  - Experience Platform
+  - Experience Platform services
+  - Target
+  partner_url: https://www.epsilon.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  other_publisher_names:
+  - Epsilon Americas
+- partner_name: Ernst & Young LLP U.S.
+  app: EY | Consumer Experience of the Future
+  apps:
+  - EY | Audience Data Platform Powered by AEP
+  - EY | Consumer Experience of the Future
+  listing_count: 2
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200051
+  category: Adobe Exchange Experience Cloud listing (Analytics, Campaign, Experience Platform, Experience Platform
+    services)
+  products:
+  - Analytics
+  - Campaign
+  - Experience Platform
+  - Experience Platform services
+  - Marketo Engage
+  - Target
+  partner_url: ey.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  partner_held:
+    candidate: ey
+    why: systems integrator / consultancy (Adobe solution listing), not a publisher of its own product
+- partner_name: Funnel
+  app: Funnel
+  apps:
+  - Funnel
+  listing_count: 1
+  partner: funnel
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/101613
+  category: Adobe Exchange Experience Cloud listing (Analytics)
+  products:
+  - Analytics
+  partner_url: https://funnel.io/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: Hootsuite Media Inc.
+  app: Adobe Analytics for Hootsuite Impact
+  apps:
+  - Adobe Analytics for Hootsuite Impact
+  listing_count: 1
+  partner: hootsuite
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/100066
+  category: Adobe Exchange Experience Cloud listing (Analytics)
+  products:
+  - Analytics
+  partner_url: www.hootsuite.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+- partner_name: Infosys Limited
+  app: Infosys Aster | Product Launch Accelerator
+  apps:
+  - Blue Acorn iCi | Intelligent Commerce Foundation
+  - Infosys Aster | Product Launch Accelerator
+  - Infosys | Elevating CXM - Digital Experience Orchestrator
+  - Infosys | Unified Reseller Network
+  listing_count: 4
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200256
+  category: Adobe Exchange Experience Cloud listing (Analytics, Commerce, Customer Journey Analytics, Experience
+    Platform)
+  products:
+  - Analytics
+  - Commerce
+  - Customer Journey Analytics
+  - Experience Platform
+  - Experience Platform apps
+  - Experience Platform services
+  - Firefly
+  - GenStudio
+  - Journey Optimizer
+  - Real-Time CDP
+  - Target
+  - Workfront
+  partner_url: http://infosys.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  partner_held:
+    candidate: infosys
+    why: 'market-fit gate: partner''s own tags carry no creative / media / marketing / analytics / content / commerce
+      / e-sign / work-management term'
+- partner_name: Invoca, Inc.
+  app: Invoca
+  apps:
+  - Invoca
+  listing_count: 1
+  partner: invoca
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/100067
+  category: Adobe Exchange Experience Cloud listing (Analytics)
+  products:
+  - Analytics
+  partner_url: invoca.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: PricewaterhouseCoopers LLP
+  app: PwC | Experience Value Analyzer
+  apps:
+  - PwC | Experience Value Analyzer
+  listing_count: 1
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200139
+  category: Adobe Exchange Experience Cloud listing (Analytics, Experience Platform services, Real-Time CDP, Target)
+  products:
+  - Analytics
+  - Experience Platform services
+  - Real-Time CDP
+  - Target
+  partner_url: www.pwc.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  partner_held:
+    candidate: pricewaterhousecoopers
+    why: systems integrator / consultancy (Adobe solution listing), not a publisher of its own product
+- partner_name: Profound
+  app: Adobe Analytics - Profound Agent Analytics Integration
+  apps:
+  - Adobe Analytics - Profound Agent Analytics Integration
+  listing_count: 1
+  partner: profound
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600242
+  category: Adobe Exchange Experience Cloud listing (Analytics)
+  products:
+  - Analytics
+  partner_url: https://www.tryprofound.com/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: RainFocus, LLC
+  app: RainFocus Adobe Analytics Integration
+  apps:
+  - RainFocus Adobe Analytics Integration
+  listing_count: 1
+  partner: rainfocus
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/108922
+  category: Adobe Exchange Experience Cloud listing (Analytics)
+  products:
+  - Analytics
+  partner_url: rainfocus.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+- partner_name: Transcend Inc.
+  app: Transcend
+  apps:
+  - Transcend
+  listing_count: 1
+  partner: transcend-io
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/109813
+  category: Adobe Exchange Experience Cloud listing (Analytics, Experience Platform)
+  products:
+  - Analytics
+  - Experience Platform
+  partner_url: transcend.io
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+- partner_name: Virtusa
+  app: Virtusa | AEP Customer 360
+  apps:
+  - Virtusa | AEP Customer 360
+  - Virtusa | Next Generation Digital Banking Launchpad
+  - Virtusa | vEngage
+  listing_count: 3
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200143
+  category: Adobe Exchange Experience Cloud listing (Analytics, Campaign, Customer Journey Analytics, Experience
+    Platform)
+  products:
+  - Analytics
+  - Campaign
+  - Customer Journey Analytics
+  - Experience Platform
+  - Experience Platform services
+  - Journey Optimizer
+  - Target
+  partner_url: https://www.virtusa.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  partner_held:
+    candidate: virtusa
+    why: 'market-fit gate: partner''s own tags carry no creative / media / marketing / analytics / content / commerce
+      / e-sign / work-management term'
 templates: []
