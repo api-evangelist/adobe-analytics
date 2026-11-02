@@ -1,0 +1,140 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Adobe Analytics
+providerId: adobe-analytics
+created: '2026-05-04'
+generated: '2026-08-13'
+# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
+# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
+# 2026-08-13: attempted to reconcile against the Adobe pricing page. business.adobe.com
+# would not answer this run (see verification below), so the tier names are left in place
+# with method still `generated`, and the per-tier API-to-SKU mapping that the 2026-05-04
+# sweep asserted has been REMOVED because it could not be verified and a wrong packaging
+# claim is worse than a missing one.
+method: generated
+modified: '2026-08-13'
+reconciled: false
+plan_count: 3
+list_pricing_published: false
+tags:
+  - Analytics
+  - Business Intelligence
+  - Customer Intelligence
+  - Digital Marketing
+  - Web Analytics
+description: >-
+  Adobe Analytics is an enterprise product sold on contact-sales contracts. Adobe
+  publishes NO list price, no public per-tier quota, and no self-service signup: there is
+  no plan an API consumer can read a number off. Adobe markets three packages — Select,
+  Prime and Ultimate — priced by committed server-call volume and feature bundle. API
+  access is included with the underlying Analytics license and is not separately metered
+  or separately purchasable.
+notes: >-
+  A developer cannot obtain Adobe Analytics API access without an existing Adobe Analytics
+  contract and an Adobe Developer Console project provisioned by an org admin. For catalog
+  purposes this is a fully sales-gated commercial surface.
+sources:
+  - https://business.adobe.com/products/analytics/adobe-analytics.html
+  - https://business.adobe.com/products/analytics/pricing.html
+  - https://developer.adobe.com/analytics-apis/
+verification:
+  checked: '2026-08-13'
+  outcome: unverified
+  evidence:
+    - url: https://business.adobe.com/products/analytics/pricing.html
+      status: 0
+      note: >-
+        Connection opened over HTTP/2 and then returned no response before a 30s timeout
+        (curl exit 92), with and without a browser User-Agent. WebFetch on the same URL
+        timed out at 60s. business.adobe.com did not serve this run.
+    - url: https://business.adobe.com/products/analytics/adobe-analytics.html
+      status: 0
+      note: Same non-response.
+plans:
+  - id: adobe-analytics-select
+    name: Analytics Select
+    type: enterprise
+    price: contact sales
+    verified: false
+    description: Entry Adobe Analytics package.
+    entries:
+      - label: Server-call commit
+        name: server_calls
+        type: subscription
+        metric: server_call
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+  - id: adobe-analytics-prime
+    name: Analytics Prime
+    type: enterprise
+    price: contact sales
+    verified: false
+    description: Mid-tier Adobe Analytics package.
+    entries:
+      - label: Server-call commit
+        name: server_calls
+        type: subscription
+        metric: server_call
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+  - id: adobe-analytics-ultimate
+    name: Analytics Ultimate
+    type: enterprise
+    price: contact sales
+    verified: false
+    description: Top-tier Adobe Analytics package.
+    entries:
+      - label: Server-call commit
+        name: server_calls
+        type: subscription
+        metric: server_call
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
+x-canonical:
+  generated: '2026-11-01'
+  vocabulary: engine/economics/plans-canonical.yml
+  models:
+  - subscription
+  units:
+  - request
+  plans:
+  - name: Analytics Select
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - request
+    periods:
+    - year
+  - name: Analytics Prime
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - request
+    periods:
+    - year
+  - name: Analytics Ultimate
+    access: enterprise
+    model: subscription
+    model_how: derived
+    units:
+    - request
+    periods:
+    - year
